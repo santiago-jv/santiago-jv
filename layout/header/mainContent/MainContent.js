@@ -21,7 +21,7 @@ const MainContent = () => {
 
                 </p>
             </div>
-            <a href="https://linkedin.com/in/santiago-jv" className={styles['button']}>Revisa mi LinkeIn</a>
+            <a href="https://linkedin.com/in/santiago-jv" className={styles['button']}>Revisa mi LinkedIn</a>
 
             <div className={styles['social-networks']}>
                 <ul>
