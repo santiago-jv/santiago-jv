@@ -32,7 +32,7 @@ const MainContent = () => {
                        
                     </li>
                     <li className={styles['social-item']}>
-                        <a href="https://" className={styles['social-link']}>
+                        <a href="https://twitter.com/santiago_jv4035" className={styles['social-link']}>
                             <i className="fab fa-twitter"></i>
                         </a>
                        
