@@ -1,0 +1,109 @@
+.background{
+  width:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+  opacity: .3;
+}
+.main-content{
+    padding-top: 6rem;
+    width: 70%;
+    margin:auto;
+    min-height:100vh;
+}
+.greeting-text {
+    font-size: clamp(16px,7vw,20px);
+    margin-left: .1rem;
+    margin-bottom: 1rem;
+}
+.title, .subtitle{
+    font-size: clamp(40px, 4vw, 70px);
+}    
+.title{
+    color:var(--gray);
+    margin-right: 1.5rem; 
+}
+
+
+.subtitle{
+    color:var(--dark-gray);
+    margin-top: .3rem;
+}
+.span-text{
+    font-size: clamp(20px, 6vw, 50px);
+}
+.red-text{
+    font-family: 'Fira Code', monospace;
+    color:var(--red);
+    font-weight: normal;
+}
+
+.information,.button{
+   margin-top: 2rem;
+}
+.description{
+    max-width: 600px;
+    color: var(--dark-gray);
+    line-height:1.5rem;
+    font-size: 1.1rem;
+    
+}
+.button{
+    display:inline-block;
+    cursor:pointer;
+    outline:none;
+    border:2px solid var(--red);
+    background-color: transparent;
+    padding:1rem 1.75rem;
+    border-radius: .3rem;
+    font-family: 'Fira Code',monospace;
+    color: var(--red);
+    transition: background .3s ease;
+}
+.button:hover{
+    background-color: var(--soft-red);
+}
+
+.social-networks{
+    position:fixed;
+    bottom:50px;
+    right: 3%;
+}
+.social-networks ul{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.social-item{
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.social-link:hover i{
+    color:var(--red);
+}
+.social-link{
+    transition:transform .3s ease;
+    color:var(--dark-gray);
+}
+.social-line{
+    display:block;
+    width: 100px;
+    margin-top: 50px;
+    transform:rotate(90deg);
+    border-color:var(--dark-gray);
+}
+
+
+@media screen and (max-width: 900px) {
+    .background{
+        display: none;
+    }
+    .social-networks{
+        display: none;
+    }
+}

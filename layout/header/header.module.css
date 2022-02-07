@@ -1,0 +1,138 @@
+.header {
+   
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    position: fixed;
+    transition:top .3s ease;
+    top:0;
+    z-index: 100;
+    left: 0;
+}
+.header--hidden{
+    top: -100%;
+}
+.logo{
+    width: 14rem;
+}
+/* NAVBAR STYLES */
+
+.header__menu-button,.navbar__close-icon{
+    color:var(--gray);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.header__navbar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    max-width: 350px;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: -350px;
+    padding-top: 1rem;
+    background-color: var(--dark-blue);
+    transition: right .4s ease;
+}
+.header__navbar--open{
+    right: 0;
+}
+.navbar__header{
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.navbar__title{
+    color:var(--gray);
+    font-size: 1.4rem;
+    text-align: center;
+
+}
+.navbar__items{
+    width: 100%;
+    margin-top: 1.5rem;
+}
+.navbar__item {
+    list-style: none;
+}
+.navbar__link {
+    text-align: center;
+    text-decoration: none;
+    color:var(--gray);
+    font-family: 'Fira Code', monospace;
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    transition:color .3s ease-out;
+}
+.navbar__item:hover .navbar__link{
+    color: var(--red);
+}
+
+/* BACKGROUND STYLES */
+
+.background{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.20);
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity .4s ease;
+}
+.background--show{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+@media screen and (min-width:1000px) {
+    .header__navbar{
+        display: block;
+        width:fit-content;
+        max-width: none;
+        height: fit-content;
+        position: static;
+        z-index: auto;
+        padding-top: 0rem;
+        background-color: transparent;
+        transition: right .4s ease;
+    }
+    .header__menu-button{
+       display: none;
+    }
+    .navbar__header{
+        display: none;
+    }
+    .navbar__items{
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+    }
+    .navbar__item {
+        margin-right: 2.5rem;
+    }
+
+    .navbar__link {
+        padding:0;
+    }
+    .navbar__item:hover .navbar__link{
+        background-color: transparent;
+    }
+    .background{
+        display: none;
+    }
+}
