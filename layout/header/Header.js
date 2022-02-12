@@ -30,7 +30,7 @@ const Header = () => {
     }
   return (
     <>
-        <header ref={headerReference} className={styles['header']}>
+        <header ref={headerReference} className={styles['header'] + "  animate__animated animate__fadeInDown animate__delay-3s"}>
         
             <img className={styles['logo']} src="images/logo.svg" alt="Nest js"/>
             
