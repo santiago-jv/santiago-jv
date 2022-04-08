@@ -16,36 +16,36 @@ const MainContent = () => {
 
             <div className={styles['information'] + " animate__animated animate__fadeInDown animate__delay-2s"}>
                 <p className={styles['description']}>
-                    Soy estudiante de Ingeniería de Sistemas residente en Colombia y ocasionalmente
-                    dedico parte de mi tiempo a aprender y pulir mis conocimientos en algunas tecnologías.
+                    Estudio Ingeniería de Sistemas en la Universidad del Magdalena. Ocasionalmente
+                    dedico parte de mi tiempo a aprender y pulir mis conocimientos en las tecnologías de la web.
 
                 </p>
             </div>
-            <a href="https://linkedin.com/in/santiago-jv" className={styles['button'] + " animate__animated animate__fadeInLeft animate__delay-3s"}>Revisa mi LinkedIn</a>
+            <a target='_blank' href="https://linkedin.com/in/santiago-jv" className={styles['button'] + " animate__animated animate__fadeInLeft animate__delay-3s"}>Revisa mi LinkedIn</a>
 
             <div className={styles['social-networks'] + " animate__animated animate__fadeInUp animate__delay-4s"}>
                 <ul>
                     <li className={styles['social-item']}>
-                        <a href="https://github.com/santiago-jv" className={styles['social-link']}>
+                        <a target='_blank' href="https://github.com/santiago-jv" className={styles['social-link']}>
                             <i className="fab fa-github"></i>
                         </a>
                        
                     </li>
                     <li className={styles['social-item']}>
-                        <a href="https://twitter.com/santiago_jv4035" className={styles['social-link']}>
+                        <a target='_blank' href="https://twitter.com/santiago_jv4035" className={styles['social-link']}>
                             <i className="fab fa-twitter"></i>
                         </a>
                        
                     </li>
                     <li className={styles['social-item']}>
-                        <a href="mailto:santiagoolayojv@gmail.com" className={styles['social-link']}>
-                            <i class="fas fa-envelope"></i>
+                        <a target='_blank' href="mailto:santiagoolayojv@gmail.com" className={styles['social-link']}>
+                            <i className="fas fa-envelope"></i>
                         </a>
                        
                     </li>
                     <li className={styles['social-item']}>
-                        <a href="https://www.instagram.com/santiago_ojv" className={styles['social-link']}>
-                            <i class="fab fa-instagram"></i>
+                        <a target='_blank' href="https://www.instagram.com/santiago_ojv" className={styles['social-link']}>
+                            <i className="fab fa-instagram"></i>
                         </a>
                        
                     </li>
