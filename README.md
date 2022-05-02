@@ -1,6 +1,6 @@
 
 
-Systems Engineer Student and Web developer
+Systems Engineer Student and Web Developer
 -------------------------------------------
 
 * 🌍  I'm based in Santa Marta, Colombia
