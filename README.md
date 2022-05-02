@@ -1,7 +1,6 @@
-Hi 👋 My name is Santiago Olayo
-===============================
 
-Systems Engineer Student and Web developer.
+
+Systems Engineer Student and Web developer
 -------------------------------------------
 
 * 🌍  I'm based in Santa Marta, Colombia
