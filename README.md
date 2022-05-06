@@ -4,7 +4,7 @@ Systems Engineer Student and Web Developer.
 * 🌍  I'm based in Santa Marta, Colombia
 * ✉️  You can contact me at [santiagoolayojv@gmail.com](mailto:santiagoolayojv@gmail.com)
 * 🚀  I'm currently working on [My Portfolio](http://santiago-jv.me)
-* 🧠  I'm learning Spring Boot and Architecture Patterns
+* 🧠  I'm learning Spring Boot and Microservices
 
 <a href="https://www.github.com/santiago-jv" target="_blank" rel="noreferrer"><img
 src="https://img.shields.io/github/followers/santiago-jv?logo=github&style=for-the-badge&color=0891b2&labelColor=1c1917" /></a>
