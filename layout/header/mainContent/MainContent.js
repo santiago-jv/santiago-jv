@@ -5,23 +5,21 @@ const MainContent = () => {
         <main className={styles["main-content"]}>
             <img  src="/images/background.png" alt="background cat" className={styles["background"]}/>
             <h1 className={styles["greeting-text"] + " " + styles["red-text"] + " animate__animated animate__fadeInDown"}>
-                Hola, mi nombre es
+                Hi, my name is
             </h1>
             <h2 className={styles['title'] + " animate__animated animate__fadeInDown animate__delay-1s"}>
                 Santiago Olayo
             </h2>
             <h2 className={styles['subtitle'] + " animate__animated animate__fadeInDown animate__delay-1s"}>
-                Desarrollo software para la web
+                I develope software for the web
             </h2> 
 
             <div className={styles['information'] + " animate__animated animate__fadeInDown animate__delay-2s"}>
                 <p className={styles['description']}>
-                    Estudio Ingeniería de Sistemas en la Universidad del Magdalena. Ocasionalmente
-                    dedico parte de mi tiempo a aprender y pulir mis conocimientos en las tecnologías de la web.
-
+                    I like learn everything about software development :D
                 </p>
             </div>
-            <a target='_blank' href="https://linkedin.com/in/santiago-jv" className={styles['button'] + " animate__animated animate__fadeInLeft animate__delay-3s"}>Revisa mi LinkedIn</a>
+            <a target='_blank' href="https://linkedin.com/in/santiago-jv" className={styles['button'] + " animate__animated animate__fadeInLeft animate__delay-3s"}>Check my LinkedIn</a>
 
             <div className={styles['social-networks'] + " animate__animated animate__fadeInUp animate__delay-4s"}>
                 <ul>

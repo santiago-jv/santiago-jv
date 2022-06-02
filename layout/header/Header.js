@@ -45,17 +45,17 @@ const Header = () => {
                 <ul className={styles['navbar__items']}>
                     <li className={styles['navbar__item']}>
                         <a href="#" className={styles['navbar__link']}>
-                            Sobre mi
+                            About me
                         </a>
                     </li>
                     <li className={styles['navbar__item']}>
                         <a href="#" className={styles['navbar__link']}>
-                            Proyectos
+                            Projects
                         </a>
                     </li>
                     <li className={styles['navbar__item']}>
                         <a href="#" className={styles['navbar__link']}>
-                            Contáctame
+                            Contact me
                         </a>
                     </li>
                 </ul>
