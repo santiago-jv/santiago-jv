@@ -1,7 +1,7 @@
 Systems Engineer Student and Web Developer.
 -------------------------------------------
 
-* 🌍  I'm based in Santa Marta, Colombia
+* 🌍  I'm live in Santa Marta, Colombia
 * ✉️  You can contact me at [santiagoolayojv@gmail.com](mailto:santiagoolayojv@gmail.com)
 * 🚀  I'm currently working on [My Portfolio](http://santiago-jv.me)
 * 🧠  I'm learning Django!
