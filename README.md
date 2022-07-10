@@ -1,4 +1,4 @@
-Systems Engineer Student and Web Developer.
+Systems Engineer Student and Web Developer
 -------------------------------------------
 
 * 🌍  I'm live in Santa Marta, Colombia
