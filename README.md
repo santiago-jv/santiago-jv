@@ -2,7 +2,7 @@ Systems Engineer Student and Web Developer
 -------------------------------------------
 
 * 🌍  I'm live in Santa Marta, Colombia
-* ✉️  You can contact me at [santiagoolayojv@gmail.com](mailto:santiagojv.work@gmail.com)
+* ✉️  You can contact me at [santiagojv.work@gmail.com](mailto:santiagojv.work@gmail.com)
 * 🚀  I'm currently working at [Bolsiyo](https://www.bolsiyo.app/)
 * 🧠  I'm learning!
 
