@@ -1,10 +1,6 @@
 <h1 align="center">Hi 👋, I'm Santiago Olayo</h1>
 <h3 align="center">A passionate Backend And DevOps Developer from Colombia</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=santiago-jv&label=Profile%20views&color=0e75b6&style=flat" alt="santiago-jv" /> </p>
-
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=santiago-jv" alt="santiago-jv" /></a> </p>
-
 - 🔭 I’m currently working on [Bolsiyo SAS](bolsiyo.app)
 
 - 🌱 I’m currently learning **DevOps and AWS Infranstructure**
