@@ -1,11 +1,11 @@
-<h1 align="center">Hi 👋, I'm Santiago Olayo</h1>
-<h3 align="center">A passionate Backend And DevOps Developer from Colombia</h3>
+<h1 align="center">Hi, I'm Santiago Olayo</h1>
+<h3 align="center">A passionate Backend And DevOps Developer from Colombia🔥/h3>
 
-- 🔭 I’m currently working on [Bolsiyo](bolsiyo.app)
+- 🔭 I’m currently working on [Bolsiyo](https://bolsiyo.app)
 
 - 🌱 I’m currently learning **DevOps and AWS Infranstructure**
 
-- 👨‍💻 All of my projects are available at [github.com/santiago-jv](github.com/santiago-jv)
+- 👨‍💻 All of my projects are available at [github.com/santiago-jv](https://github.com/santiago-jv)
 
 - 📝 I regularly write articles on [https://medium.com/@santiago-jv/](https://medium.com/@santiago-jv/)
 
