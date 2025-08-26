@@ -1,7 +1,7 @@
 <h1 align="center">Hi, I'm Santiago Olayo</h1>
 <h3 align="center">A passionate Backend And DevOps Developer from Colombia🔥</h3>
 
-- 🔭 I’m currently working on [Bolsiyo](https://bolsiyo.app)
+- 🔭 I’m currently working on [GoodRec](https://goodrec.com)
 
 - 🌱 I’m currently learning **DevOps and AWS Infranstructure**
 
