@@ -3,8 +3,6 @@
 
 - 🔭 I’m currently working on [GoodRec](https://goodrec.com)
 
-- 🌱 I’m currently learning **DevOps and AWS Infranstructure**
-
 - 👨‍💻 All of my projects are available at [github.com/santiago-jv](https://github.com/santiago-jv)
 
 - 📝 I regularly write articles on [https://medium.com/@santiago-jv/](https://medium.com/@santiago-jv/)
