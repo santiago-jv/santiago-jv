@@ -4,10 +4,8 @@ const nextConfig = {
   images: {
     domains: ['santiago-jv.vercel.app'],
   },
-  // Enable experimental features for better TypeScript support
-  experimental: {
-    typedRoutes: true,
-  },
+  // Enable typed routes for better TypeScript support
+  typedRoutes: true,
 }
 
 module.exports = nextConfig
