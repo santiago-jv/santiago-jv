@@ -29,7 +29,7 @@ const ProjectsSection: React.FC = () => {
                 <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>
                         <span className={styles.sectionNumber}>02.</span>
-                        Some Things I've Built
+                        Some Things I&apos;ve Built
                     </h2>
                     <p className={styles.sectionDescription}>
                         <strong>Note:</strong> The projects below are examples to showcase the types of backend systems I work on. 

@@ -70,11 +70,11 @@ const ContactSection: React.FC = () => {
                 <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>
                         <span className={styles.sectionNumber}>03.</span>
-                        What's Next?
+                        What&apos;s Next?
                     </h2>
                     <h3 className={styles.sectionSubtitle}>Get In Touch</h3>
                     <p className={styles.sectionDescription}>
-                        I'm always interested in new opportunities and interesting projects. 
+                        I&apos;m always interested in new opportunities and interesting projects. 
                         Whether you have a question or just want to say hi, feel free to reach out!
                     </p>
                 </div>
@@ -82,7 +82,7 @@ const ContactSection: React.FC = () => {
                 <div className={styles.contactContent}>
                     {/* Contact Information */}
                     <div className={styles.contactInfo}>
-                        <h4 className={styles.infoTitle}>Let's Connect</h4>
+                        <h4 className={styles.infoTitle}>Let&apos;s Connect</h4>
                         <div className={styles.contactGrid}>
                             {contactInfo.map((item, index) => (
                                 <div key={index} className={styles.contactItem}>
@@ -180,7 +180,7 @@ const ContactSection: React.FC = () => {
                             {submitStatus === 'success' && (
                                 <div className={`${styles.submitMessage} ${styles.submitSuccess}`}>
                                     <i className="fas fa-check-circle"></i>
-                                    Message sent successfully! I'll get back to you soon.
+                                    Message sent successfully! I&apos;ll get back to you soon.
                                 </div>
                             )}
                             {submitStatus === 'error' && (

@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
 
                         {/* Contact Info */}
                         <div className={styles.contactSection}>
-                            <h4 className={styles.sectionTitle}>Let's Connect</h4>
+                            <h4 className={styles.sectionTitle}>Let&apos;s Connect</h4>
                             <div className={styles.contactInfo}>
                                 <a 
                                     href="mailto:santiagojv.work@gmail.com" 
