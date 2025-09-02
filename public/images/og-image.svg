@@ -1,0 +1,32 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0A192F"/>
+  
+  <!-- Main content area -->
+  <rect x="60" y="60" width="1080" height="510" rx="20" fill="#112240" stroke="#64FFDA" stroke-width="2"/>
+  
+  <!-- Title -->
+  <text x="600" y="200" text-anchor="middle" fill="#CCD6F6" font-family="Inter, sans-serif" font-size="48" font-weight="700">
+    Santiago Olayo
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="260" text-anchor="middle" fill="#8892B0" font-family="Inter, sans-serif" font-size="24">
+    Full-Stack Web Developer
+  </text>
+  
+  <!-- Tech stack -->
+  <text x="600" y="320" text-anchor="middle" fill="#64FFDA" font-family="Fira Code, monospace" font-size="18">
+    React • Next.js • Node.js • TypeScript
+  </text>
+  
+  <!-- URL -->
+  <text x="600" y="450" text-anchor="middle" fill="#FF566F" font-family="Fira Code, monospace" font-size="20">
+    santiago-jv.vercel.app
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" cy="150" r="40" fill="#64FFDA" opacity="0.1"/>
+  <circle cx="1050" cy="480" r="60" fill="#FF566F" opacity="0.1"/>
+  <rect x="100" y="400" width="80" height="80" rx="10" fill="#64FFDA" opacity="0.1"/>
+</svg>

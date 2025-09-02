@@ -1,0 +1,20 @@
+# robots.txt for santiago-jv.vercel.app
+
+# Allow all web crawlers to access all content
+User-agent: *
+Allow: /
+
+# Specify sitemap location (update when you create one)
+Sitemap: https://santiago-jv.vercel.app/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Block access to private/sensitive directories
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Allow indexing of images
+Allow: /images/
+Allow: /favicon.ico

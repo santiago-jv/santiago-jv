@@ -1,0 +1,455 @@
+/* Footer Styles */
+.footer {
+    background: linear-gradient(180deg, var(--color-background) 0%, #080c16 100%);
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), transparent);
+}
+
+.footerContent {
+    padding: 4rem 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.footerGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Brand Section */
+.brandSection {
+    max-width: 400px;
+}
+
+.logo {
+    font-size: var(--font-size-2xl);
+    font-family: 'Fira Code', monospace;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: inline-block;
+    position: relative;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    transition: width var(--transition-base);
+}
+
+.logo:hover::after {
+    width: 100%;
+}
+
+.brandDescription {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: var(--font-size-base);
+}
+
+.availability {
+    margin-top: 1.5rem;
+}
+
+.statusIndicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.statusDot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+.statusText {
+    font-size: var(--font-size-sm);
+    color: #22c55e;
+    font-weight: 500;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Sections */
+.linksSection,
+.skillsSection,
+.contactSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sectionTitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+/* Quick Links */
+.linksList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footerLink {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    position: relative;
+    padding-left: 1rem;
+    font-size: var(--font-size-base);
+}
+
+.footerLink::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 0.7em;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all var(--transition-base);
+}
+
+.footerLink:hover {
+    color: var(--color-text-primary);
+    transform: translateX(5px);
+}
+
+.footerLink:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Skills */
+.skillsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skillTag {
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-family: 'Fira Code', monospace;
+    transition: all var(--transition-base);
+    cursor: default;
+}
+
+.skillTag:hover {
+    background: rgba(255, 86, 111, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/* Contact Info */
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.emailLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+    font-size: var(--font-size-base);
+}
+
+.emailLink:hover {
+    color: var(--color-accent);
+}
+
+.locationText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    margin: 0;
+}
+
+/* Social Links */
+.socialLinks {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.socialLink::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.socialLink i {
+    position: relative;
+    z-index: 1;
+    font-size: var(--font-size-base);
+    transition: transform var(--transition-base);
+}
+
+.socialLink:hover::before {
+    opacity: 1;
+}
+
+.socialLink:hover {
+    border-color: transparent;
+    transform: translateY(-3px);
+}
+
+.socialLink:hover i {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Footer Bottom */
+.footerBottom {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.bottomContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.copyright p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.builtWith {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.builtWith i {
+    color: var(--color-primary);
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.1); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+}
+
+.footerMeta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.version {
+    font-family: 'Fira Code', monospace;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.sourceLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-base);
+}
+
+.sourceLink:hover {
+    color: var(--color-accent);
+}
+
+/* Decorative Elements */
+.decorativeGrid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-image: 
+        linear-gradient(rgba(255, 86, 111, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 86, 111, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .footerGrid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+    }
+
+    .brandSection {
+        grid-column: 1 / -1;
+        max-width: none;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footerContent {
+        padding: 3rem 0 2rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .footerGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .brandSection {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .statusIndicator {
+        margin: 0 auto;
+    }
+
+    .bottomContent {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footerMeta {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footerContent {
+        padding: 2rem 0 1.5rem;
+    }
+
+    .skillsGrid {
+        justify-content: center;
+    }
+
+    .socialLinks {
+        justify-content: center;
+    }
+
+    .socialLink {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .footerBottom {
+        padding: 1rem 0;
+    }
+}
