@@ -1,69 +1,64 @@
-import styles from "./main-content.module.css";
-import { SocialLink } from "@/types/global";
+import styles from './main-content.module.css';
+import { HERO_CONTENT } from '@/data/portfolio-content';
 
 const MainContent: React.FC = () => {
-    const socialLinks: SocialLink[] = [
-        {
-            href: "https://github.com/santiago-jv/santiago-jv",
-            icon: "fab fa-github",
-            label: "GitHub Profile",
-            platform: "github"
-        },
-        {
-            href: "https://twitter.com/santiago_jv4035",
-            icon: "fab fa-twitter", 
-            label: "Twitter Profile",
-            platform: "twitter"
-        },
-        {
-            href: "mailto:santiagoolayojv@gmail.com",
-            icon: "fas fa-envelope",
-            label: "Email Contact",
-            platform: "email"
-        },
-        {
-            href: "https://www.instagram.com/santiago_ojv",
-            icon: "fab fa-instagram",
-            label: "Instagram Profile", 
-            platform: "instagram"
-        }
-    ];
+  return (
+    <main id="about" className={styles['main-content']}>
+      <img
+        src="/images/background.png"
+        alt="Decorative background illustration"
+        className={styles.background}
+      />
 
-    return (
-        <main id="about" className={styles["main-content"]}>
-            <img 
-                src="/images/background.png" 
-                alt="Decorative background illustration" 
-                className={styles["background"]}
-            />
-            <h1 className={`${styles["greeting-text"]} ${styles["red-text"]} animate__animated animate__fadeInDown`}>
-                Hi, my name is
-            </h1>
-            <h2 className={`${styles['title']} animate__animated animate__fadeInDown animate__delay-1s`}>
-                Santiago Olayo
-            </h2>
-            <h2 className={`${styles['subtitle']} animate__animated animate__fadeInDown animate__delay-1s`}>
-                Semi Senior Backend Engineer
-            </h2> 
+      <h1 className={`${styles['greeting-text']} ${styles['red-text']} animate__animated animate__fadeInDown`}>
+        {HERO_CONTENT.greeting}
+      </h1>
 
-            <div className={`${styles['information']} animate__animated animate__fadeInDown animate__delay-2s`}>
-                <p className={styles['description']}>
-                    Specialized in building robust backend systems with NestJS, Spring Boot, and cloud technologies
-                </p>
-            </div>
-            <a 
-                target='_blank' 
-                rel='noreferrer noopener' 
-                href="https://linkedin.com/in/santiago-jv" 
-                className={`${styles['button']} animate__animated animate__fadeInLeft animate__delay-3s`}
-                aria-label="Check my LinkedIn profile"
+      <h2 className={`${styles.title} animate__animated animate__fadeInDown animate__delay-1s`}>
+        {HERO_CONTENT.name}
+      </h2>
+
+      <h2 className={`${styles.subtitle} animate__animated animate__fadeInDown animate__delay-1s`}>
+        {HERO_CONTENT.role}
+      </h2>
+
+      <div className={`${styles.information} animate__animated animate__fadeInDown animate__delay-2s`}>
+        <p className={styles.description}>{HERO_CONTENT.summary}</p>
+      </div>
+
+      <div className={`${styles.actions} animate__animated animate__fadeInLeft animate__delay-3s`}>
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={HERO_CONTENT.primaryCta.href}
+          className={styles.button}
+          aria-label={HERO_CONTENT.primaryCta.label}
+        >
+          {HERO_CONTENT.primaryCta.label}
+        </a>
+
+        <a href={HERO_CONTENT.secondaryCta.href} className={styles['button-secondary']}>
+          {HERO_CONTENT.secondaryCta.label}
+        </a>
+      </div>
+
+      <ul className={styles['social-list']} aria-label="Social links">
+        {HERO_CONTENT.socialLinks.map((social) => (
+          <li key={social.platform}>
+            <a
+              href={social.href}
+              target={social.href.startsWith('http') ? '_blank' : '_self'}
+              rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+              className={styles['social-link']}
+              aria-label={social.label}
             >
-                Check my LinkedIn
+              <i className={social.iconClassName} aria-hidden="true"></i>
             </a>
-
-
-        </main>
-    );
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
 };
 
 export default MainContent;

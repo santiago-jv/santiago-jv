@@ -1,441 +1,293 @@
-/* Contact Section Styles */
 .contactSection {
-    padding: 6rem 0 4rem;
-    margin-top: 4rem;
-    background: linear-gradient(135deg, var(--color-background) 0%, #0d1421 100%);
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  margin-top: 4rem;
+  padding: 6rem 0 4rem;
+  background: linear-gradient(135deg, var(--color-background) 0%, #0d1421 100%);
 }
 
 .contactSection::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
 }
 
-/* Section Header */
-.sectionHeader {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.sectionTitle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    font-size: var(--font-size-lg);
-    color: var(--color-accent);
-    font-family: 'Fira Code', monospace;
-    margin-bottom: 1rem;
-    font-weight: 400;
-}
-
-.sectionNumber {
-    color: var(--color-primary);
-    font-size: var(--font-size-base);
-}
-
-.sectionSubtitle {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: var(--color-text-primary);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-}
-
-.sectionDescription {
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: var(--font-size-lg);
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-}
-
-/* Contact Content */
 .contactContent {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
 }
 
-/* Contact Information */
-.contactInfo {
-    background: rgba(255, 255, 255, 0.02);
-    padding: 2.5rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
+.contactInfo,
+.contactForm {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2.5rem;
 }
 
-.contactInfo::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+.contactInfo::before,
+.contactForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
 }
 
-.infoTitle {
-    font-size: var(--font-size-2xl);
-    color: var(--color-text-primary);
-    margin-bottom: 2rem;
-    font-weight: 600;
+.infoTitle,
+.formTitle {
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-2xl);
 }
 
 .contactGrid {
-    display: grid;
-    gap: 2rem;
+  display: grid;
+  gap: 1.25rem;
 }
 
 .contactItem {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 12px;
-    transition: all var(--transition-base);
-    cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 12px;
+  padding: 0.9rem;
+  transition: transform var(--transition-base), background var(--transition-base);
 }
 
 .contactItem:hover {
-    background: rgba(255, 255, 255, 0.03);
-    transform: translateX(8px);
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .contactIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    font-size: var(--font-size-lg);
-    flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+}
+
+.contactIcon i {
+  color: white;
 }
 
 .contactDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .contactLabel {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    font-family: 'Fira Code', monospace;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .contactValue {
-    font-size: var(--font-size-base);
-    color: var(--color-text-primary);
-    text-decoration: none;
-    transition: color var(--transition-base);
-    font-weight: 500;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  transition: color var(--transition-base);
 }
 
 .contactValue:hover {
-    color: var(--color-accent);
-}
-
-/* Contact Form */
-.contactForm {
-    background: rgba(255, 255, 255, 0.02);
-    padding: 2.5rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-}
-
-.contactForm::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
-}
-
-.formTitle {
-    font-size: var(--font-size-2xl);
-    color: var(--color-text-primary);
-    margin-bottom: 2rem;
-    font-weight: 600;
+  color: var(--color-accent);
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .formRow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
 .formLabel {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-primary);
-    font-family: 'Fira Code', monospace;
-    font-weight: 500;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-mono);
+  font-weight: 500;
 }
 
 .formInput {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid transparent;
-    border-radius: 8px;
-    color: var(--color-text-primary);
-    font-size: var(--font-size-base);
-    transition: all var(--transition-base);
-    font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.9rem;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-base);
 }
 
 .formInput:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 4px rgba(100, 255, 218, 0.1);
-}
-
-.formInput::placeholder {
-    color: var(--color-text-secondary);
-    opacity: 0.7;
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
 }
 
 .formInput:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .formTextarea {
-    resize: vertical;
-    min-height: 120px;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.submitStatus {
+  min-height: 3rem;
 }
 
 .submitMessage {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    border-radius: 8px;
-    font-size: var(--font-size-sm);
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
 }
 
 .submitSuccess {
-    background: rgba(34, 197, 94, 0.1);
-    color: #22c55e;
-    border: 1px solid rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
 }
 
 .submitError {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-    border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
 }
 
 .submitButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.submitButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.submitButton:hover::before {
-    left: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  padding: 1rem 2rem;
+  color: white;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .submitButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255, 86, 111, 0.3);
-}
-
-.submitButton:active {
-    transform: translateY(0);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 86, 111, 0.3);
 }
 
 .submitButton:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* Quick Contact CTA */
 .quickContact {
-    text-align: center;
-    padding: 3rem;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(255, 86, 111, 0.1), rgba(100, 255, 218, 0.05));
-    border: 1px solid rgba(255, 86, 111, 0.2);
-    position: relative;
-}
-
-.quickContact::before {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.02));
-    z-index: -1;
+  position: relative;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 86, 111, 0.2);
+  background: linear-gradient(135deg, rgba(255, 86, 111, 0.1), rgba(34, 197, 94, 0.05));
+  padding: 2.5rem;
+  text-align: center;
 }
 
 .quickContactText {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-secondary);
-    margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
 }
 
 .emailButton {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: transparent;
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    font-family: 'Fira Code', monospace;
-    transition: all var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.emailButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--color-primary-light);
-    transition: left 0.3s;
-    z-index: -1;
-}
-
-.emailButton:hover::before {
-    left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid var(--color-primary);
+  padding: 0.9rem 1.6rem;
+  color: var(--color-primary);
+  font-family: var(--font-family-mono);
+  transition: all var(--transition-base);
 }
 
 .emailButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255, 86, 111, 0.2);
+  transform: translateY(-2px);
+  background: var(--color-primary-light);
 }
 
-/* Responsive Design */
 @media screen and (max-width: 900px) {
-    .contactSection {
-        padding: 4rem 0 3rem;
-    }
+  .contactSection {
+    padding: 4rem 0 3rem;
+  }
 
-    .container {
-        padding: 0 1rem;
-    }
+  .container {
+    padding: 0 1rem;
+  }
 
-    .contactContent {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
+  .contactContent {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
 
-    .contactInfo,
-    .contactForm {
-        padding: 2rem;
-    }
+  .contactInfo,
+  .contactForm {
+    padding: 2rem;
+  }
 
-    .formRow {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .sectionSubtitle {
-        font-size: clamp(2rem, 8vw, 3rem);
-    }
+  .formRow {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .contactSection {
-        padding: 3rem 0 2rem;
-    }
+  .contactSection {
+    padding: 3rem 0 2rem;
+  }
 
-    .container {
-        padding: 0 1rem;
-    }
+  .contactInfo,
+  .contactForm,
+  .quickContact {
+    padding: 1.5rem;
+  }
 
-    .contactInfo,
-    .contactForm {
-        padding: 1.5rem;
-    }
-
-    .contactItem {
-        padding: 0.75rem;
-    }
-
-    .contactIcon {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    .quickContact {
-        padding: 2rem 1.5rem;
-    }
-
-    .emailButton {
-        padding: 0.875rem 1.5rem;
-        font-size: var(--font-size-sm);
-    }
+  .submitButton,
+  .emailButton {
+    width: 100%;
+    justify-content: center;
+  }
 }

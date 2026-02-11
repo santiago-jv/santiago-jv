@@ -1,18 +1,11 @@
-/* Hero Background Image */
-.hero-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: -1;
-  object-fit: cover;
-  opacity: 0.3;
-  transition: opacity var(--transition-slow);
-  will-change: opacity;
+.main-content {
+  position: relative;
+  width: min(70%, 68rem);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding-top: 6.5rem;
 }
 
-/* Legacy class name for backward compatibility */
 .background {
   position: absolute;
   top: 0;
@@ -22,320 +15,140 @@
   z-index: -1;
   object-fit: cover;
   opacity: 0.3;
-  transition: opacity var(--transition-slow);
-  will-change: opacity;
 }
 
-/* Main Content Container */
-.main-content {
-    padding-top: 6rem;
-    width: 70%;
-    margin: auto;
-    min-height: 100vh;
-}
-
-/* Typography Components */
 .greeting-text {
-    font-size: clamp(16px, 7vw, 20px);
-    margin-left: 0.1rem;
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
 }
 
-.hero-title,
-.hero-subtitle {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    line-height: 1.1;
-    font-weight: 700;
-    margin: 0;
-    opacity: 0;
-    animation-fill-mode: forwards;
+.red-text {
+  color: var(--color-primary);
+  font-family: var(--font-family-mono);
+  font-weight: 500;
 }
 
-.hero-title {
-    color: var(--color-text-primary);
-    margin-bottom: var(--spacing-xs);
-}
-
-.hero-subtitle {
-    color: var(--color-text-secondary);
-    margin-bottom: var(--spacing-xl);
-    font-weight: 600;
-}
-
-/* Legacy class names for backward compatibility */
-.title, .subtitle {
-    font-size: clamp(40px, 4vw, 70px);
+.title,
+.subtitle {
+  line-height: 1.1;
 }
 
 .title {
-    color: var(--gray);
-    margin-right: 1.5rem;
+  color: var(--color-text-primary);
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
 }
 
 .subtitle {
-    color: var(--dark-gray);
-    margin-top: 0.3rem;
+  color: var(--color-text-secondary);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
 }
 
-.highlight-text {
-    font-size: clamp(var(--font-size-lg), 6vw, var(--font-size-3xl));
-    display: inline-block;
-}
-
-/* Legacy class name */
-.span-text {
-    font-size: clamp(var(--font-size-lg), 6vw, var(--font-size-3xl));
-    display: inline-block;
-}
-
-.accent-text {
-    font-family: 'Fira Code', monospace;
-    color: var(--color-primary);
-    font-weight: 400;
-    position: relative;
-}
-
-.accent-text::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transition-base);
-}
-
-.accent-text:hover::after {
-    transform: scaleX(1);
-}
-
-/* Legacy class name */
-.red-text {
-    font-family: 'Fira Code', monospace;
-    color: var(--color-primary);
-    font-weight: 400;
-    position: relative;
-}
-
-/* Content Sections */
-.hero-content {
-    margin-top: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
-    opacity: 0;
-    animation-fill-mode: forwards;
-}
-
-.hero-description {
-    max-width: 600px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    font-size: var(--font-size-lg);
-    margin: 0;
-}
-
-/* Legacy class names */
-.information, .button {
-    margin-top: 2rem;
+.information {
+  margin-top: 2rem;
 }
 
 .description {
-    max-width: 600px;
-    color: var(--dark-gray);
-    line-height: 1.5rem;
-    font-size: 1.1rem;
+  max-width: 38rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: 1.75;
 }
 
-/* Button - Restored Original Style */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.4rem;
+  font-family: var(--font-family-mono);
+  transition: all var(--transition-base);
+}
+
 .button {
-    display: inline-block;
-    cursor: pointer;
-    outline: none;
-    border: 2px solid var(--red);
-    background-color: transparent;
-    padding: 1rem 1.75rem;
-    border-radius: 0.3rem;
-    font-family: 'Fira Code', monospace;
-    color: var(--red);
-    transition: background .3s ease;
-    margin-top: 2rem;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
 }
 
 .button:hover {
-    background-color: var(--soft-red);
+  background: var(--color-primary-light);
 }
 
-/* Social Media Links */
-.social-sidebar {
-    position: fixed;
-    bottom: 0;
-    right: var(--spacing-lg);
-    z-index: var(--z-sticky);
-    opacity: 0;
-    animation-fill-mode: forwards;
+.button-secondary {
+  border: 2px solid rgba(148, 163, 184, 0.4);
+  color: var(--color-text-secondary);
+}
+
+.button-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .social-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-md);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.social-item {
-    list-style: none;
-    margin-bottom: 1rem;
-}
-
-.social-link:hover i {
-    color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 2rem;
 }
 
 .social-link {
-    transition: transform .3s ease;
-    color: var(--dark-gray);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 0.5rem;
+  transition: transform var(--transition-base), border-color var(--transition-base);
 }
 
-.social-divider {
-    width: 2px;
-    height: 4rem;
-    background: var(--color-text-secondary);
-    border: none;
-    margin-top: var(--spacing-lg);
-    opacity: 0.5;
+.social-link i {
+  font-size: 1rem;
 }
 
-/* Legacy class names */
-.social-networks {
-    position: fixed;
-    bottom: 50px;
-    right: 3%;
+.social-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
 }
 
-.social-networks ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.social-line {
-    display: block;
-    width: 100px;
-    margin-top: 50px;
-    transform: rotate(90deg);
-    border-color: var(--dark-gray);
-}
-
-/* Responsive Design */
 @media screen and (max-width: 900px) {
-    .hero-background,
-    .background {
-        display: none;
-    }
-    
+  .background {
+    display: none;
+  }
 
-    
-    .main-content {
-        width: 85%;
-        padding-top: 5rem;
-        text-align: center;
-    }
-    
-    .greeting-text {
-        font-size: clamp(14px, 5vw, 18px);
-        margin-bottom: 0.8rem;
-    }
-    
-    .hero-title,
-    .hero-subtitle,
-    .title,
-    .subtitle {
-        font-size: clamp(1.8rem, 10vw, 2.8rem);
-        text-align: center;
-        line-height: 1.2;
-    }
-    
-    .title {
-        margin-right: 0;
-        margin-bottom: 0.5rem;
-    }
-    
-    .subtitle {
-        margin-top: 0.2rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .hero-description,
-    .description {
-        text-align: center;
-        font-size: 1rem;
-        line-height: 1.5;
-        max-width: 100%;
-    }
-    
-    .information {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .button {
-        width: auto;
-        min-width: 200px;
-        max-width: 280px;
-        margin: 0 auto;
-        margin-top: 1.5rem;
-        text-align: center;
-        display: inline-block;
-    }
+  .main-content {
+    width: 88%;
+    padding-top: 5rem;
+    text-align: center;
+  }
+
+  .description {
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  .actions,
+  .social-list {
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .main-content {
-        width: 90%;
-        padding-top: 4.5rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    
-    .greeting-text {
-        font-size: 14px;
-        margin-bottom: 0.5rem;
-    }
-    
-    .hero-title,
-    .hero-subtitle,
-    .title,
-    .subtitle {
-        font-size: clamp(1.5rem, 12vw, 2.2rem);
-    }
-    
-    .description {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-    
-    .button {
-        min-width: 180px;
-        max-width: 240px;
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .information {
-        margin-top: 1rem;
-    }
-}
+  .main-content {
+    width: 92%;
+    padding-top: 4.5rem;
+  }
 
-/* Animation Performance Classes */
-.animate-on-scroll {
-    will-change: transform, opacity;
-}
-
-.animation-complete {
-    will-change: auto;
+  .button,
+  .button-secondary {
+    width: 100%;
+  }
 }

@@ -1,128 +1,107 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './header.module.css';
-import { NavigationItem } from '@/types/global';
+import { NAVIGATION_LINKS } from '@/data/portfolio-content';
 
 const Header: React.FC = () => {
-    const navbarReference = useRef<HTMLElement>(null);
-    const backgroundReference = useRef<HTMLDivElement>(null);
-    const headerReference = useRef<HTMLElement>(null);
-    const lastScrollValue = useRef<number>(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
 
-    const navigationItems: NavigationItem[] = [
-        { label: "About me", href: "#about" },
-        { label: "Projects", href: "#projects" },
-        { label: "Contact me", href: "#contact" }
-    ];
+  useEffect(() => {
+    let lastScroll = 0;
 
-    useEffect(() => {
-        const handleScroll = (): void => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll === 0) {
-                headerReference.current?.classList.remove(styles['header--hidden']);
-                return;
-            }
-            
-            if (currentScroll > lastScrollValue.current) {
-                headerReference.current?.classList.add(styles['header--hidden']);
-            } 
-            else if (currentScroll < lastScrollValue.current) {  
-                headerReference.current?.classList.remove(styles['header--hidden']);  
-            }
-            lastScrollValue.current = currentScroll;
-        };
+    const handleScroll = (): void => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll <= 0) {
+        setIsHeaderHidden(false);
+        lastScroll = 0;
+        return;
+      }
 
-        window.addEventListener('scroll', handleScroll);
-        
-        // Cleanup event listener to prevent memory leaks
-        return (): void => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
-    const handleNavbar = (): void => {
-        navbarReference.current?.classList.toggle(styles['header__navbar--open']);
-        backgroundReference.current?.classList.toggle(styles['background--show']);
+      setIsHeaderHidden(currentScroll > lastScroll);
+      lastScroll = currentScroll;
     };
 
-    const handleNavItemClick = (item: NavigationItem): void => {
-        if (item.href) {
-            const element = document.querySelector(item.href);
-            if (element) {
-                element.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start' 
-                });
-            }
-        }
-        handleNavbar(); // Close mobile menu after selection
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
     };
 
-    return (
-        <>
-            <header 
-                ref={headerReference} 
-                className={`${styles['header']} animate__animated animate__fadeInDown animate__delay-3s`}
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  const handleNavItemClick = (href: string): void => {
+    const section = document.querySelector(href);
+    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <>
+      <header
+        className={`${styles.header} ${isHeaderHidden ? styles['header--hidden'] : ''} animate__animated animate__fadeInDown animate__delay-3s`}
+      >
+        <a href="#about" aria-label="Go to About section">
+          <img className={styles.logo} src="/images/logo.svg" alt="Santiago Olayo logo" />
+        </a>
+
+        <nav
+          id="site-menu"
+          className={`${styles.header__navbar} ${isMenuOpen ? styles['header__navbar--open'] : ''}`}
+        >
+          <header className={styles.navbar__header}>
+            <h1 className={styles.navbar__title}>Menu</h1>
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className={styles['navbar__close-icon']}
+              aria-label="Close navigation menu"
+              type="button"
             >
-                <img 
-                    className={styles['logo']} 
-                    src="images/logo.svg" 
-                    alt="Santiago Olayo Logo"
-                />
+              <i className="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </header>
 
-                <nav ref={navbarReference} className={styles['header__navbar']}>
-                    <header className={styles['navbar__header']}>
-                        <h1 className={styles['navbar__title']}>
-                            Menu
-                        </h1>
-                        <button 
-                            onClick={handleNavbar} 
-                            className={styles['navbar__close-icon']}
-                            aria-label="Close navigation menu"
-                            type="button"
-                        >
-                            <i className="fas fa-times"></i>
-                        </button>
-                    </header>
-                    <ul className={styles['navbar__items']}>
-                        {navigationItems.map((item) => (
-                            <li key={item.label} className={styles['navbar__item']}>
-                                <button 
-                                    className={styles['navbar__link']} 
-                                    type="button"
-                                    onClick={() => handleNavItemClick(item)}
-                                    aria-label={`Navigate to ${item.label}`}
-                                >
-                                    {item.label}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-
-                <button 
-                    onClick={handleNavbar} 
-                    className={styles['header__menu-button']} 
-                    aria-label="Open navigation menu"
-                    type="button"
+          <ul className={styles.navbar__items}>
+            {NAVIGATION_LINKS.map((item) => (
+              <li key={item.href} className={styles.navbar__item}>
+                <button
+                  className={styles.navbar__link}
+                  type="button"
+                  onClick={() => handleNavItemClick(item.href)}
                 >
-                    <i className="fas fa-bars"></i>
+                  {item.label}
                 </button>
-            </header>
-            <div 
-                ref={backgroundReference} 
-                onClick={handleNavbar} 
-                className={styles['background']}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        handleNavbar();
-                    }
-                }}
-                aria-label="Close navigation menu"
-            />
-        </>
-    );
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <button
+          onClick={() => setIsMenuOpen((current) => !current)}
+          className={styles['header__menu-button']}
+          aria-label="Open navigation menu"
+          aria-expanded={isMenuOpen}
+          aria-controls="site-menu"
+          type="button"
+        >
+          <i className="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </header>
+
+      <button
+        type="button"
+        onClick={() => setIsMenuOpen(false)}
+        className={`${styles.background} ${isMenuOpen ? styles['background--show'] : ''}`}
+        aria-label="Close navigation menu"
+      />
+    </>
+  );
 };
 
 export default Header;
