@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://www.linkedin.com/in/santiago-jv">LinkedIn</a> •
   <a href="https://github.com/santiago-jv">GitHub</a> •
-  <a href="https://santiago-jv.me">Portfolio</a> •
+  <a href="https://santiago-jv.dev">Portfolio</a> •
   <a href="mailto:santiagojv.work@gmail.com">Email</a>
 </p>
 
@@ -28,7 +28,7 @@ Backend engineer specialized in designing and implementing scalable APIs, distri
 - **AI & Automation:** LLM integrations, MCP (Model Context Protocol), workflow automation with n8n
 
 ## Selected Links
-- Portfolio: https://santiago-jv.me
+- Portfolio: https://santiago-jv.dev
 - Medium: https://medium.com/@santiago-jv/
 - Contact: mailto:santiagojv.work@gmail.com
 
