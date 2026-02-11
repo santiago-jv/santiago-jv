@@ -11,7 +11,7 @@ export const SEO = {
   siteUrl: 'https://santiago-jv.vercel.app/',
   title: 'Santiago Olayo - Backend Engineer',
   description:
-    'Santiago Olayo - Semi Senior Backend Engineer specializing in NestJS, Spring Boot, AWS and database technologies. Building robust and scalable backend systems.',
+    'Santiago Olayo - Backend Engineer specializing in scalable APIs, cloud architectures, AI integrations, MCP tooling, and n8n automations.',
   ogImage: '/images/og-image.svg',
 };
 
@@ -24,9 +24,9 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
 export const HERO_CONTENT: HeroContent = {
   greeting: 'Hi, my name is',
   name: 'Santiago Olayo',
-  role: 'Semi Senior Backend Engineer',
+  role: 'Backend Engineer | AI & Automation',
   summary:
-    'Specialized in building robust backend systems with NestJS, Spring Boot, and cloud technologies.',
+    'I build robust backend systems and AI-powered workflows using NestJS, Spring Boot, cloud platforms, MCP-based tool connectivity, and n8n automations.',
   primaryCta: {
     label: 'Check my LinkedIn',
     href: 'https://linkedin.com/in/santiago-jv',
@@ -67,10 +67,17 @@ export const PROJECTS_HEADING: SectionHeadingContent = {
   number: '02.',
   title: "Some Things I've Built",
   description:
-    'The projects below are examples that showcase the type of backend systems I work on. Real projects from my professional experience will be added soon.',
+    'The projects below are examples that showcase the type of backend systems, AI workflows, and automation platforms I build. Real projects from my professional experience will be added soon.',
 };
 
 export const PROJECTS: Project[] = [
+  {
+    title: 'AI Operations Assistant',
+    description:
+      'Operational assistant integrating LLM-based flows with MCP tools and n8n orchestrations for incident triage, team notifications, and repetitive task automation.',
+    tech: ['TypeScript', 'MCP', 'n8n', 'OpenAI API'],
+    status: 'In Development',
+  },
   {
     title: 'E-commerce API',
     description:
@@ -138,11 +145,22 @@ export const FOOTER_CONTENT: FooterContent = {
   brand: {
     name: '<santiago-jv/>',
     description:
-      "Full-stack developer passionate about creating innovative web solutions that make a difference. Always learning, always building.",
+      'Backend engineer focused on scalable architectures, practical AI integrations, and business automation systems.',
     availabilityText: 'Available for new opportunities',
   },
   quickLinks: NAVIGATION_LINKS,
-  skills: ['NestJS', 'Spring Boot', 'TypeScript', 'React', 'AWS', 'PostgreSQL', 'MongoDB', 'Redis'],
+  skills: [
+    'NestJS',
+    'Spring Boot',
+    'TypeScript',
+    'AWS',
+    'PostgreSQL',
+    'MongoDB',
+    'Redis',
+    'MCP',
+    'n8n',
+    'OpenAI API',
+  ],
   socialLinks: HERO_CONTENT.socialLinks,
   email: 'santiagojv.work@gmail.com',
   location: 'Santa Marta, Colombia',

@@ -12,18 +12,20 @@
 </p>
 
 ## Professional Summary
-Backend engineer specialized in designing and implementing scalable APIs and distributed services. I work with modern backend ecosystems to deliver secure, observable, and maintainable systems aligned with business goals.
+Backend engineer specialized in designing and implementing scalable APIs, distributed services, and AI-powered workflows. I work with modern backend ecosystems to deliver secure, observable, and maintainable systems aligned with business goals.
 
 ## Current Focus
 - Building backend solutions at **GoodRec**
 - Improving system reliability, performance, and cloud readiness
 - Applying clean architecture and engineering best practices in production systems
+- Building practical AI integrations, MCP-based tool connectivity, and workflow automations with **n8n**
 
 ## Core Expertise
 - **Architecture:** REST APIs, microservices, event-driven patterns
 - **Backend:** NestJS, Spring Boot, Node.js, TypeScript, Java
 - **Data:** PostgreSQL, MongoDB, Redis
 - **Cloud & DevOps:** AWS, Docker, CI/CD, monitoring and alerting
+- **AI & Automation:** LLM integrations, MCP (Model Context Protocol), workflow automation with n8n
 
 ## Selected Links
 - Portfolio: https://santiago-jv.me
