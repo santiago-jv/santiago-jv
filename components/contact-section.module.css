@@ -147,13 +147,16 @@
   padding: 0.9rem;
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
-  transition: all var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .formInput:focus {
   border-color: var(--color-accent);
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+  box-shadow: 0 0 0 4px var(--color-accent-light);
 }
 
 .formInput:disabled {
@@ -181,15 +184,15 @@
 }
 
 .submitSuccess {
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  background: rgba(34, 197, 94, 0.1);
-  color: #22c55e;
+  border: 1px solid var(--color-success-light);
+  background: var(--color-success-light);
+  color: var(--color-success);
 }
 
 .submitError {
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+  border: 1px solid var(--color-danger-light);
+  background: var(--color-danger-light);
+  color: var(--color-danger);
 }
 
 .submitButton {
@@ -208,7 +211,7 @@
 
 .submitButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 86, 111, 0.3);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.28);
 }
 
 .submitButton:disabled {
@@ -221,8 +224,8 @@
 .quickContact {
   position: relative;
   border-radius: 16px;
-  border: 1px solid rgba(255, 86, 111, 0.2);
-  background: linear-gradient(135deg, rgba(255, 86, 111, 0.1), rgba(34, 197, 94, 0.05));
+  border: 1px solid var(--color-primary-light);
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
   padding: 2.5rem;
   text-align: center;
 }
@@ -242,7 +245,11 @@
   padding: 0.9rem 1.6rem;
   color: var(--color-primary);
   font-family: var(--font-family-mono);
-  transition: all var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
 }
 
 .emailButton:hover {

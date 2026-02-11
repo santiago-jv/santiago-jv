@@ -1,11 +1,16 @@
 :root {
-  --color-primary: #ff566f;
-  --color-primary-light: rgba(255, 86, 111, 0.15);
-  --color-background: #0a192f;
-  --color-background-secondary: #112240;
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-accent: #22c55e;
+  --color-primary: #3b82f6;
+  --color-primary-light: rgba(59, 130, 246, 0.16);
+  --color-background: #0b1220;
+  --color-background-secondary: #111a2e;
+  --color-text-primary: #e6edf7;
+  --color-text-secondary: #9fb0c7;
+  --color-accent: #14b8a6;
+  --color-accent-light: rgba(20, 184, 166, 0.16);
+  --color-success: #22c55e;
+  --color-success-light: rgba(34, 197, 94, 0.12);
+  --color-danger: #f87171;
+  --color-danger-light: rgba(248, 113, 113, 0.12);
 
   --font-family-base: 'Space Grotesk', sans-serif;
   --font-family-mono: 'JetBrains Mono', monospace;

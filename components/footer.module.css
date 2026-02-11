@@ -58,8 +58,8 @@
   align-items: center;
   gap: 0.75rem;
   border-radius: 8px;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid var(--color-success-light);
+  background: var(--color-success-light);
   padding: 0.75rem 1rem;
 }
 
@@ -67,7 +67,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--color-success);
   animation: pulse 2s infinite;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .statusText {
-  color: #22c55e;
+  color: var(--color-success);
   font-size: var(--font-size-sm);
   font-family: var(--font-family-mono);
 }
@@ -125,7 +125,7 @@
 
 .footerLink {
   color: var(--color-text-secondary);
-  transition: all var(--transition-base);
+  transition: color var(--transition-base), transform var(--transition-base);
 }
 
 .footerLink:hover {
@@ -147,13 +147,16 @@
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   font-family: var(--font-family-mono);
-  transition: all var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base),
+    background-color var(--transition-base);
 }
 
 .skillTag:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(255, 86, 111, 0.1);
+  background: var(--color-primary-light);
 }
 
 .contactInfo {
@@ -259,8 +262,8 @@
   bottom: 0;
   z-index: 0;
   height: 100px;
-  background-image: linear-gradient(rgba(255, 86, 111, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 86, 111, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(59, 130, 246, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.06) 1px, transparent 1px);
   background-size: 20px 20px;
   opacity: 0.5;
 }

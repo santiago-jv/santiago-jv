@@ -5,15 +5,23 @@ import { NAVIGATION_LINKS } from '@/data/portfolio-content';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const [isHeaderReady, setIsHeaderReady] = useState(false);
 
   useEffect(() => {
-    let lastScroll = 0;
+    const SCROLL_DELTA = 8;
+    const MIN_HIDE_OFFSET = 80;
+    let lastScroll = window.pageYOffset;
 
     const handleScroll = (): void => {
       const currentScroll = window.pageYOffset;
-      if (currentScroll <= 0) {
+
+      if (isMenuOpen || currentScroll <= MIN_HIDE_OFFSET) {
         setIsHeaderHidden(false);
-        lastScroll = 0;
+        lastScroll = currentScroll;
+        return;
+      }
+
+      if (Math.abs(currentScroll - lastScroll) < SCROLL_DELTA) {
         return;
       }
 
@@ -23,6 +31,10 @@ const Header: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    setIsHeaderReady(true);
   }, []);
 
   useEffect(() => {
@@ -45,10 +57,14 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`${styles.header} ${isHeaderHidden ? styles['header--hidden'] : ''} animate__animated animate__fadeInDown animate__delay-3s`}
+        className={`${styles.header} ${isHeaderHidden ? styles['header--hidden'] : ''} ${isHeaderReady ? styles['header--ready'] : ''}`}
       >
         <a href="#about" aria-label="Go to About section">
-          <img className={styles.logo} src="/images/logo.svg" alt="Santiago Olayo logo" />
+          <span className={styles.logo} aria-label="santiago-jv logo">
+            <span className={styles.logoAccent}>&lt;</span>
+            <span className={styles.logoText}>santiago-jv</span>
+            <span className={styles.logoAccent}>/&gt;</span>
+          </span>
         </a>
 
         <nav

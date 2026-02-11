@@ -24,7 +24,7 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
 export const HERO_CONTENT: HeroContent = {
   greeting: 'Hi, my name is',
   name: 'Santiago Olayo',
-  role: 'Backend Engineer | AI & Automation',
+  role: 'Backend AI Engineer',
   summary:
     'I build robust backend systems and AI-powered workflows using NestJS, Spring Boot, cloud platforms, MCP-based tool connectivity, and n8n automations.',
   primaryCta: {

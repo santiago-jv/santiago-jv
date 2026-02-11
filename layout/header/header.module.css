@@ -9,18 +9,42 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
-  border-bottom: 1px solid rgba(255, 86, 111, 0.1);
+  border-bottom: 1px solid var(--color-primary-light);
   background-color: rgba(10, 25, 47, 0.95);
   backdrop-filter: blur(10px);
-  transition: transform var(--transition-base);
+  opacity: 0;
+  transform: translate3d(0, -14px, 0);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+  will-change: transform, opacity;
+}
+
+.header--ready {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .header--hidden {
-  transform: translateY(-100%);
+  transform: translate3d(0, -100%, 0);
 }
 
 .logo {
-  width: 14rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.08rem;
+  font-family: var(--font-family-mono);
+  font-size: 2.05rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.logoText {
+  color: var(--color-text-primary);
+}
+
+.logoAccent {
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .header__menu-button,
@@ -48,7 +72,7 @@
 .header__navbar {
   position: fixed;
   top: 0;
-  right: -350px;
+  right: 0;
   z-index: 100;
   width: 100%;
   max-width: 350px;
@@ -58,11 +82,13 @@
   align-items: center;
   padding-top: 1rem;
   background-color: var(--color-background);
-  transition: right var(--transition-slow);
+  transform: translate3d(100%, 0, 0);
+  transition: transform var(--transition-slow);
+  will-change: transform;
 }
 
 .header__navbar--open {
-  right: 0;
+  transform: translate3d(0, 0, 0);
 }
 
 .navbar__header {
@@ -109,14 +135,17 @@
   height: 100vh;
   visibility: hidden;
   opacity: 0;
+  pointer-events: none;
   cursor: pointer;
   background: rgba(0, 0, 0, 0.2);
-  transition: opacity var(--transition-slow);
+  transition: opacity var(--transition-slow), visibility 0s linear var(--transition-slow);
 }
 
 .background--show {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
+  transition: opacity var(--transition-slow);
 }
 
 @media screen and (max-width: 900px) {
@@ -126,7 +155,7 @@
   }
 
   .logo {
-    width: 12rem;
+    font-size: 1.75rem;
   }
 
   .header__menu-button {
@@ -150,29 +179,26 @@
   }
 
   .logo {
-    width: 10rem;
+    font-size: 1.45rem;
+    letter-spacing: 0.06em;
   }
 
   .header__navbar {
     max-width: 280px;
-    right: -280px;
-  }
-
-  .header__navbar--open {
-    right: 0;
   }
 }
 
 @media screen and (min-width: 1000px) {
   .header__navbar {
     position: static;
-    right: auto;
+    transform: none;
     width: auto;
     max-width: none;
     height: auto;
     display: block;
     padding-top: 0;
     background-color: transparent;
+    transition: none;
   }
 
   .header__menu-button,
@@ -190,5 +216,23 @@
 
   .navbar__link {
     padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header__navbar,
+  .background {
+    transition: none;
+  }
+
+  .header {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .header--hidden {
+    transform: none;
   }
 }

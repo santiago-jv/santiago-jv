@@ -17,8 +17,9 @@ export default function Document(): JSX.Element {
           referrerPolicy="no-referrer"
         />
 
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#0A192F" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#0B1220" />
       </Head>
       <body>
         <Main />
