@@ -37,7 +37,7 @@ const ContactSection: React.FC = () => {
       const mailtoBody = encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
       );
-      window.location.href = `mailto:santiagojv.work@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+      window.location.href = `mailto:contact@santiago-jv.tech?subject=${mailtoSubject}&body=${mailtoBody}`;
       setFormData(INITIAL_FORM_DATA);
       setSubmitStatus('success');
     } catch {

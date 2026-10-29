@@ -28,4 +28,4 @@
 - [GitHub Profile](https://github.com/santiago-jv): Code repositories and open-source work.
 - [X (Twitter)](https://x.com/santiagojv_tech): `@santiagojv_tech`
 - [Medium Blog](https://medium.com/@santiago-jv/): Technical articles by Santiago Olayo.
-- [Direct Email](mailto:santiagojv.work@gmail.com): `santiagojv.work@gmail.com`
+- [Direct Email](mailto:contact@santiago-jv.tech): `contact@santiago-jv.tech`

@@ -80,8 +80,8 @@ export const HERO_CONTENT: HeroContent = {
     },
     {
       platform: 'email',
-      label: 'Email',
-      href: 'mailto:santiagojv.work@gmail.com',
+      label: 'Email (contact@santiago-jv.tech)',
+      href: 'mailto:contact@santiago-jv.tech',
       iconClassName: 'fa-regular fa-envelope',
     },
   ],
@@ -200,13 +200,13 @@ export const CONTACT_CONTENT: ContactContent = {
   introTitle: 'Links & Contact',
   formTitle: 'Send a Message',
   quickActionLabel: 'Send me an email',
-  quickActionHref: 'mailto:santiagojv.work@gmail.com?subject=Hey%20Santiago!',
+  quickActionHref: 'mailto:contact@santiago-jv.tech?subject=Hey%20Santiago!',
   infoItems: [
     {
       iconClassName: 'fa-regular fa-envelope',
       label: 'Email',
-      value: 'santiagojv.work@gmail.com',
-      href: 'mailto:santiagojv.work@gmail.com',
+      value: 'contact@santiago-jv.tech',
+      href: 'mailto:contact@santiago-jv.tech',
     },
     {
       iconClassName: 'fa-brands fa-linkedin-in',
@@ -258,7 +258,7 @@ export const FOOTER_CONTENT: FooterContent = {
     'Metabase',
   ],
   socialLinks: HERO_CONTENT.socialLinks,
-  email: 'santiagojv.work@gmail.com',
+  email: 'contact@santiago-jv.tech',
   location: 'Colombia',
   sourceUrl: 'https://github.com/santiago-jv/santiago-jv',
   version: 'v4.2.0',

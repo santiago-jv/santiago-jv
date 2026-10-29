@@ -13,7 +13,7 @@ const JSON_LD_SCHEMA = {
     jobTitle: 'Senior Software Engineer & Product Owner Engineer',
     description: SEO.description,
     url: SEO.siteUrl,
-    email: 'mailto:santiagojv.work@gmail.com',
+    email: 'mailto:contact@santiago-jv.tech',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Barranquilla',
