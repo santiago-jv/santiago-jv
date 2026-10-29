@@ -1,0 +1,63 @@
+# Santiago Olayo Villamil — Complete Professional Profile (llms-full.txt)
+
+> This document provides the full, structured professional context of Santiago Olayo Villamil (`santiago-jv`) following the `llms.txt` standard for AI assistants, search engines, and automated recruiting agents.
+
+---
+
+## 1. Identity & Contact
+- **Name:** Santiago Olayo Villamil
+- **Title:** Senior Software Engineer | Backend, Cloud & AI Internal Tooling | Product Owner Engineer
+- **Website:** https://www.santiago-jv.tech/
+- **Email:** santiagojv.work@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/santiago-jv
+- **GitHub:** https://github.com/santiago-jv
+- **X (Twitter):** https://x.com/santiagojv_tech (`@santiagojv_tech`)
+- **Medium:** https://medium.com/@santiago-jv/
+- **Resume PDF:** https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf
+- **Location:** Barranquilla / Santa Marta, Colombia (Remote)
+
+---
+
+## 2. Executive Summary
+Software Engineer with 4+ years of experience building and improving products for startups and international companies. Works across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.
+
+Works closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. Handles the process end to end, from discussions with stakeholders and technical design to implementation, database migrations, deployment, and post-release monitoring across backend services, mobile features, and internal tooling.
+
+Beyond feature development, has contributed to migrating manual processes toward AI-assisted workflows and improving/maintaining the internal tools the team relies on—including MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills for each internal team area, and prompting rules control with Cloudflare AI Gateway. Uses Datadog to monitor services, configure alerts, and investigate production issues, CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.
+
+---
+
+## 3. Professional Experience
+
+### GoodRec — Product Owner Engineer / Senior Backend Engineer
+- **Period:** January 2025 – Present
+- **Modality:** Remote
+- **Key Responsibilities & Achievements:**
+  - End-to-end execution alongside product, operations, support, and finance: from stakeholder discussions and technical design to implementation, cloud deployment (AWS / Google Cloud Functions), and post-release monitoring.
+  - Development and evolution of backend services (Node.js, NestJS, TypeScript) under Hexagonal Architecture and Domain-Driven Design (DDD), mobile features, internal tools, database migrations (PostgreSQL, MongoDB), and concurrency control using atomic locks in Redis.
+  - Contributed to building and migrating manual processes to AI-assisted workflows, improving and maintaining the team's internal tooling: MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills per internal team area, and prompting rules maintenance with Cloudflare AI Gateway.
+  - Production observability and reliability: continuous monitoring of distributed services, proactive alerting, distributed tracing, and production incident investigation using Datadog.
+  - Product analytics and data-driven decisions: tracking product events and business metrics with CleverTap and analyzing data in Metabase to measure business impact and guide the product roadmap.
+
+### Bolsiyo — Backend Developer
+- **Period:** August 2022 – January 2025 (2 years 6 months)
+- **Modality:** Remote (Colombia)
+- **Key Responsibilities & Achievements:**
+  - Built high-transactional backend services with Node.js, TypeScript, and LoopBack 4 for the mobile platform used by independent merchants.
+  - Designed schemas and migrations for relational and NoSQL databases (PostgreSQL, MongoDB), optimizing critical wallet and payment queries.
+  - Implemented secure REST APIs, Git version control, automated testing, and integrations with payment gateways and third-party services.
+  - Continuous collaboration under Agile (Scrum) methodologies, technical user story refinement, and peer code reviews.
+
+### Cooltivalo · +COTAS · SLS GROUPS — Full Stack & Software Developer
+- **Period:** January 2021 – May 2023
+- **Modality:** Santa Marta / Barranquilla / Remote
+- **Key Responsibilities & Achievements:**
+  - Developed web platforms and backend services using JavaScript, TypeScript, Node.js, GraphQL, MySQL, and MongoDB.
+  - Built responsive interfaces and optimized REST and GraphQL API integrations.
+  - Modeled relational databases and managed cloud deployments.
+
+---
+
+## 4. Education
+- **Ingeniero de Sistemas (Systems Engineering)** — Universidad del Magdalena, Santa Marta, Colombia (2019 – 2025)
+- **Curso Profesional de Scrum e Ingeniería de Software** — Platzi (2022)

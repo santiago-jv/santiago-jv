@@ -18,7 +18,7 @@ export default function Document(): JSX.Element {
         />
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="alternate icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <meta name="theme-color" content="#07090e" />
       </Head>
       <body>

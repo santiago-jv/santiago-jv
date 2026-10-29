@@ -1,8 +1,26 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="14" fill="#0B1220"/>
-  <rect x="4" y="4" width="56" height="56" rx="10" stroke="#1F2A44" stroke-width="1.5"/>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0D121F"/>
+      <stop offset="100%" stop-color="#07090E"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="55%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
 
-  <path d="M24 20L14 32L24 44" stroke="#3B82F6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M40 20L50 32L40 44" stroke="#3B82F6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M35 17L29 47" stroke="#14B8A6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Squircle Base -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="13.5" stroke="url(#accentGrad)" stroke-opacity="0.45" stroke-width="2"/>
+
+  <!-- Terminal Prompt '>' in Electric Indigo -->
+  <path d="M15 21L27 32L15 43" stroke="#818CF8" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Geometric 'S' / Node Slash in Gradient -->
+  <path d="M46 20H36C33.2386 20 31 22.2386 31 25C31 27.7614 33.2386 30 36 30H42C44.7614 30 47 32.2386 47 35C47 37.7614 44.7614 40 42 40H31" stroke="url(#accentGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Active Emerald Node Dot -->
+  <circle cx="49" cy="43" r="3.5" fill="#10B981"/>
 </svg>

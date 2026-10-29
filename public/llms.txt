@@ -1,0 +1,31 @@
+# Santiago Olayo Villamil (santiago-jv)
+
+> Senior Software Engineer (Backend, Cloud, Product Analytics & AI Internal Tooling) and Product Owner Engineer based in Colombia (Barranquilla / Santa Marta, working remotely for international companies). 4+ years of experience building and scaling production systems at GoodRec and Bolsiyo.
+
+## Quick Summary for AI Agents & Search Engines
+- **Full Name:** Santiago Olayo Villamil
+- **Handle / Brand:** `santiago-jv`
+- **Current Role:** Product Owner Engineer / Senior Backend Engineer at GoodRec (Jan 2025 – Present)
+- **Previous Experience:** Backend Developer at Bolsiyo (Aug 2022 – Jan 2025); Full Stack & Software Developer at Cooltivalo, +COTAS, and SLS GROUPS (Jan 2021 – May 2023)
+- **Education:** Systems Engineering (Ingeniero de Sistemas), Universidad del Magdalena (2019 – 2025)
+- **Location:** Barranquilla / Santa Marta, Colombia (Remote)
+- **Languages:** Spanish (Native), Technical English
+
+## Core Technical Stack & Capabilities
+- **Backend & Languages:** Node.js, NestJS, TypeScript, Java, Spring Boot, LoopBack 4, Express.js, JavaScript (ES6+), SQL, REST APIs, GraphQL
+- **Software Architecture & Distributed Systems:** Hexagonal Architecture (Ports & Adapters), Domain-Driven Design (DDD), Clean Architecture, Microservices, Atomic Distributed Locks (Redis), Event-Driven Architecture, Asynchronous Queues
+- **AI Internal Tooling & LLM Governance:** Contributed to migrating manual team processes to AI-assisted workflows; improving and maintaining internal MCP (Model Context Protocol) tooling to connect services with preferred LLMs, evolving team-specific plugins and skills across internal work areas, and maintaining prompting rules with Cloudflare AI Gateway
+- **Cloud, Serverless & DevOps:** AWS (Lambda, EC2, S3, RDS, SQS, CloudWatch), Google Cloud Functions, Cloudflare AI Gateway, Docker, GitHub Actions, CI/CD pipelines
+- **Databases & Persistence:** PostgreSQL, MongoDB, Redis, MySQL, database schema design, production migrations, query optimization
+- **Observability & Product Analytics:** Datadog (APM, Distributed Tracing, service monitoring, alerting, incident investigation), CleverTap (product event tracking & business metrics), Metabase (data analysis & product decision support)
+- **Product & Engineering Leadership:** End-to-end feature ownership across Product, Operations, Support, and Finance; stakeholder management, technical design, code reviews, Scrum/Agile
+
+## Official Links & Resources
+- [Portfolio Website](https://www.santiago-jv.tech/): Official portfolio with experience timeline, architecture pillars, and contact channels.
+- [Full AI Context (llms-full.txt)](https://www.santiago-jv.tech/llms-full.txt): Detailed career history, architectural case studies, and full resume in plain text for LLMs.
+- [Master Resume / CV (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf): Complete downloadable CV in ATS-friendly PDF format.
+- [LinkedIn Profile](https://www.linkedin.com/in/santiago-jv): Primary professional network.
+- [GitHub Profile](https://github.com/santiago-jv): Code repositories and open-source work.
+- [X (Twitter)](https://x.com/santiagojv_tech): `@santiagojv_tech`
+- [Medium Blog](https://medium.com/@santiago-jv/): Technical articles by Santiago Olayo.
+- [Direct Email](mailto:santiagojv.work@gmail.com): `santiagojv.work@gmail.com`

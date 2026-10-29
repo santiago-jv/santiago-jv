@@ -1,32 +1,39 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#0A192F"/>
-  
-  <!-- Main content area -->
-  <rect x="60" y="60" width="1080" height="510" rx="20" fill="#112240" stroke="#64FFDA" stroke-width="2"/>
-  
-  <!-- Title -->
-  <text x="600" y="200" text-anchor="middle" fill="#CCD6F6" font-family="Inter, sans-serif" font-size="48" font-weight="700">
+  <defs>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0D1322"/>
+      <stop offset="100%" stop-color="#07090E"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="120" y1="220" x2="900" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="50%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#07090E"/>
+  <rect x="48" y="48" width="1104" height="534" rx="28" fill="url(#cardGrad)" stroke="#6366F1" stroke-opacity="0.35" stroke-width="2"/>
+
+  <text x="110" y="150" fill="#818CF8" font-family="JetBrains Mono, monospace" font-size="22" font-weight="600">
+    &lt;santiago-jv/&gt;
+  </text>
+
+  <text x="110" y="250" fill="#F8FAFC" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="72" font-weight="800">
     Santiago Olayo
   </text>
-  
-  <!-- Subtitle -->
-  <text x="600" y="260" text-anchor="middle" fill="#8892B0" font-family="Inter, sans-serif" font-size="24">
-    Full-Stack Web Developer
+
+  <text x="110" y="325" fill="url(#titleGrad)" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="42" font-weight="700">
+    Senior Backend &amp; AI Engineer · Product Owner Engineer
   </text>
-  
-  <!-- Tech stack -->
-  <text x="600" y="320" text-anchor="middle" fill="#64FFDA" font-family="Fira Code, monospace" font-size="18">
-    React • Next.js • Node.js • TypeScript
+
+  <text x="110" y="410" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="22" font-weight="500">
+    NestJS • Node.js • Spring Boot • Hexagonal &amp; DDD • AWS • Redis
   </text>
-  
-  <!-- URL -->
-  <text x="600" y="450" text-anchor="middle" fill="#FF566F" font-family="Fira Code, monospace" font-size="20">
-    santiago-jv.vercel.app
+  <text x="110" y="450" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="22" font-weight="500">
+    MCP Internal Tooling • Cloudflare AI Gateway • Datadog • CleverTap • Metabase
   </text>
-  
-  <!-- Decorative elements -->
-  <circle cx="150" cy="150" r="40" fill="#64FFDA" opacity="0.1"/>
-  <circle cx="1050" cy="480" r="60" fill="#FF566F" opacity="0.1"/>
-  <rect x="100" y="400" width="80" height="80" rx="10" fill="#64FFDA" opacity="0.1"/>
+
+  <text x="110" y="525" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="20">
+    https://www.santiago-jv.tech
+  </text>
 </svg>

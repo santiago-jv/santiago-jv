@@ -1,20 +1,34 @@
-# robots.txt for santiago-jv.vercel.app
+# robots.txt for https://www.santiago-jv.tech
 
-# Allow all web crawlers to access all content
 User-agent: *
 Allow: /
 
-# Specify sitemap location (update when you create one)
-Sitemap: https://santiago-jv.vercel.app/sitemap.xml
+# Explicitly allow AI Search & LLM Crawlers
+User-agent: OAI-SearchBot
+Allow: /
 
-# Crawl-delay for better server performance
-Crawl-delay: 1
+User-agent: GPTBot
+Allow: /
 
-# Block access to private/sensitive directories
-Disallow: /api/
-Disallow: /_next/
-Disallow: /node_modules/
+User-agent: ChatGPT-User
+Allow: /
 
-# Allow indexing of images
-Allow: /images/
-Allow: /favicon.ico
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap & LLM context files
+Sitemap: https://www.santiago-jv.tech/sitemap.xml
+# LLMs Context: https://www.santiago-jv.tech/llms.txt
+# LLMs Full Context: https://www.santiago-jv.tech/llms-full.txt

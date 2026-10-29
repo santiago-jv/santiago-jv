@@ -1,0 +1,12 @@
+# Redirect / Alias for llms.txt standard
+# Primary file: https://www.santiago-jv.tech/llms.txt
+# Full context: https://www.santiago-jv.tech/llms-full.txt
+
+Santiago Olayo Villamil (santiago-jv) — Senior Software Engineer (Backend, Cloud, Product Analytics & AI Internal Tooling) | Product Owner Engineer.
+Portfolio: https://www.santiago-jv.tech/
+Full LLM Context: https://www.santiago-jv.tech/llms-full.txt
+Resume PDF: https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf
+LinkedIn: https://www.linkedin.com/in/santiago-jv
+GitHub: https://github.com/santiago-jv
+X: https://x.com/santiagojv_tech
+Email: santiagojv.work@gmail.com
