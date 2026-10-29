@@ -3,7 +3,7 @@ import styles from './header.module.css';
 import { usePreferences } from '@/context/PreferencesContext';
 
 const Header: React.FC = () => {
-  const { locale, theme, content, toggleLocale, toggleTheme } = usePreferences();
+  const { content } = usePreferences();
   const headerContent = content.header;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,9 +57,6 @@ const Header: React.FC = () => {
     setIsMenuOpen(false);
   };
 
-  const themeAriaLabel =
-    theme === 'dark' ? headerContent.themeToLightAriaLabel : headerContent.themeToDarkAriaLabel;
-
   return (
     <>
       <header
@@ -74,88 +71,59 @@ const Header: React.FC = () => {
             </span>
           </a>
 
-          <div className={styles.rightCluster}>
-            <nav
-              id="site-menu"
-              className={`${styles.header__navbar} ${isMenuOpen ? styles['header__navbar--open'] : ''}`}
-            >
-              <header className={styles.navbar__header}>
-                <span className={styles.navbar__title}>{headerContent.drawerTitle}</span>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className={styles['navbar__close-icon']}
-                  aria-label={headerContent.closeMenuAriaLabel}
-                  type="button"
-                >
-                  <i className="fa-solid fa-xmark" aria-hidden="true"></i>
-                </button>
-              </header>
+          <nav
+            id="site-menu"
+            className={`${styles.header__navbar} ${isMenuOpen ? styles['header__navbar--open'] : ''}`}
+          >
+            <header className={styles.navbar__header}>
+              <span className={styles.navbar__title}>{headerContent.drawerTitle}</span>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className={styles['navbar__close-icon']}
+                aria-label={headerContent.closeMenuAriaLabel}
+                type="button"
+              >
+                <i className="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </header>
 
-              <ul className={styles.navbar__items}>
-                {headerContent.navLinks.map((item, idx) => (
-                  <li key={item.href} className={styles.navbar__item}>
-                    <button
-                      className={styles.navbar__link}
-                      type="button"
-                      onClick={() => handleNavItemClick(item.href)}
-                    >
-                      <span className={styles.navIndex}>0{idx + 1}.</span>
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
-                <li className={styles.navbar__ctaItem}>
-                  <a
-                    href={headerContent.resumeHref}
-                    download={headerContent.resumeDownloadName}
-                    className={styles.resumeButton}
-                    onClick={() => setIsMenuOpen(false)}
+            <ul className={styles.navbar__items}>
+              {headerContent.navLinks.map((item, idx) => (
+                <li key={item.href} className={styles.navbar__item}>
+                  <button
+                    className={styles.navbar__link}
+                    type="button"
+                    onClick={() => handleNavItemClick(item.href)}
                   >
-                    <i className="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
-                    {headerContent.resumeLabel}
-                  </a>
+                    <span className={styles.navIndex}>0{idx + 1}.</span>
+                    {item.label}
+                  </button>
                 </li>
-              </ul>
-            </nav>
+              ))}
+              <li className={styles.navbar__ctaItem}>
+                <a
+                  href={headerContent.resumeHref}
+                  download={headerContent.resumeDownloadName}
+                  className={styles.resumeButton}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <i className="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                  {headerContent.resumeLabel}
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-            <div className={styles.utilityControls}>
-              <button
-                type="button"
-                onClick={toggleLocale}
-                className={styles.langToggle}
-                aria-label={headerContent.langSwitchAriaLabel}
-                title={headerContent.langSwitchAriaLabel}
-              >
-                <span className={locale === 'en' ? styles.langActive : styles.langInactive}>EN</span>
-                <span className={styles.langDivider}>/</span>
-                <span className={locale === 'es' ? styles.langActive : styles.langInactive}>ES</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className={styles.themeToggle}
-                aria-label={themeAriaLabel}
-                title={themeAriaLabel}
-              >
-                <i
-                  className={theme === 'dark' ? 'fa-regular fa-sun' : 'fa-solid fa-moon'}
-                  aria-hidden="true"
-                ></i>
-              </button>
-
-              <button
-                onClick={() => setIsMenuOpen((current) => !current)}
-                className={styles['header__menu-button']}
-                aria-label={headerContent.openMenuAriaLabel}
-                aria-expanded={isMenuOpen}
-                aria-controls="site-menu"
-                type="button"
-              >
-                <i className="fa-solid fa-bars-staggered" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
+          <button
+            onClick={() => setIsMenuOpen((current) => !current)}
+            className={styles['header__menu-button']}
+            aria-label={headerContent.openMenuAriaLabel}
+            aria-expanded={isMenuOpen}
+            aria-controls="site-menu"
+            type="button"
+          >
+            <i className="fa-solid fa-bars-staggered" aria-hidden="true"></i>
+          </button>
         </div>
       </header>
 

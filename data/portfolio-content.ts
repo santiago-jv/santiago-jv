@@ -77,9 +77,6 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       resumeLabel: 'Resume',
       resumeHref: '/Santiago_Olayo_Villamil_CV_EN.pdf',
       resumeDownloadName: 'Santiago_Olayo_Villamil_CV_EN.pdf',
-      langSwitchAriaLabel: 'Switch language to Spanish',
-      themeToLightAriaLabel: 'Switch to light theme',
-      themeToDarkAriaLabel: 'Switch to dark theme',
     },
     hero: {
       greeting: 'Hi, my name is',
@@ -326,9 +323,6 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       resumeLabel: 'Hoja de Vida',
       resumeHref: '/Santiago_Olayo_Villamil_CV_ES.pdf',
       resumeDownloadName: 'Santiago_Olayo_Villamil_CV_ES.pdf',
-      langSwitchAriaLabel: 'Cambiar idioma a inglés',
-      themeToLightAriaLabel: 'Cambiar a modo claro',
-      themeToDarkAriaLabel: 'Cambiar a modo oscuro',
     },
     hero: {
       greeting: 'Hola, mi nombre es',

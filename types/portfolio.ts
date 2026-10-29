@@ -99,9 +99,6 @@ export interface HeaderLocaleContent {
   resumeLabel: string;
   resumeHref: string;
   resumeDownloadName: string;
-  langSwitchAriaLabel: string;
-  themeToLightAriaLabel: string;
-  themeToDarkAriaLabel: string;
 }
 
 export interface FooterContent {
