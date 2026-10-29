@@ -5,11 +5,6 @@ import { HERO_CONTENT } from '@/data/portfolio-content';
 const MainContent: React.FC = () => {
   return (
     <main id="about" className={styles['main-content']}>
-      <div className={`${styles.statusPill} ${styles.introItem} ${styles.delay1}`}>
-        <span className={styles.statusDot} aria-hidden="true"></span>
-        <span>{HERO_CONTENT.badgeText}</span>
-      </div>
-
       <p className={`${styles['greeting-text']} ${styles.introItem} ${styles.delay1}`}>
         {HERO_CONTENT.greeting}
       </p>

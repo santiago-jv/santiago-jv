@@ -20,7 +20,6 @@ export interface HeroCta {
 }
 
 export interface HeroContent {
-  badgeText: string;
   greeting: string;
   name: string;
   role: string;
@@ -76,7 +75,6 @@ export interface FooterContent {
   brand: {
     name: string;
     description: string;
-    availabilityText: string;
   };
   quickLinks: NavigationLink[];
   skills: string[];

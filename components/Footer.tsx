@@ -13,12 +13,6 @@ const Footer: React.FC = () => {
             <div className={styles.brandSection}>
               <div className={styles.logo}>{FOOTER_CONTENT.brand.name}</div>
               <p className={styles.brandDescription}>{FOOTER_CONTENT.brand.description}</p>
-              <div className={styles.availability}>
-                <div className={styles.statusIndicator}>
-                  <div className={styles.statusDot}></div>
-                  <span className={styles.statusText}>{FOOTER_CONTENT.brand.availabilityText}</span>
-                </div>
-              </div>
             </div>
 
             <div className={styles.linksSection}>

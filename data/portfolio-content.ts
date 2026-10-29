@@ -24,7 +24,6 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
 ];
 
 export const HERO_CONTENT: HeroContent = {
-  badgeText: 'Available for Senior Backend, Tech Lead & PO Engineer Roles',
   greeting: 'Hi, my name is',
   name: 'Santiago Olayo',
   role: 'Senior Backend & AI Engineer',
@@ -191,10 +190,10 @@ export const PROJECTS: Project[] = [
 export const CONTACT_CONTENT: ContactContent = {
   heading: {
     number: '03.',
-    title: 'Contact & Opportunities',
+    title: 'Contact',
     subtitle: "Let's Build Something Solid",
     description:
-      "I'm open to Senior Backend Engineer, Tech Lead, and Product Owner Engineer opportunities across LatAm and remote teams. Reach out directly or send a message below.",
+      'Whether you want to discuss backend architecture, internal AI workflows, or engineering collaborations, feel free to reach out directly.',
   },
   introTitle: 'Direct Channels',
   formTitle: 'Send a Message',
@@ -239,7 +238,6 @@ export const FOOTER_CONTENT: FooterContent = {
     name: '<santiago-jv/>',
     description:
       'Senior Software Engineer focused on backend architecture, MCP & LLM internal tooling, observability, and end-to-end product execution.',
-    availabilityText: 'Open to Senior / Tech Lead opportunities',
   },
   quickLinks: NAVIGATION_LINKS,
   skills: [
