@@ -21,22 +21,22 @@ I also work with CleverTap to track product events and business metrics, Datadog
 
 ---
 
-## Tech Stack
+## Core Stack & Priorities
 
-- **Backend:** Node.js, NestJS, TypeScript, Java, Spring Boot, LoopBack 4, Hexagonal Architecture, DDD
-- **Cloud & Databases:** AWS, Google Cloud Functions, PostgreSQL, MongoDB, Redis, MySQL, Docker
-- **Internal AI Tooling:** MCP (Model Context Protocol), LLMs, Internal Plugins & Skills, Cloudflare AI Gateway
-- **Monitoring & Product Analytics:** Datadog, CleverTap, Metabase
+<p align="left">
+  <a href="https://www.santiago-jv.tech">
+    <img src="https://skillicons.dev/icons?i=ts,nodejs,nestjs,java,spring,aws,gcp,postgres,redis,mongodb,docker,graphql&theme=dark" alt="Core Backend, Cloud & Database Stack" />
+  </a>
+</p>
 
-<p>
-  <img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="nestjs" width="40" height="40"/>
-  <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/>
+## Observability, AI Tooling & Product Analytics
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Datadog-Observability%20%26%20APM-632CA6?style=for-the-badge&logo=datadog&logoColor=white" alt="Datadog"/>
+  <img src="https://img.shields.io/badge/Cloudflare-AI%20Gateway-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare AI Gateway"/>
+  <img src="https://img.shields.io/badge/MCP-Internal%20AI%20Tooling-4F46E5?style=for-the-badge&logo=ankermake&logoColor=white" alt="MCP"/>
+  <img src="https://img.shields.io/badge/Claude%20%26%20OpenAI-LLM%20Workflows-18181B?style=for-the-badge&logo=anthropic&logoColor=white" alt="LLMs"/>
+  <img src="https://img.shields.io/badge/CleverTap-Product%20Events-EF4444?style=for-the-badge&logoColor=white" alt="CleverTap"/>
+  <img src="https://img.shields.io/badge/Metabase-Product%20Analytics-509EE3?style=for-the-badge&logo=metabase&logoColor=white" alt="Metabase"/>
+  <img src="https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions"/>
 </p>
