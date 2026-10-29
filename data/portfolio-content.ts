@@ -30,12 +30,15 @@ export const HERO_CONTENT: HeroContent = {
   summary:
     'I have 4+ years of experience building and improving products for startups and international companies. I work across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.',
   highlights: [
-    'Node.js & NestJS',
-    'Spring Boot & Java',
-    'AWS & Cloud Functions',
-    'PostgreSQL · MongoDB · Redis',
-    'MCP & Cloudflare AI Gateway',
-    'Datadog · CleverTap · Metabase',
+    'TypeScript',
+    'Node.js',
+    'NestJS',
+    'Spring Boot',
+    'PostgreSQL',
+    'Redis',
+    'AWS',
+    'Hexagonal / DDD',
+    'AI & MCP Tooling',
   ],
   primaryCta: {
     label: 'Download CV',
