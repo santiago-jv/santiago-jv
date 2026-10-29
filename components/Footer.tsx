@@ -1,8 +1,10 @@
 import React from 'react';
-import { FOOTER_CONTENT } from '@/data/portfolio-content';
+import { usePreferences } from '@/context/PreferencesContext';
 import styles from './footer.module.css';
 
 const Footer: React.FC = () => {
+  const { content } = usePreferences();
+  const footer = content.footer;
   const currentYear = new Date().getFullYear();
 
   return (
@@ -11,14 +13,14 @@ const Footer: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.footerGrid}>
             <div className={styles.brandSection}>
-              <div className={styles.logo}>{FOOTER_CONTENT.brand.name}</div>
-              <p className={styles.brandDescription}>{FOOTER_CONTENT.brand.description}</p>
+              <div className={styles.logo}>{footer.brand.name}</div>
+              <p className={styles.brandDescription}>{footer.brand.description}</p>
             </div>
 
             <div className={styles.linksSection}>
-              <h4 className={styles.sectionTitle}>Navigation</h4>
+              <h4 className={styles.sectionTitle}>{footer.sectionTitles.navigation}</h4>
               <ul className={styles.linksList}>
-                {FOOTER_CONTENT.quickLinks.map((link) => (
+                {footer.quickLinks.map((link) => (
                   <li key={link.href}>
                     <a href={link.href} className={styles.footerLink}>
                       {link.label}
@@ -29,9 +31,9 @@ const Footer: React.FC = () => {
             </div>
 
             <div className={styles.skillsSection}>
-              <h4 className={styles.sectionTitle}>Technologies</h4>
+              <h4 className={styles.sectionTitle}>{footer.sectionTitles.technologies}</h4>
               <ul className={styles.skillsGrid}>
-                {FOOTER_CONTENT.skills.map((skill) => (
+                {footer.skills.map((skill) => (
                   <li key={skill} className={styles.skillTag}>
                     {skill}
                   </li>
@@ -40,27 +42,27 @@ const Footer: React.FC = () => {
             </div>
 
             <div className={styles.contactSection}>
-              <h4 className={styles.sectionTitle}>Let&apos;s Connect</h4>
+              <h4 className={styles.sectionTitle}>{footer.sectionTitles.connect}</h4>
               <div className={styles.contactInfo}>
-                <a href={`mailto:${FOOTER_CONTENT.email}`} className={styles.emailLink}>
+                <a href={`mailto:${footer.email}`} className={styles.emailLink}>
                   <i className="fas fa-envelope" aria-hidden="true"></i>
-                  {FOOTER_CONTENT.email}
+                  {footer.email}
                 </a>
                 <p className={styles.locationText}>
                   <i className="fas fa-map-marker-alt" aria-hidden="true"></i>
-                  {FOOTER_CONTENT.location}
+                  {footer.location}
                 </p>
               </div>
 
               <ul className={styles.socialLinks}>
-                {FOOTER_CONTENT.socialLinks.map((social) => (
+                {footer.socialLinks.map((social) => (
                   <li key={social.platform}>
                     <a
                       href={social.href}
                       target={social.href.startsWith('http') ? '_blank' : '_self'}
                       rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
                       className={styles.socialLink}
-                      aria-label={`Follow me on ${social.label}`}
+                      aria-label={`${footer.followAriaPrefix} ${social.label}`}
                     >
                       <i className={social.iconClassName} aria-hidden="true"></i>
                     </a>
@@ -76,20 +78,22 @@ const Footer: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.bottomContent}>
             <div className={styles.copyright}>
-              <p>© {currentYear} Santiago Olayo. All rights reserved.</p>
-              <p className={styles.builtWith}>Built with Next.js & TypeScript</p>
+              <p>
+                © {currentYear} Santiago Olayo. {footer.rightsReserved}
+              </p>
+              <p className={styles.builtWith}>{footer.builtWith}</p>
             </div>
 
             <div className={styles.footerMeta}>
-              <span className={styles.version}>{FOOTER_CONTENT.version}</span>
+              <span className={styles.version}>{footer.version}</span>
               <a
-                href={FOOTER_CONTENT.sourceUrl}
+                href={footer.sourceUrl}
                 target="_blank"
                 rel="noreferrer noopener"
                 className={styles.sourceLink}
               >
                 <i className="fas fa-code" aria-hidden="true"></i>
-                View Source
+                {footer.sourceLabel}
               </a>
             </div>
           </div>

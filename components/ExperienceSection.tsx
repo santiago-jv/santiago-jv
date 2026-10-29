@@ -1,16 +1,18 @@
 import React from 'react';
 import SectionHeading from '@/components/SectionHeading';
-import { EXPERIENCES, EXPERIENCE_HEADING } from '@/data/portfolio-content';
+import { usePreferences } from '@/context/PreferencesContext';
 import styles from './experience-section.module.css';
 
 const ExperienceSection: React.FC = () => {
+  const { content } = usePreferences();
+
   return (
     <section id="experience" className={styles.experienceSection}>
       <div className={styles.container}>
-        <SectionHeading content={EXPERIENCE_HEADING} />
+        <SectionHeading content={content.experienceHeading} />
 
         <div className={styles.timeline}>
-          {EXPERIENCES.map((item) => (
+          {content.experiences.map((item) => (
             <article key={`${item.company}-${item.role}`} className={styles.experienceCard}>
               <div className={styles.cardHeader}>
                 <div>

@@ -3,8 +3,9 @@
   overflow: hidden;
   margin-top: 2rem;
   border-top: 1px solid var(--color-border);
-  background: rgba(7, 9, 14, 0.92);
+  background: var(--color-footer-bg);
   backdrop-filter: blur(12px);
+  transition: background-color var(--transition-base), border-color var(--transition-base);
 }
 
 .footerContent {
@@ -45,30 +46,6 @@
   color: var(--color-text-secondary);
   font-size: 0.92rem;
   line-height: 1.65;
-}
-
-.statusIndicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(16, 185, 129, 0.28);
-  background: rgba(16, 185, 129, 0.08);
-  padding: 0.45rem 0.9rem;
-}
-
-.statusDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-accent);
-}
-
-.statusText {
-  color: var(--color-accent-bright);
-  font-size: 0.75rem;
-  font-family: var(--font-family-mono);
-  font-weight: 500;
 }
 
 .linksSection,
@@ -115,7 +92,7 @@
 .skillTag {
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-surface-subtle);
   padding: 0.28rem 0.58rem;
   color: var(--color-text-secondary);
   font-size: 0.72rem;
@@ -128,7 +105,7 @@
 
 .skillTag:hover {
   border-color: var(--color-border-hover);
-  color: #ffffff;
+  color: var(--color-social-hover-text);
   background: var(--color-primary-light);
 }
 
@@ -165,7 +142,7 @@
   justify-content: center;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-surface-subtle);
   color: var(--color-text-secondary);
   transition:
     transform var(--transition-base),
@@ -178,7 +155,7 @@
   transform: translateY(-2px);
   border-color: var(--color-border-hover);
   background: var(--color-primary-light);
-  color: #ffffff;
+  color: var(--color-social-hover-text);
 }
 
 .footerBottom {
@@ -222,7 +199,7 @@
 .version {
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-surface-subtle);
   padding: 0.2rem 0.5rem;
   font-family: var(--font-family-mono);
 }

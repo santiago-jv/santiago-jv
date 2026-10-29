@@ -5,12 +5,14 @@ import ExperienceSection from '@/components/ExperienceSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import { SEO } from '@/data/portfolio-content';
+import { usePreferences } from '@/context/PreferencesContext';
 import 'animate.css';
 
 const Home: React.FC = () => {
+  const { content } = usePreferences();
+
   return (
-    <Container title={SEO.title}>
+    <Container title={content.seo.title}>
       <Header />
       <MainContent />
       <ExperienceSection />

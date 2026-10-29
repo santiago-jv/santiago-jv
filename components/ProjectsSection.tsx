@@ -1,17 +1,19 @@
 import React from 'react';
 import SectionHeading from '@/components/SectionHeading';
-import { PROJECTS, PROJECTS_HEADING } from '@/data/portfolio-content';
+import { usePreferences } from '@/context/PreferencesContext';
 import styles from './projects-section.module.css';
 
 const ProjectsSection: React.FC = () => {
+  const { content } = usePreferences();
+
   return (
     <section id="projects" className={styles.projectsSection}>
       <div className={styles.container}>
-        <SectionHeading content={PROJECTS_HEADING} />
+        <SectionHeading content={content.projectsHeading} />
 
         <ul className={styles.projectsGrid}>
-          {PROJECTS.map((project) => (
-            <li key={project.title} className={styles.projectCard}>
+          {content.projects.map((project, index) => (
+            <li key={`${index}-${project.title}`} className={styles.projectCard}>
               <article className={styles.projectContent}>
                 <div className={styles.projectHeader}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>

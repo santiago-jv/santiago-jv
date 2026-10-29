@@ -1,28 +1,34 @@
 import type { CSSProperties } from 'react';
 import styles from './main-content.module.css';
-import { HERO_CONTENT } from '@/data/portfolio-content';
+import { usePreferences } from '@/context/PreferencesContext';
 
 const MainContent: React.FC = () => {
+  const { content } = usePreferences();
+  const hero = content.hero;
+
   return (
     <main id="about" className={styles['main-content']}>
       <p className={`${styles['greeting-text']} ${styles.introItem} ${styles.delay1}`}>
-        {HERO_CONTENT.greeting}
+        {hero.greeting}
       </p>
 
       <h1 className={`${styles.title} ${styles.introItem} ${styles.delay2}`}>
-        {HERO_CONTENT.name}
+        {hero.name}
       </h1>
 
       <h2 className={`${styles.subtitle} ${styles.introItem} ${styles.delay2}`}>
-        {HERO_CONTENT.role}
+        {hero.role}
       </h2>
 
       <div className={`${styles.information} ${styles.introItem} ${styles.delay3}`}>
-        <p className={styles.description}>{HERO_CONTENT.summary}</p>
+        <p className={styles.description}>{hero.summary}</p>
       </div>
 
-      <ul className={`${styles.highlightsRow} ${styles.introItem} ${styles.delay3}`} aria-label="Core stack">
-        {HERO_CONTENT.highlights.map((item) => (
+      <ul
+        className={`${styles.highlightsRow} ${styles.introItem} ${styles.delay3}`}
+        aria-label={hero.coreStackAriaLabel}
+      >
+        {hero.highlights.map((item) => (
           <li key={item} className={styles.highlightPill}>
             {item}
           </li>
@@ -31,43 +37,43 @@ const MainContent: React.FC = () => {
 
       <div className={`${styles.actions} ${styles.introItem} ${styles.delay4}`}>
         <a
-          href={HERO_CONTENT.primaryCta.href}
-          download={HERO_CONTENT.primaryCta.download}
-          target={HERO_CONTENT.primaryCta.href.startsWith('http') ? '_blank' : undefined}
-          rel={HERO_CONTENT.primaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+          href={hero.primaryCta.href}
+          download={hero.primaryCta.download}
+          target={hero.primaryCta.href.startsWith('http') ? '_blank' : undefined}
+          rel={hero.primaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
           className={styles.button}
-          aria-label={HERO_CONTENT.primaryCta.label}
+          aria-label={hero.primaryCta.label}
         >
-          {HERO_CONTENT.primaryCta.iconClassName && (
-            <i className={`${HERO_CONTENT.primaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
+          {hero.primaryCta.iconClassName && (
+            <i className={`${hero.primaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
           )}
-          {HERO_CONTENT.primaryCta.label}
+          {hero.primaryCta.label}
         </a>
 
         <a
-          href={HERO_CONTENT.secondaryCta.href}
-          target={HERO_CONTENT.secondaryCta.href.startsWith('http') ? '_blank' : undefined}
-          rel={HERO_CONTENT.secondaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+          href={hero.secondaryCta.href}
+          target={hero.secondaryCta.href.startsWith('http') ? '_blank' : undefined}
+          rel={hero.secondaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
           className={styles['button-secondary']}
         >
-          {HERO_CONTENT.secondaryCta.iconClassName && (
-            <i className={`${HERO_CONTENT.secondaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
+          {hero.secondaryCta.iconClassName && (
+            <i className={`${hero.secondaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
           )}
-          {HERO_CONTENT.secondaryCta.label}
+          {hero.secondaryCta.label}
         </a>
 
-        {HERO_CONTENT.tertiaryCta && (
-          <a href={HERO_CONTENT.tertiaryCta.href} className={styles['button-secondary']}>
-            {HERO_CONTENT.tertiaryCta.iconClassName && (
-              <i className={`${HERO_CONTENT.tertiaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
+        {hero.tertiaryCta && (
+          <a href={hero.tertiaryCta.href} className={styles['button-secondary']}>
+            {hero.tertiaryCta.iconClassName && (
+              <i className={`${hero.tertiaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
             )}
-            {HERO_CONTENT.tertiaryCta.label}
+            {hero.tertiaryCta.label}
           </a>
         )}
       </div>
 
-      <ul className={`${styles['social-list']} ${styles.delay5}`} aria-label="Social links">
-        {HERO_CONTENT.socialLinks.map((social, index) => (
+      <ul className={`${styles['social-list']} ${styles.delay5}`} aria-label={hero.socialLinksAriaLabel}>
+        {hero.socialLinks.map((social, index) => (
           <li
             key={social.platform}
             className={styles['social-item']}

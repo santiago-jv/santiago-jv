@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
-import { CONTACT_CONTENT } from '@/data/portfolio-content';
+import { usePreferences } from '@/context/PreferencesContext';
 import styles from './contact-section.module.css';
 
 type ContactFormData = {
@@ -18,6 +18,10 @@ const INITIAL_FORM_DATA: ContactFormData = {
 };
 
 const ContactSection: React.FC = () => {
+  const { content } = usePreferences();
+  const contactContent = content.contact;
+  const labels = contactContent.formLabels;
+
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -33,7 +37,7 @@ const ContactSection: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      const mailtoSubject = encodeURIComponent(`[Portfolio Contact] ${formData.subject}`);
+      const mailtoSubject = encodeURIComponent(`${labels.mailtoPrefix} ${formData.subject}`);
       const mailtoBody = encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
       );
@@ -50,13 +54,13 @@ const ContactSection: React.FC = () => {
   return (
     <section id="contact" className={styles.contactSection}>
       <div className={styles.container}>
-        <SectionHeading content={CONTACT_CONTENT.heading} />
+        <SectionHeading content={contactContent.heading} />
 
         <div className={styles.contactContent}>
           <div className={styles.contactInfo}>
-            <h4 className={styles.infoTitle}>{CONTACT_CONTENT.introTitle}</h4>
+            <h4 className={styles.infoTitle}>{contactContent.introTitle}</h4>
             <ul className={styles.contactGrid}>
-              {CONTACT_CONTENT.infoItems.map((item) => (
+              {contactContent.infoItems.map((item) => (
                 <li key={item.label} className={styles.contactItem}>
                   <div className={styles.contactIcon}>
                     <i className={item.iconClassName} aria-hidden="true"></i>
@@ -67,6 +71,7 @@ const ContactSection: React.FC = () => {
                     {item.href ? (
                       <a
                         href={item.href}
+                        download={item.download}
                         className={styles.contactValue}
                         target={item.href.startsWith('http') ? '_blank' : '_self'}
                         rel={item.href.startsWith('http') ? 'noreferrer noopener' : undefined}
@@ -83,12 +88,12 @@ const ContactSection: React.FC = () => {
           </div>
 
           <div className={styles.contactForm}>
-            <h4 className={styles.formTitle}>{CONTACT_CONTENT.formTitle}</h4>
+            <h4 className={styles.formTitle}>{contactContent.formTitle}</h4>
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
                   <label htmlFor="name" className={styles.formLabel}>
-                    Name *
+                    {labels.name}
                   </label>
                   <input
                     type="text"
@@ -105,7 +110,7 @@ const ContactSection: React.FC = () => {
 
                 <div className={styles.formGroup}>
                   <label htmlFor="email" className={styles.formLabel}>
-                    Email *
+                    {labels.email}
                   </label>
                   <input
                     type="email"
@@ -123,7 +128,7 @@ const ContactSection: React.FC = () => {
 
               <div className={styles.formGroup}>
                 <label htmlFor="subject" className={styles.formLabel}>
-                  Subject *
+                  {labels.subject}
                 </label>
                 <input
                   type="text"
@@ -139,7 +144,7 @@ const ContactSection: React.FC = () => {
 
               <div className={styles.formGroup}>
                 <label htmlFor="message" className={styles.formLabel}>
-                  Message *
+                  {labels.message}
                 </label>
                 <textarea
                   id="message"
@@ -157,14 +162,14 @@ const ContactSection: React.FC = () => {
                 {submitStatus === 'success' && (
                   <p className={`${styles.submitMessage} ${styles.submitSuccess}`}>
                     <i className="fas fa-check-circle" aria-hidden="true"></i>
-                    Message sent successfully! I&apos;ll get back to you soon.
+                    {labels.successMessage}
                   </p>
                 )}
 
                 {submitStatus === 'error' && (
                   <p className={`${styles.submitMessage} ${styles.submitError}`}>
                     <i className="fas fa-exclamation-circle" aria-hidden="true"></i>
-                    Something went wrong. Please try again or email me directly.
+                    {labels.errorMessage}
                   </p>
                 )}
               </div>
@@ -173,12 +178,12 @@ const ContactSection: React.FC = () => {
                 {isSubmitting ? (
                   <>
                     <i className="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                    Sending...
+                    {labels.sending}
                   </>
                 ) : (
                   <>
                     <i className="fas fa-paper-plane" aria-hidden="true"></i>
-                    Send Message
+                    {labels.submit}
                   </>
                 )}
               </button>
@@ -187,10 +192,10 @@ const ContactSection: React.FC = () => {
         </div>
 
         <div className={styles.quickContact}>
-          <p className={styles.quickContactText}>Prefer a direct approach?</p>
-          <a href={CONTACT_CONTENT.quickActionHref} className={styles.emailButton}>
+          <p className={styles.quickContactText}>{labels.directPrompt}</p>
+          <a href={contactContent.quickActionHref} className={styles.emailButton}>
             <i className="fas fa-envelope" aria-hidden="true"></i>
-            {CONTACT_CONTENT.quickActionLabel}
+            {contactContent.quickActionLabel}
           </a>
         </div>
       </div>

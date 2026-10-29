@@ -23,6 +23,7 @@
   box-shadow: var(--shadow-card);
   transition:
     transform var(--transition-base),
+    background-color var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base);
   position: relative;
@@ -38,7 +39,7 @@
   right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-primary-bright), var(--color-accent-bright), transparent);
-  opacity: 0.65;
+  opacity: 0.55;
 }
 
 .projectCard:hover {
@@ -72,8 +73,8 @@
 .projectStatus {
   white-space: nowrap;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--color-accent-border);
+  background: var(--color-accent-light);
   padding: 0.25rem 0.65rem;
   color: var(--color-accent-bright);
   font-size: 0.72rem;
@@ -98,7 +99,7 @@
 
 .techTag {
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(99, 102, 241, 0.24);
+  border: 1px solid var(--color-primary-border);
   background: var(--color-primary-light);
   padding: 0.25rem 0.6rem;
   color: var(--color-primary-bright);
@@ -116,7 +117,7 @@
   margin-top: 0.35rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--color-surface-subtle);
   color: var(--color-primary-bright);
   transition:
     transform var(--transition-base),
@@ -127,7 +128,7 @@
 
 .projectCard:hover .projectIcon {
   background: var(--color-primary);
-  border-color: var(--color-primary-bright);
+  border-color: var(--color-primary);
   color: #ffffff;
   transform: scale(1.06);
 }

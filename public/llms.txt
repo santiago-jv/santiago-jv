@@ -23,7 +23,8 @@
 ## Official Links & Resources
 - [Portfolio Website](https://www.santiago-jv.tech/): Official portfolio with experience timeline, architecture pillars, and contact channels.
 - [Full AI Context (llms-full.txt)](https://www.santiago-jv.tech/llms-full.txt): Detailed career history, architectural case studies, and full resume in plain text for LLMs.
-- [Master Resume / CV (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf): Complete downloadable CV in ATS-friendly PDF format.
+- [Master Resume / CV in English (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_EN.pdf): Complete downloadable English CV in ATS-friendly PDF format.
+- [Hoja de Vida / CV en Español (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_ES.pdf): Complete downloadable Spanish CV in ATS-friendly PDF format.
 - [LinkedIn Profile](https://www.linkedin.com/in/santiago-jv): Primary professional network.
 - [GitHub Profile](https://github.com/santiago-jv): Code repositories and open-source work.
 - [X (Twitter)](https://x.com/santiagojv_tech): `@santiagojv_tech`

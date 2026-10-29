@@ -7,7 +7,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf</loc>
+    <loc>https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_EN.pdf</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_ES.pdf</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
