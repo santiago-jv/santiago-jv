@@ -10,30 +10,31 @@ import {
 
 export const SEO = {
   siteUrl: 'https://www.santiago-jv.tech/',
-  title: 'Santiago Olayo | Senior Backend & AI Engineer · Product Owner Engineer',
+  title: 'Santiago Olayo | Software Engineer',
   description:
-    'Software Engineer with 4+ years of experience building and scaling products across backend development (NestJS, Spring Boot, Node.js), cloud infrastructure (AWS), internal MCP & LLM tooling with Cloudflare AI Gateway, Datadog observability, and product analytics.',
+    'Software Engineer with 4+ years of experience building and improving products across backend development, cloud infrastructure, product analytics, and internal tools.',
   ogImage: '/images/og-image.svg',
 };
 
 export const NAVIGATION_LINKS: NavigationLink[] = [
   { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Architecture', href: '#projects' },
+  { label: 'Work', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export const HERO_CONTENT: HeroContent = {
   greeting: 'Hi, my name is',
   name: 'Santiago Olayo',
-  role: 'Senior Backend & AI Engineer',
+  role: 'Software Engineer',
   summary:
-    'Software Engineer with 4+ years of experience building and scaling products for startups and international companies. I handle execution end to end—partnering with product, operations, support, and finance across distributed backend systems, cloud infrastructure, observability (Datadog), product analytics (CleverTap, Metabase), and contributing to the migration from manual processes to AI-assisted internal tooling (MCP, team plugins/skills, and Cloudflare AI Gateway).',
+    'I have 4+ years of experience building and improving products for startups and international companies. I work across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.',
   highlights: [
-    'NestJS · Node.js · Spring Boot',
-    'Hexagonal Architecture & DDD',
-    'MCP Tooling & Cloudflare AI Gateway',
-    'AWS · Redis Locks · PostgreSQL',
+    'Node.js & NestJS',
+    'Spring Boot & Java',
+    'AWS & Cloud Functions',
+    'PostgreSQL · MongoDB · Redis',
+    'MCP & Cloudflare AI Gateway',
     'Datadog · CleverTap · Metabase',
   ],
   primaryCta: {
@@ -43,12 +44,12 @@ export const HERO_CONTENT: HeroContent = {
     iconClassName: 'fa-solid fa-arrow-down-to-bracket',
   },
   secondaryCta: {
-    label: 'LinkedIn Profile',
+    label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/santiago-jv',
     iconClassName: 'fa-brands fa-linkedin-in',
   },
   tertiaryCta: {
-    label: 'Contact Me',
+    label: 'Get in touch',
     href: '#contact',
     iconClassName: 'fa-regular fa-paper-plane',
   },
@@ -88,32 +89,33 @@ export const HERO_CONTENT: HeroContent = {
 
 export const EXPERIENCE_HEADING: SectionHeadingContent = {
   number: '01.',
-  title: 'Experience & Product Impact',
-  subtitle: 'Where I Have Built & Scaled Systems',
+  title: 'Experience',
+  subtitle: "Where I've Worked",
   description:
-    'End-to-end ownership across backend architectures, cloud infrastructure, internal AI tooling, production observability, and product analytics.',
+    'I work closely with product, operations, support, and finance to understand their needs and take features from idea to production.',
 };
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
-    role: 'Product Owner Engineer / Senior Backend Engineer',
+    role: 'Product Owner Engineer / Backend Engineer',
     company: 'GoodRec',
     period: 'Jan 2025 – Present',
     location: 'Remote',
     highlights: [
-      'Partner closely with product, operations, support, and finance to turn business needs into production-ready features—owning the lifecycle end to end from stakeholder discussions and technical design to database migrations, deployment, and post-release monitoring.',
-      'Architect and scale backend services using Node.js, NestJS, and TypeScript under Hexagonal Architecture and Domain-Driven Design (DDD), managing high-concurrency synchronization with atomic Redis locks and serverless cloud deployments (AWS / Cloud Functions).',
-      'Contributed to migrating manual workflows toward AI-assisted processes—improving and maintaining the team’s internal tools, including MCP (Model Context Protocol) tooling to connect with preferred LLMs, focused plugins and skills for internal team areas, and prompting rules with Cloudflare AI Gateway.',
-      'Ensure production reliability using Datadog for service monitoring, proactive alerting, APM, and incident investigation, while driving product decisions through CleverTap event tracking and Metabase analytics.',
+      'Handle feature development end to end, from discussions with stakeholders and technical design to implementation, deployment, and post-release monitoring.',
+      'Build and maintain backend services (Node.js, NestJS, TypeScript) using Hexagonal Architecture and DDD, along with mobile features, internal tools, database migrations, and Redis locks.',
+      'Contributed to moving manual workflows toward AI-assisted processes and improving internal team tools, including MCP tooling to connect with our preferred LLMs, focused plugins and skills for each team area, and prompting rules with Cloudflare AI Gateway.',
+      'Use Datadog to monitor services, configure alerts, and investigate production issues, CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.',
     ],
     tech: [
       'NestJS',
+      'Node.js',
       'TypeScript',
-      'Hexagonal Architecture & DDD',
-      'MCP Tooling',
-      'Cloudflare AI Gateway',
-      'Redis Locks',
+      'Hexagonal / DDD',
       'AWS',
+      'Redis',
+      'MCP',
+      'Cloudflare AI Gateway',
       'Datadog',
       'CleverTap',
       'Metabase',
@@ -123,22 +125,22 @@ export const EXPERIENCES: ExperienceItem[] = [
     role: 'Backend Developer',
     company: 'Bolsiyo',
     period: 'Aug 2022 – Jan 2025',
-    location: 'Remote (Colombia)',
+    location: 'Remote',
     highlights: [
-      'Developed high-transactional backend microservices using Node.js, TypeScript, and LoopBack 4 for a mobile fintech/retail platform serving independent merchants.',
-      'Designed relational and NoSQL database schemas and migrations (PostgreSQL, MongoDB), optimizing critical wallet and payment queries.',
-      'Built secure REST APIs, third-party payment gateway integrations, and automated test suites within an agile Scrum environment.',
+      'Built and maintained backend services with Node.js, TypeScript, and LoopBack 4 for a mobile app used by independent merchants.',
+      'Designed schemas and ran migrations in PostgreSQL and MongoDB, optimizing wallet and payment queries.',
+      'Developed REST APIs, payment gateway integrations, and automated tests within a Scrum team.',
     ],
-    tech: ['Node.js', 'TypeScript', 'LoopBack 4', 'PostgreSQL', 'MongoDB', 'REST APIs', 'Scrum'],
+    tech: ['Node.js', 'TypeScript', 'LoopBack 4', 'PostgreSQL', 'MongoDB', 'REST APIs'],
   },
   {
-    role: 'Full Stack & Software Developer',
+    role: 'Full Stack Developer',
     company: 'Cooltivalo · +COTAS · SLS GROUPS',
     period: 'Jan 2021 – May 2023',
-    location: 'Santa Marta / Barranquilla / Remote',
+    location: 'Colombia',
     highlights: [
-      'Built end-to-end web platforms and backend APIs using JavaScript, TypeScript, Node.js, GraphQL, MySQL, and MongoDB.',
-      'Modeled relational data schemas, integrated responsive front-end interfaces, and managed initial cloud deployments.',
+      'Developed web applications and backend APIs using JavaScript, TypeScript, Node.js, GraphQL, MySQL, and MongoDB.',
+      'Handled relational data modeling, front-end integrations, and cloud deployments.',
     ],
     tech: ['Node.js', 'TypeScript', 'GraphQL', 'MySQL', 'MongoDB', 'JavaScript'],
   },
@@ -146,44 +148,44 @@ export const EXPERIENCES: ExperienceItem[] = [
 
 export const PROJECTS_HEADING: SectionHeadingContent = {
   number: '02.',
-  title: 'Architecture & Systems',
-  subtitle: 'Core Engineering Areas',
+  title: 'What I Work On',
+  subtitle: 'Systems & Day-to-Day Engineering',
   description:
-    'Production backend systems, observability pipelines, and internal AI tooling I have contributed to, improved, and maintained.',
+    'A closer look at the backend systems, internal tooling, and product infrastructure I build and maintain.',
 };
 
 export const PROJECTS: Project[] = [
   {
-    title: 'Internal MCP Tooling & AI Workflow Migration',
+    title: 'Backend Services & Database Migrations',
     description:
-      'Contributed to migrating manual team operations to AI-assisted workflows—maintaining and improving internal MCP (Model Context Protocol) tooling connected to preferred LLMs, team-focused plugins and skills, and prompting rules via Cloudflare AI Gateway.',
-    tech: ['TypeScript', 'MCP', 'Cloudflare AI Gateway', 'LLMs', 'Internal Plugins & Skills'],
-    status: 'Production',
-    iconClassName: 'fa-solid fa-diagram-project',
-  },
-  {
-    title: 'High-Concurrency Booking & Transactional Backend',
-    description:
-      'Distributed backend services built with Hexagonal Architecture and DDD, utilizing atomic Redis distributed locks, idempotent webhooks, and database migrations across PostgreSQL and MongoDB to prevent race conditions under peak load.',
-    tech: ['NestJS', 'Node.js', 'Hexagonal & DDD', 'Redis Locks', 'PostgreSQL', 'AWS'],
-    status: 'Production',
+      'Designing and scaling backend APIs with NestJS, Node.js, and Spring Boot. Handling high-concurrency flows with Redis locks and running safe schema migrations in PostgreSQL and MongoDB.',
+    tech: ['NestJS', 'Node.js', 'Spring Boot', 'PostgreSQL', 'MongoDB', 'Redis'],
+    status: 'Core Focus',
     iconClassName: 'fa-solid fa-server',
   },
   {
-    title: 'Full-Stack Observability & Product Analytics Engine',
+    title: 'Internal AI Tooling & Workflow Optimization',
     description:
-      'End-to-end telemetry and product intelligence setup combining Datadog APM, distributed tracing, and custom alerting for incident triage with CleverTap event pipelines and Metabase executive dashboards.',
-    tech: ['Datadog APM', 'CleverTap', 'Metabase', 'Distributed Tracing', 'SQL'],
-    status: 'Production',
+      'Helping the team replace manual tasks with AI-assisted workflows. Improving internal MCP tooling to connect with our preferred LLMs, building team-focused plugins and skills, and managing prompting rules through Cloudflare AI Gateway.',
+    tech: ['TypeScript', 'MCP', 'Cloudflare AI Gateway', 'LLMs', 'Internal Tooling'],
+    status: 'Internal Tools',
+    iconClassName: 'fa-solid fa-diagram-project',
+  },
+  {
+    title: 'Production Monitoring & Product Analytics',
+    description:
+      'Keeping services healthy in production with Datadog alerts, logs, and tracing. Tracking product events in CleverTap and building queries in Metabase so product, ops, and finance can make decisions with real data.',
+    tech: ['Datadog', 'CleverTap', 'Metabase', 'AWS', 'SQL'],
+    status: 'Observability & Data',
     iconClassName: 'fa-solid fa-chart-line',
   },
   {
-    title: 'Autonomous Job & Document Intelligence Suite',
+    title: 'End-to-End Product Delivery',
     description:
-      'Multi-agent automation pipeline leveraging browser orchestration, bidirectional Google Sheets synchronization, ATS equivalence matching, and headless PDF/DOCX vector compilation.',
-    tech: ['Node.js', 'MCP Agents', 'Chrome DevTools Protocol', 'Google Apps Script'],
-    status: 'Active System',
-    iconClassName: 'fa-solid fa-microchip',
+      'Working directly with product, operations, support, and finance to scope problems, design practical technical solutions, ship across backend and mobile, and iterate after release.',
+    tech: ['Product Ownership', 'Technical Design', 'Hexagonal / DDD', 'CI/CD'],
+    status: 'Execution',
+    iconClassName: 'fa-solid fa-layer-group',
   },
 ];
 
@@ -191,14 +193,14 @@ export const CONTACT_CONTENT: ContactContent = {
   heading: {
     number: '03.',
     title: 'Contact',
-    subtitle: "Let's Build Something Solid",
+    subtitle: 'Get In Touch',
     description:
-      'Whether you want to discuss backend architecture, internal AI workflows, or engineering collaborations, feel free to reach out directly.',
+      'If you want to chat about backend engineering, internal tools, or a project, feel free to send me a message.',
   },
-  introTitle: 'Direct Channels',
+  introTitle: 'Links & Contact',
   formTitle: 'Send a Message',
-  quickActionLabel: 'Email Me Directly',
-  quickActionHref: 'mailto:santiagojv.work@gmail.com?subject=Hello%20Santiago!',
+  quickActionLabel: 'Send me an email',
+  quickActionHref: 'mailto:santiagojv.work@gmail.com?subject=Hey%20Santiago!',
   infoItems: [
     {
       iconClassName: 'fa-regular fa-envelope',
@@ -214,7 +216,7 @@ export const CONTACT_CONTENT: ContactContent = {
     },
     {
       iconClassName: 'fa-brands fa-x-twitter',
-      label: 'X (Twitter)',
+      label: 'X',
       value: '@santiagojv_tech',
       href: 'https://x.com/santiagojv_tech',
     },
@@ -226,8 +228,8 @@ export const CONTACT_CONTENT: ContactContent = {
     },
     {
       iconClassName: 'fa-regular fa-file-pdf',
-      label: 'Resume / CV',
-      value: 'Download Master CV (PDF)',
+      label: 'CV',
+      value: 'Download PDF',
       href: '/Santiago_Olayo_Villamil_CV.pdf',
     },
   ],
@@ -237,7 +239,7 @@ export const FOOTER_CONTENT: FooterContent = {
   brand: {
     name: '<santiago-jv/>',
     description:
-      'Senior Software Engineer focused on backend architecture, MCP & LLM internal tooling, observability, and end-to-end product execution.',
+      'Software Engineer working across backend development, cloud infrastructure, product analytics, and internal tools.',
   },
   quickLinks: NAVIGATION_LINKS,
   skills: [
@@ -245,20 +247,19 @@ export const FOOTER_CONTENT: FooterContent = {
     'Node.js',
     'TypeScript',
     'Spring Boot',
-    'Hexagonal & DDD',
-    'MCP',
-    'Cloudflare AI Gateway',
-    'AWS & Cloud Functions',
+    'AWS',
     'PostgreSQL',
     'MongoDB',
     'Redis',
+    'MCP',
+    'Cloudflare AI Gateway',
     'Datadog',
     'CleverTap',
     'Metabase',
   ],
   socialLinks: HERO_CONTENT.socialLinks,
   email: 'santiagojv.work@gmail.com',
-  location: 'Barranquilla / Santa Marta, Colombia (Remote)',
+  location: 'Colombia',
   sourceUrl: 'https://github.com/santiago-jv/santiago-jv',
-  version: 'v4.1.0',
+  version: 'v4.2.0',
 };

@@ -1,5 +1,5 @@
 <h1 align="center">Santiago Olayo</h1>
-<p align="center"><strong>Senior Software Engineer · Backend, Cloud & AI Internal Tooling · Product Owner Engineer</strong></p>
+<p align="center"><strong>Software Engineer · Backend, Cloud, Product Analytics & Internal Tools</strong></p>
 
 <p align="center">
   <a href="https://www.santiago-jv.tech">Portfolio (santiago-jv.tech)</a> •
@@ -13,24 +13,20 @@
 
 ## About Me
 
-Software Engineer with 4+ years of experience building and scaling products for startups and international companies. I work across backend development, cloud infrastructure, AI-powered internal tooling, and product analytics, with a focus on solving real business problems and making systems and processes work better.
+Software Engineer with 4+ years of experience building and improving products for startups and international companies. I work across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.
 
-I work closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. I handle the process end to end—from stakeholder discussions and technical design to implementation, database migrations, deployment, and post-release monitoring across backend services, mobile features, and internal tools.
+I work closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. I handle the process end to end, from discussions with stakeholders and technical design to implementation, deployment, and post-release monitoring. My work spans backend services, mobile features, internal tooling, and database migrations.
 
-Beyond feature development, I design and implement AI workflows to reduce manual work and optimize the tools the team relies on—building MCP (Model Context Protocol) servers as internal tooling to connect with our preferred LLMs, creating dedicated plugins and skills tailored to each internal team's workflow, and managing prompting rules and LLM routing through Cloudflare AI Gateway.
-
-To ensure reliability and business impact, I use Datadog to monitor services, configure alerts, and investigate production issues, along with CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.
+I also work with CleverTap to track product events and business metrics, Datadog to monitor services, configure alerts, and investigate production issues, and Metabase to analyze data and support product decisions. Beyond feature development, I look for ways to improve internal workflows, reduce manual work, and make better use of AI to optimize the tools and processes the team relies on, including contributing to our internal MCP tooling, team-focused plugins and skills, and prompting rules with Cloudflare AI Gateway.
 
 ---
 
-## Core Stack & Engineering Pillars
+## Tech Stack
 
-- **Backend & Architecture:** Node.js, NestJS, TypeScript, Java, Spring Boot, LoopBack 4, Hexagonal Architecture, Domain-Driven Design (DDD), Microservices, REST & GraphQL APIs
-- **AI Workflows & Internal Tooling:** Model Context Protocol (MCP), LLM Orchestration, Internal Team Plugins & Skills, Cloudflare AI Gateway (Prompting Rules & Routing), n8n
-- **Observability & Product Analytics:** Datadog (Monitoring, Alerts, APM & Distributed Tracing), CleverTap (Product Events & Business Metrics), Metabase (Data Analysis & Product Decisions)
-- **Cloud, Serverless & Databases:** AWS (Lambda, EC2, S3, RDS, CloudWatch), Google Cloud Functions, PostgreSQL, MongoDB, Redis (Distributed Locks), MySQL, Docker, CI/CD
-
-## Technologies
+- **Backend:** Node.js, NestJS, TypeScript, Java, Spring Boot, LoopBack 4, Hexagonal Architecture, DDD
+- **Cloud & Databases:** AWS, Google Cloud Functions, PostgreSQL, MongoDB, Redis, MySQL, Docker
+- **Internal AI Tooling:** MCP (Model Context Protocol), LLMs, Internal Plugins & Skills, Cloudflare AI Gateway
+- **Monitoring & Product Analytics:** Datadog, CleverTap, Metabase
 
 <p>
   <img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="nestjs" width="40" height="40"/>
@@ -43,15 +39,4 @@ To ensure reliability and business impact, I use Datadog to monitor services, co
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/>
-</p>
-
-## AI, Observability & Product Analytics
-
-<p>
-  <img src="https://img.shields.io/badge/MCP-Model%20Context%20Protocol-0A192F?style=for-the-badge&logoColor=white" alt="MCP"/>
-  <img src="https://img.shields.io/badge/Cloudflare-AI%20Gateway-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare AI Gateway"/>
-  <img src="https://img.shields.io/badge/Datadog-Observability%20%26%20APM-632CA6?style=for-the-badge&logo=datadog&logoColor=white" alt="Datadog"/>
-  <img src="https://img.shields.io/badge/CleverTap-Product%20Events-EF4444?style=for-the-badge&logoColor=white" alt="CleverTap"/>
-  <img src="https://img.shields.io/badge/Metabase-Product%20Analytics-509EE3?style=for-the-badge&logo=metabase&logoColor=white" alt="Metabase"/>
-  <img src="https://img.shields.io/badge/Claude%20%26%20OpenAI-LLM%20Workflows-191919?style=for-the-badge&logo=anthropic&logoColor=white" alt="LLMs"/>
 </p>
