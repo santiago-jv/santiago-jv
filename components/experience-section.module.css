@@ -1,0 +1,153 @@
+.experienceSection {
+  padding: 6rem 0 2rem 0;
+  background: var(--color-background);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.experienceCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.experienceCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.35);
+  border-left-color: var(--color-accent);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.roleTitle {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.companyName {
+  margin: 0.25rem 0 0 0;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.metaBadges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.periodBadge,
+.locationBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+}
+
+.periodBadge {
+  background: var(--color-primary-light);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--color-primary);
+}
+
+.locationBadge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-secondary);
+}
+
+.locationBadge i {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+}
+
+.highlightsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.highlightItem {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.highlightItem::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.techBadge {
+  border-radius: 4px;
+  border: 1px solid var(--color-primary-light);
+  background: var(--color-primary-light);
+  padding: 0.25rem 0.6rem;
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+}
+
+@media screen and (max-width: 768px) {
+  .experienceSection {
+    padding: 4rem 0 1rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .experienceCard {
+    padding: 1.5rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

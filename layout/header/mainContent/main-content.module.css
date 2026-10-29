@@ -161,6 +161,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.55rem;
   min-height: 3rem;
   padding: 0.75rem 1.25rem;
   border-radius: 0.4rem;
@@ -170,6 +171,11 @@
     background-color var(--transition-base),
     border-color var(--transition-base),
     color var(--transition-base);
+}
+
+.ctaIcon {
+  color: currentColor;
+  font-size: 0.95rem;
 }
 
 .button {

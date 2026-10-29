@@ -33,7 +33,11 @@ const ContactSection: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const mailtoSubject = encodeURIComponent(`[Portfolio Contact] ${formData.subject}`);
+      const mailtoBody = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+      );
+      window.location.href = `mailto:santiagojv.work@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
       setFormData(INITIAL_FORM_DATA);
       setSubmitStatus('success');
     } catch {

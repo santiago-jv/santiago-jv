@@ -23,18 +23,39 @@ const MainContent: React.FC = () => {
 
       <div className={`${styles.actions} ${styles.introItem} ${styles.delay4}`}>
         <a
-          target="_blank"
-          rel="noreferrer noopener"
           href={HERO_CONTENT.primaryCta.href}
+          download={HERO_CONTENT.primaryCta.download}
+          target={HERO_CONTENT.primaryCta.href.startsWith('http') ? '_blank' : undefined}
+          rel={HERO_CONTENT.primaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
           className={styles.button}
           aria-label={HERO_CONTENT.primaryCta.label}
         >
+          {HERO_CONTENT.primaryCta.iconClassName && (
+            <i className={`${HERO_CONTENT.primaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
+          )}
           {HERO_CONTENT.primaryCta.label}
         </a>
 
-        <a href={HERO_CONTENT.secondaryCta.href} className={styles['button-secondary']}>
+        <a
+          href={HERO_CONTENT.secondaryCta.href}
+          target={HERO_CONTENT.secondaryCta.href.startsWith('http') ? '_blank' : undefined}
+          rel={HERO_CONTENT.secondaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+          className={styles['button-secondary']}
+        >
+          {HERO_CONTENT.secondaryCta.iconClassName && (
+            <i className={`${HERO_CONTENT.secondaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
+          )}
           {HERO_CONTENT.secondaryCta.label}
         </a>
+
+        {HERO_CONTENT.tertiaryCta && (
+          <a href={HERO_CONTENT.tertiaryCta.href} className={styles['button-secondary']}>
+            {HERO_CONTENT.tertiaryCta.iconClassName && (
+              <i className={`${HERO_CONTENT.tertiaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
+            )}
+            {HERO_CONTENT.tertiaryCta.label}
+          </a>
+        )}
       </div>
 
       <ul className={`${styles['social-list']} ${styles.delay5}`} aria-label="Social links">

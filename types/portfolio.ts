@@ -1,4 +1,4 @@
-export type SocialPlatform = 'github' | 'twitter' | 'instagram' | 'linkedin' | 'email';
+export type SocialPlatform = 'github' | 'twitter' | 'instagram' | 'linkedin' | 'medium' | 'email';
 
 export interface NavigationLink {
   label: string;
@@ -12,19 +12,21 @@ export interface SocialLink {
   iconClassName: string;
 }
 
+export interface HeroCta {
+  label: string;
+  href: string;
+  download?: boolean;
+  iconClassName?: string;
+}
+
 export interface HeroContent {
   greeting: string;
   name: string;
   role: string;
   summary: string;
-  primaryCta: {
-    label: string;
-    href: string;
-  };
-  secondaryCta: {
-    label: string;
-    href: string;
-  };
+  primaryCta: HeroCta;
+  secondaryCta: HeroCta;
+  tertiaryCta?: HeroCta;
   socialLinks: SocialLink[];
 }
 
@@ -35,11 +37,21 @@ export interface SectionHeadingContent {
   description?: string;
 }
 
+export interface ExperienceItem {
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  highlights: string[];
+  tech: string[];
+}
+
 export interface Project {
   title: string;
   description: string;
   tech: string[];
   status: string;
+  iconClassName?: string;
 }
 
 export interface ContactInfoItem {

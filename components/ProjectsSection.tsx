@@ -29,19 +29,12 @@ const ProjectsSection: React.FC = () => {
                 </ul>
 
                 <div className={styles.projectIcon} aria-hidden="true">
-                  <i className="fas fa-code"></i>
+                  <i className={project.iconClassName || 'fas fa-code'}></i>
                 </div>
               </article>
             </li>
           ))}
         </ul>
-
-        <div className={styles.moreProjects}>
-          <p className={styles.moreText}>
-            Real projects from my professional experience at GoodRec and other exciting work will be
-            featured here soon.
-          </p>
-        </div>
       </div>
     </section>
   );
