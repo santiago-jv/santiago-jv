@@ -28,7 +28,7 @@ export const HERO_CONTENT: HeroContent = {
   name: 'Santiago Olayo',
   role: 'Senior Backend & AI Engineer',
   summary:
-    'Software Engineer with 4+ years of experience building and scaling products for startups and international companies. I handle execution end to end—partnering with product, operations, support, and finance across distributed backend systems, cloud infrastructure, internal MCP & LLM tooling governed by Cloudflare AI Gateway, Datadog observability, and product analytics.',
+    'Software Engineer with 4+ years of experience building and scaling products for startups and international companies. I handle execution end to end—partnering with product, operations, support, and finance across distributed backend systems, cloud infrastructure, observability (Datadog), product analytics (CleverTap, Metabase), and contributing to the migration from manual processes to AI-assisted internal tooling (MCP, team plugins/skills, and Cloudflare AI Gateway).',
   highlights: [
     'NestJS · Node.js · Spring Boot',
     'Hexagonal Architecture & DDD',
@@ -103,7 +103,7 @@ export const EXPERIENCES: ExperienceItem[] = [
     highlights: [
       'Partner closely with product, operations, support, and finance to turn business needs into production-ready features—owning the lifecycle end to end from stakeholder discussions and technical design to database migrations, deployment, and post-release monitoring.',
       'Architect and scale backend services using Node.js, NestJS, and TypeScript under Hexagonal Architecture and Domain-Driven Design (DDD), managing high-concurrency synchronization with atomic Redis locks and serverless cloud deployments (AWS / Cloud Functions).',
-      'Optimize internal workflows and reduce manual operations with AI: implement MCP (Model Context Protocol) servers as internal tooling to connect with preferred LLMs, build dedicated plugins and skills tailored to each internal team area, and enforce prompting rules and routing via Cloudflare AI Gateway.',
+      'Contributed to migrating manual workflows toward AI-assisted processes—improving and maintaining the team’s internal tools, including MCP (Model Context Protocol) tooling to connect with preferred LLMs, focused plugins and skills for internal team areas, and prompting rules with Cloudflare AI Gateway.',
       'Ensure production reliability using Datadog for service monitoring, proactive alerting, APM, and incident investigation, while driving product decisions through CleverTap event tracking and Metabase analytics.',
     ],
     tech: [
@@ -147,16 +147,16 @@ export const EXPERIENCES: ExperienceItem[] = [
 export const PROJECTS_HEADING: SectionHeadingContent = {
   number: '02.',
   title: 'Architecture & Systems',
-  subtitle: 'Core Engineering Pillars',
+  subtitle: 'Core Engineering Areas',
   description:
-    'Production architectures, internal AI ecosystems, and high-concurrency backend systems I design and maintain.',
+    'Production backend systems, observability pipelines, and internal AI tooling I have contributed to, improved, and maintained.',
 };
 
 export const PROJECTS: Project[] = [
   {
-    title: 'Internal MCP Tooling & Multi-Team AI Gateway',
+    title: 'Internal MCP Tooling & AI Workflow Migration',
     description:
-      'Standardized internal AI ecosystem connecting business services with preferred LLMs via custom MCP (Model Context Protocol) servers, modular plugins and skills tailored per internal team area, and centralized prompting rules and observability through Cloudflare AI Gateway.',
+      'Contributed to migrating manual team operations to AI-assisted workflows—maintaining and improving internal MCP (Model Context Protocol) tooling connected to preferred LLMs, team-focused plugins and skills, and prompting rules via Cloudflare AI Gateway.',
     tech: ['TypeScript', 'MCP', 'Cloudflare AI Gateway', 'LLMs', 'Internal Plugins & Skills'],
     status: 'Production',
     iconClassName: 'fa-solid fa-diagram-project',

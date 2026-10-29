@@ -20,7 +20,7 @@ I partner closely with **product, operations, support, and finance** to understa
 
 ## Core Focus & Engineering Pillars
 - **Backend & Distributed Architecture:** Node.js, NestJS, TypeScript, Java, Spring Boot, LoopBack 4, Hexagonal Architecture, Domain-Driven Design (DDD), atomic distributed locks in Redis, and asynchronous event processing.
-- **Internal AI & MCP Tooling:** Implementing **MCP (Model Context Protocol)** servers as internal tooling to connect services with preferred LLMs, building focused **plugins and skills** tailored to each internal team area, and enforcing prompting rules and routing via **Cloudflare AI Gateway**.
+- **Internal AI & MCP Tooling:** Contributing to the migration from manual workflows to AI-assisted processes—improving and maintaining internal **MCP (Model Context Protocol)** tooling to connect with preferred LLMs, focused **plugins and skills** per internal team area, and prompting rules with **Cloudflare AI Gateway**.
 - **Observability & Product Analytics:** Monitoring distributed services, configuring proactive alerts, and investigating production issues with **Datadog** (APM & Distributed Tracing); tracking product events with **CleverTap**; and analyzing business metrics in **Metabase**.
 - **Cloud & Databases:** AWS (Lambda, EC2, S3, RDS, CloudWatch), Google Cloud Functions, PostgreSQL, MongoDB, Redis, MySQL, Docker, and CI/CD pipelines.
 
