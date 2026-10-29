@@ -5,13 +5,18 @@ import { HERO_CONTENT } from '@/data/portfolio-content';
 const MainContent: React.FC = () => {
   return (
     <main id="about" className={styles['main-content']}>
-      <h1 className={`${styles['greeting-text']} ${styles['red-text']} ${styles.introItem} ${styles.delay1}`}>
-        {HERO_CONTENT.greeting}
-      </h1>
+      <div className={`${styles.statusPill} ${styles.introItem} ${styles.delay1}`}>
+        <span className={styles.statusDot} aria-hidden="true"></span>
+        <span>{HERO_CONTENT.badgeText}</span>
+      </div>
 
-      <h2 className={`${styles.title} ${styles.introItem} ${styles.delay2}`}>
+      <p className={`${styles['greeting-text']} ${styles.introItem} ${styles.delay1}`}>
+        {HERO_CONTENT.greeting}
+      </p>
+
+      <h1 className={`${styles.title} ${styles.introItem} ${styles.delay2}`}>
         {HERO_CONTENT.name}
-      </h2>
+      </h1>
 
       <h2 className={`${styles.subtitle} ${styles.introItem} ${styles.delay2}`}>
         {HERO_CONTENT.role}
@@ -20,6 +25,14 @@ const MainContent: React.FC = () => {
       <div className={`${styles.information} ${styles.introItem} ${styles.delay3}`}>
         <p className={styles.description}>{HERO_CONTENT.summary}</p>
       </div>
+
+      <ul className={`${styles.highlightsRow} ${styles.introItem} ${styles.delay3}`} aria-label="Core stack">
+        {HERO_CONTENT.highlights.map((item) => (
+          <li key={item} className={styles.highlightPill}>
+            {item}
+          </li>
+        ))}
+      </ul>
 
       <div className={`${styles.actions} ${styles.introItem} ${styles.delay4}`}>
         <a
@@ -71,6 +84,7 @@ const MainContent: React.FC = () => {
               rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
               className={styles['social-link']}
               aria-label={social.label}
+              title={social.label}
             >
               <i className={social.iconClassName} aria-hidden="true"></i>
             </a>

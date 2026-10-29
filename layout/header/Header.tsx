@@ -9,7 +9,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const SCROLL_DELTA = 8;
-    const MIN_HIDE_OFFSET = 80;
+    const MIN_HIDE_OFFSET = 90;
     let lastScroll = window.pageYOffset;
 
     const handleScroll = (): void => {
@@ -59,55 +59,69 @@ const Header: React.FC = () => {
       <header
         className={`${styles.header} ${isHeaderHidden ? styles['header--hidden'] : ''} ${isHeaderReady ? styles['header--ready'] : ''}`}
       >
-        <a href="#about" aria-label="Go to About section">
-          <span className={styles.logo} aria-label="santiago-jv logo">
-            <span className={styles.logoAccent}>&lt;</span>
-            <span className={styles.logoText}>santiago-jv</span>
-            <span className={styles.logoAccent}>/&gt;</span>
-          </span>
-        </a>
+        <div className={styles.headerInner}>
+          <a href="#about" aria-label="Go to About section" className={styles.brandLink}>
+            <span className={styles.logo} aria-label="santiago-jv logo">
+              <span className={styles.logoAccent}>&lt;</span>
+              <span className={styles.logoText}>santiago-jv</span>
+              <span className={styles.logoAccent}>/&gt;</span>
+            </span>
+          </a>
 
-        <nav
-          id="site-menu"
-          className={`${styles.header__navbar} ${isMenuOpen ? styles['header__navbar--open'] : ''}`}
-        >
-          <header className={styles.navbar__header}>
-            <h1 className={styles.navbar__title}>Menu</h1>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className={styles['navbar__close-icon']}
-              aria-label="Close navigation menu"
-              type="button"
-            >
-              <i className="fas fa-times" aria-hidden="true"></i>
-            </button>
-          </header>
+          <nav
+            id="site-menu"
+            className={`${styles.header__navbar} ${isMenuOpen ? styles['header__navbar--open'] : ''}`}
+          >
+            <header className={styles.navbar__header}>
+              <span className={styles.navbar__title}>Navigation</span>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className={styles['navbar__close-icon']}
+                aria-label="Close navigation menu"
+                type="button"
+              >
+                <i className="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </header>
 
-          <ul className={styles.navbar__items}>
-            {NAVIGATION_LINKS.map((item) => (
-              <li key={item.href} className={styles.navbar__item}>
-                <button
-                  className={styles.navbar__link}
-                  type="button"
-                  onClick={() => handleNavItemClick(item.href)}
+            <ul className={styles.navbar__items}>
+              {NAVIGATION_LINKS.map((item, idx) => (
+                <li key={item.href} className={styles.navbar__item}>
+                  <button
+                    className={styles.navbar__link}
+                    type="button"
+                    onClick={() => handleNavItemClick(item.href)}
+                  >
+                    <span className={styles.navIndex}>0{idx + 1}.</span>
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+              <li className={styles.navbar__ctaItem}>
+                <a
+                  href="/Santiago_Olayo_Villamil_CV.pdf"
+                  download
+                  className={styles.resumeButton}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
-                </button>
+                  <i className="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                  Resume
+                </a>
               </li>
-            ))}
-          </ul>
-        </nav>
+            </ul>
+          </nav>
 
-        <button
-          onClick={() => setIsMenuOpen((current) => !current)}
-          className={styles['header__menu-button']}
-          aria-label="Open navigation menu"
-          aria-expanded={isMenuOpen}
-          aria-controls="site-menu"
-          type="button"
-        >
-          <i className="fas fa-bars" aria-hidden="true"></i>
-        </button>
+          <button
+            onClick={() => setIsMenuOpen((current) => !current)}
+            className={styles['header__menu-button']}
+            aria-label="Open navigation menu"
+            aria-expanded={isMenuOpen}
+            aria-controls="site-menu"
+            type="button"
+          >
+            <i className="fa-solid fa-bars-staggered" aria-hidden="true"></i>
+          </button>
+        </div>
       </header>
 
       <button

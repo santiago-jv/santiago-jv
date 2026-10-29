@@ -1,4 +1,4 @@
-export type SocialPlatform = 'github' | 'twitter' | 'instagram' | 'linkedin' | 'medium' | 'email';
+export type SocialPlatform = 'github' | 'x' | 'linkedin' | 'medium' | 'email';
 
 export interface NavigationLink {
   label: string;
@@ -20,10 +20,12 @@ export interface HeroCta {
 }
 
 export interface HeroContent {
+  badgeText: string;
   greeting: string;
   name: string;
   role: string;
   summary: string;
+  highlights: string[];
   primaryCta: HeroCta;
   secondaryCta: HeroCta;
   tertiaryCta?: HeroCta;

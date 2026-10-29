@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://www.santiago-jv.tech">Portfolio</a> •
   <a href="https://www.linkedin.com/in/santiago-jv">LinkedIn</a> •
+  <a href="https://x.com/santiagojv_tech">X (@santiagojv_tech)</a> •
   <a href="https://github.com/santiago-jv">GitHub</a> •
   <a href="https://medium.com/@santiago-jv/">Medium</a> •
   <a href="mailto:santiagojv.work@gmail.com">Email</a>
