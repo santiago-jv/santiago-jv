@@ -7,34 +7,18 @@ const Header: React.FC = () => {
   const headerContent = content.header;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isHeaderReady, setIsHeaderReady] = useState(false);
 
   useEffect(() => {
-    const SCROLL_DELTA = 8;
-    const MIN_HIDE_OFFSET = 90;
-    let lastScroll = window.pageYOffset;
-
     const handleScroll = (): void => {
-      const currentScroll = window.pageYOffset;
-
-      if (isMenuOpen || currentScroll <= MIN_HIDE_OFFSET) {
-        setIsHeaderHidden(false);
-        lastScroll = currentScroll;
-        return;
-      }
-
-      if (Math.abs(currentScroll - lastScroll) < SCROLL_DELTA) {
-        return;
-      }
-
-      setIsHeaderHidden(currentScroll > lastScroll);
-      lastScroll = currentScroll;
+      setIsScrolled(window.scrollY > 16);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMenuOpen]);
+  }, []);
 
   useEffect(() => {
     setIsHeaderReady(true);
@@ -60,15 +44,11 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`${styles.header} ${isHeaderHidden ? styles['header--hidden'] : ''} ${isHeaderReady ? styles['header--ready'] : ''}`}
+        className={`${styles.header} ${isScrolled ? styles['header--scrolled'] : ''} ${isHeaderReady ? styles['header--ready'] : ''}`}
       >
         <div className={styles.headerInner}>
           <a href="#about" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
-            <span className={styles.logo} aria-label="santiago-jv logo">
-              <span className={styles.logoAccent}>&lt;</span>
-              <span className={styles.logoText}>santiago-jv</span>
-              <span className={styles.logoAccent}>/&gt;</span>
-            </span>
+            <span className={styles.wordmark}>Santiago Olayo</span>
           </a>
 
           <nav
@@ -88,14 +68,13 @@ const Header: React.FC = () => {
             </header>
 
             <ul className={styles.navbar__items}>
-              {headerContent.navLinks.map((item, idx) => (
+              {headerContent.navLinks.map((item) => (
                 <li key={item.href} className={styles.navbar__item}>
                   <button
                     className={styles.navbar__link}
                     type="button"
                     onClick={() => handleNavItemClick(item.href)}
                   >
-                    <span className={styles.navIndex}>0{idx + 1}.</span>
                     {item.label}
                   </button>
                 </li>
@@ -107,12 +86,21 @@ const Header: React.FC = () => {
                   className={styles.resumeButton}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <i className="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
                   {headerContent.resumeLabel}
                 </a>
               </li>
             </ul>
           </nav>
+
+          <div className={styles.desktopCtaWrapper}>
+            <a
+              href={headerContent.resumeHref}
+              download={headerContent.resumeDownloadName}
+              className={styles.resumeButton}
+            >
+              {headerContent.resumeLabel}
+            </a>
+          </div>
 
           <button
             onClick={() => setIsMenuOpen((current) => !current)}
@@ -122,8 +110,11 @@ const Header: React.FC = () => {
             aria-controls="site-menu"
             type="button"
           >
-            <i className="fa-solid fa-bars-staggered" aria-hidden="true"></i>
+            <i className="fa-solid fa-bars" aria-hidden="true"></i>
           </button>
+        </div>
+        <div className={styles.progressTrack} aria-hidden="true">
+          <div className={styles.progressBar} />
         </div>
       </header>
 

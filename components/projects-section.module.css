@@ -1,153 +1,214 @@
 .projectsSection {
-  padding: 5.5rem 0 3rem;
+  padding: 116px 0 124px;
+  background-color: var(--apple-bg-white);
+  position: relative;
 }
 
 .container {
-  max-width: 1160px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 0 24px;
 }
 
-.projectsGrid {
+.bentoGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.projectCard {
-  background: var(--color-surface);
-  backdrop-filter: blur(14px);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: 2rem;
-  box-shadow: var(--shadow-card);
-  transition:
-    transform var(--transition-base),
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
+.bentoTile {
   position: relative;
+  border-radius: var(--radius-bento);
+  border: 1px solid var(--apple-border);
   overflow: hidden;
-  will-change: transform;
 }
 
-.projectCard::before {
+.bentoWidePrimary {
+  grid-column: span 7;
+  background: var(--apple-bg-stone);
+}
+
+.bentoCompactAccent {
+  grid-column: span 5;
+  background: linear-gradient(150deg, #f1f7fe 0%, #e6f0fc 100%);
+  border-color: rgba(0, 113, 227, 0.13);
+}
+
+.bentoCompactNeutral {
+  grid-column: span 5;
+  background: var(--apple-bg-stone);
+}
+
+.bentoWideElevated {
+  grid-column: span 7;
+  background: linear-gradient(155deg, #f7f7fa 0%, #efeff4 100%);
+}
+
+.bentoTile::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-primary-bright), var(--color-accent-bright), transparent);
-  opacity: 0.55;
+  inset: 0;
+  background: radial-gradient(
+    460px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    rgba(255, 255, 255, 0.82),
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 340ms var(--ease-apple-snappy);
 }
 
-.projectCard:hover {
-  transform: translateY(-5px);
-  border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-card-hover);
+.bentoTile:hover {
+  transform: translate3d(0, -5px, 0) scale(1.008);
+  box-shadow: var(--shadow-bento-hover);
+  border-color: var(--apple-border-strong);
 }
 
-.projectContent {
+.bentoTile:hover::before {
+  opacity: 1;
+}
+
+.tileContent {
+  position: relative;
+  z-index: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-  height: 100%;
-}
-
-.projectHeader {
-  display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
+  gap: 28px;
+  padding: 38px 38px 34px;
 }
 
-.projectTitle {
-  margin: 0;
-  color: var(--color-text-primary);
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.projectStatus {
-  white-space: nowrap;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-accent-border);
-  background: var(--color-accent-light);
-  padding: 0.25rem 0.65rem;
-  color: var(--color-accent-bright);
-  font-size: 0.72rem;
-  font-family: var(--font-family-mono);
-  font-weight: 600;
-}
-
-.projectDescription {
-  margin: 0;
-  color: var(--color-text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.72;
-}
-
-.projectTech {
+.tileTopRow {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: auto;
-  padding-top: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.techTag {
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-primary-border);
-  background: var(--color-primary-light);
-  padding: 0.25rem 0.6rem;
-  color: var(--color-primary-bright);
-  font-size: 0.75rem;
-  font-family: var(--font-family-mono);
-  font-weight: 500;
-}
-
-.projectIcon {
-  width: 2.4rem;
-  height: 2.4rem;
+.iconSquircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: var(--apple-bg-white);
+  color: var(--apple-text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.35rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-subtle);
-  color: var(--color-primary-bright);
-  transition:
-    transform var(--transition-base),
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    color var(--transition-base);
+  font-size: 19px;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: transform 420ms var(--ease-apple-spring);
 }
 
-.projectCard:hover .projectIcon {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+.bentoTile:hover .iconSquircle {
+  transform: scale(1.06) translateY(-1px);
+}
+
+.iconSquircleAccent {
+  background: var(--apple-blue);
   color: #ffffff;
-  transform: scale(1.06);
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(0, 113, 227, 0.26);
 }
 
-@media screen and (max-width: 860px) {
+.statusEyebrow {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--apple-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.statusEyebrowAccent {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--apple-blue);
+  border-color: rgba(0, 113, 227, 0.14);
+}
+
+.tileBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tileTitle {
+  font-family: var(--font-family-display);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--apple-text-primary);
+}
+
+.tileDescription {
+  font-size: 15.5px;
+  line-height: 1.58;
+  letter-spacing: -0.01em;
+  color: var(--apple-text-secondary);
+}
+
+.tileTechList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.tileTechPill {
+  padding: 5.5px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--apple-text-primary);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.008em;
+  border: 1px solid rgba(0, 0, 0, 0.055);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 920px) {
   .projectsSection {
-    padding: 4rem 0 2rem;
+    padding: 88px 0 96px;
   }
 
+  .bentoWidePrimary,
+  .bentoCompactAccent,
+  .bentoCompactNeutral,
+  .bentoWideElevated {
+    grid-column: span 12;
+  }
+
+  .tileContent {
+    padding: 32px 28px;
+  }
+}
+
+@media (max-width: 560px) {
   .container {
-    padding: 0 1.25rem;
+    padding: 0 18px;
   }
 
-  .projectsGrid {
-    grid-template-columns: 1fr;
-    gap: 1.35rem;
+  .bentoTile {
+    border-radius: 24px;
   }
 
-  .projectCard {
-    padding: 1.5rem;
+  .tileContent {
+    padding: 26px 22px;
+    gap: 22px;
+  }
+
+  .tileTitle {
+    font-size: 22px;
+  }
+
+  .tileDescription {
+    font-size: 14.5px;
   }
 }

@@ -6,10 +6,11 @@ import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import { usePreferences } from '@/context/PreferencesContext';
-import 'animate.css';
+import { useApplePageMotion } from '@/hooks/useAppleMotion';
 
 const Home: React.FC = () => {
-  const { content } = usePreferences();
+  const { locale, content } = usePreferences();
+  useApplePageMotion(locale);
 
   return (
     <Container title={content.seo.title}>

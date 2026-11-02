@@ -1,180 +1,233 @@
 .experienceSection {
-  padding: 5.5rem 0 2.5rem;
+  padding: 112px 0 120px;
+  background-color: var(--apple-bg-stone);
+  position: relative;
 }
 
 .container {
-  max-width: 1160px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 0 24px;
 }
 
-.timeline {
+.cardsStack {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
-  position: relative;
+  gap: 22px;
 }
 
 .experienceCard {
   position: relative;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 44px;
+  padding: 40px 44px;
+  background: var(--apple-bg-white);
+  border-radius: var(--radius-bento);
+  border: 1px solid var(--apple-border);
+  box-shadow: var(--shadow-bento);
   overflow: hidden;
-  background: var(--color-surface);
-  backdrop-filter: blur(14px);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: 2.25rem;
-  box-shadow: var(--shadow-card);
-  transition:
-    transform var(--transition-base),
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
 }
 
 .experienceCard::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-primary-bright), var(--color-accent-bright), transparent);
-  opacity: 0.55;
+  inset: 0;
+  background: radial-gradient(
+    560px circle at var(--spot-x, 20%) var(--spot-y, 0%),
+    rgba(0, 113, 227, 0.045),
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 360ms var(--ease-apple-snappy);
 }
 
 .experienceCard:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-card-hover);
+  transform: translate3d(0, -4px, 0) scale(1.004);
+  box-shadow: var(--shadow-bento-hover);
+  border-color: var(--apple-border-strong);
 }
 
-.cardHeader {
+.experienceCard:hover::before {
+  opacity: 1;
+}
+
+.metaColumn {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.35rem;
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid var(--color-border-subtle);
+  position: relative;
+  z-index: 1;
 }
 
-.roleTitle {
-  margin: 0;
-  color: var(--color-text-primary);
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.periodPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--apple-bg-stone);
+  color: var(--apple-text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 16px;
+}
+
+.liveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--apple-green);
+  box-shadow: 0 0 0 3px var(--apple-green-tint);
 }
 
 .companyName {
-  margin: 0.3rem 0 0 0;
-  color: var(--color-accent-bright);
-  font-family: var(--font-family-mono);
-  font-size: 0.92rem;
+  font-family: var(--font-family-display);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--apple-text-primary);
+  margin-bottom: 8px;
+}
+
+.roleTitle {
+  font-size: 15.5px;
   font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  color: var(--apple-blue);
+  margin-bottom: 10px;
 }
 
-.metaBadges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-}
-
-.periodBadge,
-.locationBadge {
+.locationMeta {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.32rem 0.72rem;
-  border-radius: var(--radius-full);
-  font-family: var(--font-family-mono);
-  font-size: 0.75rem;
+  gap: 6px;
+  font-size: 13px;
   font-weight: 500;
+  color: var(--apple-text-tertiary);
 }
 
-.periodBadge {
-  background: var(--color-primary-light);
-  border: 1px solid var(--color-primary-border);
-  color: var(--color-primary-bright);
+.locationMeta i {
+  font-size: 11.5px;
+  color: var(--apple-text-tertiary);
 }
 
-.locationBadge {
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
-}
-
-.locationBadge i {
-  font-size: 0.72rem;
-  color: var(--color-accent-bright);
+.detailsColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 26px;
+  position: relative;
+  z-index: 1;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+  padding-left: 40px;
 }
 
 .highlightsList {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  margin: 0 0 1.6rem 0;
 }
 
 .highlightItem {
-  position: relative;
-  padding-left: 1.35rem;
-  color: var(--color-text-secondary);
-  font-size: 0.96rem;
-  line-height: 1.72;
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 13px 0;
+  font-size: 15.5px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--apple-text-secondary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.055);
 }
 
-.highlightItem::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--color-primary-bright);
-  font-family: var(--font-family-mono);
+.highlightItem:first-child {
+  padding-top: 0;
+}
+
+.highlightItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bulletMarker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--apple-blue);
+  margin-top: 9px;
+  opacity: 0.78;
 }
 
 .techList {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 8px;
 }
 
 .techBadge {
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-subtle);
-  padding: 0.28rem 0.65rem;
-  color: var(--color-text-pill);
-  font-size: 0.75rem;
-  font-family: var(--font-family-mono);
+  padding: 6px 13px;
+  border-radius: var(--radius-pill);
+  background: var(--apple-bg-stone);
+  color: var(--apple-text-primary);
+  font-size: 12.5px;
   font-weight: 500;
+  letter-spacing: -0.008em;
+  border: 1px solid rgba(0, 0, 0, 0.04);
   transition:
-    border-color var(--transition-fast),
     background-color var(--transition-fast),
-    color var(--transition-fast);
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.experienceCard:hover .techBadge {
-  border-color: var(--color-primary-border);
+.techBadge:hover {
+  background: var(--apple-blue-tint);
+  color: var(--apple-blue);
+  transform: translateY(-1px);
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 920px) {
   .experienceSection {
-    padding: 4rem 0 1.5rem;
-  }
-
-  .container {
-    padding: 0 1.25rem;
+    padding: 88px 0 96px;
   }
 
   .experienceCard {
-    padding: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 28px;
   }
 
-  .cardHeader {
-    flex-direction: column;
-    gap: 0.75rem;
+  .detailsColumn {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.065);
+    padding-left: 0;
+    padding-top: 24px;
+  }
+
+  .locationMeta {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 18px;
+  }
+
+  .experienceCard {
+    padding: 26px 22px;
+    border-radius: 24px;
+  }
+
+  .companyName {
+    font-size: 22px;
+  }
+
+  .highlightItem {
+    font-size: 14.5px;
   }
 }

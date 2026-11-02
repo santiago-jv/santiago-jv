@@ -9,98 +9,89 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerContent}>
-        <div className={styles.container}>
-          <div className={styles.footerGrid}>
-            <div className={styles.brandSection}>
-              <div className={styles.logo}>{footer.brand.name}</div>
-              <p className={styles.brandDescription}>{footer.brand.description}</p>
-            </div>
-
-            <div className={styles.linksSection}>
-              <h4 className={styles.sectionTitle}>{footer.sectionTitles.navigation}</h4>
-              <ul className={styles.linksList}>
-                {footer.quickLinks.map((link) => (
-                  <li key={link.href}>
-                    <a href={link.href} className={styles.footerLink}>
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.skillsSection}>
-              <h4 className={styles.sectionTitle}>{footer.sectionTitles.technologies}</h4>
-              <ul className={styles.skillsGrid}>
-                {footer.skills.map((skill) => (
-                  <li key={skill} className={styles.skillTag}>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.contactSection}>
-              <h4 className={styles.sectionTitle}>{footer.sectionTitles.connect}</h4>
-              <div className={styles.contactInfo}>
-                <a href={`mailto:${footer.email}`} className={styles.emailLink}>
-                  <i className="fas fa-envelope" aria-hidden="true"></i>
-                  {footer.email}
-                </a>
-                <p className={styles.locationText}>
-                  <i className="fas fa-map-marker-alt" aria-hidden="true"></i>
-                  {footer.location}
-                </p>
-              </div>
-
-              <ul className={styles.socialLinks}>
-                {footer.socialLinks.map((social) => (
-                  <li key={social.platform}>
-                    <a
-                      href={social.href}
-                      target={social.href.startsWith('http') ? '_blank' : '_self'}
-                      rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-                      className={styles.socialLink}
-                      aria-label={`${footer.followAriaPrefix} ${social.label}`}
-                    >
-                      <i className={social.iconClassName} aria-hidden="true"></i>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <div className={styles.container}>
+        <div className={styles.directoryGrid}>
+          <div className={styles.brandColumn}>
+            <p className={styles.wordmark}>Santiago Olayo</p>
+            <p className={styles.brandDescription}>{footer.brand.description}</p>
           </div>
-        </div>
-      </div>
 
-      <div className={styles.footerBottom}>
-        <div className={styles.container}>
-          <div className={styles.bottomContent}>
-            <div className={styles.copyright}>
-              <p>
-                © {currentYear} Santiago Olayo. {footer.rightsReserved}
-              </p>
-              <p className={styles.builtWith}>{footer.builtWith}</p>
-            </div>
+          <div className={styles.directoryColumn}>
+            <h4 className={styles.columnTitle}>{footer.sectionTitles.navigation}</h4>
+            <ul className={styles.linksList}>
+              {footer.quickLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className={styles.footerLink}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className={styles.footerMeta}>
-              <span className={styles.version}>{footer.version}</span>
-              <a
-                href={footer.sourceUrl}
-                target="_blank"
-                rel="noreferrer noopener"
-                className={styles.sourceLink}
-              >
-                <i className="fas fa-code" aria-hidden="true"></i>
-                {footer.sourceLabel}
+          <div className={styles.directoryColumn}>
+            <h4 className={styles.columnTitle}>{footer.sectionTitles.technologies}</h4>
+            <ul className={styles.skillsCloud}>
+              {footer.skills.map((skill) => (
+                <li key={skill} className={styles.skillItem}>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.directoryColumn}>
+            <h4 className={styles.columnTitle}>{footer.sectionTitles.connect}</h4>
+            <div className={styles.connectMeta}>
+              <a href={`mailto:${footer.email}`} className={styles.footerLink}>
+                {footer.email}
               </a>
+              <p className={styles.locationText}>{footer.location}</p>
             </div>
+
+            <ul className={styles.socialList}>
+              {footer.socialLinks.map((social) => (
+                <li key={social.platform}>
+                  <a
+                    href={social.href}
+                    target={social.href.startsWith('http') ? '_blank' : '_self'}
+                    rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                    className={styles.socialButton}
+                    aria-label={`${footer.followAriaPrefix} ${social.label}`}
+                  >
+                    <i className={social.iconClassName} aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className={styles.legalBar}>
+          <div className={styles.legalLeft}>
+            <span>
+              Copyright © {currentYear} Santiago Olayo. {footer.rightsReserved}
+            </span>
+            <span className={styles.legalDivider} aria-hidden="true">
+              |
+            </span>
+            <span>{footer.builtWith}</span>
+          </div>
+
+          <div className={styles.legalRight}>
+            <span className={styles.versionTag}>{footer.version}</span>
+            <a
+              href={footer.sourceUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className={styles.sourceLink}
+            >
+              <span>{footer.sourceLabel}</span>
+              <span aria-hidden="true">›</span>
+            </a>
           </div>
         </div>
       </div>
-
-      <div className={styles.decorativeGrid}></div>
     </footer>
   );
 };

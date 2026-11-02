@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { usePreferences } from '@/context/PreferencesContext';
+import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './projects-section.module.css';
+
+const BENTO_VARIANT_CLASSES = [
+  styles.bentoWidePrimary,
+  styles.bentoCompactAccent,
+  styles.bentoCompactNeutral,
+  styles.bentoWideElevated,
+];
 
 const ProjectsSection: React.FC = () => {
   const { content } = usePreferences();
@@ -11,31 +19,53 @@ const ProjectsSection: React.FC = () => {
       <div className={styles.container}>
         <SectionHeading content={content.projectsHeading} />
 
-        <ul className={styles.projectsGrid}>
-          {content.projects.map((project, index) => (
-            <li key={`${index}-${project.title}`} className={styles.projectCard}>
-              <article className={styles.projectContent}>
-                <div className={styles.projectHeader}>
-                  <h3 className={styles.projectTitle}>{project.title}</h3>
-                  <span className={styles.projectStatus}>{project.status}</span>
-                </div>
+        <ul className={styles.bentoGrid}>
+          {content.projects.map((project, index) => {
+            const variantClass = BENTO_VARIANT_CLASSES[index % BENTO_VARIANT_CLASSES.length];
+            const isAccentTile = index === 1;
 
-                <p className={styles.projectDescription}>{project.description}</p>
+            return (
+              <li
+                key={`${index}-${project.title}`}
+                className={`${styles.bentoTile} ${variantClass}`}
+                data-apple-reveal
+                style={{ '--reveal-delay': `${index * 85}ms` } as CSSProperties}
+                onMouseMove={handleAppleCardSpotlight}
+              >
+                <article className={styles.tileContent}>
+                  <div className={styles.tileTopRow}>
+                    <div
+                      className={`${styles.iconSquircle} ${isAccentTile ? styles.iconSquircleAccent : ''}`}
+                      aria-hidden="true"
+                    >
+                      <i className={project.iconClassName || 'fa-solid fa-code'} />
+                    </div>
 
-                <ul className={styles.projectTech}>
-                  {project.tech.map((tech) => (
-                    <li key={`${project.title}-${tech}`} className={styles.techTag}>
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
+                    {project.status && (
+                      <span
+                        className={`${styles.statusEyebrow} ${isAccentTile ? styles.statusEyebrowAccent : ''}`}
+                      >
+                        {project.status}
+                      </span>
+                    )}
+                  </div>
 
-                <div className={styles.projectIcon} aria-hidden="true">
-                  <i className={project.iconClassName || 'fas fa-code'}></i>
-                </div>
-              </article>
-            </li>
-          ))}
+                  <div className={styles.tileBody}>
+                    <h3 className={styles.tileTitle}>{project.title}</h3>
+                    <p className={styles.tileDescription}>{project.description}</p>
+                  </div>
+
+                  <ul className={styles.tileTechList}>
+                    {project.tech.map((tech) => (
+                      <li key={`${project.title}-${tech}`} className={styles.tileTechPill}>
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

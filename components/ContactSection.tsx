@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { usePreferences } from '@/context/PreferencesContext';
+import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './contact-section.module.css';
 
 type ContactFormData = {
@@ -56,39 +57,65 @@ const ContactSection: React.FC = () => {
       <div className={styles.container}>
         <SectionHeading content={contactContent.heading} />
 
-        <div className={styles.contactContent}>
-          <div className={styles.contactInfo}>
-            <h4 className={styles.infoTitle}>{contactContent.introTitle}</h4>
-            <ul className={styles.contactGrid}>
-              {contactContent.infoItems.map((item) => (
-                <li key={item.label} className={styles.contactItem}>
-                  <div className={styles.contactIcon}>
-                    <i className={item.iconClassName} aria-hidden="true"></i>
-                  </div>
+        <div className={styles.contactBentoGrid}>
+          <div
+            className={styles.channelsCard}
+            data-apple-reveal
+            style={{ '--reveal-delay': '0ms' } as CSSProperties}
+            onMouseMove={handleAppleCardSpotlight}
+          >
+            <h3 className={styles.cardHeading}>{contactContent.introTitle}</h3>
 
-                  <div className={styles.contactDetails}>
-                    <span className={styles.contactLabel}>{item.label}</span>
+            <ul className={styles.channelList}>
+              {contactContent.infoItems.map((item) => {
+                const inner = (
+                  <>
+                    <div className={styles.channelIcon}>
+                      <i className={item.iconClassName} aria-hidden="true" />
+                    </div>
+
+                    <div className={styles.channelMeta}>
+                      <span className={styles.channelLabel}>{item.label}</span>
+                      <span className={styles.channelValue}>{item.value}</span>
+                    </div>
+
+                    {item.href && (
+                      <span className={styles.rowChevron} aria-hidden="true">
+                        ›
+                      </span>
+                    )}
+                  </>
+                );
+
+                return (
+                  <li key={item.label} className={styles.channelItem}>
                     {item.href ? (
                       <a
                         href={item.href}
                         download={item.download}
-                        className={styles.contactValue}
+                        className={styles.channelRowLink}
                         target={item.href.startsWith('http') ? '_blank' : '_self'}
                         rel={item.href.startsWith('http') ? 'noreferrer noopener' : undefined}
                       >
-                        {item.value}
+                        {inner}
                       </a>
                     ) : (
-                      <span className={styles.contactValue}>{item.value}</span>
+                      <div className={styles.channelRowStatic}>{inner}</div>
                     )}
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          <div className={styles.contactForm}>
-            <h4 className={styles.formTitle}>{contactContent.formTitle}</h4>
+          <div
+            className={styles.formCard}
+            data-apple-reveal
+            style={{ '--reveal-delay': '95ms' } as CSSProperties}
+            onMouseMove={handleAppleCardSpotlight}
+          >
+            <h3 className={styles.cardHeading}>{contactContent.formTitle}</h3>
+
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
@@ -152,7 +179,7 @@ const ContactSection: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className={`${styles.formInput} ${styles.formTextarea}`}
-                  rows={6}
+                  rows={5}
                   required
                   disabled={isSubmitting}
                 />
@@ -161,41 +188,39 @@ const ContactSection: React.FC = () => {
               <div className={styles.submitStatus} aria-live="polite">
                 {submitStatus === 'success' && (
                   <p className={`${styles.submitMessage} ${styles.submitSuccess}`}>
-                    <i className="fas fa-check-circle" aria-hidden="true"></i>
+                    <i className="fa-solid fa-circle-check" aria-hidden="true" />
                     {labels.successMessage}
                   </p>
                 )}
 
                 {submitStatus === 'error' && (
                   <p className={`${styles.submitMessage} ${styles.submitError}`}>
-                    <i className="fas fa-exclamation-circle" aria-hidden="true"></i>
+                    <i className="fa-solid fa-circle-exclamation" aria-hidden="true" />
                     {labels.errorMessage}
                   </p>
                 )}
               </div>
 
-              <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <i className="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                    {labels.sending}
-                  </>
-                ) : (
-                  <>
-                    <i className="fas fa-paper-plane" aria-hidden="true"></i>
-                    {labels.submit}
-                  </>
-                )}
-              </button>
+              <div className={styles.formActions}>
+                <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+                  {isSubmitting ? labels.sending : labels.submit}
+                </button>
+              </div>
             </form>
           </div>
         </div>
 
-        <div className={styles.quickContact}>
+        <div
+          className={styles.quickContactBanner}
+          data-apple-reveal
+          style={{ '--reveal-delay': '170ms' } as CSSProperties}
+        >
           <p className={styles.quickContactText}>{labels.directPrompt}</p>
-          <a href={contactContent.quickActionHref} className={styles.emailButton}>
-            <i className="fas fa-envelope" aria-hidden="true"></i>
-            {contactContent.quickActionLabel}
+          <a href={contactContent.quickActionHref} className={styles.directEmailLink}>
+            <span>{contactContent.quickActionLabel}</span>
+            <span className={styles.chevron} aria-hidden="true">
+              ›
+            </span>
           </a>
         </div>
       </div>

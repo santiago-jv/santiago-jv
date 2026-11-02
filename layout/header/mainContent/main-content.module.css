@@ -1,283 +1,310 @@
-.main-content {
+.heroSection {
   position: relative;
-  max-width: 1160px;
+  background: var(--apple-bg-white);
+  padding: 9.5rem 1.5rem 6.5rem;
+  overflow: hidden;
+}
+
+.heroAmbient {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 95vw);
+  height: 520px;
+  background: radial-gradient(
+    ellipse 68% 58% at 50% 24%,
+    rgba(0, 113, 227, 0.065) 0%,
+    rgba(120, 148, 255, 0.03) 42%,
+    rgba(255, 255, 255, 0) 76%
+  );
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  max-width: 920px;
   margin: 0 auto;
-  min-height: min(92vh, 840px);
-  padding: 8.5rem 5% 4rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  isolation: isolate;
+  align-items: center;
+  text-align: center;
+  transform: translate3d(0, calc(var(--hero-progress, 0) * -22px), 0)
+    scale(calc(1 - (var(--hero-progress, 0) * 0.03)));
+  opacity: calc(1 - (var(--hero-progress, 0) * 0.45));
+  transform-origin: center top;
+  will-change: transform, opacity;
 }
 
-.main-content::before {
-  content: '';
-  position: absolute;
-  top: 6rem;
-  right: -4rem;
-  width: min(46vw, 38rem);
-  height: min(46vw, 38rem);
-  border-radius: 999px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 35% 35%, var(--aura-primary), transparent 62%),
-    radial-gradient(circle at 70% 70%, var(--aura-accent), transparent 64%);
-  filter: blur(28px);
-  animation: auraShift 10s ease-in-out infinite alternate;
-}
-
-@keyframes introFadeUp {
+@keyframes appleHeroReveal {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translate3d(0, 26px, 0) scale(0.985);
+    filter: blur(8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes socialPopIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes auraShift {
-  from {
     transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(-16px, 12px, 0) scale(1.04);
+    filter: blur(0px);
   }
 }
 
-.introItem {
+.heroStagger1,
+.heroStagger2,
+.heroStagger3,
+.heroStagger4,
+.heroStagger5,
+.heroStagger6 {
   opacity: 0;
-  animation: introFadeUp 620ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: appleHeroReveal 880ms var(--ease-apple-spring) forwards;
 }
 
-.delay1 {
-  animation-delay: 80ms;
+.heroStagger1 {
+  animation-delay: 60ms;
+}
+.heroStagger2 {
+  animation-delay: 150ms;
+}
+.heroStagger3 {
+  animation-delay: 250ms;
+}
+.heroStagger4 {
+  animation-delay: 350ms;
+}
+.heroStagger5 {
+  animation-delay: 450ms;
+}
+.heroStagger6 {
+  animation-delay: 540ms;
 }
 
-.delay2 {
-  animation-delay: 180ms;
-}
-
-.delay3 {
-  animation-delay: 290ms;
-}
-
-.delay4 {
-  animation-delay: 400ms;
-}
-
-.delay5 {
-  animation-delay: 520ms;
-}
-
-.greeting-text {
-  margin-bottom: 0.5rem;
-  color: var(--color-primary-bright);
-  font-family: var(--font-family-mono);
-  font-size: clamp(0.88rem, 1.8vw, 1rem);
+.eyebrowPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: var(--apple-bg-stone);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  color: var(--apple-text-primary);
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.4rem;
 }
 
-.title {
-  margin: 0;
-  font-size: clamp(2.65rem, 6.4vw, 4.75rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.06;
-  background: var(--gradient-heading);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.eyebrowDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--apple-blue);
 }
 
-.subtitle {
-  margin-top: 0.35rem;
-  font-size: clamp(1.75rem, 4.4vw, 3.1rem);
+.displayTitle {
+  font-family: var(--font-family-display);
+  font-size: clamp(3.15rem, 7.6vw, 5.65rem);
   font-weight: 700;
-  letter-spacing: -0.028em;
-  line-height: 1.14;
-  background: var(--gradient-subtitle);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.045em;
+  line-height: 1.03;
+  color: var(--apple-text-primary);
+  margin: 0;
 }
 
-.information {
+.editorialLead {
   margin-top: 1.65rem;
+  max-width: 46rem;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.18rem, 2.2vw, 1.52rem);
+  line-height: 1.44;
+  letter-spacing: -0.022em;
 }
 
-.description {
-  max-width: 44rem;
-  color: var(--color-text-secondary);
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
-  line-height: 1.78;
+.leadPrimary {
+  color: var(--apple-text-primary);
+  font-weight: 600;
 }
 
-.highlightsRow {
+.leadSecondary {
+  color: var(--apple-text-secondary);
+  font-weight: 400;
+}
+
+.specPills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: 1.5rem;
-  max-width: 46rem;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 48rem;
+  margin-top: 2rem;
 }
 
-.highlightPill {
-  padding: 0.35rem 0.78rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-subtle);
-  color: var(--color-text-pill);
+.specPill {
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--apple-bg-stone);
+  color: var(--apple-text-primary);
   font-family: var(--font-family-mono);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 500;
+  letter-spacing: -0.01em;
   transition:
-    border-color var(--transition-fast),
+    transform var(--transition-fast),
     background-color var(--transition-fast),
     color var(--transition-fast);
 }
 
-.highlightPill:hover {
-  border-color: var(--color-border-hover);
-  background: var(--color-surface-subtle-hover);
-  color: var(--color-text-pill-hover);
+.specPill:hover {
+  transform: translateY(-2px);
+  background: #ebebf0;
 }
 
-.actions {
+.ctaGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-top: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 1.15rem;
+  margin-top: 2.5rem;
 }
 
-.button,
-.button-secondary {
+.primaryPillButton,
+.secondaryPillButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   min-height: 2.95rem;
-  padding: 0.72rem 1.35rem;
-  border-radius: var(--radius-md);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  padding: 0.72rem 1.55rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
   transition:
-    transform var(--transition-base),
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base),
-    color var(--transition-base);
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.ctaIcon {
-  color: currentColor;
-  font-size: 0.92rem;
-}
-
-.button {
-  background: var(--gradient-cta);
-  border: 1px solid rgba(165, 180, 252, 0.35);
+.primaryPillButton {
+  background: var(--apple-blue);
   color: #ffffff;
-  box-shadow: 0 8px 24px -6px rgba(79, 70, 229, 0.48), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 20px rgba(0, 113, 227, 0.22);
 }
 
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px -6px rgba(79, 70, 229, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+.primaryPillButton:hover {
+  background: var(--apple-blue-hover);
+  transform: scale(1.02);
+  box-shadow: 0 10px 26px rgba(0, 113, 227, 0.28);
 }
 
-.button-secondary {
-  border: 1px solid var(--color-border);
-  background: var(--color-secondary-btn-bg);
-  backdrop-filter: blur(10px);
-  color: var(--color-text-primary);
-  box-shadow: var(--color-secondary-btn-shadow);
+.primaryPillButton:active {
+  transform: scale(0.98);
 }
 
-.button-secondary:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-border-hover);
-  background: var(--color-secondary-btn-hover-bg);
-  color: var(--color-text-pill-hover);
+.secondaryPillButton {
+  background: var(--apple-bg-stone);
+  color: var(--apple-text-primary);
 }
 
-.social-list {
+.secondaryPillButton:hover {
+  background: #e8e8ed;
+  transform: scale(1.02);
+}
+
+.secondaryPillButton:active {
+  transform: scale(0.98);
+}
+
+.appleChevronLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.35rem;
+  color: var(--apple-blue);
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+
+.appleChevronLink:hover span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.chevron {
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.appleChevronLink:hover .chevron {
+  transform: translateX(4px);
+}
+
+.dockList {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 2.25rem;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 2.5rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: rgba(245, 245, 247, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.social-item {
-  opacity: 0;
-  animation: socialPopIn 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(520ms + (var(--social-index, 0) * 80ms));
-}
-
-.social-link {
+.dockItem {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.55rem;
-  height: 2.55rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-secondary-btn-bg);
-  color: var(--color-text-secondary);
-  box-shadow: var(--color-secondary-btn-shadow);
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--apple-text-primary);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
   transition:
-    transform var(--transition-base),
-    border-color var(--transition-base),
-    color var(--transition-base),
-    background-color var(--transition-base),
-    box-shadow var(--transition-base);
+    transform 280ms var(--ease-apple-spring),
+    color var(--transition-fast),
+    box-shadow 280ms var(--ease-apple-spring);
 }
 
-.social-link i {
-  font-size: 1rem;
+.dockItem:hover {
+  transform: translateY(-4px) scale(1.12);
+  color: var(--apple-blue);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.09);
 }
 
-.social-link:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-border-hover);
-  background: var(--color-primary-light);
-  color: var(--color-social-hover-text);
-  box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.28);
-}
-
-@media screen and (max-width: 900px) {
-  .main-content {
-    padding: 7.5rem 1.25rem 3rem;
-    min-height: auto;
+@media (prefers-reduced-motion: reduce) {
+  .heroInner {
+    transform: none;
+    opacity: 1;
   }
 
-  .main-content::before {
-    display: none;
+  .heroStagger1,
+  .heroStagger2,
+  .heroStagger3,
+  .heroStagger4,
+  .heroStagger5,
+  .heroStagger6 {
+    opacity: 1;
+    animation: none;
   }
 }
 
-@media screen and (max-width: 520px) {
-  .actions {
+@media screen and (max-width: 640px) {
+  .heroSection {
+    padding: 7rem 1.25rem 4.25rem;
+  }
+
+  .ctaGroup {
     flex-direction: column;
     width: 100%;
   }
 
-  .button,
-  .button-secondary {
+  .primaryPillButton,
+  .secondaryPillButton {
     width: 100%;
   }
 }

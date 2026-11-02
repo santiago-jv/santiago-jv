@@ -24,6 +24,7 @@
       "@/components/*": ["components/*"],
       "@/context/*": ["context/*"],
       "@/data/*": ["data/*"],
+      "@/hooks/*": ["hooks/*"],
       "@/layout/*": ["layout/*"],
       "@/styles/*": ["styles/*"],
       "@/public/*": ["public/*"],

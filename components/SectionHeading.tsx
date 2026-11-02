@@ -7,13 +7,10 @@ interface SectionHeadingProps {
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({ content }) => {
   return (
-    <div className={styles.sectionHeader}>
-      <h2 className={styles.sectionTitle}>
-        <span className={styles.sectionNumber}>{content.number}</span>
-        {content.title}
-      </h2>
-      {content.subtitle && <h3 className={styles.sectionSubtitle}>{content.subtitle}</h3>}
-      {content.description && <p className={styles.sectionDescription}>{content.description}</p>}
+    <div className={styles.sectionHeader} data-apple-reveal>
+      <p className={styles.eyebrow}>{content.title}</p>
+      {content.subtitle && <h2 className={styles.headline}>{content.subtitle}.</h2>}
+      {content.description && <p className={styles.description}>{content.description}</p>}
     </div>
   );
 };

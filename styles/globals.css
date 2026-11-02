@@ -1,163 +1,55 @@
 :root {
-  --color-primary: #6366f1;
-  --color-primary-bright: #818cf8;
-  --color-primary-light: rgba(99, 102, 241, 0.14);
-  --color-primary-border: rgba(99, 102, 241, 0.3);
+  /* Apple Cupertino Daylight Palette (Light Mode Only) */
+  --apple-bg-white: #ffffff;
+  --apple-bg-stone: #f5f5f7;
+  --apple-bg-nav: rgba(251, 251, 253, 0.78);
 
-  --color-background: #07090e;
-  --color-background-secondary: #0c1018;
-  --color-surface: rgba(15, 21, 35, 0.72);
-  --color-surface-elevated: rgba(22, 30, 48, 0.85);
-  --color-surface-subtle: rgba(255, 255, 255, 0.03);
-  --color-surface-subtle-hover: rgba(255, 255, 255, 0.06);
+  --apple-text-primary: #1d1d1f;
+  --apple-text-secondary: #6e6e73;
+  --apple-text-tertiary: #86868b;
 
-  --color-header-bg: rgba(10, 14, 24, 0.78);
-  --color-header-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
-  --color-drawer-bg: #090d16;
-  --color-backdrop: rgba(3, 6, 12, 0.65);
-  --color-footer-bg: rgba(7, 9, 14, 0.92);
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-blue-active: #0068d1;
+  --apple-blue-tint: rgba(0, 113, 227, 0.08);
+  --apple-blue-focus: rgba(0, 113, 227, 0.2);
 
-  --color-input-bg: rgba(7, 9, 14, 0.65);
-  --color-input-focus-bg: rgba(12, 16, 26, 0.92);
+  --apple-green: #1d8348;
+  --apple-green-tint: rgba(29, 131, 72, 0.09);
+  --apple-red: #d70015;
+  --apple-red-tint: rgba(215, 0, 21, 0.08);
 
-  --color-secondary-btn-bg: rgba(15, 21, 35, 0.65);
-  --color-secondary-btn-hover-bg: rgba(24, 33, 54, 0.85);
-  --color-secondary-btn-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  --apple-border: rgba(0, 0, 0, 0.07);
+  --apple-border-strong: rgba(0, 0, 0, 0.12);
+  --apple-hairline: #d2d2d7;
 
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-subtle: rgba(255, 255, 255, 0.06);
-  --color-border-hover: rgba(129, 140, 248, 0.38);
+  /* Native Apple SF Pro stack first on macOS/iOS, clean fallback elsewhere */
+  --font-family-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'SF Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
 
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-text-pill: #cbd5e1;
-  --color-text-pill-hover: #ffffff;
-  --color-social-hover-text: #ffffff;
-  --color-text-muted: #64748b;
+  /* Radii */
+  --radius-bento: 28px;
+  --radius-card: 22px;
+  --radius-control: 14px;
+  --radius-pill: 980px;
 
-  --color-accent: #10b981;
-  --color-accent-bright: #34d399;
-  --color-accent-light: rgba(16, 185, 129, 0.14);
-  --color-accent-border: rgba(16, 185, 129, 0.3);
+  /* Elevation */
+  --shadow-bento: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-bento-hover: 0 22px 48px rgba(0, 0, 0, 0.085), 0 4px 14px rgba(0, 0, 0, 0.03);
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.035);
 
-  --color-success: #10b981;
-  --color-success-light: rgba(16, 185, 129, 0.12);
-  --color-danger: #f87171;
-  --color-danger-light: rgba(248, 113, 113, 0.12);
+  /* Signature Apple Physics Curves */
+  --ease-apple-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-apple-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-apple-snappy: cubic-bezier(0.32, 0.72, 0, 1);
 
-  --gradient-heading: linear-gradient(180deg, #ffffff 15%, #cbd5e1 100%);
-  --gradient-subtitle: linear-gradient(92deg, #818cf8 0%, #38bdf8 52%, #34d399 100%);
-  --gradient-cta: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-
-  --bg-radial-top: rgba(99, 102, 241, 0.16);
-  --bg-radial-side: rgba(16, 185, 129, 0.08);
-  --bg-grid-line: rgba(255, 255, 255, 0.018);
-  --aura-primary: rgba(99, 102, 241, 0.22);
-  --aura-accent: rgba(16, 185, 129, 0.14);
-
-  --shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-  --shadow-card-hover: 0 20px 44px -10px rgba(0, 0, 0, 0.65), 0 0 28px -6px rgba(99, 102, 241, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
-
-  --selection-bg: rgba(99, 102, 241, 0.32);
-  --selection-text: #ffffff;
-
-  --font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-family-mono: 'JetBrains Mono', monospace;
-
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-
-  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-base: 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 420ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  --radius-sm: 0.375rem;
-  --radius-base: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-full: 9999px;
+  --transition-fast: 200ms var(--ease-apple-snappy);
+  --transition-base: 380ms var(--ease-apple-spring);
+  --transition-slow: 720ms var(--ease-apple-spring);
 
   --z-sticky: 1020;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-primary: #4f46e5;
-    --color-primary-bright: #4338ca;
-    --color-primary-light: rgba(79, 70, 229, 0.085);
-    --color-primary-border: rgba(79, 70, 229, 0.24);
-
-    --color-background: #f8fafc;
-    --color-background-secondary: #f1f5f9;
-    --color-surface: rgba(255, 255, 255, 0.88);
-    --color-surface-elevated: rgba(255, 255, 255, 0.96);
-    --color-surface-subtle: rgba(15, 23, 42, 0.035);
-    --color-surface-subtle-hover: rgba(79, 70, 229, 0.075);
-
-    --color-header-bg: rgba(255, 255, 255, 0.84);
-    --color-header-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.09), 0 1px 2px 0 rgba(15, 23, 42, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-    --color-drawer-bg: #ffffff;
-    --color-backdrop: rgba(15, 23, 42, 0.32);
-    --color-footer-bg: rgba(248, 250, 252, 0.94);
-
-    --color-input-bg: #ffffff;
-    --color-input-focus-bg: #ffffff;
-
-    --color-secondary-btn-bg: rgba(255, 255, 255, 0.92);
-    --color-secondary-btn-hover-bg: #ffffff;
-    --color-secondary-btn-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.06), inset 0 1px 0 0 #ffffff;
-
-    --color-border: rgba(15, 23, 42, 0.09);
-    --color-border-subtle: rgba(15, 23, 42, 0.065);
-    --color-border-hover: rgba(79, 70, 229, 0.4);
-
-    --color-text-primary: #0f172a;
-    --color-text-secondary: #475569;
-    --color-text-pill: #334155;
-    --color-text-pill-hover: #0f172a;
-    --color-social-hover-text: #4338ca;
-    --color-text-muted: #64748b;
-
-    --color-accent: #059669;
-    --color-accent-bright: #047857;
-    --color-accent-light: rgba(5, 150, 105, 0.09);
-    --color-accent-border: rgba(5, 150, 105, 0.26);
-
-    --color-success: #059669;
-    --color-success-light: rgba(5, 150, 105, 0.1);
-    --color-danger: #dc2626;
-    --color-danger-light: rgba(220, 38, 38, 0.1);
-
-    --gradient-heading: linear-gradient(180deg, #0f172a 15%, #334155 100%);
-    --gradient-subtitle: linear-gradient(92deg, #4f46e5 0%, #0284c7 52%, #059669 100%);
-    --gradient-cta: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-
-    --bg-radial-top: rgba(79, 70, 229, 0.09);
-    --bg-radial-side: rgba(5, 150, 105, 0.055);
-    --bg-grid-line: rgba(15, 23, 42, 0.032);
-    --aura-primary: rgba(79, 70, 229, 0.12);
-    --aura-accent: rgba(5, 150, 105, 0.08);
-
-    --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.07), 0 1px 2px 0 rgba(15, 23, 42, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-    --shadow-card-hover: 0 20px 40px -12px rgba(15, 23, 42, 0.12), 0 0 24px -8px rgba(79, 70, 229, 0.15), inset 0 1px 0 0 #ffffff;
-
-    --selection-bg: rgba(79, 70, 229, 0.18);
-    --selection-text: #0f172a;
-  }
+  --hero-progress: 0;
 }
 
 *,
@@ -170,37 +62,26 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  html {
-    color-scheme: light;
-  }
+  color-scheme: light;
+  background-color: var(--apple-bg-white);
 }
 
 body {
   font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  line-height: 1.65;
-  color: var(--color-text-primary);
-  background-color: var(--color-background);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -15%, var(--bg-radial-top), transparent),
-    radial-gradient(ellipse 50% 40% at 85% 20%, var(--bg-radial-side), transparent),
-    linear-gradient(var(--bg-grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bg-grid-line) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-  background-attachment: fixed;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.012em;
+  color: var(--apple-text-primary);
+  background-color: var(--apple-bg-white);
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: var(--selection-bg);
-  color: var(--selection-text);
+  background: rgba(0, 113, 227, 0.16);
+  color: var(--apple-text-primary);
 }
 
 a {
@@ -213,9 +94,8 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--color-primary-bright);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
+  outline: none;
+  box-shadow: 0 0 0 4px var(--apple-blue-focus);
 }
 
 button {
@@ -232,7 +112,35 @@ ol {
 
 i {
   color: inherit;
-  transition: color var(--transition-base);
+}
+
+/* Apple Scroll-Triggered Choreographed Reveal */
+[data-apple-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.985);
+  filter: blur(6px);
+  transition:
+    opacity 760ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
+    transform 540ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
+    filter 760ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
+    box-shadow 480ms var(--ease-apple-spring),
+    border-color 300ms var(--ease-apple-snappy);
+  will-change: opacity, transform, filter;
+}
+
+[data-apple-reveal='visible'] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-apple-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
 }
 
 .sr-only {

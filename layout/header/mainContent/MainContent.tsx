@@ -2,96 +2,110 @@ import type { CSSProperties } from 'react';
 import styles from './main-content.module.css';
 import { usePreferences } from '@/context/PreferencesContext';
 
+function splitLeadSentence(text: string): { lead: string; rest: string } {
+  const dotIdx = text.indexOf('. ');
+  if (dotIdx === -1) {
+    return { lead: text, rest: '' };
+  }
+  return {
+    lead: text.slice(0, dotIdx + 1),
+    rest: text.slice(dotIdx + 1),
+  };
+}
+
 const MainContent: React.FC = () => {
-  const { content } = usePreferences();
+  const { locale, content } = usePreferences();
   const hero = content.hero;
+  const { lead, rest } = splitLeadSentence(hero.summary);
+
+  const eyebrowLabel =
+    locale === 'es'
+      ? 'Ingeniero de Software · Backend, Cloud e IA'
+      : 'Software Engineer · Backend, Cloud & AI Tooling';
 
   return (
-    <main id="about" className={styles['main-content']}>
-      <p className={`${styles['greeting-text']} ${styles.introItem} ${styles.delay1}`}>
-        {hero.greeting}
-      </p>
+    <main id="about" className={styles.heroSection}>
+      <div className={styles.heroAmbient} aria-hidden="true" />
 
-      <h1 className={`${styles.title} ${styles.introItem} ${styles.delay2}`}>
-        {hero.name}
-      </h1>
+      <div className={styles.heroInner}>
+        <div className={`${styles.eyebrowPill} ${styles.heroStagger1}`}>
+          <span className={styles.eyebrowDot} aria-hidden="true" />
+          <span>{eyebrowLabel}</span>
+        </div>
 
-      <h2 className={`${styles.subtitle} ${styles.introItem} ${styles.delay2}`}>
-        {hero.role}
-      </h2>
+        <h1 className={`${styles.displayTitle} ${styles.heroStagger2}`}>
+          {hero.name}
+        </h1>
 
-      <div className={`${styles.information} ${styles.introItem} ${styles.delay3}`}>
-        <p className={styles.description}>{hero.summary}</p>
-      </div>
+        <p className={`${styles.editorialLead} ${styles.heroStagger3}`}>
+          <strong className={styles.leadPrimary}>{lead}</strong>{' '}
+          {rest && <span className={styles.leadSecondary}>{rest}</span>}
+        </p>
 
-      <ul
-        className={`${styles.highlightsRow} ${styles.introItem} ${styles.delay3}`}
-        aria-label={hero.coreStackAriaLabel}
-      >
-        {hero.highlights.map((item) => (
-          <li key={item} className={styles.highlightPill}>
-            {item}
-          </li>
-        ))}
-      </ul>
-
-      <div className={`${styles.actions} ${styles.introItem} ${styles.delay4}`}>
-        <a
-          href={hero.primaryCta.href}
-          download={hero.primaryCta.download}
-          target={hero.primaryCta.href.startsWith('http') ? '_blank' : undefined}
-          rel={hero.primaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-          className={styles.button}
-          aria-label={hero.primaryCta.label}
+        <ul
+          className={`${styles.specPills} ${styles.heroStagger4}`}
+          aria-label={hero.coreStackAriaLabel}
         >
-          {hero.primaryCta.iconClassName && (
-            <i className={`${hero.primaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
-          )}
-          {hero.primaryCta.label}
-        </a>
+          {hero.highlights.map((item) => (
+            <li key={item} className={styles.specPill}>
+              {item}
+            </li>
+          ))}
+        </ul>
 
-        <a
-          href={hero.secondaryCta.href}
-          target={hero.secondaryCta.href.startsWith('http') ? '_blank' : undefined}
-          rel={hero.secondaryCta.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-          className={styles['button-secondary']}
-        >
-          {hero.secondaryCta.iconClassName && (
-            <i className={`${hero.secondaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
-          )}
-          {hero.secondaryCta.label}
-        </a>
-
-        {hero.tertiaryCta && (
-          <a href={hero.tertiaryCta.href} className={styles['button-secondary']}>
-            {hero.tertiaryCta.iconClassName && (
-              <i className={`${hero.tertiaryCta.iconClassName} ${styles.ctaIcon}`} aria-hidden="true"></i>
-            )}
-            {hero.tertiaryCta.label}
-          </a>
-        )}
-      </div>
-
-      <ul className={`${styles['social-list']} ${styles.delay5}`} aria-label={hero.socialLinksAriaLabel}>
-        {hero.socialLinks.map((social, index) => (
-          <li
-            key={social.platform}
-            className={styles['social-item']}
-            style={{ '--social-index': index } as CSSProperties}
+        <div className={`${styles.ctaGroup} ${styles.heroStagger5}`}>
+          <a
+            href={hero.primaryCta.href}
+            download={hero.primaryCta.download}
+            className={styles.primaryPillButton}
+            aria-label={hero.primaryCta.label}
           >
-            <a
-              href={social.href}
-              target={social.href.startsWith('http') ? '_blank' : '_self'}
-              rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-              className={styles['social-link']}
-              aria-label={social.label}
-              title={social.label}
-            >
-              <i className={social.iconClassName} aria-hidden="true"></i>
+            {hero.primaryCta.label}
+          </a>
+
+          <a
+            href={hero.secondaryCta.href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={styles.secondaryPillButton}
+          >
+            <i className={hero.secondaryCta.iconClassName} aria-hidden="true" />
+            {hero.secondaryCta.label}
+          </a>
+
+          {hero.tertiaryCta && (
+            <a href={hero.tertiaryCta.href} className={styles.appleChevronLink}>
+              <span>{hero.tertiaryCta.label}</span>
+              <span className={styles.chevron} aria-hidden="true">
+                ›
+              </span>
             </a>
-          </li>
-        ))}
-      </ul>
+          )}
+        </div>
+
+        <ul
+          className={`${styles.dockList} ${styles.heroStagger6}`}
+          aria-label={hero.socialLinksAriaLabel}
+        >
+          {hero.socialLinks.map((social, index) => (
+            <li
+              key={social.platform}
+              style={{ '--dock-idx': index } as CSSProperties}
+            >
+              <a
+                href={social.href}
+                target={social.href.startsWith('http') ? '_blank' : '_self'}
+                rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                className={styles.dockItem}
+                aria-label={social.label}
+                title={social.label}
+              >
+                <i className={social.iconClassName} aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </main>
   );
 };

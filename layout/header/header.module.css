@@ -4,12 +4,17 @@
   left: 0;
   right: 0;
   z-index: var(--z-sticky);
-  padding: 1rem 5%;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   opacity: 0;
-  transform: translate3d(0, -14px, 0);
-  transition: transform var(--transition-base), opacity var(--transition-base);
-  will-change: transform, opacity;
-  pointer-events: none;
+  transform: translate3d(0, -10px, 0);
+  transition:
+    opacity 520ms var(--ease-apple-spring),
+    transform 520ms var(--ease-apple-spring),
+    background-color 260ms ease,
+    border-color 260ms ease;
 }
 
 .header--ready {
@@ -17,29 +22,19 @@
   transform: translate3d(0, 0, 0);
 }
 
-.header--hidden {
-  transform: translate3d(0, -120%, 0);
+.header--scrolled {
+  background: rgba(251, 251, 253, 0.84);
+  border-bottom-color: rgba(0, 0, 0, 0.09);
 }
 
 .headerInner {
-  max-width: 1160px;
+  max-width: 1024px;
   margin: 0 auto;
-  height: 3.75rem;
+  height: 52px;
+  padding: 0 1.5rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 1.35rem;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  background: var(--color-header-bg);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow: var(--color-header-shadow);
-  pointer-events: auto;
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    box-shadow var(--transition-base);
+  justify-content: space-between;
 }
 
 .brandLink {
@@ -48,29 +43,41 @@
   flex-shrink: 0;
 }
 
-.logo {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.1rem;
-  font-family: var(--font-family-mono);
-  font-size: 1.15rem;
+.wordmark {
+  font-family: var(--font-family-display);
+  font-size: 1.02rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  letter-spacing: -0.024em;
+  color: var(--apple-text-primary);
+  transition: opacity var(--transition-fast);
 }
 
-.logoText {
-  color: var(--color-text-primary);
-  transition: color var(--transition-fast);
+.brandLink:hover .wordmark {
+  opacity: 0.7;
 }
 
-.brandLink:hover .logoText {
-  color: var(--color-primary-bright);
+.desktopCtaWrapper {
+  display: none;
 }
 
-.logoAccent {
-  color: var(--color-primary-bright);
-  font-weight: 600;
+.progressTrack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1.5px;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.progressBar {
+  width: 100%;
+  height: 100%;
+  background: var(--apple-blue);
+  transform-origin: left center;
+  transform: scaleX(var(--page-progress, 0));
+  opacity: 0.85;
 }
 
 .header__menu-button,
@@ -78,18 +85,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: var(--radius-full);
-  color: var(--color-text-primary);
-  font-size: 1.15rem;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  color: var(--apple-text-primary);
+  font-size: 1rem;
+  transition: background-color var(--transition-fast);
 }
 
 .header__menu-button:hover,
 .navbar__close-icon:hover {
-  background: var(--color-surface-subtle-hover);
-  color: var(--color-primary-bright);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .header__navbar {
@@ -103,10 +109,11 @@
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  background: var(--color-drawer-bg);
-  border-left: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px);
+  border-left: 1px solid var(--apple-border);
   transform: translate3d(105%, 0, 0);
-  transition: transform var(--transition-slow), background-color var(--transition-base);
+  transition: transform 480ms var(--ease-apple-snappy);
   will-change: transform;
 }
 
@@ -120,85 +127,69 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--apple-border);
 }
 
 .navbar__title {
-  color: var(--color-text-secondary);
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-xs);
+  color: var(--apple-text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
 }
 
 .navbar__items {
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-.navbar__item {
-  list-style: none;
+  gap: 0.25rem;
 }
 
 .navbar__link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   width: 100%;
-  padding: 0.85rem 1rem;
-  border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
-  font-size: 0.92rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  color: var(--apple-text-primary);
+  font-size: 1rem;
   font-weight: 500;
-  white-space: nowrap;
-  transition: color var(--transition-fast), background-color var(--transition-fast);
-}
-
-.navIndex {
-  color: var(--color-primary-bright);
-  font-family: var(--font-family-mono);
-  font-size: 0.78rem;
+  letter-spacing: -0.015em;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
 .navbar__item:hover .navbar__link {
-  color: var(--color-text-primary);
-  background: var(--color-surface-subtle-hover);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .navbar__ctaItem {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
 }
 
 .resumeButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  width: 100%;
-  padding: 0.65rem 1rem;
-  border-radius: var(--radius-full);
-  background: var(--color-primary-light);
-  border: 1px solid var(--color-primary-border);
-  color: var(--color-primary-bright);
-  font-family: var(--font-family-mono);
-  font-size: 0.82rem;
-  font-weight: 600;
+  padding: 0.42rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: var(--apple-blue);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   transition:
     background-color var(--transition-fast),
-    border-color var(--transition-fast),
-    color var(--transition-fast),
     transform var(--transition-fast);
 }
 
 .resumeButton:hover {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #ffffff;
-  transform: translateY(-1px);
+  background: var(--apple-blue-hover);
+}
+
+.resumeButton:active {
+  transform: scale(0.97);
 }
 
 .background {
@@ -211,20 +202,19 @@
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  cursor: pointer;
-  background: var(--color-backdrop);
-  backdrop-filter: blur(4px);
-  transition: opacity var(--transition-slow), visibility 0s linear var(--transition-slow);
+  background: rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(6px);
+  transition: opacity 380ms ease, visibility 0s linear 380ms;
 }
 
 .background--show {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
-  transition: opacity var(--transition-slow);
+  transition: opacity 380ms ease;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 860px) {
   .header__navbar {
     position: static;
     transform: none;
@@ -234,52 +224,42 @@
     display: block;
     padding: 0;
     background: transparent;
+    backdrop-filter: none;
     border: none;
     transition: none;
   }
 
   .header__menu-button,
   .navbar__header,
+  .navbar__ctaItem,
   .background {
     display: none;
+  }
+
+  .desktopCtaWrapper {
+    display: flex;
+    align-items: center;
   }
 
   .navbar__items {
     margin-top: 0;
     flex-direction: row;
     align-items: center;
-    gap: 0.35rem;
+    gap: 1.75rem;
   }
 
   .navbar__link {
     width: auto;
-    padding: 0.5rem 0.9rem;
-    border-radius: var(--radius-full);
-    font-size: 0.88rem;
+    padding: 0.25rem 0;
+    border-radius: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgba(29, 29, 31, 0.8);
+    letter-spacing: -0.005em;
   }
 
-  .navbar__ctaItem {
-    margin-top: 0;
-    margin-left: 0.5rem;
-  }
-
-  .resumeButton {
-    width: auto;
-    padding: 0.5rem 1.05rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .header {
-    padding: 0.75rem 1rem;
-  }
-
-  .headerInner {
-    height: 3.35rem;
-    padding: 0 1rem;
-  }
-
-  .logo {
-    font-size: 1.02rem;
+  .navbar__item:hover .navbar__link {
+    background: transparent;
+    color: var(--apple-text-primary);
   }
 }

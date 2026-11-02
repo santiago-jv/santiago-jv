@@ -1,53 +1,37 @@
 .sectionHeader {
-  margin-bottom: 3.25rem;
+  margin-bottom: 3.5rem;
+  max-width: 46rem;
 }
 
-.sectionTitle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.65rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-primary-border);
-  background: var(--color-primary-light);
-  color: var(--color-primary-bright);
-  font-family: var(--font-family-mono);
-  font-size: 0.78rem;
+.eyebrow {
+  margin-bottom: 0.55rem;
+  color: var(--apple-blue);
+  font-family: var(--font-family-display);
+  font-size: 0.88rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: -0.01em;
 }
 
-.sectionNumber {
-  color: var(--color-accent-bright);
+.headline {
+  margin: 0 0 0.85rem 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(2.15rem, 4.8vw, 3.35rem);
+  font-weight: 700;
+  letter-spacing: -0.038em;
+  line-height: 1.08;
+  color: var(--apple-text-primary);
 }
 
-.sectionSubtitle {
-  margin-bottom: 0.9rem;
-  font-size: clamp(1.9rem, 4vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  background: var(--gradient-heading);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.description {
+  margin: 0;
+  color: var(--apple-text-secondary);
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.52;
+  letter-spacing: -0.016em;
 }
 
-.sectionDescription {
-  max-width: 44rem;
-  color: var(--color-text-secondary);
-  font-size: 1.05rem;
-  line-height: 1.72;
-}
-
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
   .sectionHeader {
     margin-bottom: 2.5rem;
-  }
-
-  .sectionDescription {
-    font-size: 0.98rem;
   }
 }
