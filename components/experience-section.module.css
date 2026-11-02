@@ -35,7 +35,7 @@
   inset: 0;
   background: radial-gradient(
     560px circle at var(--spot-x, 20%) var(--spot-y, 0%),
-    rgba(0, 113, 227, 0.045),
+    rgba(29, 29, 31, 0.04),
     transparent 65%
   );
   opacity: 0;
@@ -79,8 +79,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--apple-green);
-  box-shadow: 0 0 0 3px var(--apple-green-tint);
+  background: var(--apple-accent);
+  box-shadow: 0 0 0 3px rgba(29, 29, 31, 0.12);
 }
 
 .companyName {
@@ -98,7 +98,7 @@
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: -0.012em;
-  color: var(--apple-blue);
+  color: var(--apple-text-secondary);
   margin-bottom: 10px;
 }
 
@@ -158,9 +158,9 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--apple-blue);
+  background: var(--apple-accent);
   margin-top: 9px;
-  opacity: 0.78;
+  opacity: 0.65;
 }
 
 .techList {
@@ -185,8 +185,8 @@
 }
 
 .techBadge:hover {
-  background: var(--apple-blue-tint);
-  color: var(--apple-blue);
+  background: var(--apple-accent);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 

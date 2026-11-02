@@ -1,0 +1,549 @@
+.stageWrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 3.4rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.macbookScene {
+  --lid-angle: -18deg;
+  --open-ratio: 0.85;
+  --screen-wake: 1;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --sheen-x: 50%;
+
+  width: 100%;
+  max-width: 780px;
+  perspective: 1650px;
+  perspective-origin: 50% 42%;
+  padding: 12px 16px 26px;
+}
+
+.macbookRig {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform:
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y))
+    scale(calc(0.93 + var(--open-ratio) * 0.07));
+  transition: transform 260ms var(--ease-apple-smooth);
+}
+
+/* =========================================================
+   3D DISPLAY LID ASSEMBLY
+   ========================================================= */
+.lidAssembly {
+  position: relative;
+  width: 86%;
+  aspect-ratio: 16 / 10.2;
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  transform: rotateX(var(--lid-angle));
+  will-change: transform;
+  z-index: 3;
+}
+
+/* Outer Space Black Lid Cover (visible when closed < -90deg) */
+.lidOuterCover {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px 20px 6px 6px;
+  background: linear-gradient(160deg, #27272a 0%, #17171a 52%, #0d0d0f 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.18);
+  transform: rotateX(180deg) translateZ(1px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lidOuterGlint {
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    115deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 64%
+  );
+  transform: translateX(calc((var(--open-ratio) - 0.5) * 60%));
+}
+
+.lidOuterMonogram {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-family-display);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner Liquid Retina XDR Screen */
+.lidInnerScreen {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px 20px 6px 6px;
+  background: #09090b;
+  padding: 11px 11px 20px;
+  border: 2px solid #262629;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 18px 44px rgba(0, 0, 0, 0.18);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bezelSheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    112deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.055) var(--sheen-x, 50%),
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cameraNotch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78px;
+  height: 15px;
+  background: #09090b;
+  border-radius: 0 0 8px 8px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cameraLens {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a3950 0%, #0f131a 75%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.retinaViewport {
+  flex: 1;
+  border-radius: 11px 11px 4px 4px;
+  background: radial-gradient(ellipse 90% 80% at 50% 15%, #19191d 0%, #0d0d10 68%, #09090b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  opacity: var(--screen-wake, 1);
+  filter: brightness(calc(0.45 + var(--screen-wake, 1) * 0.55));
+  transition: opacity 180ms linear;
+}
+
+.macosMenuBar {
+  height: 26px;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: #d2d2d7;
+}
+
+.menuLeft,
+.menuRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trafficDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.menuTitle {
+  margin-left: 6px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #f5f5f7;
+}
+
+.livePulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f5f5f7;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.75);
+  animation: pulseGlow 2.2s ease-in-out infinite;
+}
+
+.menuStatusText {
+  font-family: var(--font-family-mono);
+  font-size: 9.5px;
+  color: #a1a1a6;
+}
+
+/* Vector Motion Graph */
+.vectorCanvas {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px 0;
+}
+
+.flowSvg {
+  width: 100%;
+  height: auto;
+  max-height: 230px;
+}
+
+@keyframes beamFlow {
+  0% {
+    stroke-dashoffset: 220;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.animatedBeam1,
+.animatedBeam2,
+.animatedBeam3 {
+  stroke-dasharray: 46 174;
+  animation: beamFlow 2.4s linear infinite;
+}
+
+.animatedBeam2 {
+  animation-delay: 0.45s;
+}
+
+.animatedBeam3 {
+  animation-delay: 0.95s;
+}
+
+.orbitRing {
+  transform-origin: 372px 135px;
+  animation: orbitSpin 22s linear infinite;
+}
+
+.ambientCorePulse {
+  transform-origin: 372px 135px;
+  animation: pulseGlow 3.6s ease-in-out infinite;
+}
+
+.nodePulseDot {
+  transform-origin: 22px 28px;
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Bottom Telemetry Strip */
+.telemetryStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px 12px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.telemetryCard {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.telemetryLabel {
+  font-size: 9.5px;
+  color: #86868b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.telemetryValue {
+  font-family: var(--font-family-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #f5f5f7;
+  white-space: nowrap;
+}
+
+.chinWordmark {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+/* =========================================================
+   3D HINGE & ANODIZED SPACE BLACK BASE DECK
+   ========================================================= */
+.hingeBarrel {
+  width: 72%;
+  height: 7px;
+  background: linear-gradient(180deg, #09090b 0%, #2c2c30 48%, #111113 100%);
+  border-radius: 2px;
+  z-index: 4;
+}
+
+.baseAssembly {
+  position: relative;
+  width: 98%;
+  transform-style: preserve-3d;
+  transform-origin: 50% 0%;
+  transform: rotateX(74deg);
+  z-index: 2;
+}
+
+.baseDeckSurface {
+  width: 100%;
+  height: 150px;
+  border-radius: 6px 6px 18px 18px;
+  background: linear-gradient(180deg, #232326 0%, #19191c 58%, #2a2a2e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 12px 26px 10px;
+  display: grid;
+  grid-template-columns: 22px 1fr 22px;
+  grid-template-rows: 1fr 38px;
+  gap: 8px 12px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.12);
+}
+
+.speakerGrille {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.65) 0.75px, transparent 0.75px);
+  background-size: 3px 3px;
+  border-radius: 4px;
+  opacity: 0.65;
+}
+
+.keyboardWell {
+  background: #0d0d0f;
+  border-radius: 6px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.keyRow {
+  display: block;
+  width: 100%;
+  height: 14px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #19191d 0px,
+    #19191d 22px,
+    #0b0b0d 22px,
+    #0b0b0d 25px
+  );
+  box-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.07);
+}
+
+.trackpadWell {
+  grid-column: 1 / -1;
+  width: 34%;
+  height: 100%;
+  justify-self: center;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Front CNC Aluminum Lip (Positioned at front edge of rotated base) */
+.baseFrontEdge {
+  width: 100%;
+  height: 13px;
+  background: linear-gradient(
+    90deg,
+    #141416 0%,
+    #323236 16%,
+    #1f1f23 50%,
+    #323236 84%,
+    #141416 100%
+  );
+  border-radius: 0 0 12px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  transform-origin: 50% 0%;
+  transform: rotateX(-74deg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.thumbScoopNotch {
+  width: 13%;
+  height: 5px;
+  background: #0f0f12;
+  border-radius: 0 0 6px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: none;
+}
+
+.studioFloorShadow {
+  width: 88%;
+  height: 32px;
+  margin-top: -102px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.26) 0%,
+    rgba(0, 0, 0, 0.1) 48%,
+    rgba(0, 0, 0, 0) 76%
+  );
+  filter: blur(12px);
+  transform: scaleX(calc(0.88 + var(--open-ratio) * 0.14));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================================
+   CAPTION & REPLAY PILL
+   ========================================================= */
+.stageFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.stageCaption {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--apple-text-tertiary);
+  letter-spacing: -0.01em;
+}
+
+.replayButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: var(--radius-pill);
+  background: var(--apple-bg-stone);
+  border: 1px solid var(--apple-border);
+  color: var(--apple-text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.replayButton:hover:not(:disabled) {
+  background: #e8e8ed;
+  transform: scale(1.03);
+}
+
+.replayButton:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.replayButton:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.replayButton i {
+  font-size: 10.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animatedBeam1,
+  .animatedBeam2,
+  .animatedBeam3,
+  .orbitRing,
+  .ambientCorePulse,
+  .nodePulseDot,
+  .livePulseDot {
+    animation: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .stageWrapper {
+    margin-top: 2.4rem;
+  }
+
+  .lidAssembly {
+    width: 94%;
+  }
+
+  .telemetryStrip {
+    display: none;
+  }
+
+  .baseDeckSurface {
+    height: 105px;
+    padding: 8px 14px;
+  }
+
+  .studioFloorShadow {
+    margin-top: -72px;
+  }
+}

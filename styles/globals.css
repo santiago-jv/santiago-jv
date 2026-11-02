@@ -1,26 +1,32 @@
 :root {
-  /* Apple Cupertino Daylight Palette (Light Mode Only) */
+  /* Apple Cupertino Space Black & Daylight Palette (Light Mode Only) */
   --apple-bg-white: #ffffff;
   --apple-bg-stone: #f5f5f7;
-  --apple-bg-nav: rgba(251, 251, 253, 0.78);
+  --apple-bg-nav: rgba(255, 255, 255, 0.78);
 
   --apple-text-primary: #1d1d1f;
   --apple-text-secondary: #6e6e73;
   --apple-text-tertiary: #86868b;
 
-  --apple-blue: #0071e3;
-  --apple-blue-hover: #0077ed;
-  --apple-blue-active: #0068d1;
-  --apple-blue-tint: rgba(0, 113, 227, 0.08);
-  --apple-blue-focus: rgba(0, 113, 227, 0.2);
+  /* Apple Space Black Accent System (Replaces Apple Blue) */
+  --apple-accent: #1d1d1f;
+  --apple-accent-hover: #333336;
+  --apple-accent-active: #000000;
+  --apple-accent-tint: rgba(29, 29, 31, 0.065);
+  --apple-accent-focus: rgba(29, 29, 31, 0.16);
+
+  /* Anodized Space Black Hardware Tokens */
+  --apple-obsidian: #121214;
+  --apple-obsidian-elevated: #1c1c1f;
+  --apple-titanium-rim: rgba(255, 255, 255, 0.14);
 
   --apple-green: #1d8348;
   --apple-green-tint: rgba(29, 131, 72, 0.09);
   --apple-red: #d70015;
   --apple-red-tint: rgba(215, 0, 21, 0.08);
 
-  --apple-border: rgba(0, 0, 0, 0.07);
-  --apple-border-strong: rgba(0, 0, 0, 0.12);
+  --apple-border: rgba(0, 0, 0, 0.075);
+  --apple-border-strong: rgba(0, 0, 0, 0.14);
   --apple-hairline: #d2d2d7;
 
   /* Native Apple SF Pro stack first on macOS/iOS, clean fallback elsewhere */
@@ -36,7 +42,7 @@
 
   /* Elevation */
   --shadow-bento: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-bento-hover: 0 22px 48px rgba(0, 0, 0, 0.085), 0 4px 14px rgba(0, 0, 0, 0.03);
+  --shadow-bento-hover: 0 22px 48px rgba(0, 0, 0, 0.09), 0 4px 14px rgba(0, 0, 0, 0.035);
   --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.035);
 
   /* Signature Apple Physics Curves */
@@ -80,7 +86,7 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 113, 227, 0.16);
+  background: rgba(29, 29, 31, 0.14);
   color: var(--apple-text-primary);
 }
 
@@ -95,7 +101,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 4px var(--apple-blue-focus);
+  box-shadow: 0 0 0 4px var(--apple-accent-focus);
 }
 
 button {

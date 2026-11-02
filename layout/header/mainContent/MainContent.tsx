@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 import styles from './main-content.module.css';
 import { usePreferences } from '@/context/PreferencesContext';
+import MacBookShowcase from '@/components/MacBookShowcase';
 
 function splitLeadSentence(text: string): { lead: string; rest: string } {
   const dotIdx = text.indexOf('. ');
@@ -106,6 +107,8 @@ const MainContent: React.FC = () => {
           ))}
         </ul>
       </div>
+
+      <MacBookShowcase />
     </main>
   );
 };

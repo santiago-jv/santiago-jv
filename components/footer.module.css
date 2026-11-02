@@ -123,8 +123,8 @@
 }
 
 .socialButton:hover {
-  background: var(--apple-bg-white);
-  color: var(--apple-blue);
+  background: var(--apple-accent);
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -172,7 +172,7 @@
 }
 
 .sourceLink:hover {
-  color: var(--apple-blue);
+  color: var(--apple-accent);
 }
 
 @media (max-width: 900px) {

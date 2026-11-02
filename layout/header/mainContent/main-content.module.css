@@ -1,7 +1,7 @@
 .heroSection {
   position: relative;
   background: var(--apple-bg-white);
-  padding: 9.5rem 1.5rem 6.5rem;
+  padding: 8.8rem 1.5rem 5.5rem;
   overflow: hidden;
 }
 
@@ -14,8 +14,8 @@
   height: 520px;
   background: radial-gradient(
     ellipse 68% 58% at 50% 24%,
-    rgba(0, 113, 227, 0.065) 0%,
-    rgba(120, 148, 255, 0.03) 42%,
+    rgba(29, 29, 31, 0.05) 0%,
+    rgba(134, 134, 139, 0.025) 44%,
     rgba(255, 255, 255, 0) 76%
   );
   pointer-events: none;
@@ -29,11 +29,6 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transform: translate3d(0, calc(var(--hero-progress, 0) * -22px), 0)
-    scale(calc(1 - (var(--hero-progress, 0) * 0.03)));
-  opacity: calc(1 - (var(--hero-progress, 0) * 0.45));
-  transform-origin: center top;
-  will-change: transform, opacity;
 }
 
 @keyframes appleHeroReveal {
@@ -60,22 +55,22 @@
 }
 
 .heroStagger1 {
-  animation-delay: 60ms;
+  animation-delay: 50ms;
 }
 .heroStagger2 {
-  animation-delay: 150ms;
+  animation-delay: 130ms;
 }
 .heroStagger3 {
-  animation-delay: 250ms;
+  animation-delay: 210ms;
 }
 .heroStagger4 {
-  animation-delay: 350ms;
+  animation-delay: 290ms;
 }
 .heroStagger5 {
-  animation-delay: 450ms;
+  animation-delay: 370ms;
 }
 .heroStagger6 {
-  animation-delay: 540ms;
+  animation-delay: 440ms;
 }
 
 .eyebrowPill {
@@ -85,24 +80,24 @@
   padding: 0.4rem 0.95rem;
   border-radius: var(--radius-pill);
   background: var(--apple-bg-stone);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   color: var(--apple-text-primary);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.35rem;
 }
 
 .eyebrowDot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--apple-blue);
+  background: var(--apple-accent);
 }
 
 .displayTitle {
   font-family: var(--font-family-display);
-  font-size: clamp(3.15rem, 7.6vw, 5.65rem);
+  font-size: clamp(3.15rem, 7.4vw, 5.5rem);
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.03;
@@ -111,10 +106,10 @@
 }
 
 .editorialLead {
-  margin-top: 1.65rem;
+  margin-top: 1.5rem;
   max-width: 46rem;
   font-family: var(--font-family-display);
-  font-size: clamp(1.18rem, 2.2vw, 1.52rem);
+  font-size: clamp(1.15rem, 2.1vw, 1.48rem);
   line-height: 1.44;
   letter-spacing: -0.022em;
 }
@@ -135,7 +130,7 @@
   justify-content: center;
   gap: 0.5rem;
   max-width: 48rem;
-  margin-top: 2rem;
+  margin-top: 1.75rem;
 }
 
 .specPill {
@@ -147,6 +142,7 @@
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+  border: 1px solid rgba(0, 0, 0, 0.04);
   transition:
     transform var(--transition-fast),
     background-color var(--transition-fast),
@@ -155,7 +151,8 @@
 
 .specPill:hover {
   transform: translateY(-2px);
-  background: #ebebf0;
+  background: var(--apple-accent);
+  color: #ffffff;
 }
 
 .ctaGroup {
@@ -164,7 +161,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.9rem 1.15rem;
-  margin-top: 2.5rem;
+  margin-top: 2.15rem;
 }
 
 .primaryPillButton,
@@ -174,7 +171,7 @@
   justify-content: center;
   gap: 0.5rem;
   min-height: 2.95rem;
-  padding: 0.72rem 1.55rem;
+  padding: 0.72rem 1.6rem;
   border-radius: var(--radius-pill);
   font-size: 0.98rem;
   font-weight: 500;
@@ -186,24 +183,26 @@
 }
 
 .primaryPillButton {
-  background: var(--apple-blue);
+  background: var(--apple-accent);
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(0, 113, 227, 0.22);
+  box-shadow: 0 8px 22px rgba(29, 29, 31, 0.18);
 }
 
 .primaryPillButton:hover {
-  background: var(--apple-blue-hover);
+  background: var(--apple-accent-hover);
   transform: scale(1.02);
-  box-shadow: 0 10px 26px rgba(0, 113, 227, 0.28);
+  box-shadow: 0 12px 28px rgba(29, 29, 31, 0.24);
 }
 
 .primaryPillButton:active {
+  background: var(--apple-accent-active);
   transform: scale(0.98);
 }
 
 .secondaryPillButton {
   background: var(--apple-bg-stone);
   color: var(--apple-text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .secondaryPillButton:hover {
@@ -220,7 +219,7 @@
   align-items: center;
   gap: 0.3rem;
   padding: 0.4rem 0.35rem;
-  color: var(--apple-blue);
+  color: var(--apple-text-primary);
   font-size: 0.98rem;
   font-weight: 500;
   letter-spacing: -0.012em;
@@ -246,11 +245,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   padding: 0.45rem 0.65rem;
   border-radius: var(--radius-pill);
-  background: rgba(245, 245, 247, 0.85);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(245, 245, 247, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .dockItem {
@@ -266,22 +265,19 @@
   font-size: 0.95rem;
   transition:
     transform 280ms var(--ease-apple-spring),
+    background-color var(--transition-fast),
     color var(--transition-fast),
     box-shadow 280ms var(--ease-apple-spring);
 }
 
 .dockItem:hover {
   transform: translateY(-4px) scale(1.12);
-  color: var(--apple-blue);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.09);
+  background: var(--apple-accent);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroInner {
-    transform: none;
-    opacity: 1;
-  }
-
   .heroStagger1,
   .heroStagger2,
   .heroStagger3,
@@ -295,7 +291,7 @@
 
 @media screen and (max-width: 640px) {
   .heroSection {
-    padding: 7rem 1.25rem 4.25rem;
+    padding: 6.8rem 1.25rem 3.75rem;
   }
 
   .ctaGroup {

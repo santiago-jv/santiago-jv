@@ -28,10 +28,12 @@
   background: var(--apple-bg-stone);
 }
 
+/* Signature Apple Anodized Space Black Pro Accent Tile */
 .bentoCompactAccent {
   grid-column: span 5;
-  background: linear-gradient(150deg, #f1f7fe 0%, #e6f0fc 100%);
-  border-color: rgba(0, 113, 227, 0.13);
+  background: linear-gradient(155deg, #222226 0%, #141417 55%, #0c0c0e 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #f5f5f7;
 }
 
 .bentoCompactNeutral {
@@ -58,10 +60,23 @@
   transition: opacity 340ms var(--ease-apple-snappy);
 }
 
+.bentoCompactAccent::before {
+  background: radial-gradient(
+    460px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    rgba(255, 255, 255, 0.1),
+    transparent 65%
+  );
+}
+
 .bentoTile:hover {
   transform: translate3d(0, -5px, 0) scale(1.008);
   box-shadow: var(--shadow-bento-hover);
   border-color: var(--apple-border-strong);
+}
+
+.bentoCompactAccent:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.24);
 }
 
 .bentoTile:hover::before {
@@ -108,10 +123,10 @@
 }
 
 .iconSquircleAccent {
-  background: var(--apple-blue);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 8px 20px rgba(0, 113, 227, 0.26);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
 }
 
 .statusEyebrow {
@@ -126,9 +141,9 @@
 }
 
 .statusEyebrowAccent {
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--apple-blue);
-  border-color: rgba(0, 113, 227, 0.14);
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .tileBody {
@@ -146,11 +161,19 @@
   color: var(--apple-text-primary);
 }
 
+.bentoCompactAccent .tileTitle {
+  color: #ffffff;
+}
+
 .tileDescription {
   font-size: 15.5px;
   line-height: 1.58;
   letter-spacing: -0.01em;
   color: var(--apple-text-secondary);
+}
+
+.bentoCompactAccent .tileDescription {
+  color: #a1a1a6;
 }
 
 .tileTechList {
@@ -171,6 +194,13 @@
   letter-spacing: -0.008em;
   border: 1px solid rgba(0, 0, 0, 0.055);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.bentoCompactAccent .tileTechPill {
+  background: rgba(255, 255, 255, 0.09);
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: none;
 }
 
 @media (max-width: 920px) {

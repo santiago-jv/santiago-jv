@@ -5,11 +5,12 @@
 
 .eyebrow {
   margin-bottom: 0.55rem;
-  color: var(--apple-blue);
+  color: var(--apple-text-secondary);
   font-family: var(--font-family-display);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
 }
 
 .headline {

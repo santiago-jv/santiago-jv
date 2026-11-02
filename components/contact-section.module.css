@@ -35,7 +35,7 @@
   inset: 0;
   background: radial-gradient(
     480px circle at var(--spot-x, 30%) var(--spot-y, 0%),
-    rgba(0, 113, 227, 0.04),
+    rgba(29, 29, 31, 0.035),
     transparent 65%
   );
   opacity: 0;
@@ -108,8 +108,8 @@
 }
 
 .channelRowLink:hover .channelIcon {
-  background-color: var(--apple-blue-tint);
-  color: var(--apple-blue);
+  background-color: var(--apple-accent);
+  color: #ffffff;
 }
 
 .channelMeta {
@@ -147,7 +147,7 @@
 
 .channelRowLink:hover .rowChevron {
   transform: translateX(3px);
-  color: var(--apple-blue);
+  color: var(--apple-accent);
 }
 
 .form {
@@ -201,8 +201,8 @@
 .formInput:focus {
   outline: none;
   background-color: var(--apple-bg-white);
-  border-color: var(--apple-blue);
-  box-shadow: 0 0 0 4px var(--apple-blue-focus);
+  border-color: var(--apple-accent);
+  box-shadow: 0 0 0 4px var(--apple-accent-focus);
 }
 
 .formInput:disabled {
@@ -251,12 +251,12 @@
   justify-content: center;
   padding: 13px 28px;
   border-radius: var(--radius-pill);
-  background: var(--apple-blue);
+  background: var(--apple-accent);
   color: #ffffff;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  box-shadow: 0 6px 18px rgba(0, 113, 227, 0.22);
+  box-shadow: 0 6px 18px rgba(29, 29, 31, 0.16);
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast),
@@ -264,13 +264,13 @@
 }
 
 .submitButton:hover:not(:disabled) {
-  background: var(--apple-blue-hover);
+  background: var(--apple-accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0, 113, 227, 0.28);
+  box-shadow: 0 10px 24px rgba(29, 29, 31, 0.22);
 }
 
 .submitButton:active:not(:disabled) {
-  background: var(--apple-blue-active);
+  background: var(--apple-accent-active);
   transform: scale(0.985);
 }
 
@@ -305,7 +305,7 @@
   gap: 6px;
   font-size: 15.5px;
   font-weight: 600;
-  color: var(--apple-blue);
+  color: var(--apple-accent);
   letter-spacing: -0.012em;
 }
 

@@ -48,6 +48,14 @@ const Header: React.FC = () => {
       >
         <div className={styles.headerInner}>
           <a href="#about" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
+            <img
+              src="/favicon.svg?v=space-black"
+              alt=""
+              width={22}
+              height={22}
+              className={styles.brandMark}
+              aria-hidden="true"
+            />
             <span className={styles.wordmark}>Santiago Olayo</span>
           </a>
 

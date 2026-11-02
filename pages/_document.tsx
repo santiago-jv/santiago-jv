@@ -15,7 +15,7 @@ export default function Document(): JSX.Element {
   return (
     <Html lang="en">
       <Head>
-        <meta name="theme-color" content="#fbfbfd" />
+        <meta name="theme-color" content="#ffffff" />
         <script dangerouslySetInnerHTML={{ __html: INITIAL_LOCALE_SCRIPT }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -30,8 +30,9 @@ export default function Document(): JSX.Element {
           referrerPolicy="no-referrer"
         />
 
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=space-black" />
+        <link rel="shortcut icon" href="/favicon.svg?v=space-black" />
+        <link rel="apple-touch-icon" href="/favicon.svg?v=space-black" />
       </Head>
       <body>
         <Main />

@@ -8,11 +8,9 @@
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  opacity: 0;
-  transform: translate3d(0, -10px, 0);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
   transition:
-    opacity 520ms var(--ease-apple-spring),
-    transform 520ms var(--ease-apple-spring),
     background-color 260ms ease,
     border-color 260ms ease;
 }
@@ -40,7 +38,15 @@
 .brandLink {
   display: inline-flex;
   align-items: center;
+  gap: 0.55rem;
   flex-shrink: 0;
+}
+
+.brandMark {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: block;
 }
 
 .wordmark {
@@ -74,10 +80,10 @@
 .progressBar {
   width: 100%;
   height: 100%;
-  background: var(--apple-blue);
+  background: var(--apple-accent);
   transform-origin: left center;
   transform: scaleX(var(--page-progress, 0));
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .header__menu-button,
@@ -171,9 +177,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.42rem 0.95rem;
+  padding: 0.42rem 0.98rem;
   border-radius: var(--radius-pill);
-  background: var(--apple-blue);
+  background: var(--apple-accent);
   color: #ffffff;
   font-size: 0.78rem;
   font-weight: 500;
@@ -185,7 +191,7 @@
 }
 
 .resumeButton:hover {
-  background: var(--apple-blue-hover);
+  background: var(--apple-accent-hover);
 }
 
 .resumeButton:active {
