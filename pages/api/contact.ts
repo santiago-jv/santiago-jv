@@ -192,7 +192,11 @@ export default async function handler(
       return;
     }
 
-    res.status(503).json({ ok: false, code: 'DELIVERY_FAILED' });
+    res.status(503).json({
+      ok: false,
+      code: 'DELIVERY_FAILED',
+      message: 'RESEND_API_KEY is not defined in the server environment. Please redeploy in Vercel to apply the environment variable.',
+    });
     return;
   }
 
