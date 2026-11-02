@@ -115,7 +115,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     },
     experiences: [
       {
-        role: 'Product Owner Engineer / Backend Engineer',
+        role: 'Backend Engineer',
         company: 'GoodRec',
         period: 'Jan 2025 – Present',
         location: 'Remote',
@@ -199,7 +199,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         title: 'End-to-End Product Delivery',
         description:
           'Working directly with product, operations, support, and finance to scope problems, design practical technical solutions, ship across backend and mobile, and iterate after release.',
-        tech: ['Product Ownership', 'Technical Design', 'Hexagonal / DDD', 'CI/CD'],
+        tech: ['Feature Ownership', 'Technical Design', 'Hexagonal / DDD', 'CI/CD'],
         status: 'Execution',
         iconClassName: 'fa-solid fa-layer-group',
       },
@@ -360,7 +360,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     },
     experiences: [
       {
-        role: 'Product Owner Engineer / Backend Engineer',
+        role: 'Backend Engineer',
         company: 'GoodRec',
         period: 'Ene 2025 – Actualidad',
         location: 'Remoto',
@@ -444,7 +444,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         title: 'Entrega de Producto de Punta a Punta',
         description:
           'Trabajo directo con producto, operaciones, soporte y finanzas para aterrizar problemas, diseñar soluciones técnicas prácticas, desplegar en backend y móvil, e iterar después del lanzamiento.',
-        tech: ['Product Ownership', 'Diseño Técnico', 'Hexagonal / DDD', 'CI/CD'],
+        tech: ['Feature Ownership', 'Diseño Técnico', 'Hexagonal / DDD', 'CI/CD'],
         status: 'Ejecución',
         iconClassName: 'fa-solid fa-layer-group',
       },

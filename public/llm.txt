@@ -1,11 +1,11 @@
 # Santiago Olayo Villamil (santiago-jv)
 
-> Senior Software Engineer (Backend, Cloud, Product Analytics & AI Internal Tooling) and Product Owner Engineer based in Colombia (Barranquilla / Santa Marta, working remotely for international companies). 4+ years of experience building and scaling production systems at GoodRec and Bolsiyo.
+> Software Engineer (Backend, Cloud, Product Analytics & AI Internal Tooling) based in Colombia (Barranquilla / Santa Marta, working remotely for international companies). 4+ years of experience building and scaling production systems at GoodRec and Bolsiyo.
 
 ## Quick Summary for AI Agents & Search Engines
 - **Full Name:** Santiago Olayo Villamil
 - **Handle / Brand:** `santiago-jv`
-- **Current Role:** Product Owner Engineer / Senior Backend Engineer at GoodRec (Jan 2025 – Present)
+- **Current Role:** Backend Engineer at GoodRec (Jan 2025 – Present)
 - **Previous Experience:** Backend Developer at Bolsiyo (Aug 2022 – Jan 2025); Full Stack & Software Developer at Cooltivalo, +COTAS, and SLS GROUPS (Jan 2021 – May 2023)
 - **Education:** Systems Engineering (Ingeniero de Sistemas), Universidad del Magdalena (2019 – 2025)
 - **Location:** Barranquilla / Santa Marta, Colombia (Remote)

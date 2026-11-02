@@ -16,7 +16,7 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
       '@type': 'Person',
       name: 'Santiago Olayo Villamil',
       alternateName: ['Santiago Olayo', 'santiago-jv', 'santiagojv_tech'],
-      jobTitle: 'Senior Software Engineer & Product Owner Engineer',
+      jobTitle: 'Software Engineer',
       description: seo.description,
       url: seo.siteUrl,
       email: 'mailto:contact@santiago-jv.tech',
@@ -54,7 +54,7 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         'Datadog',
         'CleverTap',
         'Metabase',
-        'Product Ownership',
+        'Feature Ownership',
       ],
       sameAs: [
         'https://www.linkedin.com/in/santiago-jv',
@@ -72,7 +72,7 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         <meta name="author" content="Santiago Olayo Villamil (santiago-jv)" />
         <meta
           name="keywords"
-          content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Senior Backend Engineer, Senior Full Stack Engineer, Product Owner Engineer, AI Engineer, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare AI Gateway, Datadog, CleverTap, Metabase, AWS, Colombia"
+          content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Backend Engineer, Software Engineer, Cloud Infrastructure, AI Internal Tooling, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare AI Gateway, Datadog, CleverTap, Metabase, AWS, Colombia"
         />
         <meta
           name="robots"
