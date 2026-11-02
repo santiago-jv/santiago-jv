@@ -42,11 +42,11 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
           {
             id: 'api-gw',
             title: 'AWS API Gateway',
-            subtitle: 'REST · GraphQL · Edge',
-            roleTag: 'Ingress Layer',
+            subtitle: 'Cloudflare · DNS · REST',
+            roleTag: 'DNS & Ingress',
             summary:
-              'Edge routing, request validation, auth, and traffic control across client and partner APIs.',
-            chips: ['AWS API Gateway', 'Cloudflare', 'REST / GraphQL'],
+              'Cloudflare DNS management and perimeter protection paired with AWS API Gateway routing, auth, and traffic control.',
+            chips: ['Cloudflare & DNS', 'AWS API Gateway', 'WAF / SSL', 'REST APIs'],
           },
           {
             id: 'ecs-core',
@@ -229,11 +229,11 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
           {
             id: 'api-gw',
             title: 'AWS API Gateway',
-            subtitle: 'REST · GraphQL · Edge',
-            roleTag: 'Capa de Entrada',
+            subtitle: 'Cloudflare · DNS · REST',
+            roleTag: 'DNS y Entrada',
             summary:
-              'Enrutamiento en el borde, validación de contratos, seguridad y control de tráfico hacia APIs.',
-            chips: ['AWS API Gateway', 'Cloudflare', 'REST / GraphQL'],
+              'Gestión de DNS y seguridad perimetral en Cloudflare junto con enrutamiento, auth y control de tráfico en AWS API Gateway.',
+            chips: ['Cloudflare & DNS', 'AWS API Gateway', 'WAF / SSL', 'REST APIs'],
           },
           {
             id: 'ecs-core',
