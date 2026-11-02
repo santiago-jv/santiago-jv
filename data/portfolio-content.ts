@@ -83,19 +83,17 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       name: 'Santiago Olayo',
       role: 'Software Engineer',
       summary:
-        'I have 4+ years of experience building and improving products for startups and international companies. I work across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.',
+        'Backend systems, cloud infrastructure, and AI workflows. 4+ years shipping products for global teams.',
       coreStackAriaLabel: 'Core stack',
       socialLinksAriaLabel: 'Social links',
       highlights: [
         'TypeScript',
-        'Node.js',
         'NestJS',
         'Spring Boot',
         'PostgreSQL',
         'Redis',
         'AWS',
-        'Hexagonal / DDD',
-        'AI & MCP Tooling',
+        'MCP & AI',
       ],
       primaryCta: {
         label: 'Download CV',
@@ -120,7 +118,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       title: 'Experience',
       subtitle: "Where I've Worked",
       description:
-        'I work closely with product, operations, support, and finance to understand their needs and take features from idea to production.',
+        'Partnering with product, ops, and finance to take features from idea to production.',
     },
     experiences: [
       {
@@ -177,7 +175,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       title: 'What I Work On',
       subtitle: 'Systems & Day-to-Day Engineering',
       description:
-        'A closer look at the backend systems, internal tooling, and product infrastructure I build and maintain.',
+        'Backend architecture, internal AI tooling, and observability I build day to day.',
     },
     projects: [
       {
@@ -219,7 +217,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         title: 'Contact',
         subtitle: 'Get In Touch',
         description:
-          'If you want to chat about backend engineering, internal tools, or a project, feel free to send me a message.',
+          'Want to chat about backend engineering, internal tools, or a project? Send me a note.',
       },
       introTitle: 'Links & Contact',
       formTitle: 'Send a Message',
@@ -329,19 +327,17 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       name: 'Santiago Olayo',
       role: 'Ingeniero de Software',
       summary:
-        'Tengo más de 4 años de experiencia construyendo y mejorando productos para startups y empresas internacionales. Trabajo en desarrollo backend, infraestructura cloud, analítica de producto y herramientas internas, enfocado en resolver problemas reales de negocio y hacer que los sistemas y procesos funcionen mejor.',
+        'Sistemas backend, infraestructura cloud y flujos con IA. 4+ años escalando productos en equipos globales.',
       coreStackAriaLabel: 'Tecnologías principales',
       socialLinksAriaLabel: 'Enlaces sociales',
       highlights: [
         'TypeScript',
-        'Node.js',
         'NestJS',
         'Spring Boot',
         'PostgreSQL',
         'Redis',
         'AWS',
-        'Arquitectura Hexagonal / DDD',
-        'Tooling con IA y MCP',
+        'MCP & IA',
       ],
       primaryCta: {
         label: 'Descargar CV',
@@ -366,7 +362,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       title: 'Experiencia',
       subtitle: 'Dónde he trabajado',
       description:
-        'Trabajo de cerca con producto, operaciones, soporte y finanzas para entender sus necesidades y llevar funcionalidades desde la idea hasta producción.',
+        'De la idea a producción junto a producto, operaciones y finanzas.',
     },
     experiences: [
       {
@@ -423,7 +419,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       title: 'En qué trabajo',
       subtitle: 'Sistemas e ingeniería del día a día',
       description:
-        'Un vistazo más cercano a los servicios backend, herramientas internas e infraestructura de producto que construyo y mantengo.',
+        'Arquitectura backend, tooling con IA y observabilidad que construyo día a día.',
     },
     projects: [
       {
@@ -465,7 +461,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         title: 'Contacto',
         subtitle: 'Hablemos',
         description:
-          'Si quieres conversar sobre ingeniería backend, herramientas internas o algún proyecto, escríbeme con confianza.',
+          '¿Quieres conversar sobre ingeniería backend, IA o algún proyecto? Escríbeme.',
       },
       introTitle: 'Enlaces y Contacto',
       formTitle: 'Envía un mensaje',

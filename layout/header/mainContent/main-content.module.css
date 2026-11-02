@@ -1,7 +1,7 @@
 .heroSection {
   position: relative;
   background: var(--apple-bg-white);
-  padding: 8.8rem 1.5rem 5.5rem;
+  padding: 7.2rem 1.5rem 5rem;
   overflow: hidden;
 }
 
@@ -106,20 +106,23 @@
 }
 
 .editorialLead {
-  margin-top: 1.5rem;
-  max-width: 46rem;
+  margin-top: 1.2rem;
+  max-width: 48rem;
   font-family: var(--font-family-display);
-  font-size: clamp(1.15rem, 2.1vw, 1.48rem);
-  line-height: 1.44;
-  letter-spacing: -0.022em;
+  font-size: clamp(1.16rem, 2.05vw, 1.44rem);
+  line-height: 1.42;
+  letter-spacing: -0.024em;
+  text-wrap: balance;
 }
 
 .leadPrimary {
+  display: block;
   color: var(--apple-text-primary);
   font-weight: 600;
 }
 
 .leadSecondary {
+  display: block;
   color: var(--apple-text-secondary);
   font-weight: 400;
 }
