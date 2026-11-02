@@ -51,9 +51,9 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
   en: {
     seo: {
       siteUrl: 'https://www.santiago-jv.tech/',
-      title: 'Santiago Olayo | Software Engineer',
+      title: 'Santiago Olayo | Senior Software Engineer',
       description:
-        'Software Engineer with 4+ years of experience building and improving products across backend development, cloud infrastructure, product analytics, and internal tools.',
+        'Senior Software Engineer with 4+ years of experience building and improving products across backend development, cloud infrastructure, product analytics, and internal tools.',
       ogImage: '/images/og-image.svg',
       ogLocale: 'en_US',
     },
@@ -75,7 +75,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     hero: {
       greeting: 'Hi, my name is',
       name: 'Santiago Olayo',
-      role: 'Software Engineer',
+      role: 'Senior Software Engineer',
       summary:
         'Backend systems, cloud infrastructure, and AI workflows. 4+ years shipping products for global teams.',
       coreStackAriaLabel: 'Core focus areas',
@@ -115,7 +115,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     },
     experiences: [
       {
-        role: 'Backend Engineer',
+        role: 'Fullstack Engineer',
         company: 'GoodRec',
         period: 'Jan 2025 – Present',
         location: 'Remote',
@@ -296,9 +296,9 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
   es: {
     seo: {
       siteUrl: 'https://www.santiago-jv.tech/',
-      title: 'Santiago Olayo | Ingeniero de Software',
+      title: 'Santiago Olayo | Senior Software Engineer',
       description:
-        'Ingeniero de Software con más de 4 años de experiencia construyendo y mejorando productos en desarrollo backend, infraestructura cloud, analítica de producto y herramientas internas.',
+        'Senior Software Engineer con más de 4 años de experiencia construyendo y mejorando productos en desarrollo backend, infraestructura cloud, analítica de producto y herramientas internas.',
       ogImage: '/images/og-image.svg',
       ogLocale: 'es_CO',
     },
@@ -320,7 +320,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     hero: {
       greeting: 'Hola, mi nombre es',
       name: 'Santiago Olayo',
-      role: 'Ingeniero de Software',
+      role: 'Senior Software Engineer',
       summary:
         'Sistemas backend, infraestructura cloud y flujos con IA. 4+ años escalando productos en equipos globales.',
       coreStackAriaLabel: 'Áreas clave de enfoque',
@@ -360,7 +360,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     },
     experiences: [
       {
-        role: 'Backend Engineer',
+        role: 'Fullstack Engineer',
         company: 'GoodRec',
         period: 'Ene 2025 – Actualidad',
         location: 'Remoto',
