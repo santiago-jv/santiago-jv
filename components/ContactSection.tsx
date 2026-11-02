@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { usePreferences } from '@/context/PreferencesContext';
 import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
@@ -9,13 +9,17 @@ type ContactFormData = {
   email: string;
   subject: string;
   message: string;
+  website: string;
 };
+
+type SubmitFeedback = 'idle' | 'success' | 'dev-preview' | 'rate-limit' | 'validation' | 'error';
 
 const INITIAL_FORM_DATA: ContactFormData = {
   name: '',
   email: '',
   subject: '',
   message: '',
+  website: '',
 };
 
 const ContactSection: React.FC = () => {
@@ -25,32 +29,124 @@ const ContactSection: React.FC = () => {
 
   const [formData, setFormData] = useState<ContactFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<SubmitFeedback>('idle');
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const startedAtRef = useRef<number>(Date.now());
+  const copyTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    startedAtRef.current = Date.now();
+    return () => {
+      if (copyTimerRef.current) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopyValue = async (textToCopy: string): Promise<void> => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(textToCopy);
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = textToCopy;
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+      }
+
+      setCopiedEmail(true);
+      if (copyTimerRef.current) {
+        window.clearTimeout(copyTimerRef.current);
+      }
+      copyTimerRef.current = window.setTimeout(() => {
+        setCopiedEmail(false);
+      }, 2200);
+    } catch {
+      // Ignore clipboard permission restrictions gracefully
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
     setFormData((current) => ({ ...current, [name]: value }));
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      const mailtoSubject = encodeURIComponent(`${labels.mailtoPrefix} ${formData.subject}`);
-      const mailtoBody = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-      );
-      window.location.href = `mailto:contact@santiago-jv.tech?subject=${mailtoSubject}&body=${mailtoBody}`;
-      setFormData(INITIAL_FORM_DATA);
-      setSubmitStatus('success');
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          website: formData.website,
+          startedAt: startedAtRef.current,
+        }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (response.ok && data?.ok) {
+        setFormData(INITIAL_FORM_DATA);
+        startedAtRef.current = Date.now();
+        setSubmitStatus(data.mode === 'dev-preview' ? 'dev-preview' : 'success');
+        return;
+      }
+
+      if (response.status === 429 || data?.code === 'RATE_LIMITED') {
+        setSubmitStatus('rate-limit');
+        return;
+      }
+
+      if (response.status === 400 || data?.code === 'VALIDATION_ERROR') {
+        setSubmitStatus('validation');
+        return;
+      }
+
+      setSubmitStatus('error');
     } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const getFeedbackCopy = (): { text: string; isPositive: boolean } | null => {
+    switch (submitStatus) {
+      case 'success':
+        return { text: labels.successMessage, isPositive: true };
+      case 'dev-preview':
+        return { text: labels.devPreviewMessage, isPositive: true };
+      case 'rate-limit':
+        return { text: labels.rateLimitMessage, isPositive: false };
+      case 'validation':
+        return { text: labels.validationMessage, isPositive: false };
+      case 'error':
+        return { text: labels.errorMessage, isPositive: false };
+      default:
+        return null;
+    }
+  };
+
+  const feedback = getFeedbackCopy();
 
   return (
     <section id="contact" className={styles.contactSection}>
@@ -68,6 +164,35 @@ const ContactSection: React.FC = () => {
 
             <ul className={styles.channelList}>
               {contactContent.infoItems.map((item) => {
+                if (item.copyValue) {
+                  return (
+                    <li key={item.label} className={styles.channelItem}>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyValue(item.copyValue!)}
+                        className={styles.channelRowButton}
+                      >
+                        <div className={styles.channelIcon}>
+                          <i className={item.iconClassName} aria-hidden="true" />
+                        </div>
+
+                        <div className={styles.channelMeta}>
+                          <span className={styles.channelLabel}>{item.label}</span>
+                          <span className={styles.channelValue}>{item.value}</span>
+                        </div>
+
+                        <span
+                          className={`${styles.copyPill} ${
+                            copiedEmail ? styles.copyPillSuccess : ''
+                          }`}
+                        >
+                          {copiedEmail ? `✓ ${labels.copiedLabel}` : labels.copyActionLabel}
+                        </span>
+                      </button>
+                    </li>
+                  );
+                }
+
                 const inner = (
                   <>
                     <div className={styles.channelIcon}>
@@ -117,6 +242,20 @@ const ContactSection: React.FC = () => {
             <h3 className={styles.cardHeading}>{contactContent.formTitle}</h3>
 
             <form onSubmit={handleSubmit} className={styles.form}>
+              {/* Invisible anti-bot honeypot field */}
+              <div className={styles.honeypotField} aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
                   <label htmlFor="name" className={styles.formLabel}>
@@ -130,6 +269,8 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange}
                     className={styles.formInput}
                     required
+                    minLength={2}
+                    maxLength={80}
                     disabled={isSubmitting}
                     autoComplete="name"
                   />
@@ -147,6 +288,7 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange}
                     className={styles.formInput}
                     required
+                    maxLength={120}
                     disabled={isSubmitting}
                     autoComplete="email"
                   />
@@ -165,6 +307,8 @@ const ContactSection: React.FC = () => {
                   onChange={handleChange}
                   className={styles.formInput}
                   required
+                  minLength={2}
+                  maxLength={140}
                   disabled={isSubmitting}
                 />
               </div>
@@ -181,22 +325,20 @@ const ContactSection: React.FC = () => {
                   className={`${styles.formInput} ${styles.formTextarea}`}
                   rows={5}
                   required
+                  minLength={10}
+                  maxLength={3000}
                   disabled={isSubmitting}
                 />
               </div>
 
               <div className={styles.submitStatus} aria-live="polite">
-                {submitStatus === 'success' && (
-                  <p className={`${styles.submitMessage} ${styles.submitSuccess}`}>
-                    <i className="fa-solid fa-circle-check" aria-hidden="true" />
-                    {labels.successMessage}
-                  </p>
-                )}
-
-                {submitStatus === 'error' && (
-                  <p className={`${styles.submitMessage} ${styles.submitError}`}>
-                    <i className="fa-solid fa-circle-exclamation" aria-hidden="true" />
-                    {labels.errorMessage}
+                {feedback && (
+                  <p
+                    className={`${styles.submitMessage} ${
+                      feedback.isPositive ? styles.submitSuccess : styles.submitError
+                    }`}
+                  >
+                    <span>{feedback.text}</span>
                   </p>
                 )}
               </div>
@@ -208,20 +350,6 @@ const ContactSection: React.FC = () => {
               </div>
             </form>
           </div>
-        </div>
-
-        <div
-          className={styles.quickContactBanner}
-          data-apple-reveal
-          style={{ '--reveal-delay': '170ms' } as CSSProperties}
-        >
-          <p className={styles.quickContactText}>{labels.directPrompt}</p>
-          <a href={contactContent.quickActionHref} className={styles.directEmailLink}>
-            <span>{contactContent.quickActionLabel}</span>
-            <span className={styles.chevron} aria-hidden="true">
-              ›
-            </span>
-          </a>
         </div>
       </div>
     </section>

@@ -63,6 +63,7 @@ export interface ContactInfoItem {
   label: string;
   value: string;
   href?: string;
+  copyValue?: string;
   download?: string | boolean;
   iconClassName: string;
 }
@@ -75,17 +76,18 @@ export interface ContactFormLabels {
   sending: string;
   submit: string;
   successMessage: string;
+  devPreviewMessage: string;
+  rateLimitMessage: string;
+  validationMessage: string;
   errorMessage: string;
-  directPrompt: string;
-  mailtoPrefix: string;
+  copyActionLabel: string;
+  copiedLabel: string;
 }
 
 export interface ContactContent {
   heading: SectionHeadingContent;
   introTitle: string;
   formTitle: string;
-  quickActionLabel: string;
-  quickActionHref: string;
   infoItems: ContactInfoItem[];
   formLabels: ContactFormLabels;
 }

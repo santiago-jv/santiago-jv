@@ -75,7 +75,10 @@
 }
 
 .channelRowLink,
+.channelRowButton,
 .channelRowStatic {
+  width: calc(100% + 20px);
+  text-align: left;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -87,7 +90,8 @@
     transform var(--transition-fast);
 }
 
-.channelRowLink:hover {
+.channelRowLink:hover,
+.channelRowButton:hover {
   background-color: var(--apple-bg-stone);
 }
 
@@ -107,7 +111,8 @@
     color var(--transition-fast);
 }
 
-.channelRowLink:hover .channelIcon {
+.channelRowLink:hover .channelIcon,
+.channelRowButton:hover .channelIcon {
   background-color: var(--apple-accent);
   color: #ffffff;
 }
@@ -148,6 +153,45 @@
 .channelRowLink:hover .rowChevron {
   transform: translateX(3px);
   color: var(--apple-accent);
+}
+
+.copyPill {
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--apple-bg-stone);
+  border: 1px solid var(--apple-border);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--apple-text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.channelRowButton:hover .copyPill {
+  background: var(--apple-accent);
+  border-color: var(--apple-accent);
+  color: #ffffff;
+}
+
+.copyPillSuccess,
+.channelRowButton:hover .copyPillSuccess {
+  background: var(--apple-green-tint);
+  border-color: rgba(36, 138, 61, 0.25);
+  color: var(--apple-green);
+}
+
+.honeypotField {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .form {
@@ -279,51 +323,6 @@
   cursor: not-allowed;
 }
 
-.quickContactBanner {
-  margin-top: 20px;
-  padding: 22px 32px;
-  border-radius: 22px;
-  background: var(--apple-bg-white);
-  border: 1px solid var(--apple-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.quickContactText {
-  font-size: 15.5px;
-  font-weight: 500;
-  color: var(--apple-text-secondary);
-  letter-spacing: -0.01em;
-}
-
-.directEmailLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 15.5px;
-  font-weight: 600;
-  color: var(--apple-accent);
-  letter-spacing: -0.012em;
-}
-
-.directEmailLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.chevron {
-  font-size: 19px;
-  line-height: 1;
-  transition: transform var(--transition-fast);
-}
-
-.directEmailLink:hover .chevron {
-  transform: translateX(4px);
-}
-
 @media (max-width: 920px) {
   .contactSection {
     padding: 88px 0 80px;
@@ -356,11 +355,5 @@
 
   .submitButton {
     width: 100%;
-  }
-
-  .quickContactBanner {
-    padding: 20px 22px;
-    flex-direction: column;
-    align-items: flex-start;
   }
 }

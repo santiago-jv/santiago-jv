@@ -215,14 +215,12 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       },
       introTitle: 'Links & Contact',
       formTitle: 'Send a Message',
-      quickActionLabel: 'Send me an email',
-      quickActionHref: 'mailto:contact@santiago-jv.tech?subject=Hey%20Santiago!',
       infoItems: [
         {
           iconClassName: 'fa-regular fa-envelope',
           label: 'Email',
           value: 'contact@santiago-jv.tech',
-          href: 'mailto:contact@santiago-jv.tech',
+          copyValue: 'contact@santiago-jv.tech',
         },
         {
           iconClassName: 'fa-brands fa-linkedin-in',
@@ -257,10 +255,14 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         message: 'Message *',
         sending: 'Sending...',
         submit: 'Send Message',
-        successMessage: "Message sent successfully! I'll get back to you soon.",
-        errorMessage: 'Something went wrong. Please try again or email me directly.',
-        directPrompt: 'Prefer a direct approach?',
-        mailtoPrefix: '[Portfolio Contact]',
+        successMessage: "Message sent! I'll get back to you soon.",
+        devPreviewMessage:
+          'Validated locally (dev preview). Add RESEND_API_KEY in .env.local to send live emails.',
+        rateLimitMessage: 'Too many messages sent recently. Please try again in a few minutes.',
+        validationMessage: 'Please enter a valid email and at least 10 characters in your message.',
+        errorMessage: 'Could not send your message right now. Copy my email on the left to reach me.',
+        copyActionLabel: 'Copy',
+        copiedLabel: 'Copied',
       },
     },
     footer: {
@@ -459,14 +461,12 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       },
       introTitle: 'Enlaces y Contacto',
       formTitle: 'Envía un mensaje',
-      quickActionLabel: 'Envíame un correo',
-      quickActionHref: 'mailto:contact@santiago-jv.tech?subject=Hola%20Santiago!',
       infoItems: [
         {
           iconClassName: 'fa-regular fa-envelope',
           label: 'Correo',
           value: 'contact@santiago-jv.tech',
-          href: 'mailto:contact@santiago-jv.tech',
+          copyValue: 'contact@santiago-jv.tech',
         },
         {
           iconClassName: 'fa-brands fa-linkedin-in',
@@ -501,10 +501,14 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         message: 'Mensaje *',
         sending: 'Enviando...',
         submit: 'Enviar mensaje',
-        successMessage: '¡Mensaje listo para enviar! Te responderé pronto.',
-        errorMessage: 'Ocurrió un problema. Intenta de nuevo o escríbeme directamente por correo.',
-        directPrompt: '¿Prefieres escribirme directamente?',
-        mailtoPrefix: '[Contacto Portafolio]',
+        successMessage: '¡Mensaje enviado! Te responderé pronto.',
+        devPreviewMessage:
+          'Validado en local (modo preview). Agrega RESEND_API_KEY en .env.local para envío real.',
+        rateLimitMessage: 'Demasiados intentos recientes. Intenta nuevamente en unos minutos.',
+        validationMessage: 'Ingresa un correo válido y un mensaje de al menos 10 caracteres.',
+        errorMessage: 'No se pudo enviar en este momento. Puedes copiar mi correo a la izquierda.',
+        copyActionLabel: 'Copiar',
+        copiedLabel: 'Copiado',
       },
     },
     footer: {
