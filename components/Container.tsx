@@ -60,7 +60,6 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         'https://www.linkedin.com/in/santiago-jv',
         'https://github.com/santiago-jv',
         'https://x.com/santiagojv_tech',
-        'https://medium.com/@santiago-jv/',
       ],
     },
   };

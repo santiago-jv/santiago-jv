@@ -24,12 +24,6 @@ export const SHARED_SOCIAL_LINKS: SocialLink[] = [
     iconClassName: 'fa-brands fa-x-twitter',
   },
   {
-    platform: 'medium',
-    label: 'Medium (@santiago-jv)',
-    href: 'https://medium.com/@santiago-jv/',
-    iconClassName: 'fa-brands fa-medium',
-  },
-  {
     platform: 'email',
     label: 'Email (contact@santiago-jv.tech)',
     href: 'mailto:contact@santiago-jv.tech',
