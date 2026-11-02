@@ -23,7 +23,7 @@
 
 .heroInner {
   position: relative;
-  max-width: 920px;
+  max-width: 980px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  max-width: 48rem;
+  max-width: 60rem;
   margin-top: 1.75rem;
 }
 
