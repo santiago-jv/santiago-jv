@@ -10,7 +10,16 @@ export const config = {
 
 type ContactApiResponse =
   | { ok: true; mode: 'live' | 'dev-preview' }
-  | { ok: false; code: 'METHOD_NOT_ALLOWED' | 'FORBIDDEN' | 'RATE_LIMITED' | 'VALIDATION_ERROR' | 'DELIVERY_FAILED' };
+  | {
+      ok: false;
+      code:
+        | 'METHOD_NOT_ALLOWED'
+        | 'FORBIDDEN'
+        | 'RATE_LIMITED'
+        | 'VALIDATION_ERROR'
+        | 'DELIVERY_FAILED';
+      message?: string;
+    };
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 3;
@@ -230,7 +239,13 @@ export default async function handler(
     });
 
     if (!response.ok) {
-      res.status(502).json({ ok: false, code: 'DELIVERY_FAILED' });
+      const errorBody = await response.json().catch(() => null);
+      console.warn('[Contact API] Resend returned non-OK response:', response.status, errorBody);
+      res.status(502).json({
+        ok: false,
+        code: 'DELIVERY_FAILED',
+        message: errorBody?.message || 'Email delivery failed',
+      });
       return;
     }
 
