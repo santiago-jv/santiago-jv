@@ -78,7 +78,17 @@ const MainContent: React.FC = () => {
           </a>
 
           {hero.tertiaryCta && (
-            <a href={hero.tertiaryCta.href} className={styles.appleChevronLink}>
+            <a
+              href={hero.tertiaryCta.href}
+              className={styles.appleChevronLink}
+              onClick={(e) => {
+                if (hero.tertiaryCta?.href.startsWith('#')) {
+                  e.preventDefault();
+                  const target = document.querySelector(hero.tertiaryCta.href);
+                  target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               <span>{hero.tertiaryCta.label}</span>
               <span className={styles.chevron} aria-hidden="true">
                 ›
