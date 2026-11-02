@@ -235,6 +235,10 @@
 .clockText {
   font-weight: 500;
   color: #e5e5ea;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 40px;
+  text-align: right;
 }
 
 /* Main macOS Studio Window */
@@ -623,6 +627,11 @@
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.keyboardBacklight {
+  opacity: calc(0.08 + var(--screen-wake, 1) * 0.92);
+  transition: opacity 180ms linear;
 }
 
 .chassisExtrusionSlice {

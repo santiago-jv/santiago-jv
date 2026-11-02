@@ -1,7 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
 import { ARCHITECTURE_STUDIO_CONTENT } from '@/data/architecture-studio';
+import { MacBookKeyboardSvg } from './MacBookKeyboardSvg';
 import styles from './macbook-showcase.module.css';
+
+const formatVisitorLocalTime = (): string => {
+  try {
+    return new Intl.DateTimeFormat(undefined, {
+      hour: 'numeric',
+      minute: '2-digit',
+    }).format(new Date());
+  } catch {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const suffix = hours >= 12 ? 'PM' : 'AM';
+    const hour12 = hours % 12 || 12;
+    return `${hour12}:${minutes} ${suffix}`;
+  }
+};
 
 const CLOSED_ANGLE = -101;
 const INITIAL_OPEN_ANGLE = -12;
@@ -18,6 +35,20 @@ export const MacBookShowcase: React.FC = () => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const [selectedNodeIndex, setSelectedNodeIndex] = useState<number>(1);
   const [isReplaying, setIsReplaying] = useState(false);
+  const [localTime, setLocalTime] = useState<string>('');
+
+  useEffect(() => {
+    let timeoutId: number;
+
+    const tickClock = (): void => {
+      setLocalTime(formatVisitorLocalTime());
+      const msUntilNextMinute = 60000 - (Date.now() % 60000) + 60;
+      timeoutId = window.setTimeout(tickClock, msUntilNextMinute);
+    };
+
+    tickClock();
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   const studio = ARCHITECTURE_STUDIO_CONTENT[locale];
   const currentTab = studio.tabs[activeTabIndex] || studio.tabs[0];
@@ -259,7 +290,7 @@ export const MacBookShowcase: React.FC = () => {
                       <span className={styles.livePulseDot} />
                       {currentTab.statusBadge}
                     </span>
-                    <span className={styles.clockText}>9:41 AM</span>
+                    <span className={styles.clockText}>{localTime}</span>
                   </div>
                 </div>
 
@@ -428,143 +459,7 @@ export const MacBookShowcase: React.FC = () => {
              ========================================================= */}
           <div className={styles.baseAssembly} aria-hidden="true">
             <div className={styles.baseTopDeck}>
-              <svg
-                viewBox="0 0 680 434"
-                className={styles.topCaseSvg}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient
-                    id="deckAluminum"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="434"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stopColor="#1e1e22" />
-                    <stop offset="48%" stopColor="#252529" />
-                    <stop offset="100%" stopColor="#2e2e33" />
-                  </linearGradient>
-                  <pattern id="speakerDots" width="4" height="4" patternUnits="userSpaceOnUse">
-                    <circle cx="1.5" cy="1.5" r="0.85" fill="#09090b" opacity="0.82" />
-                  </pattern>
-                </defs>
-
-                <rect
-                  x="0.75"
-                  y="0.75"
-                  width="678.5"
-                  height="432.5"
-                  rx="22"
-                  fill="url(#deckAluminum)"
-                  stroke="rgba(255,255,255,0.16)"
-                  strokeWidth="1.5"
-                />
-
-                <rect x="86" y="4" width="508" height="7" rx="3" fill="#09090b" opacity="0.85" />
-
-                <rect x="20" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
-                <rect x="622" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
-
-                <rect
-                  x="68"
-                  y="28"
-                  width="544"
-                  height="226"
-                  rx="10"
-                  fill="#0b0b0d"
-                  stroke="rgba(255,255,255,0.08)"
-                  strokeWidth="1"
-                />
-
-                {/* Row 1: Esc + Function Keys + Touch ID */}
-                <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
-                  <rect x="76" y="35" width="46" height="24" rx="4" />
-                  {Array.from({ length: 12 }).map((_, idx) => (
-                    <rect key={`fn-${idx}`} x={126 + idx * 37} y="35" width="33" height="24" rx="4" />
-                  ))}
-                  <rect x="570" y="35" width="34" height="24" rx="4" />
-                  <circle
-                    cx="587"
-                    cy="47"
-                    r="7.5"
-                    fill="#111114"
-                    stroke="rgba(255,255,255,0.22)"
-                    strokeWidth="1"
-                  />
-                </g>
-
-                {/* Row 2: Number Row */}
-                <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
-                  {Array.from({ length: 13 }).map((_, idx) => (
-                    <rect key={`r2-${idx}`} x={76 + idx * 36.5} y="64" width="32.5" height="33" rx="4.5" />
-                  ))}
-                  <rect x="550.5" y="64" width="53.5" height="33" rx="4.5" />
-                </g>
-
-                {/* Row 3: Tab + QWERTY */}
-                <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
-                  <rect x="76" y="102" width="52" height="33" rx="4.5" />
-                  {Array.from({ length: 12 }).map((_, idx) => (
-                    <rect key={`r3-${idx}`} x={132 + idx * 36.3} y="102" width="32.3" height="33" rx="4.5" />
-                  ))}
-                  <rect x="568" y="102" width="36" height="33" rx="4.5" />
-                </g>
-
-                {/* Row 4: Caps + ASDF + Return */}
-                <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
-                  <rect x="76" y="140" width="62" height="33" rx="4.5" />
-                  {Array.from({ length: 11 }).map((_, idx) => (
-                    <rect key={`r4-${idx}`} x={142 + idx * 36.3} y="140" width="32.3" height="33" rx="4.5" />
-                  ))}
-                  <rect x="541.5" y="140" width="62.5" height="33" rx="4.5" />
-                </g>
-
-                {/* Row 5: Shift + ZXCV + Shift */}
-                <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
-                  <rect x="76" y="178" width="80" height="33" rx="4.5" />
-                  {Array.from({ length: 10 }).map((_, idx) => (
-                    <rect key={`r5-${idx}`} x={160 + idx * 36.3} y="178" width="32.3" height="33" rx="4.5" />
-                  ))}
-                  <rect x="523" y="178" width="81" height="33" rx="4.5" />
-                </g>
-
-                {/* Row 6: Modifiers + Spacebar + Arrows */}
-                <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
-                  <rect x="76" y="216" width="35" height="31" rx="4.5" />
-                  <rect x="115" y="216" width="35" height="31" rx="4.5" />
-                  <rect x="154" y="216" width="35" height="31" rx="4.5" />
-                  <rect x="193" y="216" width="46" height="31" rx="4.5" />
-                  <rect x="243" y="216" width="182" height="31" rx="4.5" />
-                  <rect x="429" y="216" width="46" height="31" rx="4.5" />
-                  <rect x="479" y="216" width="35" height="31" rx="4.5" />
-                  <rect x="518" y="232" width="26" height="15" rx="3" />
-                  <rect x="548" y="216" width="26" height="14.5" rx="3" />
-                  <rect x="548" y="232.5" width="26" height="14.5" rx="3" />
-                  <rect x="578" y="232" width="26" height="15" rx="3" />
-                </g>
-
-                {/* Force Touch Trackpad */}
-                <rect
-                  x="212"
-                  y="266"
-                  width="256"
-                  height="152"
-                  rx="11"
-                  fill="#202024"
-                  stroke="rgba(255,255,255,0.12)"
-                  strokeWidth="1.2"
-                />
-
-                {/* CNC Thumb-Scoop Cutout */}
-                <path
-                  d="M 292 433.5 L 298 426 L 382 426 L 388 433.5 Z"
-                  fill="#101013"
-                  stroke="rgba(255,255,255,0.18)"
-                  strokeWidth="1"
-                />
-              </svg>
+              <MacBookKeyboardSvg />
             </div>
 
             {EXTRUSION_LAYERS.map((z, idx) => (
