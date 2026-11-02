@@ -1,13 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
+import { ARCHITECTURE_STUDIO_CONTENT } from '@/data/architecture-studio';
 import styles from './macbook-showcase.module.css';
 
-/*
- * Exact 3D clamshell geometry:
- * Base plane is rotated +76deg around X from the shared rear hinge (50% 0%).
- * Lid plane has the exact same 680x434 dimensions and hinges from 50% 100%.
- * At -(180 - 76) = -104deg, the lid lies 100% flush and parallel on top of the base!
- */
 const CLOSED_ANGLE = -101;
 const INITIAL_OPEN_ANGLE = -12;
 const SCROLL_OPEN_ANGLE = -2;
@@ -19,31 +14,18 @@ export const MacBookShowcase: React.FC = () => {
   const { locale } = usePreferences();
   const stageRef = useRef<HTMLDivElement | null>(null);
   const rigRef = useRef<HTMLDivElement | null>(null);
+
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+  const [selectedNodeIndex, setSelectedNodeIndex] = useState<number>(1);
   const [isReplaying, setIsReplaying] = useState(false);
 
-  const isEs = locale === 'es';
+  const studio = ARCHITECTURE_STUDIO_CONTENT[locale];
+  const currentTab = studio.tabs[activeTabIndex] || studio.tabs[0];
+  const activeNode = currentTab.nodes[selectedNodeIndex] || currentTab.nodes[1];
 
-  const copy = {
-    caption: isEs
-      ? 'Arquitectura en producción · Backend, IA & Observabilidad'
-      : 'Production Architecture · Backend, AI & Observability',
-    replayLabel: isEs ? 'Repetir apertura' : 'Replay lid motion',
-    menuApp: 'Architecture Studio',
-    menuLive: 'MCP Gateway · Live',
-    nodeIngressTitle: 'Edge & API',
-    nodeIngressSub: 'Cloudflare · REST / GQL',
-    nodeCoreTitle: 'Core Services',
-    nodeCoreSub: 'NestJS · Spring Boot · DDD',
-    nodeDataTitle: 'Data & Locks',
-    nodeDataSub: 'PostgreSQL · Redis',
-    nodeAiTitle: 'AI & Telemetry',
-    nodeAiSub: 'MCP · Datadog · CleverTap',
-    metric1Label: isEs ? 'Disponibilidad' : 'Service Health',
-    metric1Value: '99.98% SLA',
-    metric2Label: isEs ? 'Concurrencia' : 'Concurrency',
-    metric2Value: 'Redis Locks',
-    metric3Label: isEs ? 'Flujos con IA' : 'AI Workflows',
-    metric3Value: 'MCP + AI Gateway',
+  const handleSelectTab = (index: number): void => {
+    setActiveTabIndex(index);
+    setSelectedNodeIndex(1);
   };
 
   const applyAngleToDom = useCallback((angleDeg: number) => {
@@ -182,8 +164,8 @@ export const MacBookShowcase: React.FC = () => {
     const rect = event.currentTarget.getBoundingClientRect();
     const normX = (event.clientX - rect.left) / rect.width - 0.5;
     const normY = (event.clientY - rect.top) / rect.height - 0.5;
-    rig.style.setProperty('--tilt-y', `${(normX * 4.5).toFixed(2)}deg`);
-    rig.style.setProperty('--tilt-x', `${(-normY * 2.4).toFixed(2)}deg`);
+    rig.style.setProperty('--tilt-y', `${(normX * 3.8).toFixed(2)}deg`);
+    rig.style.setProperty('--tilt-x', `${(-normY * 2.0).toFixed(2)}deg`);
     rig.style.setProperty('--sheen-x', `${((normX + 0.5) * 100).toFixed(1)}%`);
   };
 
@@ -193,6 +175,37 @@ export const MacBookShowcase: React.FC = () => {
     rig.style.setProperty('--tilt-y', '0deg');
     rig.style.setProperty('--tilt-x', '0deg');
     rig.style.setProperty('--sheen-x', '50%');
+  };
+
+  const highlightBeam1 = selectedNodeIndex === 0 || selectedNodeIndex === 1;
+  const highlightBeam2 = selectedNodeIndex === 1 || selectedNodeIndex === 2;
+  const highlightBeam3 = selectedNodeIndex === 1 || selectedNodeIndex === 3;
+
+  const renderInteractiveNode = (nodeIdx: 0 | 1 | 2 | 3, isPrimaryCore = false): JSX.Element => {
+    const node = currentTab.nodes[nodeIdx];
+    const isSelected = selectedNodeIndex === nodeIdx;
+
+    return (
+      <button
+        key={node.id}
+        type="button"
+        onClick={() => setSelectedNodeIndex(nodeIdx)}
+        onMouseEnter={() => setSelectedNodeIndex(nodeIdx)}
+        className={`${styles.archNode} ${isPrimaryCore ? styles.archNodeCore : ''} ${
+          isSelected ? styles.archNodeSelected : ''
+        }`}
+        aria-pressed={isSelected}
+      >
+        <div className={styles.nodeHeader}>
+          <span
+            className={`${styles.nodeDot} ${isSelected ? styles.nodeDotActive : ''}`}
+            aria-hidden="true"
+          />
+          <span className={styles.nodeTitle}>{node.title}</span>
+        </div>
+        <span className={styles.nodeSub}>{node.subtitle}</span>
+      </button>
+    );
   };
 
   return (
@@ -208,7 +221,6 @@ export const MacBookShowcase: React.FC = () => {
               1. UNIBODY DISPLAY LID (Exact same 680x434 footprint as Base)
              ========================================================= */}
           <div className={styles.lidAssembly}>
-            {/* Extruded CNC Aluminum Lid Rim Slices */}
             {LID_THICKNESS_LAYERS.map((z) => (
               <div
                 key={z}
@@ -235,20 +247,17 @@ export const MacBookShowcase: React.FC = () => {
                   <span className={styles.cameraSensorDot} />
                 </div>
 
-                {/* macOS Sequoia Dark Wallpaper + Top Menu Bar */}
+                {/* macOS Top Menu Bar */}
                 <div className={styles.macosTopBar}>
                   <div className={styles.topBarLeft}>
                     <span className={styles.appleGlyph}>&#63743;</span>
-                    <span className={styles.activeAppName}>{copy.menuApp}</span>
-                    <span className={styles.menuItemMuted}>View</span>
-                    <span className={styles.menuItemMuted}>Nodes</span>
-                    <span className={styles.menuItemMuted}>Traces</span>
+                    <span className={styles.activeAppName}>{studio.menuApp}</span>
                   </div>
 
                   <div className={styles.topBarRight}>
                     <span className={styles.liveBadge}>
                       <span className={styles.livePulseDot} />
-                      {copy.menuLive}
+                      {currentTab.statusBadge}
                     </span>
                     <span className={styles.clockText}>9:41 AM</span>
                   </div>
@@ -262,14 +271,35 @@ export const MacBookShowcase: React.FC = () => {
                       <span className={`${styles.trafficDot} ${styles.dotMinimize}`} />
                       <span className={`${styles.trafficDot} ${styles.dotZoom}`} />
                     </div>
-                    <span className={styles.windowTitle}>santiago-jv — production-cluster</span>
-                    <span className={styles.windowRegionTag}>us-east-1</span>
+
+                    {/* Synchronized In-Screen macOS Window Tabs */}
+                    <div className={styles.windowTabs} role="tablist">
+                      {studio.tabs.map((tab, idx) => {
+                        const isTabActive = idx === activeTabIndex;
+                        return (
+                          <button
+                            key={tab.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={isTabActive}
+                            onClick={() => handleSelectTab(idx)}
+                            className={`${styles.windowTabBtn} ${
+                              isTabActive ? styles.windowTabBtnActive : ''
+                            }`}
+                          >
+                            {tab.shortTabLabel}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <span className={styles.windowRegionTag}>{currentTab.windowContext}</span>
                   </div>
 
-                  {/* Hybrid Architecture Graph: Crisp HTML Nodes + Animated SVG Light Beams */}
-                  <div className={styles.graphStage}>
+                  {/* Interactive Directed Graph Stage */}
+                  <div key={currentTab.id} className={styles.graphStage}>
                     <svg
-                      viewBox="0 0 600 190"
+                      viewBox="0 0 600 180"
                       preserveAspectRatio="none"
                       className={styles.conduitSvg}
                       aria-hidden="true"
@@ -287,17 +317,17 @@ export const MacBookShowcase: React.FC = () => {
                       </defs>
 
                       <circle
-                        cx="296"
-                        cy="95"
-                        r="72"
+                        cx="295"
+                        cy="90"
+                        r="68"
                         fill="url(#centerAura)"
                         className={styles.ambientCorePulse}
                       />
 
                       <circle
-                        cx="296"
-                        cy="95"
-                        r="54"
+                        cx="295"
+                        cy="90"
+                        r="50"
                         fill="none"
                         stroke="rgba(255,255,255,0.14)"
                         strokeWidth="1"
@@ -305,14 +335,32 @@ export const MacBookShowcase: React.FC = () => {
                         className={styles.orbitRing}
                       />
 
-                      {/* Base Splines */}
-                      <g fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="1.5">
-                        <path d="M 156 95 C 185 95, 195 95, 222 95" />
-                        <path d="M 372 95 C 402 95, 408 46, 438 46" />
-                        <path d="M 372 95 C 402 95, 408 144, 438 144" />
+                      {/* Base Conduit Splines (Highlighted along active node path!) */}
+                      <g fill="none" strokeLinecap="round">
+                        <path
+                          d="M 176 90 C 188 90, 192 90, 204 90"
+                          stroke={
+                            highlightBeam1 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
+                          }
+                          strokeWidth={highlightBeam1 ? '2' : '1.4'}
+                        />
+                        <path
+                          d="M 386 90 C 399 90, 400 64, 413 64"
+                          stroke={
+                            highlightBeam2 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
+                          }
+                          strokeWidth={highlightBeam2 ? '2' : '1.4'}
+                        />
+                        <path
+                          d="M 386 90 C 399 90, 400 116, 413 116"
+                          stroke={
+                            highlightBeam3 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
+                          }
+                          strokeWidth={highlightBeam3 ? '2' : '1.4'}
+                        />
                       </g>
 
-                      {/* Animated Pulses */}
+                      {/* Animated Vector Light Pulses */}
                       <g
                         fill="none"
                         stroke="url(#beamWhite)"
@@ -320,86 +368,51 @@ export const MacBookShowcase: React.FC = () => {
                         strokeLinecap="round"
                       >
                         <path
-                          d="M 156 95 C 185 95, 195 95, 222 95"
+                          d="M 176 90 C 188 90, 192 90, 204 90"
                           className={styles.animatedBeam1}
                         />
                         <path
-                          d="M 372 95 C 402 95, 408 46, 438 46"
+                          d="M 386 90 C 399 90, 400 64, 413 64"
                           className={styles.animatedBeam2}
                         />
                         <path
-                          d="M 372 95 C 402 95, 408 144, 438 144"
+                          d="M 386 90 C 399 90, 400 116, 413 116"
                           className={styles.animatedBeam3}
                         />
                       </g>
                     </svg>
 
-                    {/* HTML Glass Nodes — Never Clips Text */}
+                    {/* 4 Interactive Clickable / Hoverable Nodes */}
                     <div className={styles.nodesGrid}>
-                      <div className={styles.nodeColLeft}>
-                        <div className={styles.archNode}>
-                          <div className={styles.nodeHeader}>
-                            <span className={styles.nodeDot} />
-                            <span className={styles.nodeTitle}>{copy.nodeIngressTitle}</span>
-                          </div>
-                          <span className={styles.nodeSub}>{copy.nodeIngressSub}</span>
-                        </div>
-                      </div>
+                      <div className={styles.nodeColLeft}>{renderInteractiveNode(0)}</div>
 
-                      <div className={styles.nodeColCenter}>
-                        <div className={`${styles.archNode} ${styles.archNodePrimary}`}>
-                          <div className={styles.nodeHeader}>
-                            <span className={`${styles.nodeDot} ${styles.nodeDotPulse}`} />
-                            <span className={styles.nodeTitle}>{copy.nodeCoreTitle}</span>
-                          </div>
-                          <span className={styles.nodeSub}>{copy.nodeCoreSub}</span>
-                        </div>
-                      </div>
+                      <div className={styles.nodeColCenter}>{renderInteractiveNode(1, true)}</div>
 
                       <div className={styles.nodeColRight}>
-                        <div className={styles.archNode}>
-                          <div className={styles.nodeHeader}>
-                            <span className={styles.nodeDot} />
-                            <span className={styles.nodeTitle}>{copy.nodeDataTitle}</span>
-                          </div>
-                          <span className={styles.nodeSub}>{copy.nodeDataSub}</span>
-                        </div>
-
-                        <div className={styles.archNode}>
-                          <div className={styles.nodeHeader}>
-                            <span className={styles.nodeDot} />
-                            <span className={styles.nodeTitle}>{copy.nodeAiTitle}</span>
-                          </div>
-                          <span className={styles.nodeSub}>{copy.nodeAiSub}</span>
-                        </div>
+                        {renderInteractiveNode(2)}
+                        {renderInteractiveNode(3)}
                       </div>
                     </div>
                   </div>
 
-                  {/* Bottom Telemetry Strip */}
-                  <div className={styles.telemetryStrip}>
-                    <div className={styles.telemetryCard}>
-                      <span className={styles.telemetryLabel}>{copy.metric1Label}</span>
-                      <span className={styles.telemetryValue}>{copy.metric1Value}</span>
+                  {/* Live Technical Node Inspector Dock */}
+                  <div className={styles.inspectorDock} aria-live="polite">
+                    <div className={styles.inspectorInfo}>
+                      <div className={styles.inspectorHeaderRow}>
+                        <span className={styles.inspectorTitle}>{activeNode.title}</span>
+                        <span className={styles.inspectorRolePill}>{activeNode.roleTag}</span>
+                      </div>
+                      <p className={styles.inspectorSummary}>{activeNode.summary}</p>
                     </div>
-                    <div className={styles.telemetryCard}>
-                      <span className={styles.telemetryLabel}>{copy.metric2Label}</span>
-                      <span className={styles.telemetryValue}>{copy.metric2Value}</span>
-                    </div>
-                    <div className={styles.telemetryCard}>
-                      <span className={styles.telemetryLabel}>{copy.metric3Label}</span>
-                      <span className={styles.telemetryValue}>{copy.metric3Value}</span>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Miniature macOS Floating Dock */}
-                <div className={styles.macosDockBar} aria-hidden="true">
-                  <span className={styles.miniDockIcon} />
-                  <span className={styles.miniDockIcon} />
-                  <span className={`${styles.miniDockIcon} ${styles.miniDockActive}`} />
-                  <span className={styles.miniDockIcon} />
-                  <span className={styles.miniDockIcon} />
+                    <ul className={styles.inspectorChips}>
+                      {activeNode.chips.map((chip) => (
+                        <li key={chip} className={styles.inspectorChip}>
+                          {chip}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -414,7 +427,6 @@ export const MacBookShowcase: React.FC = () => {
               3. SOLID EXTRUDED CNC UNIBODY SPACE BLACK BASE (680x434)
              ========================================================= */}
           <div className={styles.baseAssembly} aria-hidden="true">
-            {/* Top Anodized Aluminum Deck with Realistic SVG Magic Keyboard, Touch ID, Speakers & Trackpad */}
             <div className={styles.baseTopDeck}>
               <svg
                 viewBox="0 0 680 434"
@@ -422,7 +434,14 @@ export const MacBookShowcase: React.FC = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
-                  <linearGradient id="deckAluminum" x1="0" y1="0" x2="0" y2="434" gradientUnits="userSpaceOnUse">
+                  <linearGradient
+                    id="deckAluminum"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="434"
+                    gradientUnits="userSpaceOnUse"
+                  >
                     <stop offset="0%" stopColor="#1e1e22" />
                     <stop offset="48%" stopColor="#252529" />
                     <stop offset="100%" stopColor="#2e2e33" />
@@ -432,7 +451,6 @@ export const MacBookShowcase: React.FC = () => {
                   </pattern>
                 </defs>
 
-                {/* Unibody Top Deck Plate */}
                 <rect
                   x="0.75"
                   y="0.75"
@@ -444,14 +462,11 @@ export const MacBookShowcase: React.FC = () => {
                   strokeWidth="1.5"
                 />
 
-                {/* Hinge Exhaust Vent Recess */}
                 <rect x="86" y="4" width="508" height="7" rx="3" fill="#09090b" opacity="0.85" />
 
-                {/* Left & Right 6-Speaker Micro-Perforated Grilles */}
                 <rect x="20" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
                 <rect x="622" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
 
-                {/* Recessed Matte-Black Anodized Keyboard Well */}
                 <rect
                   x="68"
                   y="28"
@@ -463,13 +478,12 @@ export const MacBookShowcase: React.FC = () => {
                   strokeWidth="1"
                 />
 
-                {/* Row 1: Esc + Function Keys F1-F12 + Touch ID Ring */}
+                {/* Row 1: Esc + Function Keys + Touch ID */}
                 <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
                   <rect x="76" y="35" width="46" height="24" rx="4" />
                   {Array.from({ length: 12 }).map((_, idx) => (
                     <rect key={`fn-${idx}`} x={126 + idx * 37} y="35" width="33" height="24" rx="4" />
                   ))}
-                  {/* Touch ID Key with Metallic Sensor Ring */}
                   <rect x="570" y="35" width="34" height="24" rx="4" />
                   <circle
                     cx="587"
@@ -481,7 +495,7 @@ export const MacBookShowcase: React.FC = () => {
                   />
                 </g>
 
-                {/* Row 2: Number Row (13 standard keys + wider Delete) */}
+                {/* Row 2: Number Row */}
                 <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
                   {Array.from({ length: 13 }).map((_, idx) => (
                     <rect key={`r2-${idx}`} x={76 + idx * 36.5} y="64" width="32.5" height="33" rx="4.5" />
@@ -489,7 +503,7 @@ export const MacBookShowcase: React.FC = () => {
                   <rect x="550.5" y="64" width="53.5" height="33" rx="4.5" />
                 </g>
 
-                {/* Row 3: Tab + QWERTY Row */}
+                {/* Row 3: Tab + QWERTY */}
                 <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
                   <rect x="76" y="102" width="52" height="33" rx="4.5" />
                   {Array.from({ length: 12 }).map((_, idx) => (
@@ -498,7 +512,7 @@ export const MacBookShowcase: React.FC = () => {
                   <rect x="568" y="102" width="36" height="33" rx="4.5" />
                 </g>
 
-                {/* Row 4: Caps Lock + ASDF Row + Return */}
+                {/* Row 4: Caps + ASDF + Return */}
                 <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
                   <rect x="76" y="140" width="62" height="33" rx="4.5" />
                   {Array.from({ length: 11 }).map((_, idx) => (
@@ -507,7 +521,7 @@ export const MacBookShowcase: React.FC = () => {
                   <rect x="541.5" y="140" width="62.5" height="33" rx="4.5" />
                 </g>
 
-                {/* Row 5: Left Shift + ZXCV Row + Right Shift */}
+                {/* Row 5: Shift + ZXCV + Shift */}
                 <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
                   <rect x="76" y="178" width="80" height="33" rx="4.5" />
                   {Array.from({ length: 10 }).map((_, idx) => (
@@ -516,24 +530,22 @@ export const MacBookShowcase: React.FC = () => {
                   <rect x="523" y="178" width="81" height="33" rx="4.5" />
                 </g>
 
-                {/* Row 6: Modifiers + Wide Spacebar + Inverted-T Arrow Cluster */}
+                {/* Row 6: Modifiers + Spacebar + Arrows */}
                 <g fill="#17171b" stroke="rgba(255,255,255,0.08)" strokeWidth="0.75">
                   <rect x="76" y="216" width="35" height="31" rx="4.5" />
                   <rect x="115" y="216" width="35" height="31" rx="4.5" />
                   <rect x="154" y="216" width="35" height="31" rx="4.5" />
                   <rect x="193" y="216" width="46" height="31" rx="4.5" />
-                  {/* Spacebar */}
                   <rect x="243" y="216" width="182" height="31" rx="4.5" />
                   <rect x="429" y="216" width="46" height="31" rx="4.5" />
                   <rect x="479" y="216" width="35" height="31" rx="4.5" />
-                  {/* Arrow Cluster */}
                   <rect x="518" y="232" width="26" height="15" rx="3" />
                   <rect x="548" y="216" width="26" height="14.5" rx="3" />
                   <rect x="548" y="232.5" width="26" height="14.5" rx="3" />
                   <rect x="578" y="232" width="26" height="15" rx="3" />
                 </g>
 
-                {/* Giant Force Touch Glass Trackpad */}
+                {/* Force Touch Trackpad */}
                 <rect
                   x="212"
                   y="266"
@@ -545,7 +557,7 @@ export const MacBookShowcase: React.FC = () => {
                   strokeWidth="1.2"
                 />
 
-                {/* Front CNC Thumb-Scoop Lip Cutout */}
+                {/* CNC Thumb-Scoop Cutout */}
                 <path
                   d="M 292 433.5 L 298 426 L 382 426 L 388 433.5 Z"
                   fill="#101013"
@@ -555,7 +567,6 @@ export const MacBookShowcase: React.FC = () => {
               </svg>
             </div>
 
-            {/* Solid CNC Extruded Unibody Chassis Thickness Layers (Zero Corner Gaps!) */}
             {EXTRUSION_LAYERS.map((z, idx) => (
               <div
                 key={z}
@@ -568,29 +579,66 @@ export const MacBookShowcase: React.FC = () => {
               </div>
             ))}
 
-            {/* Left & Right Rubber Machined Feet Pads Under Base */}
             <div className={styles.rubberFootLeft} />
             <div className={styles.rubberFootRight} />
           </div>
 
-          {/* Multi-Layer Studio Contact + Ambient Floor Shadow */}
           <div className={styles.contactShadow} aria-hidden="true" />
           <div className={styles.ambientFloorShadow} aria-hidden="true" />
         </div>
       </div>
 
-      {/* Subtle Hardware Caption + Replay Control */}
-      <div className={styles.stageFooter}>
-        <span className={styles.stageCaption}>{copy.caption}</span>
-        <button
-          type="button"
-          onClick={handleReplay}
-          className={styles.replayButton}
-          disabled={isReplaying}
-        >
-          <i className="fa-solid fa-rotate-right" aria-hidden="true" />
-          <span>{copy.replayLabel}</span>
-        </button>
+      {/* =========================================================
+          4. APPLE SEGMENTED DOMAIN SWITCHER + REPLAY CONTROL
+         ========================================================= */}
+      <div className={styles.stageControls}>
+        <div className={styles.segmentedRow}>
+          <div className={styles.segmentedTrack} role="tablist" aria-label={studio.menuApp}>
+            {studio.tabs.map((tab, idx) => {
+              const isActive = idx === activeTabIndex;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => handleSelectTab(idx)}
+                  className={`${styles.segmentPill} ${isActive ? styles.segmentPillActive : ''}`}
+                >
+                  {tab.tabLabel}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleReplay}
+            className={styles.replayIconButton}
+            disabled={isReplaying}
+            aria-label={studio.replayLabel}
+            title={studio.replayLabel}
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M13.5 8A5.5 5.5 0 1 1 11.9 4.1L13.5 5.7M13.5 2.5V5.7H10.3"
+                stroke="currentColor"
+                strokeWidth="1.65"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <p className={styles.helperCaption}>{studio.helperHint}</p>
       </div>
     </div>
   );

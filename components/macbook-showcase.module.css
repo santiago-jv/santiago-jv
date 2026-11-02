@@ -5,11 +5,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  user-select: none;
 }
 
 .macbookScene {
-  --lid-angle: -14deg;
+  --lid-angle: -12deg;
   --open-ratio: 0.9;
   --screen-wake: 1;
   --tilt-x: 0deg;
@@ -17,10 +16,10 @@
   --sheen-x: 50%;
 
   width: 100%;
-  max-width: 780px;
+  max-width: 800px;
   perspective: 1450px;
   perspective-origin: 50% 48%;
-  padding: 10px 24px 22px;
+  padding: 10px 20px 22px;
 }
 
 .macbookRig {
@@ -60,7 +59,6 @@
   pointer-events: none;
 }
 
-/* Outer Anodized Space Black Top Shell (Visible when closed < -90deg) */
 .lidOuterCover {
   position: absolute;
   inset: 0;
@@ -127,8 +125,8 @@
   background: linear-gradient(
     118deg,
     transparent 18%,
-    rgba(255, 255, 255, 0.045) var(--sheen-x, 50%),
-    rgba(255, 255, 255, 0.015) calc(var(--sheen-x, 50%) + 14%),
+    rgba(255, 255, 255, 0.04) var(--sheen-x, 50%),
+    rgba(255, 255, 255, 0.012) calc(var(--sheen-x, 50%) + 14%),
     transparent 78%
   );
   pointer-events: none;
@@ -140,8 +138,8 @@
   flex: 1;
   border-radius: 13px 13px 3px 3px;
   background:
-    radial-gradient(ellipse 75% 55% at 50% 0%, rgba(64, 64, 76, 0.36) 0%, transparent 65%),
-    radial-gradient(ellipse 65% 60% at 85% 90%, rgba(45, 45, 54, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 75% 55% at 50% 0%, rgba(64, 64, 76, 0.34) 0%, transparent 65%),
+    radial-gradient(ellipse 65% 60% at 85% 90%, rgba(45, 45, 54, 0.28) 0%, transparent 70%),
     linear-gradient(180deg, #131317 0%, #0b0b0e 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
@@ -153,14 +151,14 @@
   transition: opacity 160ms linear;
 }
 
-/* Authentic Camera Notch Integrated Into Top Menu Bar */
+/* Camera Notch */
 .cameraNotch {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 92px;
-  height: 18px;
+  width: 90px;
+  height: 17px;
   background: #070709;
   border-radius: 0 0 9px 9px;
   z-index: 6;
@@ -188,15 +186,14 @@
 
 /* macOS Menu Bar */
 .macosTopBar {
-  height: 22px;
+  height: 21px;
   padding: 0 12px;
-  background: rgba(18, 18, 22, 0.72);
-  backdrop-filter: blur(12px);
+  background: rgba(18, 18, 22, 0.76);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 9.5px;
+  font-size: 9.2px;
   color: #e5e5ea;
 }
 
@@ -204,7 +201,7 @@
 .topBarRight {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
 }
 
 .appleGlyph {
@@ -217,16 +214,12 @@
   color: #ffffff;
 }
 
-.menuItemMuted {
-  color: rgba(235, 235, 245, 0.6);
-}
-
 .liveBadge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-family: var(--font-family-mono);
-  font-size: 8.8px;
+  font-size: 8.6px;
   color: #d2d2d7;
 }
 
@@ -244,14 +237,14 @@
   color: #e5e5ea;
 }
 
-/* Floating macOS Studio Window Inside Screen */
+/* Main macOS Studio Window */
 .appWindow {
   flex: 1;
-  margin: 8px 12px 4px;
+  margin: 7px 10px 8px;
   border-radius: 10px;
-  background: rgba(16, 16, 20, 0.84);
-  border: 1px solid rgba(255, 255, 255, 0.11);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42);
+  background: rgba(15, 15, 19, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -259,24 +252,26 @@
 }
 
 .windowHeader {
-  height: 24px;
+  height: 28px;
   padding: 0 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.035);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .trafficLights {
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
 }
 
 .trafficDot {
-  width: 7.5px;
-  height: 7.5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
 }
 
@@ -290,28 +285,67 @@
   background: #28c840;
 }
 
-.windowTitle {
-  font-family: var(--font-family-mono);
-  font-size: 9px;
-  color: #a1a1a6;
+/* In-Screen Synchronized Window Tabs */
+.windowTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.windowTabBtn {
+  padding: 2.5px 8px;
+  border-radius: 4.5px;
+  font-size: 8.8px;
+  font-weight: 500;
+  color: #8e8e93;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.windowTabBtn:hover {
+  color: #e5e5ea;
+}
+
+.windowTabBtnActive {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .windowRegionTag {
   font-family: var(--font-family-mono);
-  font-size: 8.5px;
-  padding: 1px 6px;
+  font-size: 8.2px;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #d2d2d7;
+  background: rgba(255, 255, 255, 0.055);
+  color: #a1a1a6;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Hybrid Architecture Graph */
+/* Interactive Directed Graph Stage */
+@keyframes stageFadeIn {
+  from {
+    opacity: 0.35;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .graphStage {
   position: relative;
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 6px 14px;
+  animation: stageFadeIn 240ms var(--ease-apple-smooth);
 }
 
 .conduitSvg {
@@ -327,9 +361,9 @@
   z-index: 2;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1.12fr 1.05fr;
+  grid-template-columns: 1fr 1.12fr 1.06fr;
   align-items: center;
-  gap: 24px;
+  gap: 26px;
 }
 
 .nodeColLeft,
@@ -342,25 +376,45 @@
 .nodeColRight {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
+/* Interactive Clickable Nodes */
 .archNode {
-  padding: 9px 11px;
-  border-radius: 10px;
-  background: rgba(24, 24, 28, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: rgba(23, 23, 28, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.26);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2.5px;
+  cursor: pointer;
+  transition:
+    transform 180ms var(--ease-apple-snappy),
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.archNodePrimary {
-  padding: 12px 13px;
-  background: rgba(32, 32, 37, 0.96);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42);
+.archNode:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(30, 30, 36, 0.96);
+}
+
+.archNodeCore {
+  padding: 11px 12px;
+}
+
+.archNodeSelected {
+  background: rgba(38, 38, 45, 0.98);
+  border-color: rgba(255, 255, 255, 0.68);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 8px 22px rgba(0, 0, 0, 0.45);
 }
 
 .nodeHeader {
@@ -370,32 +424,36 @@
 }
 
 .nodeDot {
-  width: 6px;
-  height: 6px;
+  width: 5.5px;
+  height: 5.5px;
   border-radius: 50%;
-  background: #f5f5f7;
+  background: #8e8e93;
   flex-shrink: 0;
+  transition: background-color 180ms ease, box-shadow 180ms ease;
 }
 
-.nodeDotPulse {
+.nodeDotActive {
   background: #ffffff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
-  animation: pulseGlow 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
 }
 
 .nodeTitle {
-  font-size: 10.5px;
+  font-size: 10.2px;
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.01em;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nodeSub {
   font-family: var(--font-family-mono);
-  font-size: 8.8px;
+  font-size: 8.4px;
   color: #98989d;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @keyframes beamFlow {
@@ -444,73 +502,89 @@
 }
 
 .orbitRing {
-  transform-origin: 296px 95px;
+  transform-origin: 295px 90px;
   animation: orbitSpin 22s linear infinite;
 }
 
 .ambientCorePulse {
-  transform-origin: 296px 95px;
+  transform-origin: 295px 90px;
   animation: pulseGlow 3.6s ease-in-out infinite;
 }
 
-/* Bottom Telemetry Strip */
-.telemetryStrip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
-  padding: 7px 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.28);
-}
-
-.telemetryCard {
-  padding: 5px 8px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+/* =========================================================
+   LIVE TECHNICAL NODE INSPECTOR DOCK (Bottom of Screen)
+   ========================================================= */
+.inspectorDock {
+  min-height: 56px;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 11, 0.62);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
+  gap: 12px;
 }
 
-.telemetryLabel {
-  font-size: 8.8px;
-  color: #86868b;
-  white-space: nowrap;
+.inspectorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  min-width: 0;
+  flex: 1;
 }
 
-.telemetryValue {
-  font-family: var(--font-family-mono);
-  font-size: 8.8px;
-  font-weight: 600;
-  color: #f5f5f7;
-  white-space: nowrap;
-}
-
-/* Miniature macOS Dock Bar */
-.macosDockBar {
-  align-self: center;
-  margin-bottom: 4px;
-  padding: 3px 8px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.inspectorHeaderRow {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
 }
 
-.miniDockIcon {
-  width: 9px;
-  height: 9px;
-  border-radius: 2.5px;
-  background: linear-gradient(145deg, #3a3a3c, #1c1c1e);
-  border: 0.5px solid rgba(255, 255, 255, 0.2);
+.inspectorTitle {
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
-.miniDockActive {
-  background: linear-gradient(145deg, #f5f5f7, #a1a1a6);
+.inspectorRolePill {
+  font-family: var(--font-family-mono);
+  font-size: 7.8px;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #d2d2d7;
+}
+
+.inspectorSummary {
+  font-size: 9px;
+  line-height: 1.38;
+  color: #a1a1a6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.inspectorChips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+  max-width: 42%;
+  flex-shrink: 0;
+}
+
+.inspectorChip {
+  padding: 2.5px 6.5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  font-family: var(--font-family-mono);
+  font-size: 8px;
+  font-weight: 500;
+  color: #f5f5f7;
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -526,7 +600,7 @@
 }
 
 /* =========================================================
-   3. SOLID CNC UNIBODY BASE (Exact 86% width, 680:434 aspect!)
+   3. SOLID CNC UNIBODY BASE (Exact 86% width, 680:434 aspect)
    ========================================================= */
 .baseAssembly {
   position: relative;
@@ -551,7 +625,6 @@
   display: block;
 }
 
-/* Stacked CNC Aluminum Extrusion Layers — True Volumetric Unibody With Zero Gaps */
 .chassisExtrusionSlice {
   position: absolute;
   inset: 0;
@@ -586,7 +659,6 @@
   border-radius: 4px 4px 0 0;
 }
 
-/* Machined Circular Rubber Feet Under Front Corners */
 .rubberFootLeft,
 .rubberFootRight {
   position: absolute;
@@ -606,7 +678,6 @@
   right: 38px;
 }
 
-/* Studio Contact & Ambient Floor Shadows (Aligned Under Foreshortened Base) */
 .contactShadow {
   width: 96%;
   height: 20px;
@@ -641,59 +712,103 @@
 }
 
 /* =========================================================
-   CAPTION & REPLAY PILL
+   4. APPLE SEGMENTED CONTROL + REPLAY BUTTON BELOW MACBOOK
    ========================================================= */
-.stageFooter {
+.stageControls {
   position: relative;
   z-index: 6;
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.segmentedRow {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 48px;
 }
 
-.stageCaption {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--apple-text-tertiary);
-  letter-spacing: -0.01em;
-}
-
-.replayButton {
+.segmentedTrack {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 13px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px;
   border-radius: var(--radius-pill);
   background: var(--apple-bg-stone);
   border: 1px solid var(--apple-border);
+}
+
+.segmentPill {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--apple-text-secondary);
+  transition:
+    background-color 240ms var(--ease-apple-spring),
+    color 200ms ease,
+    box-shadow 240ms var(--ease-apple-spring),
+    transform 180ms var(--ease-apple-snappy);
+}
+
+.segmentPill:hover {
   color: var(--apple-text-primary);
-  font-size: 12px;
+}
+
+.segmentPillActive {
+  background: var(--apple-accent);
+  color: #ffffff;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  box-shadow: 0 3px 10px rgba(29, 29, 31, 0.18);
+}
+
+.segmentPillActive:hover {
+  color: #ffffff;
+}
+
+.replayIconButton {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--apple-bg-stone);
+  border: 1px solid var(--apple-border);
+  color: var(--apple-text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast);
 }
 
-.replayButton:hover:not(:disabled) {
+.replayIconButton:hover:not(:disabled) {
   background: #e8e8ed;
-  transform: scale(1.03);
+  transform: rotate(35deg) scale(1.04);
 }
 
-.replayButton:active:not(:disabled) {
-  transform: scale(0.97);
+.replayIconButton:active:not(:disabled) {
+  transform: scale(0.95);
 }
 
-.replayButton:disabled {
-  opacity: 0.55;
+.replayIconButton:disabled {
+  opacity: 0.5;
   cursor: default;
 }
 
-.replayButton i {
-  font-size: 10.5px;
+.helperCaption {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--apple-text-tertiary);
+  letter-spacing: -0.008em;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -702,7 +817,6 @@
   .animatedBeam3,
   .orbitRing,
   .ambientCorePulse,
-  .nodeDotPulse,
   .livePulseDot {
     animation: none;
   }
@@ -718,18 +832,27 @@
     width: 92%;
   }
 
+  .windowTabs,
+  .windowRegionTag,
+  .inspectorChips,
+  .nodeSub {
+    display: none;
+  }
+
   .nodesGrid {
     gap: 8px;
   }
 
-  .nodeSub,
-  .telemetryStrip,
-  .macosDockBar,
-  .menuItemMuted {
-    display: none;
+  .contactShadow {
+    margin-top: -190px;
   }
 
-  .contactShadow {
-    margin-top: -195px;
+  .segmentedTrack {
+    border-radius: 20px;
+  }
+
+  .segmentPill {
+    padding: 7px 12px;
+    font-size: 12px;
   }
 }
