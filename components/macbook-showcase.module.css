@@ -204,6 +204,57 @@
   gap: 8px;
 }
 
+.menuTrayIcons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.trayIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #d2d2d7;
+  opacity: 0.9;
+  transition:
+    opacity 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.trayIcon:hover {
+  opacity: 1;
+  color: #ffffff;
+  transform: translateY(-0.5px);
+}
+
+.trayBattery {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 1px 3.5px 1px 3px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.16);
+  font-family: var(--font-family-mono);
+  font-size: 7.2px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.trayBatteryTip {
+  position: absolute;
+  right: -2.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5px;
+  height: 4px;
+  border-radius: 0 1px 1px 0;
+  background: rgba(255, 255, 255, 0.72);
+}
+
 .appleGlyph {
   font-size: 11px;
   color: #ffffff;
@@ -223,6 +274,10 @@
   color: #d2d2d7;
 }
 
+.liveBadgeText {
+  white-space: nowrap;
+}
+
 .livePulseDot {
   width: 5px;
   height: 5px;
@@ -239,6 +294,22 @@
   white-space: nowrap;
   min-width: 40px;
   text-align: right;
+}
+
+.clockFull {
+  display: inline;
+}
+
+.clockShort {
+  display: none;
+}
+
+.segmentFullLabel {
+  display: inline;
+}
+
+.segmentShortLabel {
+  display: none;
 }
 
 /* Main macOS Studio Window */
@@ -842,37 +913,246 @@
 }
 
 @media (max-width: 760px) {
+  .stageWrapper {
+    margin: 1.4rem auto 0;
+    max-width: 100%;
+    overflow: visible;
+  }
+
   .macbookScene {
-    padding: 8px 8px 14px;
+    padding: 6px 4px 14px;
+    perspective: 1200px;
+    max-width: 100%;
   }
 
   .lidAssembly,
   .baseAssembly,
   .hingeClutch {
-    width: 92%;
+    width: 95%;
+  }
+
+  .lidInnerScreen {
+    padding: 7px 7px 10px;
+    border-radius: 17px 17px 1.5px 1.5px;
+  }
+
+  .cameraNotch {
+    width: 68px;
+    height: 14px;
+    border-radius: 0 0 7px 7px;
+  }
+
+  .macosTopBar {
+    height: 19px;
+    padding: 0 8px;
+    font-size: 8px;
+  }
+
+  .appleGlyph {
+    font-size: 9.5px;
+  }
+
+  .activeAppName {
+    font-size: 8px;
+  }
+
+  .liveBadge {
+    font-size: 7.5px;
+    gap: 3.5px;
+  }
+
+  .menuTrayIcons {
+    gap: 5px;
+  }
+
+  .clockFull {
+    display: none;
+  }
+
+  .clockShort {
+    display: inline;
+  }
+
+  .segmentFullLabel {
+    display: none;
+  }
+
+  .segmentShortLabel {
+    display: inline;
+  }
+
+  .liveBadgeText {
+    display: none;
+  }
+
+  .clockText {
+    font-size: 7.8px;
+    min-width: auto;
+  }
+
+  .appWindow {
+    margin: 5px 6px 6px;
+    border-radius: 8px;
+  }
+
+  .windowHeader {
+    height: 23px;
+    padding: 0 8px;
+  }
+
+  .trafficDot {
+    width: 5.5px;
+    height: 5.5px;
   }
 
   .windowTabs,
-  .windowRegionTag,
   .inspectorChips,
   .nodeSub {
     display: none;
+  }
+
+  .windowRegionTag {
+    font-size: 7.2px;
+    padding: 1.5px 5px;
+  }
+
+  .graphStage {
+    padding: 4px 8px;
   }
 
   .nodesGrid {
     gap: 8px;
   }
 
+  .archNode {
+    padding: 5px 6px;
+    border-radius: 6px;
+    gap: 1.5px;
+  }
+
+  .archNodeCore {
+    padding: 7px 7px;
+  }
+
+  .nodeHeader {
+    gap: 4px;
+  }
+
+  .nodeDot {
+    width: 4.5px;
+    height: 4.5px;
+  }
+
+  .nodeTitle {
+    font-size: 8px;
+  }
+
+  .inspectorDock {
+    min-height: 44px;
+    padding: 5px 9px;
+    gap: 6px;
+  }
+
+  .inspectorTitle {
+    font-size: 8.8px;
+  }
+
+  .inspectorRolePill {
+    font-size: 7px;
+    padding: 1px 4.5px;
+  }
+
+  .inspectorSummary {
+    font-size: 8px;
+    line-height: 1.28;
+    -webkit-line-clamp: 2;
+  }
+
   .contactShadow {
     margin-top: -190px;
+    height: 16px;
+  }
+
+  .stageControls {
+    margin-top: 16px;
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  .segmentedRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: nowrap;
   }
 
   .segmentedTrack {
-    border-radius: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: calc(100% - 44px);
+    padding: 3px;
+    gap: 2.5px;
+    border-radius: 99px;
+  }
+
+  .segmentedTrack::-webkit-scrollbar {
+    display: none;
   }
 
   .segmentPill {
-    padding: 7px 12px;
+    padding: 5.5px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .replayIconButton {
+    width: 33px;
+    height: 33px;
     font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .helperCaption {
+    font-size: 11px;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lidAssembly,
+  .baseAssembly,
+  .hingeClutch {
+    width: 98%;
+  }
+
+  .liveBadgeText {
+    display: none;
+  }
+
+  .clockText {
+    font-size: 7.2px;
+  }
+
+  .menuTrayIcons {
+    gap: 4px;
+  }
+
+  .nodeTitle {
+    font-size: 7.2px;
+  }
+
+  .archNode {
+    padding: 4px 5px;
+  }
+
+  .archNodeCore {
+    padding: 6px 5px;
   }
 }

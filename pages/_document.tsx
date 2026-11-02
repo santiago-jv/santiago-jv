@@ -17,9 +17,9 @@ export default function Document(): JSX.Element {
       <Head>
         <meta name="theme-color" content="#ffffff" />
         <script dangerouslySetInnerHTML={{ __html: INITIAL_LOCALE_SCRIPT }} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=apple-circle" />
-        <link rel="shortcut icon" href="/favicon.svg?v=apple-circle" />
-        <link rel="apple-touch-icon" href="/favicon.svg?v=apple-circle" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=white-bg-black-s" />
+        <link rel="shortcut icon" href="/favicon.svg?v=white-bg-black-s" />
+        <link rel="apple-touch-icon" href="/favicon.svg?v=white-bg-black-s" />
       </Head>
       <body>
         <Main />

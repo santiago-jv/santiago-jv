@@ -43,10 +43,11 @@
 }
 
 .brandMark {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   display: block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .wordmark {
@@ -119,12 +120,19 @@
   backdrop-filter: blur(24px);
   border-left: 1px solid var(--apple-border);
   transform: translate3d(105%, 0, 0);
-  transition: transform 480ms var(--ease-apple-snappy);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    transform 480ms var(--ease-apple-snappy),
+    visibility 0s linear 480ms;
   will-change: transform;
 }
 
 .header__navbar--open {
   transform: translate3d(0, 0, 0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 480ms var(--ease-apple-snappy);
 }
 
 .navbar__header {

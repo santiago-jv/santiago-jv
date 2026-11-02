@@ -4,19 +4,31 @@ import { ARCHITECTURE_STUDIO_CONTENT } from '@/data/architecture-studio';
 import { MacBookKeyboardSvg } from './MacBookKeyboardSvg';
 import styles from './macbook-showcase.module.css';
 
-const formatVisitorLocalTime = (): string => {
+const formatVisitorLocalTime = (): { full: string; short: string } => {
   try {
-    return new Intl.DateTimeFormat(undefined, {
+    const now = new Date();
+    const weekday = new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(now);
+    const day = now.getDate();
+    const month = new Intl.DateTimeFormat(undefined, { month: 'short' }).format(now);
+    const time = new Intl.DateTimeFormat(undefined, {
       hour: 'numeric',
       minute: '2-digit',
-    }).format(new Date());
+    }).format(now);
+    return {
+      full: `${weekday} ${day} ${month}  ${time}`,
+      short: time,
+    };
   } catch {
     const now = new Date();
     const hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const suffix = hours >= 12 ? 'PM' : 'AM';
     const hour12 = hours % 12 || 12;
-    return `${hour12}:${minutes} ${suffix}`;
+    const timeStr = `${hour12}:${minutes} ${suffix}`;
+    return {
+      full: timeStr,
+      short: timeStr,
+    };
   }
 };
 
@@ -35,7 +47,10 @@ export const MacBookShowcase: React.FC = () => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const [selectedNodeIndex, setSelectedNodeIndex] = useState<number>(1);
   const [isReplaying, setIsReplaying] = useState(false);
-  const [localTime, setLocalTime] = useState<string>('');
+  const [localTime, setLocalTime] = useState<{ full: string; short: string }>({
+    full: '',
+    short: '',
+  });
 
   useEffect(() => {
     let timeoutId: number;
@@ -288,9 +303,116 @@ export const MacBookShowcase: React.FC = () => {
                   <div className={styles.topBarRight}>
                     <span className={styles.liveBadge}>
                       <span className={styles.livePulseDot} />
-                      {currentTab.statusBadge}
+                      <span className={styles.liveBadgeText}>{currentTab.statusBadge}</span>
                     </span>
-                    <span className={styles.clockText}>{localTime}</span>
+
+                    <div className={styles.menuTrayIcons} aria-label="macOS Menu Bar Items">
+                      {/* Slack */}
+                      <span className={styles.trayIcon} title="Slack">
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M3.3 10.2a1.3 1.3 0 1 0 1.3 1.3v-1.3H3.3Zm0-1.8h3.4v3.4a1.3 1.3 0 1 1-1.3-1.3v-2.1Zm3.4-4.8a1.3 1.3 0 1 0-1.3 1.3H6.7V3.6Zm0 1.8v3.4H3.3a1.3 1.3 0 1 1 1.3-1.3h2.1Zm4.8 3.4a1.3 1.3 0 1 0-1.3-1.3v1.3h1.3Zm0 1.8H8.1V7.2a1.3 1.3 0 1 1 1.3 1.3v2.1Zm-3.4 4.8a1.3 1.3 0 1 0 1.3-1.3H8.1v1.3Zm0-1.8V9.2h3.4a1.3 1.3 0 1 1-1.3 1.3H8.1Z" />
+                        </svg>
+                      </span>
+
+                      {/* Docker */}
+                      <span className={styles.trayIcon} title="Docker Desktop · Running">
+                        <svg
+                          width="14"
+                          height="10"
+                          viewBox="0 0 20 15"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <rect x="5.5" y="4.5" width="2" height="1.8" rx="0.3" />
+                          <rect x="8" y="4.5" width="2" height="1.8" rx="0.3" />
+                          <rect x="10.5" y="4.5" width="2" height="1.8" rx="0.3" />
+                          <rect x="8" y="2.2" width="2" height="1.8" rx="0.3" />
+                          <rect x="10.5" y="2.2" width="2" height="1.8" rx="0.3" />
+                          <path d="M18.8 6.8c-.4-.3-1.1-.4-1.8-.2-.3-.5-.7-.9-1.3-1.1-.2 0-.3.1-.4.2-.1.4.1.9.4 1.3-.4.2-1 .3-1.8.3H3.2c-.4 0-.8.3-.9.7-.5 2 0 4.2 1.5 5.5 1.5 1.3 3.6 1.7 5.7 1.7 4.2 0 7.8-2 9-5.5.4-.1.8-.4 1.1-.9.1-.2 0-.5-.3-.7z" />
+                        </svg>
+                      </span>
+
+                      {/* Granola (Organic hand-drawn spiral logo) */}
+                      <span className={styles.trayIcon} title="Granola · AI Notepad">
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M8 2.2a5.8 5.8 0 1 0 5.8 5.8A4.2 4.2 0 0 0 8 4.6a3 3 0 1 0 3 3 1.8 1.8 0 1 0-1.8-1.8" />
+                        </svg>
+                      </span>
+
+                      {/* Wi-Fi */}
+                      <span className={styles.trayIcon} title="Wi-Fi · Connected">
+                        <svg
+                          width="11"
+                          height="9"
+                          viewBox="0 0 16 12"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M8 9.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm-3.2-2.1a4.8 4.8 0 0 1 6.4 0 .8.8 0 0 1-1.1 1.1 3.2 3.2 0 0 0-4.2 0 .8.8 0 0 1-1.1-1.1Zm-2.7-2.7a8.5 8.5 0 0 1 11.8 0 .8.8 0 0 1-1.1 1.1 6.9 6.9 0 0 0-9.6 0 .8.8 0 0 1-1.1-1.1Zm-2-2.1a11.5 11.5 0 0 1 15.8 0 .8.8 0 1 1-1.1 1.1 9.9 9.9 0 0 0-13.6 0 .8.8 0 0 1-1.1-1.1Z" />
+                        </svg>
+                      </span>
+
+                      {/* Battery Capsule with 100% / 57% fill */}
+                      <span className={styles.trayBattery} title="Battery: 100%">
+                        <span className={styles.trayBatteryLevel}>100</span>
+                        <span className={styles.trayBatteryTip} aria-hidden="true" />
+                      </span>
+
+                      {/* Control Center */}
+                      <span className={styles.trayIcon} title="Control Center">
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            x="2"
+                            y="3"
+                            width="12"
+                            height="4"
+                            rx="2"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.2"
+                          />
+                          <circle cx="5" cy="5" r="1.3" fill="currentColor" />
+                          <rect
+                            x="2"
+                            y="9"
+                            width="12"
+                            height="4"
+                            rx="2"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.2"
+                          />
+                          <circle cx="11" cy="11" r="1.3" fill="currentColor" />
+                        </svg>
+                      </span>
+                    </div>
+
+                    <span className={styles.clockText}>
+                      <span className={styles.clockFull}>{localTime.full}</span>
+                      <span className={styles.clockShort}>{localTime.short}</span>
+                    </span>
                   </div>
                 </div>
 
@@ -500,7 +622,8 @@ export const MacBookShowcase: React.FC = () => {
                   onClick={() => handleSelectTab(idx)}
                   className={`${styles.segmentPill} ${isActive ? styles.segmentPillActive : ''}`}
                 >
-                  {tab.tabLabel}
+                  <span className={styles.segmentFullLabel}>{tab.tabLabel}</span>
+                  <span className={styles.segmentShortLabel}>{tab.shortTabLabel}</span>
                 </button>
               );
             })}
