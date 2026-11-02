@@ -49,10 +49,10 @@ const Header: React.FC = () => {
         <div className={styles.headerInner}>
           <a href="#about" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
             <img
-              src="/favicon.svg?v=space-black"
+              src="/favicon.svg?v=apple-circle"
               alt=""
-              width={22}
-              height={22}
+              width={20}
+              height={20}
               className={styles.brandMark}
               aria-hidden="true"
             />

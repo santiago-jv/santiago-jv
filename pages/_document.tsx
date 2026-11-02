@@ -30,9 +30,9 @@ export default function Document(): JSX.Element {
           referrerPolicy="no-referrer"
         />
 
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=space-black" />
-        <link rel="shortcut icon" href="/favicon.svg?v=space-black" />
-        <link rel="apple-touch-icon" href="/favicon.svg?v=space-black" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=apple-circle" />
+        <link rel="shortcut icon" href="/favicon.svg?v=apple-circle" />
+        <link rel="apple-touch-icon" href="/favicon.svg?v=apple-circle" />
       </Head>
       <body>
         <Main />

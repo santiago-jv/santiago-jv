@@ -81,12 +81,11 @@
 }
 
 .lidOuterMonogram {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.72);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111113;
   font-family: var(--font-family-display);
   font-size: 20px;
   font-weight: 700;
