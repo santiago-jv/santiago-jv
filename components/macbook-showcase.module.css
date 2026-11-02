@@ -376,9 +376,17 @@
   font-size: 8.8px;
   font-weight: 500;
   color: #8e8e93;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     background-color 180ms ease,
     color 180ms ease;
+}
+
+.windowTabBtn:focus {
+  outline: none;
 }
 
 .windowTabBtn:hover {
@@ -467,11 +475,19 @@
   flex-direction: column;
   gap: 2.5px;
   cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     transform 180ms var(--ease-apple-snappy),
     border-color 180ms ease,
     background-color 180ms ease,
     box-shadow 180ms ease;
+}
+
+.archNode:focus {
+  outline: none;
 }
 
 .archNode:hover {
@@ -841,11 +857,19 @@
   font-weight: 500;
   letter-spacing: -0.012em;
   color: var(--apple-text-secondary);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     background-color 240ms var(--ease-apple-spring),
     color 200ms ease,
     box-shadow 240ms var(--ease-apple-spring),
     transform 180ms var(--ease-apple-snappy);
+}
+
+.segmentPill:focus {
+  outline: none;
 }
 
 .segmentPill:hover {
@@ -874,9 +898,17 @@
   align-items: center;
   justify-content: center;
   font-size: 13px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast);
+}
+
+.replayIconButton:focus {
+  outline: none;
 }
 
 .replayIconButton:hover:not(:disabled) {

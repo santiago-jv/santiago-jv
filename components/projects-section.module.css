@@ -21,6 +21,12 @@
   border-radius: var(--radius-bento);
   border: 1px solid var(--apple-border);
   overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bentoTile:focus {
+  outline: none;
 }
 
 .bentoWidePrimary {

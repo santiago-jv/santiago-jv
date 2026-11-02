@@ -97,7 +97,16 @@
   border-radius: 50%;
   color: var(--apple-text-primary);
   font-size: 1rem;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition: background-color var(--transition-fast);
+}
+
+.header__menu-button:focus,
+.navbar__close-icon:focus {
+  outline: none;
 }
 
 .header__menu-button:hover,
@@ -170,7 +179,15 @@
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.015em;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navbar__link:focus {
+  outline: none;
 }
 
 .navbar__item:hover .navbar__link {
@@ -193,9 +210,17 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast);
+}
+
+.resumeButton:focus {
+  outline: none;
 }
 
 .resumeButton:hover {

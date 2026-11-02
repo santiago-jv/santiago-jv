@@ -27,6 +27,12 @@
   border: 1px solid var(--apple-border);
   box-shadow: var(--shadow-bento);
   overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.experienceCard:focus {
+  outline: none;
 }
 
 .experienceCard::before {

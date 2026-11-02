@@ -149,6 +149,10 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   border: 1px solid rgba(0, 0, 0, 0.04);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     transform var(--transition-fast),
     background-color var(--transition-fast),
@@ -182,10 +186,19 @@
   font-size: 0.98rem;
   font-weight: 500;
   letter-spacing: -0.015em;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     transform var(--transition-fast),
     background-color var(--transition-fast),
     box-shadow var(--transition-fast);
+}
+
+.primaryPillButton:focus,
+.secondaryPillButton:focus {
+  outline: none;
 }
 
 .primaryPillButton {
@@ -229,6 +242,12 @@
   font-size: 0.98rem;
   font-weight: 500;
   letter-spacing: -0.012em;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.appleChevronLink:focus {
+  outline: none;
 }
 
 .appleChevronLink:hover span:first-child {
@@ -269,11 +288,19 @@
   color: var(--apple-text-primary);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   font-size: 0.95rem;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     transform 280ms var(--ease-apple-spring),
     background-color var(--transition-fast),
     color var(--transition-fast),
     box-shadow 280ms var(--ease-apple-spring);
+}
+
+.dockItem:focus {
+  outline: none;
 }
 
 .dockItem:hover {

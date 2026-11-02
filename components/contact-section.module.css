@@ -85,9 +85,16 @@
   padding: 14px 10px;
   margin: 2px -10px;
   border-radius: 16px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast);
+}
+
+.channelRowLink:focus,
+.channelRowButton:focus {
+  outline: none;
 }
 
 .channelRowLink:hover,
@@ -301,10 +308,18 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   box-shadow: 0 6px 18px rgba(29, 29, 31, 0.16);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
   transition:
     background-color var(--transition-fast),
     transform var(--transition-fast),
     box-shadow var(--transition-fast);
+}
+
+.submitButton:focus {
+  outline: none;
 }
 
 .submitButton:hover:not(:disabled) {
