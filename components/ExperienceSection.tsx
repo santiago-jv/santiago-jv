@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import SectionHeading from '@/components/SectionHeading';
+import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
 import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './experience-section.module.css';
@@ -34,7 +35,7 @@ const ExperienceSection: React.FC = () => {
                   <p className={styles.roleTitle}>{item.role}</p>
 
                   <span className={styles.locationMeta}>
-                    <i className="fa-solid fa-location-dot" aria-hidden="true" />
+                    <PortfolioIcon name="fa-location-dot" />
                     {item.location}
                   </span>
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
+import PortfolioIcon from '@/components/PortfolioIcon';
 import styles from './footer.module.css';
 
 const Footer: React.FC = () => {
@@ -59,7 +60,7 @@ const Footer: React.FC = () => {
                     className={styles.socialButton}
                     aria-label={`${footer.followAriaPrefix} ${social.label}`}
                   >
-                    <i className={social.iconClassName} aria-hidden="true" />
+                    <PortfolioIcon name={social.iconClassName} />
                   </a>
                 </li>
               ))}

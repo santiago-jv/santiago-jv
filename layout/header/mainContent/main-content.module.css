@@ -31,46 +31,49 @@
   text-align: center;
 }
 
+@keyframes appleHeroLcpSettle {
+  from {
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @keyframes appleHeroReveal {
   from {
     opacity: 0;
-    transform: translate3d(0, 26px, 0) scale(0.985);
-    filter: blur(8px);
+    transform: translate3d(0, 18px, 0) scale(0.985);
   }
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0px);
   }
 }
 
+/* Primary LCP text paints immediately at opacity:1 on frame 0 (zero LCP render delay) */
 .heroStagger1,
 .heroStagger2,
-.heroStagger3,
+.heroStagger3 {
+  opacity: 1;
+  animation: appleHeroLcpSettle 520ms var(--ease-apple-spring) both;
+}
+
 .heroStagger4,
 .heroStagger5,
 .heroStagger6 {
   opacity: 0;
-  animation: appleHeroReveal 880ms var(--ease-apple-spring) forwards;
+  animation: appleHeroReveal 680ms var(--ease-apple-spring) forwards;
 }
 
-.heroStagger1 {
-  animation-delay: 50ms;
-}
-.heroStagger2 {
-  animation-delay: 130ms;
-}
-.heroStagger3 {
-  animation-delay: 210ms;
-}
 .heroStagger4 {
-  animation-delay: 290ms;
+  animation-delay: 80ms;
 }
 .heroStagger5 {
-  animation-delay: 370ms;
+  animation-delay: 140ms;
 }
 .heroStagger6 {
-  animation-delay: 440ms;
+  animation-delay: 200ms;
 }
 
 .eyebrowPill {

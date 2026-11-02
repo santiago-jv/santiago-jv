@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './header.module.css';
 import { usePreferences } from '@/context/PreferencesContext';
+import PortfolioIcon from '@/components/PortfolioIcon';
 
 const Header: React.FC = () => {
   const { content } = usePreferences();
@@ -8,20 +9,16 @@ const Header: React.FC = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHeaderReady, setIsHeaderReady] = useState(false);
 
   useEffect(() => {
     const handleScroll = (): void => {
-      setIsScrolled(window.scrollY > 16);
+      const nextScrolled = window.scrollY > 16;
+      setIsScrolled((prev) => (prev !== nextScrolled ? nextScrolled : prev));
     };
 
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsHeaderReady(true);
   }, []);
 
   useEffect(() => {
@@ -44,7 +41,7 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`${styles.header} ${isScrolled ? styles['header--scrolled'] : ''} ${isHeaderReady ? styles['header--ready'] : ''}`}
+        className={`${styles.header} ${isScrolled ? styles['header--scrolled'] : ''} ${styles['header--ready']}`}
       >
         <div className={styles.headerInner}>
           <a href="#about" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
@@ -71,7 +68,7 @@ const Header: React.FC = () => {
                 aria-label={headerContent.closeMenuAriaLabel}
                 type="button"
               >
-                <i className="fa-solid fa-xmark" aria-hidden="true"></i>
+                <PortfolioIcon name="fa-xmark" />
               </button>
             </header>
 
@@ -118,7 +115,7 @@ const Header: React.FC = () => {
             aria-controls="site-menu"
             type="button"
           >
-            <i className="fa-solid fa-bars" aria-hidden="true"></i>
+            <PortfolioIcon name="fa-bars" />
           </button>
         </div>
         <div className={styles.progressTrack} aria-hidden="true">

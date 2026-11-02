@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import SectionHeading from '@/components/SectionHeading';
+import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
 import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './projects-section.module.css';
@@ -38,7 +39,7 @@ const ProjectsSection: React.FC = () => {
                       className={`${styles.iconSquircle} ${isAccentTile ? styles.iconSquircleAccent : ''}`}
                       aria-hidden="true"
                     >
-                      <i className={project.iconClassName || 'fa-solid fa-code'} />
+                      <PortfolioIcon name={project.iconClassName || 'fa-server'} />
                     </div>
 
                     {project.status && (

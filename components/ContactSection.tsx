@@ -1,5 +1,6 @@
 import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
+import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
 import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './contact-section.module.css';
@@ -173,7 +174,7 @@ const ContactSection: React.FC = () => {
                         className={styles.channelRowButton}
                       >
                         <div className={styles.channelIcon}>
-                          <i className={item.iconClassName} aria-hidden="true" />
+                          <PortfolioIcon name={item.iconClassName} />
                         </div>
 
                         <div className={styles.channelMeta}>
@@ -196,7 +197,7 @@ const ContactSection: React.FC = () => {
                 const inner = (
                   <>
                     <div className={styles.channelIcon}>
-                      <i className={item.iconClassName} aria-hidden="true" />
+                      <PortfolioIcon name={item.iconClassName} />
                     </div>
 
                     <div className={styles.channelMeta}>

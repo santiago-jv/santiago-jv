@@ -29,10 +29,10 @@
   --apple-border-strong: rgba(0, 0, 0, 0.14);
   --apple-hairline: #d2d2d7;
 
-  /* Native Apple SF Pro stack first on macOS/iOS, clean fallback elsewhere */
-  --font-family-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
-  --font-family-mono: 'SF Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
+  /* Native Apple SF Pro stack first on macOS/iOS, self-hosted next/font with swap + size-adjust elsewhere */
+  --font-family-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'SF Mono', ui-monospace, Menlo, monospace;
 
   /* Radii */
   --radius-bento: 28px;
@@ -83,6 +83,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+[data-font-scope] {
+  --font-family-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--font-jakarta, 'Helvetica Neue'), Arial, sans-serif;
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-jakarta, 'Helvetica Neue'), Arial, sans-serif;
+  --font-family-mono: 'SF Mono', ui-monospace, var(--font-jetbrains, Menlo), monospace;
+  font-family: var(--font-family-base);
 }
 
 ::selection {

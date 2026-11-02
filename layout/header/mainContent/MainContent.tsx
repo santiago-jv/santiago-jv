@@ -1,7 +1,10 @@
 import type { CSSProperties } from 'react';
+import dynamic from 'next/dynamic';
 import styles from './main-content.module.css';
 import { usePreferences } from '@/context/PreferencesContext';
-import MacBookShowcase from '@/components/MacBookShowcase';
+import PortfolioIcon from '@/components/PortfolioIcon';
+
+const MacBookShowcase = dynamic(() => import('@/components/MacBookShowcase'), { ssr: true });
 
 function splitLeadSentence(text: string): { lead: string; rest: string } {
   const dotIdx = text.indexOf('. ');
@@ -70,7 +73,7 @@ const MainContent: React.FC = () => {
             rel="noreferrer noopener"
             className={styles.secondaryPillButton}
           >
-            <i className={hero.secondaryCta.iconClassName} aria-hidden="true" />
+            <PortfolioIcon name={hero.secondaryCta.iconClassName} />
             {hero.secondaryCta.label}
           </a>
 
@@ -101,7 +104,7 @@ const MainContent: React.FC = () => {
                 aria-label={social.label}
                 title={social.label}
               >
-                <i className={social.iconClassName} aria-hidden="true" />
+                <PortfolioIcon name={social.iconClassName} />
               </a>
             </li>
           ))}

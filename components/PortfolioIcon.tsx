@@ -1,0 +1,236 @@
+import React from 'react';
+
+interface PortfolioIconProps {
+  name?: string;
+  className?: string;
+}
+
+export const PortfolioIcon: React.FC<PortfolioIconProps> = ({ name = '', className }) => {
+  const token = name.toLowerCase();
+
+  if (token.includes('linkedin')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="currentColor"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3.02a1.97 1.97 0 1 0 0 3.94 1.97 1.97 0 0 0 0-3.94ZM20.44 13.02c0-3.47-1.85-5.08-4.33-5.08-1.99 0-2.89 1.1-3.39 1.87V8.5H9.34c.04.95 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.69.13-.93.27-.69.89-1.4 1.93-1.4 1.36 0 1.9 1.04 1.9 2.56V20h3.38v-6.98h.38Z" />
+      </svg>
+    );
+  }
+
+  if (token.includes('github')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="currentColor"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.92.85.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.25 10.25 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z" />
+      </svg>
+    );
+  }
+
+  if (token.includes('x-twitter')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="currentColor"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z" />
+      </svg>
+    );
+  }
+
+  if (token.includes('envelope')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <rect x="3" y="5" width="18" height="14" rx="2.5" />
+        <path d="m3.5 6.5 8.5 6 8.5-6" />
+      </svg>
+    );
+  }
+
+  if (token.includes('file-pdf')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M14 2.5H7a2.5 2.5 0 0 0-2.5 2.5v14A2.5 2.5 0 0 0 7 21.5h10a2.5 2.5 0 0 0 2.5-2.5V8L14 2.5Z" />
+        <path d="M14 2.5V8h5.5M9 13.5h6M9 17h4" />
+      </svg>
+    );
+  }
+
+  if (token.includes('location-dot')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="currentColor"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M12 2.25a7.25 7.25 0 0 0-7.25 7.25c0 5.08 6.14 11.45 6.4 11.72a1.2 1.2 0 0 0 1.7 0c.26-.27 6.4-6.64 6.4-11.72A7.25 7.25 0 0 0 12 2.25Zm0 9.85a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2Z" />
+      </svg>
+    );
+  }
+
+  if (token.includes('server')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <rect x="3" y="3.5" width="18" height="7" rx="2" />
+        <rect x="3" y="13.5" width="18" height="7" rx="2" />
+        <circle cx="7" cy="7" r="1" fill="currentColor" stroke="none" />
+        <circle cx="7" cy="17" r="1" fill="currentColor" stroke="none" />
+        <path d="M11.5 7h6M11.5 17h6" />
+      </svg>
+    );
+  }
+
+  if (token.includes('diagram-project')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <rect x="3" y="4" width="6" height="5" rx="1.5" />
+        <rect x="15" y="4" width="6" height="5" rx="1.5" />
+        <rect x="9" y="15" width="6" height="5" rx="1.5" />
+        <path d="M9 6.5h6M12 9v6" />
+      </svg>
+    );
+  }
+
+  if (token.includes('chart-line')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.95"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M3.5 4.5v15h17" />
+        <path d="m7 14.5 4-4 3 2.5 5.5-6" />
+      </svg>
+    );
+  }
+
+  if (token.includes('layer-group')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="m12 3.5 9 4.5-9 4.5L3 8l9-4.5Z" />
+        <path d="m3 12.5 9 4.5 9-4.5" />
+        <path d="m3 16.5 9 4.5 9-4.5" />
+      </svg>
+    );
+  }
+
+  if (token.includes('xmark')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M6 6l12 12M18 6 6 18" />
+      </svg>
+    );
+  }
+
+  if (token.includes('bars')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    );
+  }
+
+  return null;
+};
+
+export default PortfolioIcon;
