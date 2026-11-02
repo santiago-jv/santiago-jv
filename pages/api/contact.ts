@@ -213,15 +213,11 @@ export default async function handler(
       return;
     }
 
-    const systemPrefixes = ['AWS_', 'VERCEL', 'LAMBDA_', 'NODE_', '_', 'PATH', 'LD_', 'LANG', 'TZ', 'HOME'];
-    const customKeys = Object.keys(process.env).filter(
-      (k) => !systemPrefixes.some((prefix) => k.startsWith(prefix))
-    );
-
     res.status(503).json({
       ok: false,
       code: 'DELIVERY_FAILED',
-      message: `RESEND_API_KEY is missing in Vercel environment. Custom env keys found in production: [${customKeys.join(', ')}].`,
+      message:
+        'RESEND_API_KEY is not defined in the Vercel Production environment. Please ensure it is saved for "Production" in Vercel Settings -> Environment Variables.',
     });
     return;
   }
