@@ -173,7 +173,28 @@ export default async function handler(
     return;
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY?.trim();
+  const getResendApiKey = (): string | undefined => {
+    if (process.env.RESEND_API_KEY?.trim()) return process.env.RESEND_API_KEY.trim();
+
+    for (const [key, value] of Object.entries(process.env)) {
+      if (typeof value === 'string' && value.trim()) {
+        const normalized = key.trim().toUpperCase();
+        if (
+          normalized === 'RESEND_API_KEY' ||
+          normalized === 'NEXT_PUBLIC_RESEND_API_KEY' ||
+          normalized === 'RESEND_KEY' ||
+          normalized === 'RESEND_TOKEN' ||
+          normalized === 'RESEND_API' ||
+          normalized === 'RESEND'
+        ) {
+          return value.trim();
+        }
+      }
+    }
+    return undefined;
+  };
+
+  const resendApiKey = getResendApiKey();
   const toEmail = process.env.CONTACT_TO_EMAIL?.trim() || 'contact@santiago-jv.tech';
   const fromEmail =
     process.env.CONTACT_FROM_EMAIL?.trim() || 'Santiago Portfolio <noreply@santiago-jv.tech>';
@@ -192,10 +213,15 @@ export default async function handler(
       return;
     }
 
+    const matchingKeys = Object.keys(process.env).filter((k) =>
+      k.toUpperCase().includes('RESEND')
+    );
     res.status(503).json({
       ok: false,
       code: 'DELIVERY_FAILED',
-      message: 'RESEND_API_KEY is not defined in the server environment. Please redeploy in Vercel to apply the environment variable.',
+      message: `RESEND_API_KEY is missing in Vercel environment (detected related keys: ${
+        matchingKeys.length ? matchingKeys.join(', ') : 'none'
+      }).`,
     });
     return;
   }
