@@ -45,7 +45,7 @@
   aspect-ratio: 680 / 434;
   transform-style: preserve-3d;
   transform-origin: 50% 100%;
-  transform: rotateX(var(--lid-angle));
+  transform: translateZ(1px) rotateX(var(--lid-angle));
   will-change: transform;
   z-index: 4;
 }
@@ -53,7 +53,7 @@
 .lidAluminumSlice {
   position: absolute;
   inset: 0;
-  border-radius: 22px 22px 6px 6px;
+  border-radius: 22px 22px 1.5px 1.5px;
   background: linear-gradient(90deg, #1b1b1f 0%, #2f2f35 12%, #18181b 50%, #2f2f35 88%, #1b1b1f 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   pointer-events: none;
@@ -62,7 +62,7 @@
 .lidOuterCover {
   position: absolute;
   inset: 0;
-  border-radius: 22px 22px 6px 6px;
+  border-radius: 22px 22px 1.5px 1.5px;
   background: linear-gradient(160deg, #2a2a2e 0%, #19191d 52%, #101013 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.18);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
@@ -105,7 +105,7 @@
 .lidInnerScreen {
   position: absolute;
   inset: 0;
-  border-radius: 22px 22px 6px 6px;
+  border-radius: 22px 22px 1.5px 1.5px;
   background: #070709;
   padding: 9px 9px 13px;
   border: 2px solid #2b2b30;
@@ -592,15 +592,25 @@
 }
 
 /* =========================================================
-   2. CLAMSHELL HINGE CLUTCH
+   2. CLAMSHELL HINGE CLUTCH (Light-tight full-seam barrel)
    ========================================================= */
 .hingeClutch {
-  width: 68%;
-  height: 6px;
-  margin-top: -2px;
-  background: linear-gradient(180deg, #050507 0%, #242429 52%, #0c0c0f 100%);
-  border-radius: 2px;
-  z-index: 5;
+  width: 86%;
+  height: 12px;
+  margin-top: -7px;
+  margin-bottom: -7px;
+  transform: translateZ(-1.5px);
+  background: linear-gradient(
+    90deg,
+    #18181c 0%,
+    #0b0b0e 10%,
+    #19191e 50%,
+    #0b0b0e 90%,
+    #18181c 100%
+  );
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* =========================================================
@@ -610,7 +620,7 @@
   position: relative;
   width: 86%;
   aspect-ratio: 680 / 434;
-  margin-top: -2px;
+  margin-top: -5px;
   transform-style: preserve-3d;
   transform-origin: 50% 0%;
   transform: rotateX(79deg);
@@ -637,7 +647,7 @@
 .chassisExtrusionSlice {
   position: absolute;
   inset: 0;
-  border-radius: 22px;
+  border-radius: 1.5px 1.5px 22px 22px;
   background: linear-gradient(
     90deg,
     #141417 0%,
@@ -837,7 +847,8 @@
   }
 
   .lidAssembly,
-  .baseAssembly {
+  .baseAssembly,
+  .hingeClutch {
     width: 92%;
   }
 

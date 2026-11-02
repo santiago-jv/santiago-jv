@@ -252,20 +252,17 @@ export const MacBookKeyboardSvg: React.FC = () => {
         </pattern>
       </defs>
 
-      {/* Solid Unibody Anodized Space Black Top Case */}
-      <rect
-        x="0.75"
-        y="0.75"
-        width="678.5"
-        height="432.5"
-        rx="22"
+      {/* Solid Unibody Anodized Space Black Top Case (Squared M4 rear hinge edge, 22px front palm-rest corners) */}
+      <path
+        d="M 2.25 0.75 H 677.75 A 1.5 1.5 0 0 1 679.25 2.25 V 411.25 A 22 22 0 0 1 657.25 433.25 H 22.75 A 22 22 0 0 1 0.75 411.25 V 2.25 A 1.5 1.5 0 0 1 2.25 0.75 Z"
         fill="url(#deckAluminum)"
         stroke="rgba(255,255,255,0.16)"
         strokeWidth="1.5"
       />
 
-      {/* Rear Hinge Exhaust Recess */}
-      <rect x="86" y="4" width="508" height="7" rx="3" fill="#09090b" opacity="0.85" />
+      {/* Full-Width Rear Hinge Shadow Seam + Exhaust Recess */}
+      <rect x="2" y="1" width="676" height="8" rx="1" fill="#0b0b0e" opacity="0.95" />
+      <rect x="86" y="3.5" width="508" height="6.5" rx="3" fill="#050507" />
 
       {/* Left & Right 6-Speaker Micro-Perforated Grilles */}
       <rect x="20" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
