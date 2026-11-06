@@ -146,7 +146,7 @@ const Header: React.FC = () => {
           </button>
         </div>
         <div className={styles.progressTrack} aria-hidden="true">
-          <div className={styles.progressBar} />
+          <div className={styles.progressBar} data-scroll-progress-bar="" />
         </div>
       </header>
 

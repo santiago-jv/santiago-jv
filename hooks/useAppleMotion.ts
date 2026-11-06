@@ -64,6 +64,7 @@ export function useApplePageMotion(dependencyKey?: string): void {
       });
 
       let rafId = 0;
+      const progressBarEl = document.querySelector<HTMLElement>('[data-scroll-progress-bar]');
       let cachedScrollableHeight = Math.max(
         1,
         document.documentElement.scrollHeight - window.innerHeight
@@ -71,11 +72,11 @@ export function useApplePageMotion(dependencyKey?: string): void {
 
       const updateScrollMetrics = (): void => {
         const scrollY = window.scrollY || window.pageYOffset || 0;
-        const heroProgress = Math.min(1, Math.max(0, scrollY / 560));
         const pageProgress = Math.min(1, Math.max(0, scrollY / cachedScrollableHeight));
 
-        document.documentElement.style.setProperty('--hero-progress', heroProgress.toFixed(4));
-        document.documentElement.style.setProperty('--page-progress', pageProgress.toFixed(4));
+        if (progressBarEl) {
+          progressBarEl.style.transform = `scale3d(${pageProgress.toFixed(4)}, 1, 1)`;
+        }
         rafId = 0;
       };
 

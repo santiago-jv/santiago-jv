@@ -83,7 +83,8 @@
   height: 100%;
   background: var(--apple-accent);
   transform-origin: left center;
-  transform: scaleX(var(--page-progress, 0));
+  transform: scale3d(0, 1, 1);
+  will-change: transform;
   opacity: 0.9;
 }
 

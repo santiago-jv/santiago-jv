@@ -54,7 +54,7 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
     const applyDetectedLocale = (): void => {
       const detected = detectDeviceLocale();
-      setLocale(detected);
+      setLocale((prev) => (prev === detected ? prev : detected));
       syncDocumentLocale(detected);
     };
 

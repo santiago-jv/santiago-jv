@@ -36,31 +36,10 @@ const CLOSED_ANGLE = -101;
 const INITIAL_OPEN_ANGLE = -12;
 const SCROLL_OPEN_ANGLE = -2;
 
-const EXTRUSION_LAYERS = [-1.5, -3, -4.5, -6, -7.5, -9, -10.5, -12];
-const LID_THICKNESS_LAYERS = [-1.2, -2.4, -3.6];
+const EXTRUSION_LAYERS = [-3, -6, -9, -12];
+const LID_THICKNESS_LAYERS = [-1.8, -3.4];
 
-const easeMacBookOpen = (t: number): number => {
-  if (t <= 0) return 0;
-  if (t >= 1) return 1;
-  const p = Math.pow(t, 2.05);
-  const q = Math.pow(1 - t, 2.45);
-  return p / (p + q);
-};
-
-const easeMacBookClose = (t: number): number => {
-  if (t <= 0) return 0;
-  if (t >= 1) return 1;
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-};
-
-export const MacBookShowcase: React.FC = () => {
-  const { locale } = usePreferences();
-  const stageRef = useRef<HTMLDivElement | null>(null);
-  const rigRef = useRef<HTMLDivElement | null>(null);
-
-  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
-  const [selectedNodeIndex, setSelectedNodeIndex] = useState<number>(1);
-  const [isReplaying, setIsReplaying] = useState(false);
+const StudioClock: React.FC = React.memo(function StudioClock() {
   const [localTime, setLocalTime] = useState<{ full: string; short: string }>({
     full: '',
     short: '',
@@ -79,6 +58,49 @@ export const MacBookShowcase: React.FC = () => {
     return () => window.clearTimeout(timeoutId);
   }, []);
 
+  return (
+    <span className={styles.clockText}>
+      <span className={styles.clockFull}>{localTime.full}</span>
+      <span className={styles.clockShort}>{localTime.short}</span>
+    </span>
+  );
+});
+
+const easeMacBookOpen = (t: number): number => {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  const p = Math.pow(t, 2.05);
+  const q = Math.pow(1 - t, 2.45);
+  return p / (p + q);
+};
+
+const easeMacBookClose = (t: number): number => {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+};
+
+export const MacBookShowcase: React.FC = () => {
+  const { locale } = usePreferences();
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const sceneRef = useRef<HTMLDivElement | null>(null);
+  const tiltStageRef = useRef<HTMLDivElement | null>(null);
+  const macbookRigRef = useRef<HTMLDivElement | null>(null);
+  const lidAssemblyRef = useRef<HTMLDivElement | null>(null);
+  const lidGlintRef = useRef<HTMLDivElement | null>(null);
+  const glassReflectionRef = useRef<HTMLDivElement | null>(null);
+  const screenVeilRef = useRef<HTMLDivElement | null>(null);
+  const deckVeilRef = useRef<HTMLDivElement | null>(null);
+  const contactShadowRef = useRef<HTMLDivElement | null>(null);
+  const ambientShadowRef = useRef<HTMLDivElement | null>(null);
+  const isCompactRef = useRef<boolean>(false);
+  const isCoarsePointerRef = useRef<boolean>(false);
+  const lastAppliedAngleRef = useRef<number>(Number.NaN);
+
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+  const [selectedNodeIndex, setSelectedNodeIndex] = useState<number>(1);
+  const [isReplaying, setIsReplaying] = useState(false);
+
   const studio = ARCHITECTURE_STUDIO_CONTENT[locale];
   const currentTab = studio.tabs[activeTabIndex] || studio.tabs[0];
   const activeNode = currentTab.nodes[selectedNodeIndex] || currentTab.nodes[1];
@@ -89,96 +111,200 @@ export const MacBookShowcase: React.FC = () => {
     setSelectedNodeIndex(nextTab?.topology === 'release-pipeline' ? 0 : 1);
   };
 
-  const applyAngleToDom = useCallback((angleDeg: number) => {
-    const rig = rigRef.current;
-    if (!rig) return;
-
+  const applyAngleToDom = useCallback((angleDeg: number, force = false) => {
     const clamped = Math.max(CLOSED_ANGLE, Math.min(0, angleDeg));
-    const openRatio = (clamped - CLOSED_ANGLE) / (0 - CLOSED_ANGLE);
-    const screenWake = Math.max(0, Math.min(1, (clamped - -86) / 44));
-    const deckWake = Math.max(0, Math.min(1, (clamped - -92) / 22));
+    if (!force && Math.abs(clamped - lastAppliedAngleRef.current) < 0.004) {
+      return;
+    }
+    lastAppliedAngleRef.current = clamped;
 
-    rig.style.setProperty('--lid-angle', `${clamped.toFixed(2)}deg`);
-    rig.style.setProperty('--open-ratio', openRatio.toFixed(4));
-    rig.style.setProperty('--screen-wake', screenWake.toFixed(4));
-    rig.style.setProperty('--deck-wake', deckWake.toFixed(4));
+    const openRatio = (clamped - CLOSED_ANGLE) / (0 - CLOSED_ANGLE);
+    const invRatio = 1 - openRatio;
+    const screenWake = Math.max(0, Math.min(1, (clamped - -86) / 44));
+    const deckWake = Math.max(0, Math.min(1, (clamped - -92) / 26));
+
+    const rig = macbookRigRef.current;
+    if (rig) {
+      rig.style.transform = `translate3d(0, ${(invRatio * -26).toFixed(2)}px, 0) rotateX(${(
+        invRatio * -15
+      ).toFixed(2)}deg) scale(${(0.95 + openRatio * 0.05).toFixed(4)})`;
+    }
+
+    const lid = lidAssemblyRef.current;
+    if (lid) {
+      lid.style.transform = `translate3d(0, -4px, 1.5px) rotateX(${clamped.toFixed(2)}deg)`;
+    }
+
+    if (clamped < -80 && lidGlintRef.current) {
+      lidGlintRef.current.style.transform = `translate3d(${(
+        (openRatio - 0.32) *
+        96
+      ).toFixed(1)}%, 0, 0)`;
+    }
+
+    const screenVeil = screenVeilRef.current;
+    if (screenVeil) {
+      const veilAlpha = 1 - screenWake;
+      if (veilAlpha <= 0.002) {
+        if (screenVeil.style.visibility !== 'hidden') {
+          screenVeil.style.opacity = '0';
+          screenVeil.style.visibility = 'hidden';
+        }
+      } else {
+        if (screenVeil.style.visibility === 'hidden') {
+          screenVeil.style.visibility = 'visible';
+        }
+        screenVeil.style.opacity = veilAlpha.toFixed(3);
+      }
+    }
+
+    const deckVeil = deckVeilRef.current;
+    if (deckVeil) {
+      const deckAlpha = 1 - deckWake;
+      if (deckAlpha <= 0.002) {
+        if (deckVeil.style.visibility !== 'hidden') {
+          deckVeil.style.opacity = '0';
+          deckVeil.style.visibility = 'hidden';
+        }
+      } else {
+        if (deckVeil.style.visibility === 'hidden') {
+          deckVeil.style.visibility = 'visible';
+        }
+        deckVeil.style.opacity = deckAlpha.toFixed(3);
+      }
+    }
+
+    const contactShadow = contactShadowRef.current;
+    if (contactShadow) {
+      const travelPx = isCompactRef.current ? 42 : 64;
+      contactShadow.style.transform = `translate3d(0, ${(invRatio * travelPx).toFixed(1)}px, 0)`;
+    }
+
+    const ambientShadow = ambientShadowRef.current;
+    if (ambientShadow) {
+      ambientShadow.style.transform = `scale3d(${(0.92 + openRatio * 0.08).toFixed(3)}, 1, 1)`;
+    }
   }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    isCoarsePointerRef.current = Boolean(
+      window.matchMedia && window.matchMedia('(pointer: coarse)').matches
+    );
+    isCompactRef.current = window.innerWidth <= 760;
+
     const prefersReducedMotion =
       window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      applyAngleToDom(SCROLL_OPEN_ANGLE);
+      if (sceneRef.current) sceneRef.current.dataset.lidMoving = 'false';
+      applyAngleToDom(SCROLL_OPEN_ANGLE, true);
       return;
     }
 
     let introProgress = 0;
     let scrollBoost = 0;
-    let rafId = 0;
+    let scrollRafId = 0;
     let introFrameId = 0;
+    let settleRaf1 = 0;
+    let settleRaf2 = 0;
     let startTime = 0;
-    const initialHoldMs = 420;
-    const introDuration = 2450;
+    let stageDocTop = 0;
+    let viewportH = window.innerHeight || 900;
+    const initialHoldMs = 360;
+    const introDuration = 2400;
 
-    applyAngleToDom(CLOSED_ANGLE);
-
-    const computeScrollBoost = (): number => {
+    const measureStageGeometry = (): void => {
       const stage = stageRef.current;
-      if (!stage) return 0;
+      isCompactRef.current = window.innerWidth <= 760;
+      viewportH = window.innerHeight || 900;
+      if (!stage) return;
       const rect = stage.getBoundingClientRect();
-      const viewportH = window.innerHeight || 900;
-      const raw = (viewportH * 0.8 - rect.top) / (viewportH * 0.55);
+      stageDocTop = rect.top + (window.scrollY || window.pageYOffset || 0);
+    };
+
+    const computeScrollBoostFromScrollY = (): number => {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const rectTop = stageDocTop - scrollY;
+      const raw = (viewportH * 0.8 - rectTop) / (viewportH * 0.55);
       return Math.max(0, Math.min(1, raw));
     };
 
-    const renderCurrentAngle = (): void => {
+    const renderCurrentAngle = (force = false): void => {
       const baseTarget = CLOSED_ANGLE + (INITIAL_OPEN_ANGLE - CLOSED_ANGLE) * introProgress;
       const finalAngle =
         baseTarget + (SCROLL_OPEN_ANGLE - baseTarget) * (scrollBoost * introProgress);
-      applyAngleToDom(finalAngle);
+      applyAngleToDom(finalAngle, force);
     };
+
+    if (sceneRef.current) {
+      sceneRef.current.dataset.lidMoving = 'true';
+    }
+    measureStageGeometry();
+    scrollBoost = computeScrollBoostFromScrollY();
+    applyAngleToDom(CLOSED_ANGLE, true);
 
     const stepIntro = (timestamp: number): void => {
       if (!startTime) startTime = timestamp;
       const elapsed = Math.max(0, timestamp - startTime - initialHoldMs);
       const rawT = Math.min(1, elapsed / introDuration);
       introProgress = easeMacBookOpen(rawT);
-      scrollBoost = computeScrollBoost();
       renderCurrentAngle();
 
       if (rawT < 1) {
         introFrameId = window.requestAnimationFrame(stepIntro);
+      } else if (sceneRef.current) {
+        sceneRef.current.dataset.lidMoving = 'false';
       }
     };
 
-    introFrameId = window.requestAnimationFrame(stepIntro);
+    settleRaf1 = window.requestAnimationFrame(() => {
+      settleRaf2 = window.requestAnimationFrame(() => {
+        measureStageGeometry();
+        scrollBoost = computeScrollBoostFromScrollY();
+        introFrameId = window.requestAnimationFrame(stepIntro);
+      });
+    });
 
     const onScroll = (): void => {
-      if (rafId) return;
-      rafId = window.requestAnimationFrame(() => {
-        scrollBoost = computeScrollBoost();
+      if (scrollRafId) return;
+      scrollRafId = window.requestAnimationFrame(() => {
+        scrollBoost = computeScrollBoostFromScrollY();
         renderCurrentAngle();
-        rafId = 0;
+        scrollRafId = 0;
+      });
+    };
+
+    const onResize = (): void => {
+      if (scrollRafId) return;
+      scrollRafId = window.requestAnimationFrame(() => {
+        measureStageGeometry();
+        scrollBoost = computeScrollBoostFromScrollY();
+        renderCurrentAngle(true);
+        scrollRafId = 0;
       });
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
 
     return () => {
+      window.cancelAnimationFrame(settleRaf1);
+      window.cancelAnimationFrame(settleRaf2);
       window.cancelAnimationFrame(introFrameId);
-      if (rafId) window.cancelAnimationFrame(rafId);
+      if (scrollRafId) window.cancelAnimationFrame(scrollRafId);
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
     };
   }, [applyAngleToDom]);
 
   const handleReplay = (): void => {
     if (isReplaying) return;
     setIsReplaying(true);
+    if (sceneRef.current) {
+      sceneRef.current.dataset.lidMoving = 'true';
+    }
 
     const startClose = performance.now();
     const closeDuration = 920;
@@ -210,6 +336,9 @@ export const MacBookShowcase: React.FC = () => {
       if (openT < 1) {
         window.requestAnimationFrame(animateReplay);
       } else {
+        if (sceneRef.current) {
+          sceneRef.current.dataset.lidMoving = 'false';
+        }
         setIsReplaying(false);
       }
     };
@@ -218,22 +347,28 @@ export const MacBookShowcase: React.FC = () => {
   };
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>): void => {
-    const rig = rigRef.current;
-    if (!rig) return;
+    if (isCoarsePointerRef.current) return;
+    const tiltStage = tiltStageRef.current;
+    if (!tiltStage) return;
     const rect = event.currentTarget.getBoundingClientRect();
     const normX = (event.clientX - rect.left) / rect.width - 0.5;
     const normY = (event.clientY - rect.top) / rect.height - 0.5;
-    rig.style.setProperty('--tilt-y', `${(normX * 3.8).toFixed(2)}deg`);
-    rig.style.setProperty('--tilt-x', `${(-normY * 2.0).toFixed(2)}deg`);
-    rig.style.setProperty('--sheen-x', `${((normX + 0.5) * 100).toFixed(1)}%`);
+    tiltStage.style.transform = `rotateX(${(-normY * 2.0).toFixed(2)}deg) rotateY(${(
+      normX * 3.8
+    ).toFixed(2)}deg)`;
+    if (glassReflectionRef.current) {
+      const sheenX = ((normX + 0.5) * 100).toFixed(1);
+      glassReflectionRef.current.style.background = `linear-gradient(118deg, transparent 18%, rgba(255, 255, 255, 0.04) ${sheenX}%, rgba(255, 255, 255, 0.012) ${(
+        Number(sheenX) + 14
+      ).toFixed(1)}%, transparent 78%)`;
+    }
   };
 
   const handleMouseLeave = (): void => {
-    const rig = rigRef.current;
-    if (!rig) return;
-    rig.style.setProperty('--tilt-y', '0deg');
-    rig.style.setProperty('--tilt-x', '0deg');
-    rig.style.setProperty('--sheen-x', '50%');
+    if (isCoarsePointerRef.current) return;
+    if (tiltStageRef.current) {
+      tiltStageRef.current.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    }
   };
 
   const topology = currentTab.topology;
@@ -304,17 +439,19 @@ export const MacBookShowcase: React.FC = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div ref={rigRef} className={styles.macbookScene}>
-        <div className={styles.macbookTiltStage}>
-          <div className={styles.macbookRig}>
+      <div ref={sceneRef} className={styles.macbookScene} data-lid-moving="true">
+        <div ref={tiltStageRef} className={styles.macbookTiltStage}>
+          <div ref={macbookRigRef} className={styles.macbookRig}>
             {/* =========================================================
                 1. UNIBODY DISPLAY LID (Exact same 680x434 footprint as Base)
                ========================================================= */}
-            <div className={styles.lidAssembly}>
-              {LID_THICKNESS_LAYERS.map((z) => (
+            <div ref={lidAssemblyRef} className={styles.lidAssembly}>
+              {LID_THICKNESS_LAYERS.map((z, idx) => (
                 <div
                   key={z}
-                  className={styles.lidAluminumSlice}
+                  className={`${styles.lidAluminumSlice} ${
+                    idx === 0 ? styles.sliceDesktopOnly : ''
+                  }`}
                   style={{ transform: `translateZ(${z}px)` }}
                   aria-hidden="true"
                 />
@@ -322,7 +459,7 @@ export const MacBookShowcase: React.FC = () => {
 
               {/* Outer Anodized Space Black Top Shell (Visible when closed) */}
               <div className={styles.lidOuterCover} aria-hidden="true">
-                <div className={styles.lidOuterGlint} />
+                <div ref={lidGlintRef} className={styles.lidOuterGlint} />
                 <div className={styles.lidOuterEmblem}>
                   <svg
                     viewBox="0 0 64 64"
@@ -341,9 +478,11 @@ export const MacBookShowcase: React.FC = () => {
 
             {/* Inner Liquid Retina XDR Display */}
             <div className={styles.lidInnerScreen}>
-              <div className={styles.glassReflection} aria-hidden="true" />
+              <div ref={glassReflectionRef} className={styles.glassReflection} aria-hidden="true" />
 
               <div className={styles.retinaDisplay}>
+                <div ref={screenVeilRef} className={styles.screenWakeVeil} aria-hidden="true" />
+
                 {/* Authentic M4 MacBook Pro Camera Notch */}
                 <div className={styles.cameraNotch} aria-hidden="true">
                   <span className={styles.cameraLens} />
@@ -466,10 +605,7 @@ export const MacBookShowcase: React.FC = () => {
                       </span>
                     </div>
 
-                    <span className={styles.clockText}>
-                      <span className={styles.clockFull}>{localTime.full}</span>
-                      <span className={styles.clockShort}>{localTime.short}</span>
-                    </span>
+                    <StudioClock />
                   </div>
                 </div>
 
@@ -912,17 +1048,18 @@ export const MacBookShowcase: React.FC = () => {
           <div className={styles.baseAssembly} aria-hidden="true">
             <div className={styles.baseTopDeck}>
               <MacBookKeyboardSvg />
+              <div ref={deckVeilRef} className={styles.deckWakeVeil} />
             </div>
 
             {EXTRUSION_LAYERS.map((z, idx) => (
               <div
                 key={z}
                 className={`${styles.chassisExtrusionSlice} ${
-                  idx === EXTRUSION_LAYERS.length - 1 ? styles.chassisBottomBevel : ''
-                }`}
+                  idx % 2 === 0 ? styles.sliceDesktopOnly : ''
+                } ${idx === EXTRUSION_LAYERS.length - 1 ? styles.chassisBottomBevel : ''}`}
                 style={{ transform: `translateZ(${z}px)` }}
               >
-                {idx < 5 && <span className={styles.frontThumbGroove} />}
+                {idx < 3 && <span className={styles.frontThumbGroove} />}
               </div>
             ))}
 
@@ -930,8 +1067,8 @@ export const MacBookShowcase: React.FC = () => {
             <div className={styles.rubberFootRight} />
           </div>
 
-          <div className={styles.contactShadow} aria-hidden="true" />
-          <div className={styles.ambientFloorShadow} aria-hidden="true" />
+          <div ref={contactShadowRef} className={styles.contactShadow} aria-hidden="true" />
+          <div ref={ambientShadowRef} className={styles.ambientFloorShadow} aria-hidden="true" />
           </div>
         </div>
       </div>

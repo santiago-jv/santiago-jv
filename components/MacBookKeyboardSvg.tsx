@@ -215,7 +215,7 @@ const renderArrowPolygon = (key: KeySpec): JSX.Element | null => {
   return null;
 };
 
-export const MacBookKeyboardSvg: React.FC = () => {
+export const MacBookKeyboardSvg: React.FC = React.memo(function MacBookKeyboardSvg() {
   return (
     <svg
       viewBox="0 0 680 434"
@@ -264,7 +264,7 @@ export const MacBookKeyboardSvg: React.FC = () => {
       <rect x="2" y="1" width="676" height="8" rx="1" fill="#0b0b0e" opacity="0.95" />
       <rect x="86" y="3.5" width="508" height="6.5" rx="3" fill="#050507" />
 
-      <g className={styles.deckInnerSurface}>
+      <g>
         {/* Left & Right 6-Speaker Micro-Perforated Grilles */}
         <rect x="20" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
         <rect x="622" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
@@ -282,9 +282,9 @@ export const MacBookKeyboardSvg: React.FC = () => {
       />
 
       {/* =========================================================
-          LAYER 1: WHITE LED BACKLIGHT UNDER-KEY GLOW (Synced to lid wake)
+          LAYER 1: WHITE LED BACKLIGHT UNDER-KEY GLOW
          ========================================================= */}
-      <g className={styles.keyboardBacklight}>
+      <g>
         <rect x="73" y="32" width="534" height="218" rx="8" fill="url(#kbBacklightBed)" />
 
         {/* Soft ambient halo around every key cutout */}
@@ -346,7 +346,6 @@ export const MacBookKeyboardSvg: React.FC = () => {
           LAYER 3: LASER-ETCHED BACKLIT US-ANSI KEY LEGENDS
          ========================================================= */}
       <g
-        className={styles.keyboardBacklight}
         fill="#f5f9ff"
         fontFamily="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif"
       >
@@ -521,6 +520,6 @@ export const MacBookKeyboardSvg: React.FC = () => {
       />
     </svg>
   );
-};
+});
 
 export default MacBookKeyboardSvg;

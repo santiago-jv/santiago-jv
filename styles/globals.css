@@ -55,7 +55,6 @@
   --transition-slow: 720ms var(--ease-apple-spring);
 
   --z-sticky: 1020;
-  --hero-progress: 0;
 }
 
 *,
@@ -182,32 +181,30 @@ i {
   color: inherit;
 }
 
-/* Apple Scroll-Triggered Choreographed Reveal */
+/* Apple Scroll-Triggered Choreographed Reveal (Pure GPU Compositor: opacity + transform) */
 [data-apple-reveal] {
   opacity: 0;
-  transform: translate3d(0, 28px, 0) scale(0.985);
-  filter: blur(6px);
+  transform: translate3d(0, 24px, 0) scale(0.988);
   transition:
-    opacity 760ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
-    transform 540ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
-    filter 760ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
-    box-shadow 480ms var(--ease-apple-spring),
-    border-color 300ms var(--ease-apple-snappy);
-  will-change: opacity, transform, filter;
+    opacity 680ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
+    transform 520ms var(--ease-apple-spring) var(--reveal-delay, 0ms),
+    box-shadow 420ms var(--ease-apple-spring),
+    border-color 280ms var(--ease-apple-snappy);
+  will-change: opacity, transform;
 }
 
 [data-apple-reveal='visible'] {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0px);
+  will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
   [data-apple-reveal] {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
+    will-change: auto;
   }
 }
 
