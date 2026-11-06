@@ -44,11 +44,11 @@
 }
 
 .brandMark {
-  width: 21px;
-  height: 21px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   display: block;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
 .wordmark {

@@ -49,7 +49,7 @@
 .lidAluminumSlice {
   position: absolute;
   inset: 0;
-  border-radius: 22px 22px 1.5px 1.5px;
+  border-radius: 26px;
   background: linear-gradient(90deg, #1b1b1f 0%, #2f2f35 12%, #18181b 50%, #2f2f35 88%, #1b1b1f 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   pointer-events: none;
@@ -58,7 +58,7 @@
 .lidOuterCover {
   position: absolute;
   inset: 0;
-  border-radius: 1.5px 1.5px 22px 22px;
+  border-radius: 26px;
   background:
     radial-gradient(ellipse 70% 55% at 50% 48%, rgba(255, 255, 255, 0.055) 0%, transparent 72%),
     linear-gradient(160deg, #2b2b30 0%, #1a1a1f 52%, #101014 100%);
@@ -90,13 +90,16 @@
 .lidOuterEmblem {
   position: relative;
   z-index: 2;
-  width: 54px;
-  height: 54px;
+  width: 78px;
+  height: 78px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 4px 22px rgba(0, 0, 0, 0.55),
+    0 1px 4px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .lidOuterEmblemSvg {
@@ -109,7 +112,7 @@
 .lidInnerScreen {
   position: absolute;
   inset: 0;
-  border-radius: 22px 22px 1.5px 1.5px;
+  border-radius: 24px 24px 5px 5px;
   background: #070709;
   padding: 9px 9px 13px;
   border: 2px solid #2b2b30;
@@ -837,8 +840,10 @@
    2. CLAMSHELL HINGE CLUTCH (Light-tight full-seam barrel)
    ========================================================= */
 .hingeClutch {
-  width: 86%;
+  width: 74%;
   height: 12px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: -6px;
   margin-bottom: -6px;
   transform: translateZ(-1.5px);
@@ -850,7 +855,7 @@
     #0b0b0e 90%,
     #18181c 100%
   );
-  border-radius: 1px;
+  border-radius: 3px;
   pointer-events: none;
   z-index: 2;
 }
@@ -866,6 +871,7 @@
   transform-style: preserve-3d;
   transform-origin: 50% 0%;
   transform: rotateX(79deg);
+  border-radius: 22px 22px 24px 24px;
   z-index: 3;
 }
 
@@ -873,6 +879,8 @@
   position: absolute;
   inset: 0;
   transform: translateZ(0px);
+  border-radius: 22px 22px 24px 24px;
+  overflow: hidden;
 }
 
 .topCaseSvg {
@@ -897,7 +905,7 @@
 .chassisExtrusionSlice {
   position: absolute;
   inset: 0;
-  border-radius: 1.5px 1.5px 22px 22px;
+  border-radius: 22px 22px 24px 24px;
   background: linear-gradient(
     90deg,
     #141417 0%,
@@ -1154,23 +1162,32 @@
   }
 
   .lidAssembly,
-  .baseAssembly,
-  .hingeClutch {
+  .baseAssembly {
     width: 95%;
   }
 
-  .lidOuterCover {
-    border-radius: 1.5px 1.5px 17px 17px;
+  .hingeClutch {
+    width: 78%;
+  }
+
+  .lidOuterCover,
+  .lidAluminumSlice {
+    border-radius: 20px;
   }
 
   .lidOuterEmblem {
-    width: 42px;
-    height: 42px;
+    width: 58px;
+    height: 58px;
   }
 
   .lidInnerScreen {
     padding: 7px 7px 10px;
-    border-radius: 17px 17px 1.5px 1.5px;
+    border-radius: 18px 18px 4px 4px;
+  }
+
+  .baseTopDeck,
+  .chassisExtrusionSlice {
+    border-radius: 18px 18px 20px 20px;
   }
 
   .cameraNotch {
@@ -1404,9 +1421,12 @@
 
 @media (max-width: 480px) {
   .lidAssembly,
-  .baseAssembly,
-  .hingeClutch {
+  .baseAssembly {
     width: 98%;
+  }
+
+  .hingeClutch {
+    width: 80%;
   }
 
   .liveBadgeText {

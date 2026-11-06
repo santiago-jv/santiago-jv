@@ -40,10 +40,7 @@
     0 16px 36px rgba(0, 0, 0, 0.065),
     0 2px 8px rgba(0, 0, 0, 0.025);
   --brand-accent-active: var(--brand-accent, var(--brand-color));
-  --slack-pink: #e01e5a;
-  --slack-blue: #36c5f0;
-  --slack-green: #2eb67d;
-  --slack-gold: #ecb22e;
+  --nequi-magenta: #da0081;
   --fb-orange: #ff9100;
   --fb-amber: #ffc400;
   --fb-red: #dd2c00;

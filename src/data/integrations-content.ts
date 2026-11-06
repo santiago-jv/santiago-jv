@@ -8,7 +8,7 @@ export type IntegrationBrandId =
   | 'clevertap'
   | 'appsflyer'
   | 'retool'
-  | 'slack'
+  | 'nequi'
   | 'intercom'
   | 'twilio'
   | 'sendgrid'
@@ -97,12 +97,13 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
         brandBorder: 'rgba(60, 107, 242, 0.24)',
       },
       {
-        id: 'slack',
-        name: 'Slack',
-        category: 'Alerts & Internal Bots',
-        brandColor: '#4A154B',
-        brandTint: 'rgba(74, 21, 75, 0.075)',
-        brandBorder: 'rgba(224, 30, 90, 0.22)',
+        id: 'nequi',
+        name: 'Nequi',
+        category: 'Digital Wallet & Payments',
+        brandColor: '#200020',
+        brandTint: 'rgba(218, 0, 129, 0.085)',
+        brandBorder: 'rgba(218, 0, 129, 0.24)',
+        brandAccent: '#DA0081',
       },
       {
         id: 'intercom',
@@ -205,12 +206,13 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
         brandBorder: 'rgba(60, 107, 242, 0.24)',
       },
       {
-        id: 'slack',
-        name: 'Slack',
-        category: 'Alertas y Bots Internos',
-        brandColor: '#4A154B',
-        brandTint: 'rgba(74, 21, 75, 0.075)',
-        brandBorder: 'rgba(224, 30, 90, 0.22)',
+        id: 'nequi',
+        name: 'Nequi',
+        category: 'Billetera Digital y Pagos',
+        brandColor: '#200020',
+        brandTint: 'rgba(218, 0, 129, 0.085)',
+        brandBorder: 'rgba(218, 0, 129, 0.24)',
+        brandAccent: '#DA0081',
       },
       {
         id: 'intercom',
