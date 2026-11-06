@@ -1,0 +1,65 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './experience-section.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = PORTFOLIO_CONTENT[locale];
+---
+
+<section id="experience" class={styles.experienceSection}>
+  <div class={styles.container}>
+    <SectionHeading content={content.experienceHeading} />
+
+    <div class={styles.cardsStack}>
+      {content.experiences.map((item, index) => {
+        const isCurrent = index === 0;
+        return (
+          <article
+            class={styles.experienceCard}
+            data-apple-reveal
+            style={`--reveal-delay: ${index * 90}ms;`}
+          >
+            <div class={styles.metaColumn}>
+              <div class={styles.periodPill}>
+                {isCurrent && <span class={styles.liveDot} aria-hidden="true" />}
+                <span>{item.period}</span>
+              </div>
+
+              <h3 class={styles.companyName}>{item.company}</h3>
+              <p class={styles.roleTitle}>{item.role}</p>
+
+              <span class={styles.locationMeta}>
+                <PortfolioIcon name="fa-location-dot" />
+                {item.location}
+              </span>
+            </div>
+
+            <div class={styles.detailsColumn}>
+              <ul class={styles.highlightsList}>
+                {item.highlights.map((bullet) => (
+                  <li class={styles.highlightItem}>
+                    <span class={styles.bulletMarker} aria-hidden="true" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <ul class={styles.techList} aria-label={`${item.company} technologies`}>
+                {item.tech.map((tech) => (
+                  <li class={styles.techBadge}>{tech}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

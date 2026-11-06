@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import MainContent from '@/components/MainContent.astro';
+import ExperienceSection from '@/components/ExperienceSection.astro';
+import ProjectsSection from '@/components/ProjectsSection.astro';
+import IntegrationsSection from '@/components/IntegrationsSection.astro';
+import McpShowcaseSection from '@/components/McpShowcaseSection.astro';
+import ContactSection from '@/components/ContactSection.astro';
+import Footer from '@/components/Footer.astro';
+import type { Locale } from '@/types/portfolio';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<BaseLayout locale={locale}>
+  <Header locale={locale} />
+  <MainContent locale={locale} />
+  <ExperienceSection locale={locale} />
+  <ProjectsSection locale={locale} />
+  <IntegrationsSection locale={locale} />
+  <McpShowcaseSection locale={locale} />
+  <ContactSection locale={locale} />
+  <Footer locale={locale} />
+</BaseLayout>

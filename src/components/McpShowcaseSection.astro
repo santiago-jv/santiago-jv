@@ -1,0 +1,188 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import {
+  MCP_CONTENT,
+  MCP_DOCS_URL,
+  MCP_ENDPOINT_URL,
+  MCP_GATEWAY_URL,
+} from '@/data/mcp-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './mcp-showcase-section.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = MCP_CONTENT[locale].showcase;
+const previews = [
+  { key: 'recruiter' as const, data: copy.recruiterPreview },
+  { key: 'engineering' as const, data: copy.engineeringPreview },
+];
+---
+
+<section id="mcp" class={styles.mcpSection}>
+  <div class={styles.container}>
+    <SectionHeading
+      content={{
+        number: '04.',
+        title: copy.eyebrow,
+        subtitle: copy.subtitle,
+        description: copy.description,
+      }}
+    />
+
+    <div class={styles.showcaseGrid}>
+      {/* Left: Signature Anodized Space Black Pro MCP Console */}
+      <div class={styles.consoleCard} data-apple-reveal data-mcp-console>
+        <div class={styles.consoleInner}>
+          <div class={styles.consoleHeader}>
+            <div class={styles.windowLights} aria-hidden="true">
+              <span class={styles.lightDot} />
+              <span class={styles.lightDot} />
+              <span class={styles.lightDot} />
+            </div>
+
+            <a href={MCP_GATEWAY_URL} class={styles.hostBadge}>
+              mcp.santiago-jv.tech
+            </a>
+
+            <span class={styles.livePill}>
+              <span class={styles.livePulse} aria-hidden="true" />
+              <span>{copy.liveStatusLabel}</span>
+            </span>
+          </div>
+
+          <div class={styles.endpointBox}>
+            <div class={styles.endpointMeta}>
+              <span class={styles.endpointEyebrow}>{copy.endpointLabel}</span>
+              <code class={styles.endpointCode}>{MCP_ENDPOINT_URL}</code>
+            </div>
+
+            <button
+              type="button"
+              class={styles.copyEndpointBtn}
+              data-mcp-copy-endpoint
+              data-endpoint-url={MCP_ENDPOINT_URL}
+              data-default-label={copy.copyUrlLabel}
+              data-copied-label={copy.copiedLabel}
+            >
+              <span data-copy-icon style="display:inline-flex">
+                <PortfolioIcon name="fa-copy" />
+              </span>
+              <span data-check-icon hidden style="display:inline-flex">
+                <PortfolioIcon name="fa-check" />
+              </span>
+              <span data-copy-label>{copy.copyUrlLabel}</span>
+            </button>
+          </div>
+
+          <div class={styles.segmentedBar} role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              class={styles.segmentBtn}
+              data-mcp-tab="recruiter"
+            >
+              {copy.tabs.recruiter}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class={styles.segmentBtn}
+              data-mcp-tab="engineering"
+            >
+              {copy.tabs.engineering}
+            </button>
+          </div>
+
+          {previews.map(({ key, data }) => (
+            <div
+              class={styles.terminalViewport}
+              data-mcp-panel={key}
+              hidden={key !== 'recruiter' ? true : undefined}
+            >
+              <div class={styles.commandLine}>
+                <span class={styles.promptArrow} aria-hidden="true">
+                  ❯
+                </span>
+                <code class={styles.commandCode}>{data.command}</code>
+              </div>
+
+              <div class={styles.responseCard}>
+                <div class={styles.responseTop}>
+                  <span class={styles.scoreBadge}>{data.scoreBadge}</span>
+                  <span class={styles.verdictText}>{data.verdict}</span>
+                </div>
+
+                <p class={styles.responseSummary}>{data.summary}</p>
+
+                <ul class={styles.matchedPillsList}>
+                  {data.matchedPills.map((pill) => (
+                    <li class={styles.matchedPill}>{pill}</li>
+                  ))}
+                </ul>
+
+                <p class={styles.footnoteText}>{data.footnote}</p>
+              </div>
+            </div>
+          ))}
+
+          <div class={styles.consoleActions}>
+            <a href={MCP_DOCS_URL} class={styles.primaryDocsBtn}>
+              <span>{copy.primaryCta}</span>
+              <span aria-hidden="true">›</span>
+            </a>
+
+            <button
+              type="button"
+              class={styles.secondaryPromptBtn}
+              data-mcp-copy-prompt
+              data-recruiter-prompt={copy.recruiterPreview.copyPrompt}
+              data-engineering-prompt={copy.engineeringPreview.copyPrompt}
+              data-recruiter-cta={copy.recruiterPreview.copyCtaLabel}
+              data-engineering-cta={copy.engineeringPreview.copyCtaLabel}
+              data-copied-cta={copy.secondaryCopiedLabel}
+            >
+              <span data-copy-icon style="display:inline-flex">
+                <PortfolioIcon name="fa-copy" />
+              </span>
+              <span data-check-icon hidden style="display:inline-flex">
+                <PortfolioIcon name="fa-check" />
+              </span>
+              <span data-copy-label>{copy.recruiterPreview.copyCtaLabel}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Right: 3 Daylight Value Proposition Cards */}
+      <div class={styles.valueStack}>
+        {copy.valueCards.map((card, index) => (
+          <article
+            class={styles.valueCard}
+            data-apple-reveal
+            style={`--reveal-delay: ${(index + 1) * 90}ms;`}
+          >
+            <div class={styles.valueCardTop}>
+              <div class={styles.valueIconSquircle} aria-hidden="true">
+                <PortfolioIcon name={card.icon} />
+              </div>
+              <span class={styles.valueEyebrow}>{card.eyebrow}</span>
+            </div>
+
+            <h3 class={styles.valueTitle}>{card.title}</h3>
+            <p class={styles.valueDescription}>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/mcp-console';
+</script>

@@ -1,0 +1,110 @@
+---
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import MacBookShowcase from '@/components/MacBookShowcase.astro';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './main-content.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const hero = PORTFOLIO_CONTENT[locale].hero;
+
+function splitLeadSentence(text: string): { lead: string; rest: string } {
+  const dotIdx = text.indexOf('. ');
+  if (dotIdx === -1) {
+    return { lead: text, rest: '' };
+  }
+  return {
+    lead: text.slice(0, dotIdx + 1),
+    rest: text.slice(dotIdx + 1),
+  };
+}
+
+const { lead, rest } = splitLeadSentence(hero.summary);
+const eyebrowLabel =
+  locale === 'es'
+    ? 'Ingeniero de Software · Backend, Cloud e IA'
+    : 'Software Engineer · Backend, Cloud & AI Tooling';
+---
+
+<main id="about" class={styles.heroSection}>
+  <div class={styles.heroAmbient} aria-hidden="true" />
+
+  <div class={styles.heroInner}>
+    <div class={`${styles.eyebrowPill} ${styles.heroStagger1}`}>
+      <span class={styles.eyebrowDot} aria-hidden="true" />
+      <span>{eyebrowLabel}</span>
+    </div>
+
+    <h1 class={`${styles.displayTitle} ${styles.heroStagger2}`}>
+      {hero.name}
+    </h1>
+
+    <p class={`${styles.editorialLead} ${styles.heroStagger3}`}>
+      <strong class={styles.leadPrimary}>{lead}</strong>{' '}
+      {rest && <span class={styles.leadSecondary}>{rest}</span>}
+    </p>
+
+    <ul class={`${styles.specPills} ${styles.heroStagger4}`} aria-label={hero.coreStackAriaLabel}>
+      {hero.highlights.map((item) => (
+        <li class={styles.specPill}>{item}</li>
+      ))}
+    </ul>
+
+    <div class={`${styles.ctaGroup} ${styles.heroStagger5}`}>
+      <a
+        href={hero.primaryCta.href}
+        download={hero.primaryCta.download}
+        class={styles.primaryPillButton}
+        aria-label={hero.primaryCta.label}
+      >
+        {hero.primaryCta.label}
+      </a>
+
+      <a
+        href={hero.secondaryCta.href}
+        target="_blank"
+        rel="noreferrer noopener"
+        class={styles.secondaryPillButton}
+      >
+        <PortfolioIcon name={hero.secondaryCta.iconClassName} />
+        {hero.secondaryCta.label}
+      </a>
+
+      {hero.tertiaryCta && (
+        <a
+          href={hero.tertiaryCta.href}
+          class={styles.appleChevronLink}
+          data-smooth-anchor={hero.tertiaryCta.href.startsWith('#') ? '' : undefined}
+        >
+          <span>{hero.tertiaryCta.label}</span>
+          <span class={styles.chevron} aria-hidden="true">
+            ›
+          </span>
+        </a>
+      )}
+    </div>
+
+    <ul class={`${styles.dockList} ${styles.heroStagger6}`} aria-label={hero.socialLinksAriaLabel}>
+      {hero.socialLinks.map((social, index) => (
+        <li style={`--dock-idx: ${index};`}>
+          <a
+            href={social.href}
+            target={social.href.startsWith('http') ? '_blank' : '_self'}
+            rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+            class={styles.dockItem}
+            aria-label={social.label}
+            title={social.label}
+          >
+            <PortfolioIcon name={social.iconClassName} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <MacBookShowcase locale={locale} />
+</main>

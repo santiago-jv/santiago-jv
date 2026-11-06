@@ -1,0 +1,166 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource-variable/jetbrains-mono';
+import '@/styles/globals.css';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  noindex?: boolean;
+}
+
+const { locale, title, noindex = false } = Astro.props;
+const content = PORTFOLIO_CONTENT[locale];
+const seo = content.seo;
+const resolvedTitle = title || seo.title;
+const siteOrigin = seo.siteUrl.replace(/\/$/, '');
+const canonicalUrl = locale === 'es' ? `${siteOrigin}/es/` : `${siteOrigin}/`;
+const ogImageUrl = `${siteOrigin}${seo.ogImage}`;
+
+const jsonLdSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  dateModified: '2026-11-06',
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Santiago Olayo Villamil',
+    alternateName: ['Santiago Olayo', 'santiago-jv', 'santiagojv_tech'],
+    jobTitle: 'Senior Software Engineer',
+    description: seo.description,
+    url: canonicalUrl,
+    email: 'mailto:contact@santiago-jv.tech',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Barranquilla',
+      addressRegion: 'Atlántico',
+      addressCountry: 'CO',
+    },
+    worksFor: {
+      '@type': 'Organization',
+      name: 'GoodRec',
+    },
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Universidad del Magdalena',
+    },
+    knowsAbout: [
+      'Fullstack Engineering',
+      'Backend Engineering',
+      'Node.js',
+      'NestJS',
+      'TypeScript',
+      'Java',
+      'Spring Boot',
+      'Hexagonal Architecture',
+      'Domain-Driven Design (DDD)',
+      'Model Context Protocol (MCP)',
+      'Cloudflare Workers',
+      'Large Language Models (LLMs)',
+      'AWS',
+      'Google Cloud Functions',
+      'PostgreSQL',
+      'MongoDB',
+      'Redis Distributed Locks',
+      'Datadog',
+      'CleverTap',
+      'Metabase',
+      'Stripe',
+      'Refácil',
+      'Tusdatos.co',
+      'AppsFlyer',
+      'Retool',
+      'Slack Bots & Alerts',
+      'Intercom',
+      'Twilio',
+      'SendGrid',
+      'Firebase Cloud Messaging (FCM)',
+      'Feature Ownership',
+    ],
+    sameAs: [
+      'https://www.linkedin.com/in/santiago-jv',
+      'https://github.com/santiago-jv',
+      'https://x.com/santiagojv_tech',
+    ],
+  },
+};
+
+const localeInitScript =
+  locale === 'en' && !noindex
+    ? `(function(){try{if(navigator.webdriver)return;if(window.sessionStorage.getItem('sjv-lang-init'))return;window.sessionStorage.setItem('sjv-lang-init','1');var langs=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||'en'];var p=String(langs[0]||'en').trim().toLowerCase();if(p.indexOf('es')===0){window.location.replace('/es/'+window.location.search+window.location.hash);}}catch(e){}})();`
+    : `(function(){try{window.sessionStorage.setItem('sjv-lang-init','1');}catch(e){}})();`;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <script is:inline set:html={localeInitScript} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=white-bg-black-s" />
+    <link rel="shortcut icon" href="/favicon.svg?v=white-bg-black-s" />
+    <link rel="apple-touch-icon" href="/favicon.svg?v=white-bg-black-s" />
+
+    <meta name="description" content={seo.description} />
+    <meta name="author" content="Santiago Olayo Villamil (santiago-jv)" />
+    <meta
+      name="keywords"
+      content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Senior Software Engineer, Senior Backend Engineer, Fullstack Engineer, Cloud Infrastructure, AI Internal Tooling, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare Workers, Stripe, Retool, Slack Bots, Firebase FCM, Twilio, SendGrid, Intercom, AppsFlyer, Tusdatos.co, Refácil, Datadog, CleverTap, Metabase, AWS, Colombia"
+    />
+    <meta
+      name="robots"
+      content={
+        noindex
+          ? 'noindex, follow'
+          : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+      }
+    />
+
+    {!noindex && (
+      <>
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hreflang="en" href={`${siteOrigin}/`} />
+        <link rel="alternate" hreflang="es" href={`${siteOrigin}/es/`} />
+        <link rel="alternate" hreflang="x-default" href={`${siteOrigin}/`} />
+      </>
+    )}
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context Summary" />
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM Full Context" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Santiago Olayo — Portfolio" />
+    <meta property="og:locale" content={seo.ogLocale} />
+    <meta property="og:locale:alternate" content={seo.ogLocale === 'en_US' ? 'es_CO' : 'en_US'} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@santiagojv_tech" />
+    <meta name="twitter:creator" content="@santiagojv_tech" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {!noindex && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(jsonLdSchema)}
+      />
+    )}
+
+    <title>{resolvedTitle}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '@/scripts/page-motion';
+    </script>
+  </body>
+</html>

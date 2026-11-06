@@ -1,0 +1,117 @@
+---
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './footer.module.css';
+
+interface Props {
+  locale: Locale;
+  isHomePage?: boolean;
+}
+
+const { locale, isHomePage = true } = Astro.props;
+const footer = PORTFOLIO_CONTENT[locale].footer;
+const currentYear = new Date().getFullYear();
+const homeBase = locale === 'es' ? '/es/' : '/';
+const altLocaleHref = locale === 'es' ? '/' : '/es/';
+const altLocaleLabel = locale === 'es' ? 'English' : 'Español';
+---
+
+<footer class={styles.footer}>
+  <div class={styles.container}>
+    <div class={styles.directoryGrid}>
+      <div class={styles.brandColumn}>
+        <p class={styles.wordmark}>Santiago Olayo</p>
+        <p class={styles.brandDescription}>{footer.brand.description}</p>
+      </div>
+
+      <div class={styles.directoryColumn}>
+        <h4 class={styles.columnTitle}>{footer.sectionTitles.navigation}</h4>
+        <ul class={styles.linksList}>
+          {footer.quickLinks.map((link) => {
+            const resolvedHref =
+              !isHomePage && link.href.startsWith('#') ? `${homeBase}${link.href}` : link.href;
+            return (
+              <li>
+                <a
+                  href={resolvedHref}
+                  class={styles.footerLink}
+                  data-smooth-anchor={isHomePage && link.href.startsWith('#') ? '' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div class={styles.directoryColumn}>
+        <h4 class={styles.columnTitle}>{footer.sectionTitles.technologies}</h4>
+        <ul class={styles.skillsCloud}>
+          {footer.skills.map((skill) => (
+            <li class={styles.skillItem}>{skill}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class={styles.directoryColumn}>
+        <h4 class={styles.columnTitle}>{footer.sectionTitles.connect}</h4>
+        <div class={styles.connectMeta}>
+          <a href={`mailto:${footer.email}`} class={styles.footerLink}>
+            {footer.email}
+          </a>
+          <p class={styles.locationText}>{footer.location}</p>
+        </div>
+
+        <ul class={styles.socialList}>
+          {footer.socialLinks.map((social) => (
+            <li>
+              <a
+                href={social.href}
+                target={social.href.startsWith('http') ? '_blank' : '_self'}
+                rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                class={styles.socialButton}
+                aria-label={`${footer.followAriaPrefix} ${social.label}`}
+              >
+                <PortfolioIcon name={social.iconClassName} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class={styles.legalBar}>
+      <div class={styles.legalLeft}>
+        <span>
+          Copyright © {currentYear} Santiago Olayo. {footer.rightsReserved}
+        </span>
+        <span class={styles.legalDivider} aria-hidden="true">
+          |
+        </span>
+        <span>{footer.builtWith}</span>
+      </div>
+
+      <div class={styles.legalRight}>
+        <a
+          href={altLocaleHref}
+          hreflang={locale === 'es' ? 'en' : 'es'}
+          class={styles.localeSwitchLink}
+        >
+          {altLocaleLabel}
+        </a>
+        <span class={styles.versionTag}>{footer.version}</span>
+        <a
+          href={footer.sourceUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+          class={styles.sourceLink}
+        >
+          <span>{footer.sourceLabel}</span>
+          <span aria-hidden="true">›</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

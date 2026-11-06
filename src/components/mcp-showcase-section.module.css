@@ -1,0 +1,431 @@
+.mcpSection {
+  padding: 116px 0 124px;
+  background-color: var(--apple-bg-white);
+  position: relative;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Signature Anodized Space Black Pro Console */
+.consoleCard {
+  position: relative;
+  border-radius: var(--radius-bento);
+  background: linear-gradient(155deg, #222226 0%, #141417 55%, #0c0c0e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: #f5f5f7;
+  overflow: hidden;
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.16);
+}
+
+.consoleCard ::selection {
+  background: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+.consoleInner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.consoleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.windowLights {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.lightDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.hostBadge {
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  color: #a1a1a6;
+  letter-spacing: -0.01em;
+}
+
+.livePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4.5px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(29, 131, 72, 0.16);
+  border: 1px solid rgba(52, 199, 89, 0.28);
+  color: #7ee29a;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.livePulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34c759;
+  box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.22);
+}
+
+.endpointBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-wrap: wrap;
+}
+
+.endpointMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.endpointEyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8e8e93;
+}
+
+.endpointCode {
+  font-family: var(--font-family-mono);
+  font-size: 13.5px;
+  color: #ffffff;
+  word-break: break-all;
+}
+
+.copyEndpointBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.copyEndpointBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.segmentedBar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.segmentBtn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #a1a1a6;
+  text-align: center;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.segmentBtn:hover {
+  color: #f5f5f7;
+}
+
+.segmentBtnActive,
+.segmentBtn[aria-selected='true'] {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+}
+
+.terminalViewport {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex: 1;
+}
+
+.terminalViewport[hidden] {
+  display: none !important;
+}
+
+.commandLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.promptArrow {
+  color: #34c759;
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.commandCode {
+  font-family: var(--font-family-mono);
+  font-size: 12.2px;
+  line-height: 1.55;
+  color: #e5e5ea;
+  word-break: break-word;
+}
+
+.responseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.responseTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.scoreBadge {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-family: var(--font-family-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.verdictText {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #d1d1d6;
+}
+
+.responseSummary {
+  font-size: 13.8px;
+  line-height: 1.55;
+  color: #c7c7cc;
+}
+
+.matchedPillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6.5px;
+}
+
+.matchedPill {
+  padding: 4.5px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: #f5f5f7;
+  font-size: 11.8px;
+  font-weight: 500;
+}
+
+.footnoteText {
+  font-size: 11.5px;
+  color: #8e8e93;
+  letter-spacing: -0.005em;
+}
+
+.consoleActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.primaryDocsBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  color: #1d1d1f;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.primaryDocsBtn:hover {
+  background: #f5f5f7;
+  transform: translateY(-1px);
+}
+
+.secondaryPromptBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11.5px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f5f5f7;
+  font-size: 13.8px;
+  font-weight: 500;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.secondaryPromptBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Right Stack: Daylight Value Cards */
+.valueStack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.valueCard {
+  position: relative;
+  flex: 1;
+  padding: 28px 30px;
+  border-radius: var(--radius-bento);
+  background: var(--apple-bg-stone);
+  border: 1px solid var(--apple-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.valueCard:hover {
+  transform: translate3d(0, -4px, 0);
+  box-shadow: var(--shadow-bento-hover);
+  border-color: var(--apple-border-strong);
+}
+
+.valueCardTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.valueIconSquircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--apple-bg-white);
+  border: 1px solid var(--apple-border);
+  color: var(--apple-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.valueEyebrow {
+  font-size: 11.8px;
+  font-weight: 600;
+  color: var(--apple-text-secondary);
+  letter-spacing: -0.005em;
+}
+
+.valueTitle {
+  font-family: var(--font-family-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.026em;
+  color: var(--apple-text-primary);
+}
+
+.valueDescription {
+  font-size: 14.5px;
+  line-height: 1.56;
+  color: var(--apple-text-secondary);
+}
+
+@media (max-width: 960px) {
+  .mcpSection {
+    padding: 88px 0 96px;
+  }
+
+  .showcaseGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 18px;
+  }
+
+  .consoleInner {
+    padding: 22px 18px;
+  }
+
+  .segmentedBar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .valueCard {
+    padding: 24px 22px;
+  }
+}

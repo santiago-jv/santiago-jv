@@ -1,0 +1,197 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './contact-section.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const contactContent = PORTFOLIO_CONTENT[locale].contact;
+const labels = contactContent.formLabels;
+---
+
+<section id="contact" class={styles.contactSection} data-contact-section>
+  <div class={styles.container}>
+    <SectionHeading content={contactContent.heading} />
+
+    <div class={styles.contactBentoGrid}>
+      <div class={styles.channelsCard} data-apple-reveal style="--reveal-delay: 0ms;">
+        <h3 class={styles.cardHeading}>{contactContent.introTitle}</h3>
+
+        <ul class={styles.channelList}>
+          {contactContent.infoItems.map((item) => {
+            if (item.copyValue) {
+              return (
+                <li class={styles.channelItem}>
+                  <button
+                    type="button"
+                    class={styles.channelRowButton}
+                    data-contact-copy={item.copyValue}
+                    data-copy-label={labels.copyActionLabel}
+                    data-copied-label={`✓ ${labels.copiedLabel}`}
+                  >
+                    <div class={styles.channelIcon}>
+                      <PortfolioIcon name={item.iconClassName} />
+                    </div>
+
+                    <div class={styles.channelMeta}>
+                      <span class={styles.channelLabel}>{item.label}</span>
+                      <span class={styles.channelValue}>{item.value}</span>
+                    </div>
+
+                    <span class={styles.copyPill} data-copy-pill data-copied="false">
+                      {labels.copyActionLabel}
+                    </span>
+                  </button>
+                </li>
+              );
+            }
+
+            return (
+              <li class={styles.channelItem}>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    download={item.download}
+                    class={styles.channelRowLink}
+                    target={item.href.startsWith('http') ? '_blank' : '_self'}
+                    rel={item.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                  >
+                    <div class={styles.channelIcon}>
+                      <PortfolioIcon name={item.iconClassName} />
+                    </div>
+
+                    <div class={styles.channelMeta}>
+                      <span class={styles.channelLabel}>{item.label}</span>
+                      <span class={styles.channelValue}>{item.value}</span>
+                    </div>
+
+                    <span class={styles.rowChevron} aria-hidden="true">
+                      ›
+                    </span>
+                  </a>
+                ) : (
+                  <div class={styles.channelRowStatic}>
+                    <div class={styles.channelIcon}>
+                      <PortfolioIcon name={item.iconClassName} />
+                    </div>
+
+                    <div class={styles.channelMeta}>
+                      <span class={styles.channelLabel}>{item.label}</span>
+                      <span class={styles.channelValue}>{item.value}</span>
+                    </div>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div class={styles.formCard} data-apple-reveal style="--reveal-delay: 95ms;">
+        <h3 class={styles.cardHeading}>{contactContent.formTitle}</h3>
+
+        <form
+          class={styles.form}
+          data-contact-form
+          data-label-submit={labels.submit}
+          data-label-sending={labels.sending}
+          data-msg-success={labels.successMessage}
+          data-msg-dev-preview={labels.devPreviewMessage}
+          data-msg-rate-limit={labels.rateLimitMessage}
+          data-msg-validation={labels.validationMessage}
+          data-msg-error={labels.errorMessage}
+        >
+          {/* Invisible anti-bot honeypot field */}
+          <div class={styles.honeypotField} aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex={-1} autocomplete="off" />
+          </div>
+
+          <div class={styles.formRow}>
+            <div class={styles.formGroup}>
+              <label for="name" class={styles.formLabel}>
+                {labels.name}
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class={styles.formInput}
+                required
+                minlength={2}
+                maxlength={80}
+                autocomplete="name"
+              />
+            </div>
+
+            <div class={styles.formGroup}>
+              <label for="email" class={styles.formLabel}>
+                {labels.email}
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class={styles.formInput}
+                required
+                maxlength={120}
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <div class={styles.formGroup}>
+            <label for="subject" class={styles.formLabel}>
+              {labels.subject}
+            </label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              class={styles.formInput}
+              required
+              minlength={2}
+              maxlength={140}
+            />
+          </div>
+
+          <div class={styles.formGroup}>
+            <label for="message" class={styles.formLabel}>
+              {labels.message}
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              class={`${styles.formInput} ${styles.formTextarea}`}
+              rows={5}
+              required
+              minlength={10}
+              maxlength={3000}
+            ></textarea>
+          </div>
+
+          <div class={styles.submitStatus} aria-live="polite">
+            <p class={styles.submitMessage} data-contact-feedback hidden>
+              <span></span>
+            </p>
+          </div>
+
+          <div class={styles.formActions}>
+            <button type="submit" class={styles.submitButton} data-contact-submit>
+              {labels.submit}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/contact';
+</script>

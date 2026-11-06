@@ -1,0 +1,16 @@
+---
+import type { SectionHeadingContent } from '@/types/portfolio';
+import styles from './section-heading.module.css';
+
+interface Props {
+  content: SectionHeadingContent;
+}
+
+const { content } = Astro.props;
+---
+
+<div class={styles.sectionHeader} data-apple-reveal>
+  <p class={styles.eyebrow}>{content.title}</p>
+  {content.subtitle && <h2 class={styles.headline}>{content.subtitle}.</h2>}
+  {content.description && <p class={styles.description}>{content.description}</p>}
+</div>

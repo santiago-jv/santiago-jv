@@ -1,0 +1,72 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './projects-section.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = PORTFOLIO_CONTENT[locale];
+
+const BENTO_VARIANT_CLASSES = [
+  styles.bentoWidePrimary,
+  styles.bentoCompactAccent,
+  styles.bentoCompactNeutral,
+  styles.bentoWideElevated,
+];
+---
+
+<section id="projects" class={styles.projectsSection}>
+  <div class={styles.container}>
+    <SectionHeading content={content.projectsHeading} />
+
+    <ul class={styles.bentoGrid}>
+      {content.projects.map((project, index) => {
+        const variantClass = BENTO_VARIANT_CLASSES[index % BENTO_VARIANT_CLASSES.length];
+        const isAccentTile = index === 1;
+
+        return (
+          <li
+            class={`${styles.bentoTile} ${variantClass}`}
+            data-apple-reveal
+            style={`--reveal-delay: ${index * 85}ms;`}
+          >
+            <article class={styles.tileContent}>
+              <div class={styles.tileTopRow}>
+                <div
+                  class={`${styles.iconSquircle} ${isAccentTile ? styles.iconSquircleAccent : ''}`}
+                  aria-hidden="true"
+                >
+                  <PortfolioIcon name={project.iconClassName || 'fa-server'} />
+                </div>
+
+                {project.status && (
+                  <span
+                    class={`${styles.statusEyebrow} ${isAccentTile ? styles.statusEyebrowAccent : ''}`}
+                  >
+                    {project.status}
+                  </span>
+                )}
+              </div>
+
+              <div class={styles.tileBody}>
+                <h3 class={styles.tileTitle}>{project.title}</h3>
+                <p class={styles.tileDescription}>{project.description}</p>
+              </div>
+
+              <ul class={styles.tileTechList}>
+                {project.tech.map((tech) => (
+                  <li class={styles.tileTechPill}>{tech}</li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

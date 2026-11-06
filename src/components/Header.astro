@@ -1,0 +1,114 @@
+---
+import PortfolioIcon from '@/components/PortfolioIcon.astro';
+import { PORTFOLIO_CONTENT } from '@/data/portfolio-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './header.module.css';
+
+interface Props {
+  locale: Locale;
+  isHomePage?: boolean;
+}
+
+const { locale, isHomePage = true } = Astro.props;
+const headerContent = PORTFOLIO_CONTENT[locale].header;
+const homeBase = locale === 'es' ? '/es/' : '/';
+const brandHref = isHomePage ? '#about' : homeBase;
+---
+
+<header
+  class={`${styles.header} ${styles['header--ready']}`}
+  data-site-header
+  data-scrolled="false"
+  data-home-page={isHomePage ? 'true' : 'false'}
+  data-home-base={homeBase}
+>
+  <div class={styles.headerInner}>
+    <a
+      href={brandHref}
+      aria-label={headerContent.brandAriaLabel}
+      class={styles.brandLink}
+      data-smooth-anchor={isHomePage ? '' : undefined}
+    >
+      <img
+        src="/favicon.svg?v=white-bg-black-s"
+        alt=""
+        width={21}
+        height={21}
+        class={styles.brandMark}
+        aria-hidden="true"
+      />
+      <span class={styles.wordmark}>Santiago Olayo</span>
+    </a>
+
+    <nav id="site-menu" class={styles.header__navbar} data-site-nav data-open="false">
+      <header class={styles.navbar__header}>
+        <span class={styles.navbar__title}>{headerContent.drawerTitle}</span>
+        <button
+          class={styles['navbar__close-icon']}
+          aria-label={headerContent.closeMenuAriaLabel}
+          type="button"
+          data-menu-close
+        >
+          <PortfolioIcon name="fa-xmark" />
+        </button>
+      </header>
+
+      <ul class={styles.navbar__items}>
+        {headerContent.navLinks.map((item) => (
+          <li class={styles.navbar__item}>
+            <button class={styles.navbar__link} type="button" data-nav-href={item.href}>
+              {item.label}
+            </button>
+          </li>
+        ))}
+        <li class={styles.navbar__ctaItem}>
+          <a
+            href={headerContent.resumeHref}
+            download={headerContent.resumeDownloadName}
+            class={styles.resumeButton}
+            data-menu-close
+          >
+            {headerContent.resumeLabel}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class={styles.desktopCtaWrapper}>
+      <a
+        href={headerContent.resumeHref}
+        download={headerContent.resumeDownloadName}
+        class={styles.resumeButton}
+      >
+        {headerContent.resumeLabel}
+      </a>
+    </div>
+
+    <button
+      class={styles['header__menu-button']}
+      aria-label={headerContent.openMenuAriaLabel}
+      aria-expanded="false"
+      aria-controls="site-menu"
+      type="button"
+      data-menu-toggle
+    >
+      <PortfolioIcon name="fa-bars" />
+    </button>
+  </div>
+
+  <div class={styles.progressTrack} aria-hidden="true">
+    <div class={styles.progressBar} data-scroll-progress-bar />
+  </div>
+</header>
+
+<button
+  type="button"
+  class={styles.background}
+  aria-label={headerContent.closeMenuAriaLabel}
+  data-menu-backdrop
+  data-open="false"
+/>
+
+<script>
+  import '@/scripts/header';
+</script>

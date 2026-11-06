@@ -1,0 +1,311 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    background-color 260ms ease,
+    border-color 260ms ease;
+}
+
+.header--ready {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.header--scrolled,
+.header[data-scrolled='true'] {
+  background: rgba(251, 251, 253, 0.84);
+  border-bottom-color: rgba(0, 0, 0, 0.09);
+}
+
+.headerInner {
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 52px;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-shrink: 0;
+}
+
+.brandMark {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.wordmark {
+  font-family: var(--font-family-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.024em;
+  color: var(--apple-text-primary);
+  transition: opacity var(--transition-fast);
+}
+
+.brandLink:hover .wordmark {
+  opacity: 0.7;
+}
+
+.desktopCtaWrapper {
+  display: none;
+}
+
+.progressTrack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1.5px;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.progressBar {
+  width: 100%;
+  height: 100%;
+  background: var(--apple-accent);
+  transform-origin: left center;
+  transform: scale3d(0, 1, 1);
+  will-change: transform;
+  opacity: 0.9;
+}
+
+.header__menu-button,
+.navbar__close-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  color: var(--apple-text-primary);
+  font-size: 1rem;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color var(--transition-fast);
+}
+
+.header__menu-button:focus,
+.navbar__close-icon:focus {
+  outline: none;
+}
+
+.header__menu-button:hover,
+.navbar__close-icon:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.header__navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 110;
+  width: 100%;
+  max-width: 320px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px);
+  border-left: 1px solid var(--apple-border);
+  transform: translate3d(105%, 0, 0);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    transform 480ms var(--ease-apple-snappy),
+    visibility 0s linear 480ms;
+  will-change: transform;
+}
+
+.header__navbar--open,
+.header__navbar[data-open='true'] {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 480ms var(--ease-apple-snappy);
+}
+
+.navbar__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--apple-border);
+}
+
+.navbar__title {
+  color: var(--apple-text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.navbar__items {
+  width: 100%;
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navbar__link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  color: var(--apple-text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navbar__link:focus {
+  outline: none;
+}
+
+.navbar__item:hover .navbar__link {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.navbar__ctaItem {
+  margin-top: 1rem;
+}
+
+.resumeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.98rem;
+  border-radius: var(--radius-pill);
+  background: var(--apple-accent);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.resumeButton:focus {
+  outline: none;
+}
+
+.resumeButton:hover {
+  background: var(--apple-accent-hover);
+}
+
+.resumeButton:active {
+  transform: scale(0.97);
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 95;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(6px);
+  transition: opacity 380ms ease, visibility 0s linear 380ms;
+}
+
+.background--show,
+.background[data-open='true'] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 380ms ease;
+}
+
+@media screen and (min-width: 860px) {
+  .header__navbar {
+    position: static;
+    transform: none;
+    visibility: visible;
+    pointer-events: auto;
+    will-change: auto;
+    width: auto;
+    max-width: none;
+    height: auto;
+    display: block;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    transition: none;
+  }
+
+  .header__menu-button,
+  .navbar__header,
+  .navbar__ctaItem,
+  .background {
+    display: none;
+  }
+
+  .desktopCtaWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar__items {
+    margin-top: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .navbar__link {
+    width: auto;
+    padding: 0.25rem 0;
+    border-radius: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgba(29, 29, 31, 0.8);
+    letter-spacing: -0.005em;
+  }
+
+  .navbar__item:hover .navbar__link {
+    background: transparent;
+    color: var(--apple-text-primary);
+  }
+}

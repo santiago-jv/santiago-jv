@@ -1,0 +1,828 @@
+---
+import { ARCHITECTURE_STUDIO_CONTENT } from '@/data/architecture-studio';
+import type { StudioNode, StudioTopology } from '@/data/architecture-studio';
+import type { Locale } from '@/types/portfolio';
+import MacBookKeyboardSvg from './MacBookKeyboardSvg.astro';
+import styles from './macbook-showcase.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const studio = ARCHITECTURE_STUDIO_CONTENT[locale];
+const initialTab = studio.tabs[0];
+const initialNodeIdx = initialTab.topology === 'release-pipeline' ? 0 : 1;
+const initialNode = initialTab.nodes[initialNodeIdx] || initialTab.nodes[1];
+
+const EXTRUSION_LAYERS = [-3, -6, -9, -12];
+const LID_THICKNESS_LAYERS = [-1.8, -3.4];
+
+function computeBeamStates(topology: StudioTopology, sel: number) {
+  const b1 = sel === 0 || sel === 1;
+  const b2 = topology === 'telemetry-bus' ? sel === 0 || sel === 2 : sel === 1 || sel === 2;
+  const b3 =
+    topology === 'telemetry-bus'
+      ? sel === 0 || sel === 3
+      : topology === 'release-pipeline'
+        ? sel === 2 || sel === 3
+        : sel === 1 || sel === 3;
+  const workerDb = topology === 'cloud-mesh' && (sel === 2 || sel === 3);
+  return { b1, b2, b3, workerDb };
+}
+
+function getNodeClass(variant: 'default' | 'core' | 'compact' = 'default'): string {
+  if (variant === 'core') return `${styles.archNode} ${styles.archNodeCore}`;
+  if (variant === 'compact') return `${styles.archNode} ${styles.archNodeCompact}`;
+  return styles.archNode;
+}
+
+const studioPayload = studio.tabs.map((tab) => ({
+  id: tab.id,
+  topology: tab.topology,
+  statusBadge: tab.statusBadge,
+  windowContext: tab.windowContext,
+  defaultNodeIdx: tab.topology === 'release-pipeline' ? 0 : 1,
+  nodes: tab.nodes.map((node: StudioNode) => ({
+    title: node.title,
+    roleTag: node.roleTag,
+    summary: node.summary,
+    chips: node.chips,
+  })),
+}));
+---
+
+<div
+  class={styles.stageWrapper}
+  data-macbook-studio
+  data-studio-payload={JSON.stringify(studioPayload)}
+>
+  <div class={styles.macbookScene} data-studio-scene data-lid-moving="true">
+    <div class={styles.macbookTiltStage} data-studio-tilt>
+      <div class={styles.macbookRig} data-studio-rig>
+        {/* 1. UNIBODY DISPLAY LID */}
+        <div class={styles.lidAssembly} data-studio-lid>
+          {LID_THICKNESS_LAYERS.map((z, idx) => (
+            <div
+              class={`${styles.lidAluminumSlice} ${idx === 0 ? styles.sliceDesktopOnly : ''}`}
+              style={`transform: translateZ(${z}px);`}
+              aria-hidden="true"
+            />
+          ))}
+
+          <div class={styles.lidOuterCover} aria-hidden="true">
+            <div class={styles.lidOuterGlint} data-studio-glint />
+            <div class={styles.lidOuterEmblem}>
+              <svg
+                viewBox="0 0 64 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class={styles.lidOuterEmblemSvg}
+              >
+                <circle cx="32" cy="32" r="30" fill="#FFFFFF" stroke="#D2D2D7" stroke-width="2" />
+                <path
+                  d="M32.00 44.39Q29.16 44.39 27.04 43.56Q24.92 42.72 23.71 41.15Q22.50 39.58 22.36 37.38L22.34 37.10L27.07 37.10L27.11 37.30Q27.27 38.22 27.95 38.89Q28.62 39.57 29.69 39.94Q30.77 40.32 32.13 40.32Q33.52 40.32 34.53 39.94Q35.54 39.56 36.09 38.87Q36.64 38.18 36.64 37.27L36.64 37.25Q36.64 36.04 35.69 35.35Q34.74 34.66 32.50 34.21L29.97 33.70Q27.61 33.23 26.03 32.32Q24.44 31.41 23.65 30.05Q22.85 28.70 22.85 26.90L22.85 26.88Q22.86 24.69 24.03 23.06Q25.21 21.42 27.27 20.52Q29.33 19.61 31.98 19.61Q34.75 19.61 36.77 20.47Q38.79 21.34 39.92 22.91Q41.05 24.49 41.17 26.59L41.18 26.90L36.45 26.90L36.43 26.70Q36.30 25.75 35.72 25.08Q35.13 24.41 34.18 24.05Q33.22 23.68 31.98 23.68Q30.70 23.68 29.78 24.05Q28.85 24.42 28.36 25.07Q27.86 25.72 27.86 26.58L27.86 26.60Q27.86 27.35 28.29 27.91Q28.71 28.47 29.59 28.87Q30.48 29.26 31.85 29.54L34.39 30.05Q36.90 30.55 38.51 31.43Q40.11 32.31 40.89 33.64Q41.66 34.98 41.66 36.86L41.66 36.88Q41.66 39.18 40.50 40.87Q39.35 42.56 37.19 43.48Q35.03 44.39 32.00 44.39Z"
+                  fill="#1D1D1F"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class={styles.lidInnerScreen}>
+            <div class={styles.glassReflection} data-studio-reflection aria-hidden="true" />
+
+            <div class={styles.retinaDisplay}>
+              <div class={styles.screenWakeVeil} data-studio-screen-veil aria-hidden="true" />
+
+              <div class={styles.cameraNotch} aria-hidden="true">
+                <span class={styles.cameraLens} />
+                <span class={styles.cameraSensorDot} />
+              </div>
+
+              <div class={styles.macosTopBar}>
+                <div class={styles.topBarLeft}>
+                  <span class={styles.appleGlyph}>&#63743;</span>
+                  <span class={styles.activeAppName}>{studio.menuApp}</span>
+                </div>
+
+                <div class={styles.topBarRight}>
+                  <span class={styles.liveBadge}>
+                    <span class={styles.livePulseDot} />
+                    <span class={styles.liveBadgeText} data-live-badge-text>
+                      {initialTab.statusBadge}
+                    </span>
+                  </span>
+
+                  <div class={styles.menuTrayIcons} aria-label="macOS Menu Bar Items">
+                    <span class={styles.trayIcon} title="Slack">
+                      <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M3.3 10.2a1.3 1.3 0 1 0 1.3 1.3v-1.3H3.3Zm0-1.8h3.4v3.4a1.3 1.3 0 1 1-1.3-1.3v-2.1Zm3.4-4.8a1.3 1.3 0 1 0-1.3 1.3H6.7V3.6Zm0 1.8v3.4H3.3a1.3 1.3 0 1 1 1.3-1.3h2.1Zm4.8 3.4a1.3 1.3 0 1 0-1.3-1.3v1.3h1.3Zm0 1.8H8.1V7.2a1.3 1.3 0 1 1 1.3 1.3v2.1Zm-3.4 4.8a1.3 1.3 0 1 0 1.3-1.3H8.1v1.3Zm0-1.8V9.2h3.4a1.3 1.3 0 1 1-1.3 1.3H8.1Z" />
+                      </svg>
+                    </span>
+
+                    <span class={styles.trayIcon} title="Docker Desktop · Running">
+                      <svg width="14" height="10" viewBox="0 0 20 15" fill="currentColor" aria-hidden="true">
+                        <rect x="5.5" y="4.5" width="2" height="1.8" rx="0.3" />
+                        <rect x="8" y="4.5" width="2" height="1.8" rx="0.3" />
+                        <rect x="10.5" y="4.5" width="2" height="1.8" rx="0.3" />
+                        <rect x="8" y="2.2" width="2" height="1.8" rx="0.3" />
+                        <rect x="10.5" y="2.2" width="2" height="1.8" rx="0.3" />
+                        <path d="M18.8 6.8c-.4-.3-1.1-.4-1.8-.2-.3-.5-.7-.9-1.3-1.1-.2 0-.3.1-.4.2-.1.4.1.9.4 1.3-.4.2-1 .3-1.8.3H3.2c-.4 0-.8.3-.9.7-.5 2 0 4.2 1.5 5.5 1.5 1.3 3.6 1.7 5.7 1.7 4.2 0 7.8-2 9-5.5.4-.1.8-.4 1.1-.9.1-.2 0-.5-.3-.7z" />
+                      </svg>
+                    </span>
+
+                    <span class={styles.trayIcon} title="Granola · AI Notepad">
+                      <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M8 2.2a5.8 5.8 0 1 0 5.8 5.8A4.2 4.2 0 0 0 8 4.6a3 3 0 1 0 3 3 1.8 1.8 0 1 0-1.8-1.8" />
+                      </svg>
+                    </span>
+
+                    <span class={styles.trayIcon} title="Wi-Fi · Connected">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true">
+                        <path d="M8 9.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Zm-3.2-2.1a4.8 4.8 0 0 1 6.4 0 .8.8 0 0 1-1.1 1.1 3.2 3.2 0 0 0-4.2 0 .8.8 0 0 1-1.1-1.1Zm-2.7-2.7a8.5 8.5 0 0 1 11.8 0 .8.8 0 0 1-1.1 1.1 6.9 6.9 0 0 0-9.6 0 .8.8 0 0 1-1.1-1.1Zm-2-2.1a11.5 11.5 0 0 1 15.8 0 .8.8 0 1 1-1.1 1.1 9.9 9.9 0 0 0-13.6 0 .8.8 0 0 1-1.1-1.1Z" />
+                      </svg>
+                    </span>
+
+                    <span class={styles.trayBattery} title="Battery: 100%">
+                      <span class={styles.trayBatteryLevel}>100</span>
+                      <span class={styles.trayBatteryTip} aria-hidden="true" />
+                    </span>
+
+                    <span class={styles.trayIcon} title="Control Center">
+                      <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <rect
+                          x="2"
+                          y="3"
+                          width="12"
+                          height="4"
+                          rx="2"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.2"
+                        />
+                        <circle cx="5" cy="5" r="1.3" fill="currentColor" />
+                        <rect
+                          x="2"
+                          y="9"
+                          width="12"
+                          height="4"
+                          rx="2"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.2"
+                        />
+                        <circle cx="11" cy="11" r="1.3" fill="currentColor" />
+                      </svg>
+                    </span>
+                  </div>
+
+                  <span class={styles.clockText}>
+                    <span class={styles.clockFull} data-clock-full></span>
+                    <span class={styles.clockShort} data-clock-short></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class={styles.appWindow}>
+                <div class={styles.windowHeader}>
+                  <div class={styles.trafficLights} aria-hidden="true">
+                    <span class={`${styles.trafficDot} ${styles.dotClose}`} />
+                    <span class={`${styles.trafficDot} ${styles.dotMinimize}`} />
+                    <span class={`${styles.trafficDot} ${styles.dotZoom}`} />
+                  </div>
+
+                  <div class={styles.windowTabs} role="tablist">
+                    {studio.tabs.map((tab, idx) => (
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={idx === 0 ? 'true' : 'false'}
+                        class={styles.windowTabBtn}
+                        data-studio-tab={idx}
+                      >
+                        {tab.shortTabLabel}
+                      </button>
+                    ))}
+                  </div>
+
+                  <span class={styles.windowRegionTag} data-window-region>
+                    {initialTab.windowContext}
+                  </span>
+                </div>
+
+                {/* All 4 Directed Graph Stages pre-rendered at build time */}
+                {studio.tabs.map((tab, tabIdx) => {
+                  const topology = tab.topology;
+                  const defaultSel: number = topology === 'release-pipeline' ? 0 : 1;
+                  const beams = computeBeamStates(topology, defaultSel);
+                  const beamGradId = `beam-grad-${tab.id}`;
+                  const auraGradId = `aura-grad-${tab.id}`;
+
+                  return (
+                    <div
+                      class={styles.graphStage}
+                      data-studio-panel={tabIdx}
+                      hidden={tabIdx !== 0 ? true : undefined}
+                    >
+                      {topology === 'telemetry-bus' ? (
+                        <>
+                          <svg
+                            viewBox="0 0 600 180"
+                            preserveAspectRatio="none"
+                            class={styles.conduitSvg}
+                            aria-hidden="true"
+                          >
+                            <defs>
+                              <linearGradient id={beamGradId} x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95" />
+                                <stop offset="100%" stop-color="#d2d2d7" stop-opacity="0" />
+                              </linearGradient>
+                              <radialGradient id={auraGradId} cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.13" />
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                              </radialGradient>
+                            </defs>
+
+                            <circle
+                              cx="102"
+                              cy="90"
+                              r="66"
+                              fill={`url(#${auraGradId})`}
+                              class={styles.ambientSourcePulse}
+                            />
+
+                            <g fill="none" stroke-linecap="round">
+                              <path
+                                d="M 186 90 C 208 90, 210 58, 234 58 L 378 58"
+                                data-beam="1"
+                                data-stroke-on="rgba(255,255,255,0.42)"
+                                data-stroke-off="rgba(255,255,255,0.13)"
+                                data-width-on="2"
+                                data-width-off="1.4"
+                                stroke={beams.b1 ? 'rgba(255,255,255,0.42)' : 'rgba(255,255,255,0.13)'}
+                                stroke-width={beams.b1 ? '2' : '1.4'}
+                              />
+                              <path
+                                d="M 186 90 L 378 90"
+                                data-beam="2"
+                                data-stroke-on="rgba(255,255,255,0.42)"
+                                data-stroke-off="rgba(255,255,255,0.13)"
+                                data-width-on="2"
+                                data-width-off="1.4"
+                                stroke={beams.b2 ? 'rgba(255,255,255,0.42)' : 'rgba(255,255,255,0.13)'}
+                                stroke-width={beams.b2 ? '2' : '1.4'}
+                              />
+                              <path
+                                d="M 186 90 C 208 90, 210 122, 234 122 L 378 122"
+                                data-beam="3"
+                                data-stroke-on="rgba(255,255,255,0.42)"
+                                data-stroke-off="rgba(255,255,255,0.13)"
+                                data-width-on="2"
+                                data-width-off="1.4"
+                                stroke={beams.b3 ? 'rgba(255,255,255,0.42)' : 'rgba(255,255,255,0.13)'}
+                                stroke-width={beams.b3 ? '2' : '1.4'}
+                              />
+                            </g>
+
+                            <g
+                              fill="none"
+                              stroke={`url(#${beamGradId})`}
+                              stroke-width="2.3"
+                              stroke-linecap="round"
+                            >
+                              <path
+                                d="M 186 90 C 208 90, 210 58, 234 58 L 378 58"
+                                class={styles.animatedBeam1}
+                              />
+                              <path d="M 186 90 L 378 90" class={styles.animatedBeam2} />
+                              <path
+                                d="M 186 90 C 208 90, 210 122, 234 122 L 378 122"
+                                class={styles.animatedBeam3}
+                              />
+                            </g>
+                          </svg>
+
+                          <div class={styles.nodesGridBus}>
+                            <div class={styles.nodeColLeft}>
+                              {(() => {
+                                const node = tab.nodes[0];
+                                return (
+                                  <button
+                                    type="button"
+                                    class={getNodeClass('core')}
+                                    aria-pressed={defaultSel === 0 ? 'true' : 'false'}
+                                    data-node-idx={0}
+                                  >
+                                    <div class={styles.nodeHeader}>
+                                      <span class={styles.nodeDot} aria-hidden="true" />
+                                      <span class={styles.nodeTitle}>{node.title}</span>
+                                    </div>
+                                    <span class={styles.nodeSub}>{node.subtitle}</span>
+                                  </button>
+                                );
+                              })()}
+                            </div>
+
+                            <div class={styles.busLanesStack}>
+                              {([1, 2, 3] as const).map((sinkIdx) => {
+                                const sinkNode = tab.nodes[sinkIdx];
+                                const isStreamActive = defaultSel === 0 || defaultSel === sinkIdx;
+
+                                return (
+                                  <div class={styles.busLaneRow}>
+                                    <div class={styles.busSignalCell}>
+                                      <button
+                                        type="button"
+                                        class={styles.busSignalPill}
+                                        data-signal-sink={sinkIdx}
+                                        data-active={isStreamActive ? 'true' : 'false'}
+                                        tabindex={-1}
+                                        aria-hidden="true"
+                                      >
+                                        <span>{sinkNode.streamLabel}</span>
+                                        <span class={styles.busArrowGlyph}>→</span>
+                                      </button>
+                                    </div>
+
+                                    <div class={styles.busSinkCell}>
+                                      <button
+                                        type="button"
+                                        class={getNodeClass('compact')}
+                                        aria-pressed={defaultSel === sinkIdx ? 'true' : 'false'}
+                                        data-node-idx={sinkIdx}
+                                      >
+                                        <div class={styles.nodeHeader}>
+                                          <span class={styles.nodeDot} aria-hidden="true" />
+                                          <span class={styles.nodeTitle}>{sinkNode.title}</span>
+                                        </div>
+                                        <span class={styles.nodeSub}>{sinkNode.subtitle}</span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </>
+                      ) : topology === 'release-pipeline' ? (
+                        <>
+                          <svg
+                            viewBox="0 0 600 180"
+                            preserveAspectRatio="none"
+                            class={styles.conduitSvg}
+                            aria-hidden="true"
+                          >
+                            <defs>
+                              <linearGradient id={beamGradId} x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95" />
+                                <stop offset="100%" stop-color="#d2d2d7" stop-opacity="0" />
+                              </linearGradient>
+                              <radialGradient id={auraGradId} cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.11" />
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                              </radialGradient>
+                            </defs>
+
+                            <circle
+                              cx="300"
+                              cy="90"
+                              r="72"
+                              fill={`url(#${auraGradId})`}
+                              class={styles.ambientCorePulse}
+                            />
+
+                            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path
+                                d="M 270 65 L 330 65"
+                                data-beam="1"
+                                data-stroke-on="rgba(255,255,255,0.44)"
+                                data-stroke-off="rgba(255,255,255,0.14)"
+                                data-width-on="2.1"
+                                data-width-off="1.5"
+                                stroke={beams.b1 ? 'rgba(255,255,255,0.44)' : 'rgba(255,255,255,0.14)'}
+                                stroke-width={beams.b1 ? '2.1' : '1.5'}
+                              />
+                              <path
+                                d="M 457 79 C 457 90, 442 90, 420 90 L 180 90 C 158 90, 143 90, 143 101"
+                                data-beam="2"
+                                data-stroke-on="rgba(255,255,255,0.44)"
+                                data-stroke-off="rgba(255,255,255,0.14)"
+                                data-width-on="2.1"
+                                data-width-off="1.5"
+                                stroke={beams.b2 ? 'rgba(255,255,255,0.44)' : 'rgba(255,255,255,0.14)'}
+                                stroke-width={beams.b2 ? '2.1' : '1.5'}
+                              />
+                              <path
+                                d="M 270 115 L 330 115"
+                                data-beam="3"
+                                data-stroke-on="rgba(255,255,255,0.44)"
+                                data-stroke-off="rgba(255,255,255,0.14)"
+                                data-width-on="2.1"
+                                data-width-off="1.5"
+                                stroke={beams.b3 ? 'rgba(255,255,255,0.44)' : 'rgba(255,255,255,0.14)'}
+                                stroke-width={beams.b3 ? '2.1' : '1.5'}
+                              />
+                            </g>
+
+                            <g fill="rgba(255,255,255,0.48)">
+                              <polygon points="325,62 331,65 325,68" />
+                              <polygon points="140,97 143,103 146,97" />
+                              <polygon points="325,112 331,115 325,118" />
+                            </g>
+
+                            <g
+                              fill="none"
+                              stroke={`url(#${beamGradId})`}
+                              stroke-width="2.3"
+                              stroke-linecap="round"
+                            >
+                              <path d="M 270 65 L 330 65" class={styles.animatedBeam1} />
+                              <path
+                                d="M 457 79 C 457 90, 442 90, 420 90 L 180 90 C 158 90, 143 90, 143 101"
+                                class={styles.animatedBeam2}
+                              />
+                              <path d="M 270 115 L 330 115" class={styles.animatedBeam3} />
+                            </g>
+                          </svg>
+
+                          <div class={styles.nodesGridPipeline}>
+                            {([0, 1, 2, 3] as const).map((nodeIdx) => {
+                              const node = tab.nodes[nodeIdx];
+                              return (
+                                <button
+                                  type="button"
+                                  class={getNodeClass()}
+                                  aria-pressed={defaultSel === nodeIdx ? 'true' : 'false'}
+                                  data-node-idx={nodeIdx}
+                                >
+                                  <div class={styles.nodeHeader}>
+                                    {node.stepNumber ? (
+                                      <span class={styles.nodeStepBadge} aria-hidden="true">
+                                        {node.stepNumber}
+                                      </span>
+                                    ) : (
+                                      <span class={styles.nodeDot} aria-hidden="true" />
+                                    )}
+                                    <span class={styles.nodeTitle}>{node.title}</span>
+                                  </div>
+                                  <span class={styles.nodeSub}>{node.subtitle}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <svg
+                            viewBox="0 0 600 180"
+                            preserveAspectRatio="none"
+                            class={styles.conduitSvg}
+                            aria-hidden="true"
+                          >
+                            <defs>
+                              <linearGradient id={beamGradId} x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95" />
+                                <stop offset="100%" stop-color="#d2d2d7" stop-opacity="0" />
+                              </linearGradient>
+                              <radialGradient id={auraGradId} cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14" />
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                              </radialGradient>
+                            </defs>
+
+                            <circle
+                              cx="295"
+                              cy="90"
+                              r="68"
+                              fill={`url(#${auraGradId})`}
+                              class={styles.ambientCorePulse}
+                            />
+
+                            <circle
+                              cx="295"
+                              cy="90"
+                              r="50"
+                              fill="none"
+                              stroke="rgba(255,255,255,0.14)"
+                              stroke-width="1"
+                              stroke-dasharray="5 7"
+                              class={styles.orbitRing}
+                            />
+
+                            <g fill="none" stroke-linecap="round">
+                              {topology === 'mcp-hub' ? (
+                                <>
+                                  <path
+                                    d="M 176 86.5 L 204 86.5"
+                                    data-beam="1"
+                                    data-stroke-on="rgba(255,255,255,0.44)"
+                                    data-stroke-off="rgba(255,255,255,0.16)"
+                                    data-width-on="1.8"
+                                    data-width-off="1.3"
+                                    stroke={
+                                      beams.b1
+                                        ? 'rgba(255,255,255,0.44)'
+                                        : 'rgba(255,255,255,0.16)'
+                                    }
+                                    stroke-width={beams.b1 ? '1.8' : '1.3'}
+                                  />
+                                  <path
+                                    d="M 204 93.5 L 176 93.5"
+                                    data-beam="1-rev"
+                                    data-stroke-on="rgba(255,255,255,0.34)"
+                                    data-stroke-off="rgba(255,255,255,0.13)"
+                                    data-width-on="1.3"
+                                    data-width-off="1.3"
+                                    stroke={
+                                      beams.b1
+                                        ? 'rgba(255,255,255,0.34)'
+                                        : 'rgba(255,255,255,0.13)'
+                                    }
+                                    stroke-width="1.3"
+                                    stroke-dasharray="3 3"
+                                  />
+                                </>
+                              ) : (
+                                <path
+                                  d="M 176 90 C 188 90, 192 90, 204 90"
+                                  data-beam="1"
+                                  data-stroke-on="rgba(255,255,255,0.38)"
+                                  data-stroke-off="rgba(255,255,255,0.13)"
+                                  data-width-on="2"
+                                  data-width-off="1.4"
+                                  stroke={
+                                    beams.b1
+                                      ? 'rgba(255,255,255,0.38)'
+                                      : 'rgba(255,255,255,0.13)'
+                                  }
+                                  stroke-width={beams.b1 ? '2' : '1.4'}
+                                />
+                              )}
+
+                              <path
+                                d="M 386 90 C 399 90, 400 64, 413 64"
+                                data-beam="2"
+                                data-stroke-on="rgba(255,255,255,0.38)"
+                                data-stroke-off="rgba(255,255,255,0.13)"
+                                data-width-on="2"
+                                data-width-off="1.4"
+                                stroke={
+                                  beams.b2 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
+                                }
+                                stroke-width={beams.b2 ? '2' : '1.4'}
+                              />
+                              <path
+                                d="M 386 90 C 399 90, 400 116, 413 116"
+                                data-beam="3"
+                                data-stroke-on="rgba(255,255,255,0.38)"
+                                data-stroke-off="rgba(255,255,255,0.13)"
+                                data-width-on="2"
+                                data-width-off="1.4"
+                                stroke={
+                                  beams.b3 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
+                                }
+                                stroke-width={beams.b3 ? '2' : '1.4'}
+                              />
+
+                              {topology === 'cloud-mesh' && (
+                                <path
+                                  d="M 499 78 L 499 102"
+                                  data-beam="worker-db"
+                                  data-stroke-on="rgba(255,255,255,0.42)"
+                                  data-stroke-off="rgba(255,255,255,0.16)"
+                                  data-width-on="1.8"
+                                  data-width-off="1.3"
+                                  stroke={
+                                    beams.workerDb
+                                      ? 'rgba(255,255,255,0.42)'
+                                      : 'rgba(255,255,255,0.16)'
+                                  }
+                                  stroke-width={beams.workerDb ? '1.8' : '1.3'}
+                                  stroke-dasharray="2.5 3"
+                                />
+                              )}
+                            </g>
+
+                            <g
+                              fill="none"
+                              stroke={`url(#${beamGradId})`}
+                              stroke-width="2.4"
+                              stroke-linecap="round"
+                            >
+                              {topology === 'mcp-hub' ? (
+                                <>
+                                  <path d="M 176 86.5 L 204 86.5" class={styles.animatedBeam1} />
+                                  <path
+                                    d="M 204 93.5 L 176 93.5"
+                                    class={styles.animatedBeamReverse}
+                                  />
+                                </>
+                              ) : (
+                                <path
+                                  d="M 176 90 C 188 90, 192 90, 204 90"
+                                  class={styles.animatedBeam1}
+                                />
+                              )}
+                              <path
+                                d="M 386 90 C 399 90, 400 64, 413 64"
+                                class={styles.animatedBeam2}
+                              />
+                              <path
+                                d="M 386 90 C 399 90, 400 116, 413 116"
+                                class={styles.animatedBeam3}
+                              />
+                            </g>
+                          </svg>
+
+                          <div class={styles.nodesGrid}>
+                            <div class={styles.nodeColLeft}>
+                              {(() => {
+                                const node = tab.nodes[0];
+                                return (
+                                  <button
+                                    type="button"
+                                    class={getNodeClass()}
+                                    aria-pressed={defaultSel === 0 ? 'true' : 'false'}
+                                    data-node-idx={0}
+                                  >
+                                    <div class={styles.nodeHeader}>
+                                      <span class={styles.nodeDot} aria-hidden="true" />
+                                      <span class={styles.nodeTitle}>{node.title}</span>
+                                    </div>
+                                    <span class={styles.nodeSub}>{node.subtitle}</span>
+                                  </button>
+                                );
+                              })()}
+                            </div>
+
+                            <div class={styles.nodeColCenter}>
+                              {(() => {
+                                const node = tab.nodes[1];
+                                return (
+                                  <button
+                                    type="button"
+                                    class={getNodeClass('core')}
+                                    aria-pressed={defaultSel === 1 ? 'true' : 'false'}
+                                    data-node-idx={1}
+                                  >
+                                    <div class={styles.nodeHeader}>
+                                      <span class={styles.nodeDot} aria-hidden="true" />
+                                      <span class={styles.nodeTitle}>{node.title}</span>
+                                    </div>
+                                    <span class={styles.nodeSub}>{node.subtitle}</span>
+                                  </button>
+                                );
+                              })()}
+                            </div>
+
+                            <div class={styles.nodeColRight}>
+                              {([2, 3] as const).map((nodeIdx) => {
+                                const node = tab.nodes[nodeIdx];
+                                return (
+                                  <button
+                                    type="button"
+                                    class={getNodeClass()}
+                                    aria-pressed={defaultSel === nodeIdx ? 'true' : 'false'}
+                                    data-node-idx={nodeIdx}
+                                  >
+                                    <div class={styles.nodeHeader}>
+                                      <span class={styles.nodeDot} aria-hidden="true" />
+                                      <span class={styles.nodeTitle}>{node.title}</span>
+                                    </div>
+                                    <span class={styles.nodeSub}>{node.subtitle}</span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+
+                <div class={styles.inspectorDock} aria-live="polite">
+                  <div class={styles.inspectorInfo}>
+                    <div class={styles.inspectorHeaderRow}>
+                      <span class={styles.inspectorTitle} data-inspector-title>
+                        {initialNode.title}
+                      </span>
+                      <span class={styles.inspectorRolePill} data-inspector-role>
+                        {initialNode.roleTag}
+                      </span>
+                    </div>
+                    <p class={styles.inspectorSummary} data-inspector-summary>
+                      {initialNode.summary}
+                    </p>
+                  </div>
+
+                  <ul
+                    class={styles.inspectorChips}
+                    data-inspector-chips
+                    data-chip-class={styles.inspectorChip}
+                  >
+                    {initialNode.chips.map((chip) => (
+                      <li class={styles.inspectorChip}>{chip}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. RECESSED CLAMSHELL HINGE CLUTCH */}
+        <div class={styles.hingeClutch} aria-hidden="true" />
+
+        {/* 3. SOLID EXTRUDED CNC UNIBODY SPACE BLACK BASE */}
+        <div class={styles.baseAssembly} aria-hidden="true">
+          <div class={styles.baseTopDeck}>
+            <MacBookKeyboardSvg />
+            <div class={styles.deckWakeVeil} data-studio-deck-veil />
+          </div>
+
+          {EXTRUSION_LAYERS.map((z, idx) => (
+            <div
+              class={`${styles.chassisExtrusionSlice} ${
+                idx % 2 === 0 ? styles.sliceDesktopOnly : ''
+              } ${idx === EXTRUSION_LAYERS.length - 1 ? styles.chassisBottomBevel : ''}`}
+              style={`transform: translateZ(${z}px);`}
+            >
+              {idx < 3 && <span class={styles.frontThumbGroove} />}
+            </div>
+          ))}
+
+          <div class={styles.rubberFootLeft} />
+          <div class={styles.rubberFootRight} />
+        </div>
+
+        <div class={styles.contactShadow} data-studio-contact-shadow aria-hidden="true" />
+        <div class={styles.ambientFloorShadow} data-studio-ambient-shadow aria-hidden="true" />
+      </div>
+    </div>
+  </div>
+
+  {/* 4. APPLE SEGMENTED DOMAIN SWITCHER + REPLAY CONTROL */}
+  <div class={styles.stageControls}>
+    <div class={styles.segmentedRow}>
+      <div class={styles.segmentedTrack} role="tablist" aria-label={studio.menuApp}>
+        {studio.tabs.map((tab, idx) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            class={styles.segmentPill}
+            data-studio-tab={idx}
+          >
+            <span class={styles.segmentFullLabel}>{tab.tabLabel}</span>
+            <span class={styles.segmentShortLabel}>{tab.shortTabLabel}</span>
+          </button>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        class={styles.replayIconButton}
+        aria-label={studio.replayLabel}
+        title={studio.replayLabel}
+        data-studio-replay
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M13.5 8A5.5 5.5 0 1 1 11.9 4.1L13.5 5.7M13.5 2.5V5.7H10.3"
+            stroke="currentColor"
+            stroke-width="1.65"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <p class={styles.helperCaption}>{studio.helperHint}</p>
+  </div>
+</div>
+
+<script>
+  import '@/scripts/macbook-studio';
+</script>

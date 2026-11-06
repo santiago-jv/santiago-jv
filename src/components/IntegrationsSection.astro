@@ -1,0 +1,47 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+import IntegrationLogo from '@/components/IntegrationLogo.astro';
+import { INTEGRATIONS_CONTENT } from '@/data/integrations-content';
+import type { Locale } from '@/types/portfolio';
+import styles from './integrations-section.module.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = INTEGRATIONS_CONTENT[locale];
+---
+
+<section id="integrations" class={styles.integrationsSection}>
+  <div class={styles.container}>
+    <SectionHeading content={copy.heading} />
+
+    <ul class={styles.matrixGrid}>
+      {copy.items.map((item, index) => {
+        const inlineStyle = [
+          `--reveal-delay: ${index * 45}ms`,
+          `--brand-color: ${item.brandColor}`,
+          `--brand-tint: ${item.brandTint}`,
+          `--brand-border: ${item.brandBorder}`,
+          item.brandAccent ? `--brand-accent: ${item.brandAccent}` : '',
+        ]
+          .filter(Boolean)
+          .join('; ');
+
+        return (
+          <li class={styles.matrixTile} data-apple-reveal style={inlineStyle}>
+            <div class={styles.logoSquircle} aria-hidden="true">
+              <IntegrationLogo brand={item.id} className={styles.logoGlyph} />
+            </div>
+
+            <div class={styles.metaStack}>
+              <h3 class={styles.brandName}>{item.name}</h3>
+              <span class={styles.categoryLabel}>{item.category}</span>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
