@@ -7,9 +7,12 @@ export type IntegrationBrandId =
   | 'datadog'
   | 'clevertap'
   | 'appsflyer'
+  | 'retool'
+  | 'slack'
   | 'intercom'
   | 'twilio'
-  | 'sendgrid';
+  | 'sendgrid'
+  | 'firebase';
 
 export interface IntegrationItem {
   id: IntegrationBrandId;
@@ -33,7 +36,7 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
       title: 'Third-Party Ecosystem',
       subtitle: 'Production Integrations',
       description:
-        'Payment gateways, KYC compliance, observability, mobile attribution, and messaging platforms integrated in production.',
+        'Payment gateways, KYC compliance, observability, internal ops, team bots, and messaging platforms integrated in production.',
     },
     items: [
       {
@@ -86,6 +89,22 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
         brandBorder: 'rgba(0, 153, 229, 0.25)',
       },
       {
+        id: 'retool',
+        name: 'Retool',
+        category: 'Internal Tools & Ops',
+        brandColor: '#3C6BF2',
+        brandTint: 'rgba(60, 107, 242, 0.085)',
+        brandBorder: 'rgba(60, 107, 242, 0.24)',
+      },
+      {
+        id: 'slack',
+        name: 'Slack',
+        category: 'Alerts & Internal Bots',
+        brandColor: '#4A154B',
+        brandTint: 'rgba(74, 21, 75, 0.075)',
+        brandBorder: 'rgba(224, 30, 90, 0.22)',
+      },
+      {
         id: 'intercom',
         name: 'Intercom',
         category: 'Customer Messaging',
@@ -109,6 +128,14 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
         brandTint: 'rgba(26, 130, 226, 0.085)',
         brandBorder: 'rgba(26, 130, 226, 0.24)',
       },
+      {
+        id: 'firebase',
+        name: 'Firebase FCM',
+        category: 'Mobile Push Notifications',
+        brandColor: '#DD2C00',
+        brandTint: 'rgba(255, 145, 0, 0.095)',
+        brandBorder: 'rgba(221, 44, 0, 0.24)',
+      },
     ],
   },
   es: {
@@ -117,7 +144,7 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
       title: 'Ecosistema de Terceros',
       subtitle: 'Integraciones en producción',
       description:
-        'Pasarelas de pago, validación KYC, observabilidad, atribución móvil y plataformas de mensajería integradas en producción.',
+        'Pasarelas de pago, validación KYC, observabilidad, herramientas internas, bots de alertas y mensajería integradas en producción.',
     },
     items: [
       {
@@ -170,6 +197,22 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
         brandBorder: 'rgba(0, 153, 229, 0.25)',
       },
       {
+        id: 'retool',
+        name: 'Retool',
+        category: 'Herramientas Internas y Ops',
+        brandColor: '#3C6BF2',
+        brandTint: 'rgba(60, 107, 242, 0.085)',
+        brandBorder: 'rgba(60, 107, 242, 0.24)',
+      },
+      {
+        id: 'slack',
+        name: 'Slack',
+        category: 'Alertas y Bots Internos',
+        brandColor: '#4A154B',
+        brandTint: 'rgba(74, 21, 75, 0.075)',
+        brandBorder: 'rgba(224, 30, 90, 0.22)',
+      },
+      {
         id: 'intercom',
         name: 'Intercom',
         category: 'Mensajería y Soporte',
@@ -192,6 +235,14 @@ export const INTEGRATIONS_CONTENT: Record<Locale, IntegrationsLocaleContent> = {
         brandColor: '#1A82E2',
         brandTint: 'rgba(26, 130, 226, 0.085)',
         brandBorder: 'rgba(26, 130, 226, 0.24)',
+      },
+      {
+        id: 'firebase',
+        name: 'Firebase FCM',
+        category: 'Notificaciones Push (FCM)',
+        brandColor: '#DD2C00',
+        brandTint: 'rgba(255, 145, 0, 0.095)',
+        brandBorder: 'rgba(221, 44, 0, 0.24)',
       },
     ],
   },

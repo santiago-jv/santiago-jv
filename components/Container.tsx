@@ -59,9 +59,12 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         'Refácil',
         'Tusdatos.co',
         'AppsFlyer',
+        'Retool',
+        'Slack Bots & Alerts',
         'Intercom',
         'Twilio',
         'SendGrid',
+        'Firebase Cloud Messaging (FCM)',
         'Feature Ownership',
       ],
       sameAs: [
@@ -80,7 +83,7 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         <meta name="author" content="Santiago Olayo Villamil (santiago-jv)" />
         <meta
           name="keywords"
-          content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Senior Software Engineer, Senior Backend Engineer, Fullstack Engineer, Cloud Infrastructure, AI Internal Tooling, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare Workers, Stripe, Twilio, SendGrid, Intercom, AppsFlyer, Tusdatos.co, Refácil, Datadog, CleverTap, Metabase, AWS, Colombia"
+          content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Senior Software Engineer, Senior Backend Engineer, Fullstack Engineer, Cloud Infrastructure, AI Internal Tooling, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare Workers, Stripe, Retool, Slack Bots, Firebase FCM, Twilio, SendGrid, Intercom, AppsFlyer, Tusdatos.co, Refácil, Datadog, CleverTap, Metabase, AWS, Colombia"
         />
         <meta
           name="robots"

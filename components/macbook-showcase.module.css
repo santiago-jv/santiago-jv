@@ -477,6 +477,44 @@
   gap: 12px;
 }
 
+/* Sequential 4-Stage Release Pipeline Layout (2x2 Z-Flow: 01 -> 02 -> 03 -> 04) */
+.nodesGridPipeline {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 58px;
+  row-gap: 30px;
+  align-items: center;
+}
+
+.nodeStepBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 4.5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: var(--font-family-mono);
+  font-size: 7.4px;
+  font-weight: 700;
+  color: #a1a1a6;
+  line-height: 1.25;
+  flex-shrink: 0;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.nodeStepBadgeActive {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #111114;
+}
+
 /* Telemetry & Analytics Multi-Sink Bus Layout (1 Origin -> 3 Independent Streams -> 3 Sinks) */
 .nodesGridBus {
   position: relative;
@@ -665,9 +703,14 @@
 
 .animatedBeam1,
 .animatedBeam2,
-.animatedBeam3 {
+.animatedBeam3,
+.animatedBeamReverse {
   stroke-dasharray: 42 158;
   animation: beamFlow 2.3s linear infinite;
+}
+
+.animatedBeamReverse {
+  animation-delay: 1.15s;
 }
 
 .animatedBeam2 {
@@ -1040,6 +1083,7 @@
   .animatedBeam1,
   .animatedBeam2,
   .animatedBeam3,
+  .animatedBeamReverse,
   .orbitRing,
   .ambientCorePulse,
   .ambientSourcePulse,
@@ -1167,6 +1211,16 @@
 
   .nodesGrid {
     gap: 8px;
+  }
+
+  .nodesGridPipeline {
+    column-gap: 24px;
+    row-gap: 14px;
+  }
+
+  .nodeStepBadge {
+    font-size: 6px;
+    padding: 0.5px 3px;
   }
 
   .nodesGridBus,

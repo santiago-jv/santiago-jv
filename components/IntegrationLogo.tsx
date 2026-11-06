@@ -127,6 +127,49 @@ export const IntegrationLogo: React.FC<IntegrationLogoProps> = ({ brand, classNa
         </svg>
       );
 
+    case 'retool':
+      return (
+        <svg
+          viewBox="-1 -1 26 26"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          className={className}
+          aria-hidden="true"
+        >
+          <path d="M0 2.2A2.2 2.2 0 0 1 2.2 0h8.6A2.2 2.2 0 0 1 13 2.2v1.7A1.1 1.1 0 0 1 11.9 5H1.1A1.1 1.1 0 0 1 0 3.9zm0 6.9A1.1 1.1 0 0 1 1.1 8h20.7a2.2 2.2 0 0 1 2.2 2.2v5.7a1.1 1.1 0 0 1-1.1 1.1H2.2A2.2 2.2 0 0 1 0 14.8zm11 12a1.1 1.1 0 0 1 1.1-1.1h10.8a1.1 1.1 0 0 1 1.1 1.1v.7a2.2 2.2 0 0 1-2.2 2.2h-8.6a2.2 2.2 0 0 1-2.2-2.2z" />
+        </svg>
+      );
+
+    case 'slack':
+      return (
+        <svg
+          viewBox="-10 -10 276 276"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          className={className}
+          aria-hidden="true"
+        >
+          <path
+            d="M53.841 161.32c0 14.832-11.987 26.82-26.819 26.82S.203 176.152.203 161.32c0-14.831 11.987-26.818 26.82-26.818H53.84zm13.41 0c0-14.831 11.987-26.818 26.819-26.818s26.819 11.987 26.819 26.819v67.047c0 14.832-11.987 26.82-26.82 26.82-14.83 0-26.818-11.988-26.818-26.82z"
+            style={{ fill: 'var(--slack-pink, currentColor)', transition: 'fill 260ms ease' }}
+          />
+          <path
+            d="M94.07 53.638c-14.832 0-26.82-11.987-26.82-26.819S79.239 0 94.07 0s26.819 11.987 26.819 26.819v26.82zm0 13.613c14.832 0 26.819 11.987 26.819 26.819s-11.987 26.819-26.82 26.819H26.82C11.987 120.889 0 108.902 0 94.069c0-14.83 11.987-26.818 26.819-26.818z"
+            style={{ fill: 'var(--slack-blue, currentColor)', transition: 'fill 260ms ease' }}
+          />
+          <path
+            d="M201.55 94.07c0-14.832 11.987-26.82 26.818-26.82s26.82 11.988 26.82 26.82-11.988 26.819-26.82 26.819H201.55zm-13.41 0c0 14.832-11.988 26.819-26.82 26.819-14.831 0-26.818-11.987-26.818-26.82V26.82C134.502 11.987 146.489 0 161.32 0s26.819 11.987 26.819 26.819z"
+            style={{ fill: 'var(--slack-green, currentColor)', transition: 'fill 260ms ease' }}
+          />
+          <path
+            d="M161.32 201.55c14.832 0 26.82 11.987 26.82 26.818s-11.988 26.82-26.82 26.82c-14.831 0-26.818-11.988-26.818-26.82V201.55zm0-13.41c-14.831 0-26.818-11.988-26.818-26.82 0-14.831 11.987-26.818 26.819-26.818h67.25c14.832 0 26.82 11.987 26.82 26.819s-11.988 26.819-26.82 26.819z"
+            style={{ fill: 'var(--slack-gold, currentColor)', transition: 'fill 260ms ease' }}
+          />
+        </svg>
+      );
+
     case 'intercom':
       return (
         <svg
@@ -172,6 +215,47 @@ export const IntegrationLogo: React.FC<IntegrationLogoProps> = ({ brand, classNa
           <rect x="85.33" y="85.33" width="85.34" height="85.34" opacity="0.84" />
           <rect x="0" y="170.66" width="85.34" height="85.34" opacity="1" />
           <rect x="170.66" y="0" width="85.34" height="85.34" opacity="1" />
+        </svg>
+      );
+
+    case 'firebase':
+      return (
+        <svg
+          viewBox="-35 -8 326 338"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          className={className}
+          aria-hidden="true"
+        >
+          <path
+            d="M80.18 312.295c13.455 5.414 28.05 8.628 43.376 9.163a127.5 127.5 0 0 0 58.098-11.71c-21.145-8.307-40.294-20.455-56.638-35.56-10.594 16.963-26.263 30.36-44.835 38.107"
+            style={{
+              fill: 'var(--fb-orange, currentColor)',
+              opacity: 'var(--fb-rest-o2, 0.78)',
+              transition: 'fill 260ms ease, opacity 260ms ease',
+            }}
+          />
+          <path
+            d="M125.013 274.193c-37.307-34.504-59.939-84.444-58.026-139.218.062-1.78.156-3.557.266-5.334a96.63 96.63 0 0 0-50.456.528C6.838 147.614.828 167.63.079 189.069-1.853 244.403 31.632 292.75 80.178 312.3c18.572-7.747 34.24-21.13 44.835-38.107"
+            style={{
+              fill: 'var(--fb-amber, currentColor)',
+              opacity: 'var(--fb-rest-o1, 0.56)',
+              transition: 'fill 260ms ease, opacity 260ms ease',
+            }}
+          />
+          <path
+            d="M125.015 274.191c8.674-13.88 13.933-30.154 14.545-47.687 1.61-46.12-29.394-85.794-72.306-96.865-.11 1.777-.203 3.555-.265 5.334-1.913 54.775 20.719 104.714 58.026 139.218"
+            style={{
+              fill: 'var(--fb-orange, currentColor)',
+              opacity: 'var(--fb-rest-o2, 0.78)',
+              transition: 'fill 260ms ease, opacity 260ms ease',
+            }}
+          />
+          <path
+            d="M134.761 0c-24.44 19.58-43.738 45.396-55.414 75.136a180.5 180.5 0 0 0-12.113 54.515c42.912 11.07 73.917 50.745 72.306 96.865-.612 17.532-5.887 33.79-14.545 47.687a180.7 180.7 0 0 0 56.637 35.56c42.441-19.618 72.553-61.833 74.297-111.764 1.129-32.351-11.3-61.184-28.864-85.521C208.517 86.738 134.76 0 134.76 0"
+            style={{ fill: 'var(--fb-red, currentColor)', transition: 'fill 260ms ease' }}
+          />
         </svg>
       );
   }

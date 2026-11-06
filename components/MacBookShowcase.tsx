@@ -85,7 +85,8 @@ export const MacBookShowcase: React.FC = () => {
 
   const handleSelectTab = (index: number): void => {
     setActiveTabIndex(index);
-    setSelectedNodeIndex(1);
+    const nextTab = studio.tabs[index];
+    setSelectedNodeIndex(nextTab?.topology === 'release-pipeline' ? 0 : 1);
   };
 
   const applyAngleToDom = useCallback((angleDeg: number) => {
@@ -235,15 +236,21 @@ export const MacBookShowcase: React.FC = () => {
     rig.style.setProperty('--sheen-x', '50%');
   };
 
-  const isTelemetryBus = currentTab.topology === 'telemetry-bus';
+  const topology = currentTab.topology;
 
   const highlightBeam1 = selectedNodeIndex === 0 || selectedNodeIndex === 1;
-  const highlightBeam2 = isTelemetryBus
-    ? selectedNodeIndex === 0 || selectedNodeIndex === 2
-    : selectedNodeIndex === 1 || selectedNodeIndex === 2;
-  const highlightBeam3 = isTelemetryBus
-    ? selectedNodeIndex === 0 || selectedNodeIndex === 3
-    : selectedNodeIndex === 1 || selectedNodeIndex === 3;
+  const highlightBeam2 =
+    topology === 'telemetry-bus'
+      ? selectedNodeIndex === 0 || selectedNodeIndex === 2
+      : selectedNodeIndex === 1 || selectedNodeIndex === 2;
+  const highlightBeam3 =
+    topology === 'telemetry-bus'
+      ? selectedNodeIndex === 0 || selectedNodeIndex === 3
+      : topology === 'release-pipeline'
+        ? selectedNodeIndex === 2 || selectedNodeIndex === 3
+        : selectedNodeIndex === 1 || selectedNodeIndex === 3;
+  const highlightWorkerDbLink =
+    topology === 'cloud-mesh' && (selectedNodeIndex === 2 || selectedNodeIndex === 3);
 
   const renderInteractiveNode = (
     nodeIdx: 0 | 1 | 2 | 3,
@@ -268,10 +275,21 @@ export const MacBookShowcase: React.FC = () => {
         aria-pressed={isSelected}
       >
         <div className={styles.nodeHeader}>
-          <span
-            className={`${styles.nodeDot} ${isSelected ? styles.nodeDotActive : ''}`}
-            aria-hidden="true"
-          />
+          {node.stepNumber ? (
+            <span
+              className={`${styles.nodeStepBadge} ${
+                isSelected ? styles.nodeStepBadgeActive : ''
+              }`}
+              aria-hidden="true"
+            >
+              {node.stepNumber}
+            </span>
+          ) : (
+            <span
+              className={`${styles.nodeDot} ${isSelected ? styles.nodeDotActive : ''}`}
+              aria-hidden="true"
+            />
+          )}
           <span className={styles.nodeTitle}>{node.title}</span>
         </div>
         <span className={styles.nodeSub}>{node.subtitle}</span>
@@ -490,7 +508,7 @@ export const MacBookShowcase: React.FC = () => {
 
                   {/* Interactive Directed Graph Stage */}
                   <div key={currentTab.id} className={styles.graphStage}>
-                    {isTelemetryBus ? (
+                    {topology === 'telemetry-bus' ? (
                       <>
                         <svg
                           viewBox="0 0 600 180"
@@ -609,6 +627,95 @@ export const MacBookShowcase: React.FC = () => {
                           </div>
                         </div>
                       </>
+                    ) : topology === 'release-pipeline' ? (
+                      <>
+                        <svg
+                          viewBox="0 0 600 180"
+                          preserveAspectRatio="none"
+                          className={styles.conduitSvg}
+                          aria-hidden="true"
+                        >
+                          <defs>
+                            <linearGradient id="beamPipeFwd" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                              <stop offset="50%" stopColor="#ffffff" stopOpacity="0.95" />
+                              <stop offset="100%" stopColor="#d2d2d7" stopOpacity="0" />
+                            </linearGradient>
+                            <radialGradient id="pipeAura" cx="50%" cy="50%" r="50%">
+                              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.11" />
+                              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                            </radialGradient>
+                          </defs>
+
+                          <circle
+                            cx="300"
+                            cy="90"
+                            r="72"
+                            fill="url(#pipeAura)"
+                            className={styles.ambientCorePulse}
+                          />
+
+                          {/* Sequential 4-Stage Release Conduits: 01 -> 02 -> 03 -> 04 */}
+                          <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path
+                              d="M 270 65 L 330 65"
+                              stroke={
+                                highlightBeam1
+                                  ? 'rgba(255,255,255,0.44)'
+                                  : 'rgba(255,255,255,0.14)'
+                              }
+                              strokeWidth={highlightBeam1 ? '2.1' : '1.5'}
+                            />
+                            <path
+                              d="M 457 79 C 457 90, 442 90, 420 90 L 180 90 C 158 90, 143 90, 143 101"
+                              stroke={
+                                highlightBeam2
+                                  ? 'rgba(255,255,255,0.44)'
+                                  : 'rgba(255,255,255,0.14)'
+                              }
+                              strokeWidth={highlightBeam2 ? '2.1' : '1.5'}
+                            />
+                            <path
+                              d="M 270 115 L 330 115"
+                              stroke={
+                                highlightBeam3
+                                  ? 'rgba(255,255,255,0.44)'
+                                  : 'rgba(255,255,255,0.14)'
+                              }
+                              strokeWidth={highlightBeam3 ? '2.1' : '1.5'}
+                            />
+                          </g>
+
+                          {/* Sequential Directional Arrowheads */}
+                          <g fill="rgba(255,255,255,0.48)">
+                            <polygon points="325,62 331,65 325,68" />
+                            <polygon points="140,97 143,103 146,97" />
+                            <polygon points="325,112 331,115 325,118" />
+                          </g>
+
+                          {/* Animated Release Pulses */}
+                          <g
+                            fill="none"
+                            stroke="url(#beamPipeFwd)"
+                            strokeWidth="2.3"
+                            strokeLinecap="round"
+                          >
+                            <path d="M 270 65 L 330 65" className={styles.animatedBeam1} />
+                            <path
+                              d="M 457 79 C 457 90, 442 90, 420 90 L 180 90 C 158 90, 143 90, 143 101"
+                              className={styles.animatedBeam2}
+                            />
+                            <path d="M 270 115 L 330 115" className={styles.animatedBeam3} />
+                          </g>
+                        </svg>
+
+                        <div className={styles.nodesGridPipeline}>
+                          {renderInteractiveNode(0)}
+                          {renderInteractiveNode(1)}
+                          {renderInteractiveNode(2)}
+                          {renderInteractiveNode(3)}
+                        </div>
+                      </>
                     ) : (
                       <>
                         <svg
@@ -648,17 +755,43 @@ export const MacBookShowcase: React.FC = () => {
                             className={styles.orbitRing}
                           />
 
-                          {/* Base Conduit Splines (Highlighted along active node path!) */}
+                          {/* Base Conduit Splines */}
                           <g fill="none" strokeLinecap="round">
-                            <path
-                              d="M 176 90 C 188 90, 192 90, 204 90"
-                              stroke={
-                                highlightBeam1
-                                  ? 'rgba(255,255,255,0.38)'
-                                  : 'rgba(255,255,255,0.13)'
-                              }
-                              strokeWidth={highlightBeam1 ? '2' : '1.4'}
-                            />
+                            {topology === 'mcp-hub' ? (
+                              <>
+                                {/* Dual-strand Bidirectional JSON-RPC Conduits (Host <-> MCP Server) */}
+                                <path
+                                  d="M 176 86.5 L 204 86.5"
+                                  stroke={
+                                    highlightBeam1
+                                      ? 'rgba(255,255,255,0.44)'
+                                      : 'rgba(255,255,255,0.16)'
+                                  }
+                                  strokeWidth={highlightBeam1 ? '1.8' : '1.3'}
+                                />
+                                <path
+                                  d="M 204 93.5 L 176 93.5"
+                                  stroke={
+                                    highlightBeam1
+                                      ? 'rgba(255,255,255,0.34)'
+                                      : 'rgba(255,255,255,0.13)'
+                                  }
+                                  strokeWidth="1.3"
+                                  strokeDasharray="3 3"
+                                />
+                              </>
+                            ) : (
+                              <path
+                                d="M 176 90 C 188 90, 192 90, 204 90"
+                                stroke={
+                                  highlightBeam1
+                                    ? 'rgba(255,255,255,0.38)'
+                                    : 'rgba(255,255,255,0.13)'
+                                }
+                                strokeWidth={highlightBeam1 ? '2' : '1.4'}
+                              />
+                            )}
+
                             <path
                               d="M 386 90 C 399 90, 400 64, 413 64"
                               stroke={
@@ -677,6 +810,20 @@ export const MacBookShowcase: React.FC = () => {
                               }
                               strokeWidth={highlightBeam3 ? '2' : '1.4'}
                             />
+
+                            {/* Cloud Mesh: Async Workers also persist & lock against Databases/Redis */}
+                            {topology === 'cloud-mesh' && (
+                              <path
+                                d="M 499 78 L 499 102"
+                                stroke={
+                                  highlightWorkerDbLink
+                                    ? 'rgba(255,255,255,0.42)'
+                                    : 'rgba(255,255,255,0.16)'
+                                }
+                                strokeWidth={highlightWorkerDbLink ? '1.8' : '1.3'}
+                                strokeDasharray="2.5 3"
+                              />
+                            )}
                           </g>
 
                           {/* Animated Vector Light Pulses */}
@@ -686,10 +833,23 @@ export const MacBookShowcase: React.FC = () => {
                             strokeWidth="2.4"
                             strokeLinecap="round"
                           >
-                            <path
-                              d="M 176 90 C 188 90, 192 90, 204 90"
-                              className={styles.animatedBeam1}
-                            />
+                            {topology === 'mcp-hub' ? (
+                              <>
+                                <path
+                                  d="M 176 86.5 L 204 86.5"
+                                  className={styles.animatedBeam1}
+                                />
+                                <path
+                                  d="M 204 93.5 L 176 93.5"
+                                  className={styles.animatedBeamReverse}
+                                />
+                              </>
+                            ) : (
+                              <path
+                                d="M 176 90 C 188 90, 192 90, 204 90"
+                                className={styles.animatedBeam1}
+                              />
+                            )}
                             <path
                               d="M 386 90 C 399 90, 400 64, 413 64"
                               className={styles.animatedBeam2}

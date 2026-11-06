@@ -8,19 +8,28 @@ export interface StudioNode {
   summary: string;
   chips: string[];
   streamLabel?: string;
+  stepNumber?: string;
 }
+
+export type StudioTopology =
+  | 'cloud-mesh'
+  | 'release-pipeline'
+  | 'telemetry-bus'
+  | 'mcp-hub';
 
 export interface StudioDomainTab {
   id: 'cloud' | 'cicd' | 'observability' | 'ai';
-  topology: 'pipeline-split' | 'telemetry-bus';
+  topology: StudioTopology;
   tabLabel: string;
   shortTabLabel: string;
   windowContext: string;
   statusBadge: string;
   /**
-   * 4 interactive nodes:
-   * - 'pipeline-split': [0]=Left Ingress, [1]=Center Core, [2]=Top-Right, [3]=Bottom-Right
-   * - 'telemetry-bus':  [0]=Left Source Stack, [1]=Top Sink, [2]=Middle Sink, [3]=Bottom Sink
+   * 4 interactive nodes tailored to each domain's real topology:
+   * - 'cloud-mesh':       [0]=Edge/API GW, [1]=ECS Core, [2]=Async Workers, [3]=Redis Locks & DBs (with Worker->DB link)
+   * - 'release-pipeline': [0]=01 Quality Gates -> [1]=02 Build & ECR -> [2]=03 Safe DB Migrations -> [3]=04 ECS Deploy
+   * - 'telemetry-bus':    [0]=Live App & DBs -> 3 parallel streams ([1]=Datadog, [2]=CleverTap, [3]=Metabase)
+   * - 'mcp-hub':          [0]=AI Hosts & Skills <-> [1]=MCP Server Runtime -> ([2]=Workflow Tools, [3]=Context & Rules)
    */
   nodes: [StudioNode, StudioNode, StudioNode, StudioNode];
 }
@@ -40,7 +49,7 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
     tabs: [
       {
         id: 'cloud',
-        topology: 'pipeline-split',
+        topology: 'cloud-mesh',
         tabLabel: 'Cloud, ECS & Async',
         shortTabLabel: 'Cloud & ECS',
         windowContext: 'aws · us-east-1 · ecs-cluster',
@@ -48,85 +57,89 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
         nodes: [
           {
             id: 'api-gw',
-            title: 'AWS API Gateway',
-            subtitle: 'Cloudflare · DNS · REST',
-            roleTag: 'DNS & Ingress',
+            title: 'Edge & API Gateway',
+            subtitle: 'Cloudflare WAF · AWS API GW',
+            roleTag: 'Perimeter & Ingress',
             summary:
-              'Cloudflare DNS management and perimeter protection paired with AWS API Gateway routing, auth, and traffic control.',
-            chips: ['Cloudflare & DNS', 'AWS API Gateway', 'WAF / SSL', 'REST APIs'],
+              'Cloudflare DNS and WAF perimeter protection in front of AWS API Gateway for authentication, rate control, and REST routing.',
+            chips: ['Cloudflare WAF', 'AWS API Gateway', 'JWT / Auth', 'REST APIs'],
           },
           {
             id: 'ecs-core',
             title: 'ECS Microservices',
             subtitle: 'NestJS · Spring Boot · DDD',
-            roleTag: 'Core Compute',
+            roleTag: 'Core Domain Compute',
             summary:
-              'Containerized services on AWS ECS and Cloud Functions structured with Hexagonal Architecture & DDD.',
+              'Containerized backend services on AWS ECS and Cloud Functions structured with Hexagonal Architecture (Ports & Adapters) and DDD.',
             chips: ['AWS ECS', 'NestJS', 'Spring Boot', 'Hexagonal / DDD'],
           },
           {
             id: 'async-queues',
-            title: 'Queues & Event Bus',
+            title: 'Queues & Async Workers',
             subtitle: 'SQS · EventBridge · BullMQ',
-            roleTag: 'Async & Event-Driven',
+            roleTag: 'Async Processing',
             summary:
-              'Asynchronous decoupling, background workers, DLQ retry policies, and idempotent event consumers.',
-            chips: ['AWS SQS / SNS', 'EventBridge', 'BullMQ', 'RabbitMQ'],
+              'Decoupled background workers handling webhooks, notifications, and heavy jobs with DLQ retry policies and idempotent consumers.',
+            chips: ['AWS SQS / SNS', 'EventBridge', 'BullMQ', 'Idempotency'],
           },
           {
             id: 'data-locks',
-            title: 'Data & Redis Locks',
-            subtitle: 'PostgreSQL · MongoDB · Redis',
-            roleTag: 'State & Concurrency',
+            title: 'Redis Locks & Databases',
+            subtitle: 'Redis · PostgreSQL · MongoDB',
+            roleTag: 'Concurrency & Persistence',
             summary:
-              'Race-condition prevention via atomic Redis distributed locks and tuned SQL/NoSQL queries.',
+              'Shared persistence for APIs and async workers, using atomic Redis distributed locks to prevent race conditions alongside tuned SQL/NoSQL stores.',
             chips: ['Redis Locks', 'PostgreSQL', 'MongoDB'],
           },
         ],
       },
       {
         id: 'cicd',
-        topology: 'pipeline-split',
+        topology: 'release-pipeline',
         tabLabel: 'CI/CD & GitHub Actions',
         shortTabLabel: 'CI/CD',
-        windowContext: 'github-actions · main -> prod',
-        statusBadge: 'Pipeline · Passing',
+        windowContext: 'github-actions · sequential rollout',
+        statusBadge: '4 Stages · Passing',
         nodes: [
           {
             id: 'pr-checks',
+            stepNumber: '01',
             title: 'PR & Quality Gates',
-            subtitle: 'Tests · Types · Reviews',
-            roleTag: 'Verification',
+            subtitle: 'Types · Tests · Code Review',
+            roleTag: 'Stage 01 · Verify',
             summary:
-              'Strict TypeScript checks, automated test suites, and peer code reviews before every merge.',
-            chips: ['Automated Tests', 'TypeScript', 'Code Review'],
+              'Every pull request runs strict TypeScript typechecking, automated unit/integration tests, and peer review before merging to main.',
+            chips: ['TypeScript', 'Automated Tests', 'Code Review'],
           },
           {
             id: 'gh-actions',
-            title: 'GitHub Actions CI/CD',
-            subtitle: 'Workflows · Docker · ECR',
-            roleTag: 'Build & Orchestration',
+            stepNumber: '02',
+            title: 'Docker Build & ECR',
+            subtitle: 'GitHub Actions · Immutable Tag',
+            roleTag: 'Stage 02 · Package',
             summary:
-              'Automated CI/CD workflows building multi-stage Docker images and publishing artifacts to AWS.',
-            chips: ['GitHub Actions', 'Docker', 'AWS ECR', 'CI/CD'],
+              'GitHub Actions builds multi-stage Docker images tagged by commit SHA and pushes immutable container artifacts to AWS ECR.',
+            chips: ['GitHub Actions', 'Docker', 'AWS ECR'],
           },
           {
             id: 'db-migrations',
+            stepNumber: '03',
             title: 'Safe DB Migrations',
-            subtitle: 'Zero-Downtime · Schemas',
-            roleTag: 'Data Evolution',
+            subtitle: 'Expand Schema · Zero-Downtime',
+            roleTag: 'Stage 03 · Migrate First',
             summary:
-              'Backward-compatible schema migrations in PostgreSQL and MongoDB without interrupting live traffic.',
-            chips: ['Schema Migrations', 'PostgreSQL', 'MongoDB'],
+              'Backward-compatible PostgreSQL and MongoDB schema migrations run before new containers receive traffic so live requests never break.',
+            chips: ['Expand / Contract', 'PostgreSQL', 'MongoDB'],
           },
           {
             id: 'ecs-deploy',
-            title: 'ECS & Cloud Deploy',
-            subtitle: 'Rolling · Healthchecks',
-            roleTag: 'Production Rollout',
+            stepNumber: '04',
+            title: 'ECS Rolling Deploy',
+            subtitle: 'Healthchecks · Auto-Rollback',
+            roleTag: 'Stage 04 · Release',
             summary:
-              'Progressive rollouts across AWS ECS tasks and Cloud Functions with automated healthchecks.',
-            chips: ['AWS ECS', 'Cloud Functions', 'Zero Downtime'],
+              'Progressive task replacement across AWS ECS and Cloud Functions gated by live healthchecks and Datadog monitors.',
+            chips: ['AWS ECS', 'Healthchecks', 'Zero Downtime'],
           },
         ],
       },
@@ -181,47 +194,47 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'ai',
-        topology: 'pipeline-split',
+        topology: 'mcp-hub',
         tabLabel: 'AI, MCP & Workers',
         shortTabLabel: 'AI & MCP',
-        windowContext: 'cloudflare-workers · mcp',
-        statusBadge: 'MCP Agents · Live',
+        windowContext: 'json-rpc · cloudflare-workers · mcp',
+        statusBadge: 'Streamable HTTP · Live',
         nodes: [
           {
             id: 'llm-clients-skills',
-            title: 'LLMs & Area Skills',
-            subtitle: 'Claude · Codex · Plugins',
-            roleTag: 'AI Clients & Skills',
+            title: 'AI Hosts & Area Skills',
+            subtitle: 'Claude · Codex · Team Skills',
+            roleTag: 'LLM Clients & Skills',
             summary:
-              'Connecting preferred LLMs with focused plugins, prompting rules, and skills tailored to each internal team area.',
-            chips: ['Custom Skills', 'Team Plugins', 'Prompt Rules'],
+              'Connecting Claude, Codex, Antigravity, and Cursor with focused plugins, prompting rules, and domain skills per internal team area.',
+            chips: ['Claude & Codex', 'Custom Skills', 'Prompt Rules'],
           },
           {
             id: 'cf-workers',
-            title: 'MCP & Edge Workers',
-            subtitle: 'Cloudflare Workers · HTTP',
-            roleTag: 'Protocol & Edge Runtime',
+            title: 'MCP Server Runtime',
+            subtitle: 'Cloudflare Workers · TS SDK',
+            roleTag: 'Bidirectional JSON-RPC',
             summary:
-              'Stateless MCP servers on Cloudflare Workers and internal runtimes handling Streamable HTTP, Zod schema validation, and rate limits.',
-            chips: ['Cloudflare Workers', 'MCP', 'Streamable HTTP'],
+              'Stateless MCP servers on Cloudflare Workers and internal Node runtimes handling Streamable HTTP, Zod schema validation, and rate limits.',
+            chips: ['Cloudflare Workers', 'MCP Protocol', 'Zod Guardrails'],
           },
           {
             id: 'internal-apis-flows',
-            title: 'Internal APIs & Flows',
-            subtitle: 'Ops · Support · Automation',
-            roleTag: 'Workflow Execution',
+            title: 'Workflow & Ops Tools',
+            subtitle: 'APIs · Retool · Slack Bots',
+            roleTag: 'Action Execution',
             summary:
-              'Replacing repetitive manual tasks across Operations, Support, and Product with safe, tool-driven backend actions.',
-            chips: ['Workflow Automation', 'Internal Tools', 'Ops & Support'],
+              'Typed MCP tools replacing repetitive manual tasks across Operations, Support, and Product with safe, audited backend actions.',
+            chips: ['Workflow Automation', 'Internal APIs', 'Ops & Support'],
           },
           {
             id: 'domain-context',
-            title: 'Context & Data Tools',
-            subtitle: 'Docs · SQL · Evaluators',
-            roleTag: 'Structured Context',
+            title: 'Resources & Evaluators',
+            subtitle: 'Docs · SQL · Vacancy Fit',
+            roleTag: 'Read-Safe Context',
             summary:
-              'Exposing read-safe resources, domain documentation, and deterministic evaluators to ground AI responses in real data.',
-            chips: ['MCP Resources', 'Zod Schemas', 'Guardrails'],
+              'Exposing structured MCP resources, runbooks, and deterministic edge evaluators so AI responses stay grounded in real system data.',
+            chips: ['MCP Resources', 'Deterministic Fit', 'Read-Only SQL'],
           },
         ],
       },
@@ -234,7 +247,7 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
     tabs: [
       {
         id: 'cloud',
-        topology: 'pipeline-split',
+        topology: 'cloud-mesh',
         tabLabel: 'Cloud, ECS & Colas',
         shortTabLabel: 'Cloud & ECS',
         windowContext: 'aws · us-east-1 · ecs-cluster',
@@ -242,85 +255,89 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
         nodes: [
           {
             id: 'api-gw',
-            title: 'AWS API Gateway',
-            subtitle: 'Cloudflare · DNS · REST',
-            roleTag: 'DNS y Entrada',
+            title: 'Edge & API Gateway',
+            subtitle: 'Cloudflare WAF · AWS API GW',
+            roleTag: 'Perímetro y Entrada',
             summary:
-              'Gestión de DNS y seguridad perimetral en Cloudflare junto con enrutamiento, auth y control de tráfico en AWS API Gateway.',
-            chips: ['Cloudflare & DNS', 'AWS API Gateway', 'WAF / SSL', 'REST APIs'],
+              'Protección perimetral y DNS en Cloudflare delante de AWS API Gateway para autenticación, control de tráfico y enrutamiento REST.',
+            chips: ['Cloudflare WAF', 'AWS API Gateway', 'JWT / Auth', 'REST APIs'],
           },
           {
             id: 'ecs-core',
             title: 'Microservicios ECS',
             subtitle: 'NestJS · Spring Boot · DDD',
-            roleTag: 'Cómputo Principal',
+            roleTag: 'Cómputo de Dominio',
             summary:
-              'Microservicios contenerizados en AWS ECS y Cloud Functions bajo Arquitectura Hexagonal y DDD.',
+              'Microservicios contenerizados en AWS ECS y Cloud Functions estructurados bajo Arquitectura Hexagonal (Puertos y Adaptadores) y DDD.',
             chips: ['AWS ECS', 'NestJS', 'Spring Boot', 'Hexagonal / DDD'],
           },
           {
             id: 'async-queues',
-            title: 'Colas y Eventos Async',
+            title: 'Colas y Workers Async',
             subtitle: 'SQS · EventBridge · BullMQ',
-            roleTag: 'Event-Driven',
+            roleTag: 'Procesamiento Async',
             summary:
-              'Desacoplamiento asíncrono, workers en segundo plano, políticas DLQ e idempotencia.',
-            chips: ['AWS SQS / SNS', 'EventBridge', 'BullMQ', 'RabbitMQ'],
+              'Workers desacoplados en segundo plano para webhooks, notificaciones y tareas pesadas con políticas DLQ y consumidores idempotentes.',
+            chips: ['AWS SQS / SNS', 'EventBridge', 'BullMQ', 'Idempotencia'],
           },
           {
             id: 'data-locks',
-            title: 'Datos y Locks Redis',
-            subtitle: 'PostgreSQL · MongoDB · Redis',
-            roleTag: 'Estado y Concurrencia',
+            title: 'Locks Redis y Bases',
+            subtitle: 'Redis · PostgreSQL · MongoDB',
+            roleTag: 'Concurrencia y Estado',
             summary:
-              'Prevención de race conditions con locks atómicos en Redis y optimización de consultas SQL/NoSQL.',
+              'Capa de persistencia compartida por APIs y workers async, usando locks atómicos en Redis contra race conditions junto a SQL/NoSQL.',
             chips: ['Redis Locks', 'PostgreSQL', 'MongoDB'],
           },
         ],
       },
       {
         id: 'cicd',
-        topology: 'pipeline-split',
+        topology: 'release-pipeline',
         tabLabel: 'CI/CD & GitHub Actions',
         shortTabLabel: 'CI/CD',
-        windowContext: 'github-actions · main -> prod',
-        statusBadge: 'Pipeline · OK',
+        windowContext: 'github-actions · despliegue secuencial',
+        statusBadge: '4 Etapas · OK',
         nodes: [
           {
             id: 'pr-checks',
+            stepNumber: '01',
             title: 'PR & Quality Gates',
-            subtitle: 'Tests · Tipado · Reviews',
-            roleTag: 'Calidad de Código',
+            subtitle: 'Tipado · Tests · Code Review',
+            roleTag: 'Etapa 01 · Verificación',
             summary:
-              'Validación estricta de TypeScript, pruebas automatizadas y code reviews antes de cada merge.',
-            chips: ['Automated Tests', 'TypeScript', 'Code Review'],
+              'Cada pull request ejecuta chequeo estricto de TypeScript, pruebas automatizadas y revisión de código antes de integrarse a main.',
+            chips: ['TypeScript', 'Automated Tests', 'Code Review'],
           },
           {
             id: 'gh-actions',
-            title: 'GitHub Actions CI/CD',
-            subtitle: 'Workflows · Docker · ECR',
-            roleTag: 'Build y Orquestación',
+            stepNumber: '02',
+            title: 'Build Docker & ECR',
+            subtitle: 'GitHub Actions · SHA Tag',
+            roleTag: 'Etapa 02 · Empaquetado',
             summary:
-              'Workflows automatizados que construyen imágenes Docker y publican artefactos hacia AWS.',
-            chips: ['GitHub Actions', 'Docker', 'AWS ECR', 'CI/CD'],
+              'GitHub Actions construye imágenes Docker multi-etapa versionadas por commit y publica el artefacto inmutable en AWS ECR.',
+            chips: ['GitHub Actions', 'Docker', 'AWS ECR'],
           },
           {
             id: 'db-migrations',
+            stepNumber: '03',
             title: 'Migraciones Seguras',
-            subtitle: 'Zero-Downtime · Esquemas',
-            roleTag: 'Evolución de Datos',
+            subtitle: 'Expand Schema · Zero-Downtime',
+            roleTag: 'Etapa 03 · Migrar Primero',
             summary:
-              'Migraciones compatibles de esquemas en PostgreSQL y MongoDB sin afectar el tráfico en vivo.',
-            chips: ['Migraciones SQL/NoSQL', 'PostgreSQL', 'MongoDB'],
+              'Las migraciones retrocompatibles en PostgreSQL y MongoDB corren antes de rotar contenedores para nunca romper el tráfico activo.',
+            chips: ['Expand / Contract', 'PostgreSQL', 'MongoDB'],
           },
           {
             id: 'ecs-deploy',
-            title: 'Despliegue ECS & Cloud',
-            subtitle: 'Rolling · Healthchecks',
-            roleTag: 'Paso a Producción',
+            stepNumber: '04',
+            title: 'Rolling Deploy en ECS',
+            subtitle: 'Healthchecks · Auto-Rollback',
+            roleTag: 'Etapa 04 · Lanzamiento',
             summary:
-              'Rollouts progresivos en tareas de AWS ECS y Cloud Functions con healthchecks automáticos.',
-            chips: ['AWS ECS', 'Cloud Functions', 'Zero Downtime'],
+              'Reemplazo progresivo de tareas en AWS ECS y Cloud Functions validado por healthchecks en vivo y monitores de Datadog.',
+            chips: ['AWS ECS', 'Healthchecks', 'Zero Downtime'],
           },
         ],
       },
@@ -375,47 +392,47 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'ai',
-        topology: 'pipeline-split',
+        topology: 'mcp-hub',
         tabLabel: 'IA, MCP & Workers',
         shortTabLabel: 'IA & MCP',
-        windowContext: 'cloudflare-workers · mcp',
-        statusBadge: 'MCP · En Vivo',
+        windowContext: 'json-rpc · cloudflare-workers · mcp',
+        statusBadge: 'Streamable HTTP · Vivo',
         nodes: [
           {
             id: 'llm-clients-skills',
-            title: 'LLMs y Skills por Área',
-            subtitle: 'Claude · Codex · Plugins',
-            roleTag: 'Clientes IA y Skills',
+            title: 'Hosts IA y Skills',
+            subtitle: 'Claude · Codex · Skills Área',
+            roleTag: 'Clientes LLM y Skills',
             summary:
-              'Conexión de nuestros LLMs de preferencia con plugins enfocados, reglas de prompting y skills especializados para cada área del equipo.',
-            chips: ['Custom Skills', 'Team Plugins', 'Prompt Rules'],
+              'Conexión de Claude, Codex, Antigravity y Cursor con plugins enfocados, reglas de prompting y skills diseñados para cada área del equipo.',
+            chips: ['Claude & Codex', 'Custom Skills', 'Prompt Rules'],
           },
           {
             id: 'cf-workers',
-            title: 'MCP & Edge Workers',
-            subtitle: 'Cloudflare Workers · HTTP',
-            roleTag: 'Protocolo y Runtime Edge',
+            title: 'Runtime Servidor MCP',
+            subtitle: 'Cloudflare Workers · TS SDK',
+            roleTag: 'JSON-RPC Bidireccional',
             summary:
-              'Servidores MCP sin estado en Cloudflare Workers y tooling interno gestionando Streamable HTTP, esquemas Zod y guardrails por IP.',
-            chips: ['Cloudflare Workers', 'MCP', 'Streamable HTTP'],
+              'Servidores MCP sin estado en Cloudflare Workers y Node gestionando Streamable HTTP, validación Zod y guardrails por IP.',
+            chips: ['Cloudflare Workers', 'Protocolo MCP', 'Zod Guardrails'],
           },
           {
             id: 'internal-apis-flows',
-            title: 'APIs y Flujos Internos',
-            subtitle: 'Ops · Soporte · Automatización',
-            roleTag: 'Ejecución Operativa',
+            title: 'Tools de Flujos y Ops',
+            subtitle: 'APIs · Retool · Bots Slack',
+            roleTag: 'Ejecución de Acciones',
             summary:
-              'Migración de tareas manuales repetitivas en Operaciones, Soporte y Producto hacia acciones asistidas y seguras sobre el backend.',
-            chips: ['Automatización', 'Internal Tools', 'Ops & Soporte'],
+              'Tools MCP tipadas que reemplazan tareas manuales repetitivas en Operaciones, Soporte y Producto por acciones seguras en el backend.',
+            chips: ['Automatización', 'Internal APIs', 'Ops & Soporte'],
           },
           {
             id: 'domain-context',
-            title: 'Contexto y Datos MCP',
-            subtitle: 'Docs · SQL · Evaluadores',
-            roleTag: 'Contexto Estructurado',
+            title: 'Recursos y Evaluadores',
+            subtitle: 'Docs · SQL · Match Vacantes',
+            roleTag: 'Contexto de Solo Lectura',
             summary:
-              'Exposición controlada de recursos, documentación técnica y evaluadores determinísticos para respaldar respuestas de IA con datos reales.',
-            chips: ['MCP Resources', 'Esquemas Zod', 'Guardrails'],
+              'Exposición controlada de recursos MCP, documentación técnica y evaluadores determinísticos para anclar las respuestas de IA en datos reales.',
+            chips: ['MCP Resources', 'Scoring Determinístico', 'SQL Lectura'],
           },
         ],
       },

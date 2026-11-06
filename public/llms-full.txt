@@ -47,7 +47,7 @@ Beyond feature development, has contributed to migrating manual processes toward
 - **Key Responsibilities & Achievements:**
   - Built high-transactional backend services with Node.js, TypeScript, and LoopBack 4 for the mobile platform used by independent merchants.
   - Designed schemas and migrations for relational and NoSQL databases (PostgreSQL, MongoDB), optimizing critical wallet and payment queries.
-  - Implemented secure REST APIs, Git version control, automated testing, and integrations with payment gateways (Stripe, Refácil), KYC compliance (Tusdatos.co), messaging (Twilio, SendGrid, Intercom), and mobile attribution (AppsFlyer).
+  - Implemented secure REST APIs, Git version control, automated testing, and integrations with payment gateways (Stripe, Refácil), KYC compliance (Tusdatos.co), internal ops & alerting (Retool, Slack bots/alerts), messaging & push notifications (Twilio, SendGrid, Intercom, Firebase FCM), and mobile attribution (AppsFlyer).
   - Continuous collaboration under Agile (Scrum) methodologies, technical user story refinement, and peer code reviews.
 
 ### Cooltivalo · +COTAS · SLS GROUPS ,  Full Stack & Software Developer
