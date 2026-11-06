@@ -7,15 +7,21 @@ export interface StudioNode {
   roleTag: string;
   summary: string;
   chips: string[];
+  streamLabel?: string;
 }
 
 export interface StudioDomainTab {
   id: 'cloud' | 'cicd' | 'observability' | 'ai';
+  topology: 'pipeline-split' | 'telemetry-bus';
   tabLabel: string;
   shortTabLabel: string;
   windowContext: string;
   statusBadge: string;
-  /** Always 4 nodes: [0]=Left Ingress, [1]=Center Core, [2]=Top-Right, [3]=Bottom-Right */
+  /**
+   * 4 interactive nodes:
+   * - 'pipeline-split': [0]=Left Ingress, [1]=Center Core, [2]=Top-Right, [3]=Bottom-Right
+   * - 'telemetry-bus':  [0]=Left Source Stack, [1]=Top Sink, [2]=Middle Sink, [3]=Bottom Sink
+   */
   nodes: [StudioNode, StudioNode, StudioNode, StudioNode];
 }
 
@@ -34,6 +40,7 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
     tabs: [
       {
         id: 'cloud',
+        topology: 'pipeline-split',
         tabLabel: 'Cloud, ECS & Async',
         shortTabLabel: 'Cloud & ECS',
         windowContext: 'aws · us-east-1 · ecs-cluster',
@@ -79,6 +86,7 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'cicd',
+        topology: 'pipeline-split',
         tabLabel: 'CI/CD & GitHub Actions',
         shortTabLabel: 'CI/CD',
         windowContext: 'github-actions · main -> prod',
@@ -124,91 +132,96 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'observability',
+        topology: 'telemetry-bus',
         tabLabel: 'Datadog & Product Data',
         shortTabLabel: 'Datadog & Data',
-        windowContext: 'datadog-apm · 99.98% sla',
-        statusBadge: 'Monitors · Healthy',
+        windowContext: 'telemetry · events · sql-bi',
+        statusBadge: '3 Streams · Live',
         nodes: [
           {
-            id: 'telemetry-ingest',
-            title: 'Service Telemetry',
-            subtitle: 'Logs · Spans · Events',
-            roleTag: 'Instrumentation',
+            id: 'prod-stack-source',
+            title: 'Backend, App & DBs',
+            subtitle: 'NestJS · Mobile · PostgreSQL',
+            roleTag: 'Signal & Data Origin',
             summary:
-              'Correlated structured logs, trace IDs, and domain events emitted across backend and queues.',
-            chips: ['Structured Logs', 'Trace Context', 'Metrics'],
+              'Production services, mobile apps, and relational databases emitting independent streams for SRE observability, product events, and SQL BI.',
+            chips: ['NestJS APIs', 'Mobile SDKs', 'PostgreSQL'],
           },
           {
             id: 'datadog-apm',
             title: 'Datadog Observability',
-            subtitle: 'APM · Tracing · Alerting',
-            roleTag: 'Production Reliability',
+            subtitle: 'APM · Logs · SLA Alerts',
+            streamLabel: 'APM · Logs',
+            roleTag: 'Engineering Reliability',
             summary:
-              'Distributed tracing across microservices, proactive SLA alerting, and live incident investigation.',
+              'Ingests distributed APM traces, structured logs, and service metrics directly from backend and queue workers for alerting and incident debugging.',
             chips: ['Datadog APM', 'Alerts & Monitors', 'Incident Debug'],
           },
           {
             id: 'clevertap',
             title: 'CleverTap Analytics',
-            subtitle: 'Funnels · Events · Retention',
+            subtitle: 'Events · Funnels · Retention',
+            streamLabel: 'Domain Events',
             roleTag: 'Product Behavior',
             summary:
-              'Tracking real-time user journeys, conversion funnels, and feature adoption metrics.',
+              'Receives user actions and domain events directly from mobile and backend flows to track conversion funnels, cohorts, and retention.',
             chips: ['CleverTap', 'Event Funnels', 'Retention'],
           },
           {
             id: 'metabase',
-            title: 'Metabase & BI',
+            title: 'Metabase & SQL BI',
             subtitle: 'SQL · Product · Ops · Finance',
-            roleTag: 'Business Impact',
+            streamLabel: 'SQL Replicas',
+            roleTag: 'Business Intelligence',
             summary:
-              'SQL models and dashboards giving Product, Ops, and Finance real data to guide the roadmap.',
-            chips: ['Metabase', 'SQL Analytics', 'KPIs'],
+              'Queries PostgreSQL read replicas and analytical SQL models so Product, Operations, and Finance make decisions backed by real data.',
+            chips: ['Metabase', 'SQL Read Models', 'KPIs'],
           },
         ],
       },
       {
         id: 'ai',
+        topology: 'pipeline-split',
         tabLabel: 'AI, MCP & Workers',
         shortTabLabel: 'AI & MCP',
         windowContext: 'cloudflare-workers · mcp',
         statusBadge: 'MCP Agents · Live',
         nodes: [
           {
-            id: 'team-workflows',
-            title: 'Internal Team Flows',
-            subtitle: 'Ops · Support · Product',
-            roleTag: 'Operational Need',
+            id: 'llm-clients-skills',
+            title: 'LLMs & Area Skills',
+            subtitle: 'Claude · Codex · Plugins',
+            roleTag: 'AI Clients & Skills',
             summary:
-              'Transforming repetitive manual processes into reliable AI-assisted internal workflows.',
-            chips: ['Process Automation', 'Internal Tools', 'Ops & Support'],
+              'Connecting preferred LLMs with focused plugins, prompting rules, and skills tailored to each internal team area.',
+            chips: ['Custom Skills', 'Team Plugins', 'Prompt Rules'],
           },
           {
             id: 'cf-workers',
-            title: 'Cloudflare Workers',
-            subtitle: 'Edge MCP · Serverless · HTTP',
-            roleTag: 'Edge Runtime',
+            title: 'MCP & Edge Workers',
+            subtitle: 'Cloudflare Workers · HTTP',
+            roleTag: 'Protocol & Edge Runtime',
             summary:
-              'Stateless edge execution for MCP servers, Streamable HTTP transport, rate-limiting guardrails, and AI workflow orchestration.',
-            chips: ['Cloudflare Workers', 'Streamable HTTP', 'Edge Guardrails'],
+              'Stateless MCP servers on Cloudflare Workers and internal runtimes handling Streamable HTTP, Zod schema validation, and rate limits.',
+            chips: ['Cloudflare Workers', 'MCP', 'Streamable HTTP'],
           },
           {
-            id: 'mcp-servers',
-            title: 'MCP Internal Tooling',
-            subtitle: 'Model Context Protocol',
-            roleTag: 'Context & Tools',
+            id: 'internal-apis-flows',
+            title: 'Internal APIs & Flows',
+            subtitle: 'Ops · Support · Automation',
+            roleTag: 'Workflow Execution',
             summary:
-              'Custom MCP tooling connecting preferred LLMs safely with internal APIs, docs, and databases.',
-            chips: ['MCP', 'TypeScript', 'Tool Calling'],
+              'Replacing repetitive manual tasks across Operations, Support, and Product with safe, tool-driven backend actions.',
+            chips: ['Workflow Automation', 'Internal Tools', 'Ops & Support'],
           },
           {
-            id: 'team-skills',
-            title: 'Area Plugins & Skills',
-            subtitle: 'Focused Domain Capabilities',
-            roleTag: 'Team Acceleration',
+            id: 'domain-context',
+            title: 'Context & Data Tools',
+            subtitle: 'Docs · SQL · Evaluators',
+            roleTag: 'Structured Context',
             summary:
-              'Specialized plugins and skills tailored for each internal team area to ship and operate faster.',
-            chips: ['Custom Skills', 'Team Plugins', 'LLMs'],
+              'Exposing read-safe resources, domain documentation, and deterministic evaluators to ground AI responses in real data.',
+            chips: ['MCP Resources', 'Zod Schemas', 'Guardrails'],
           },
         ],
       },
@@ -221,6 +234,7 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
     tabs: [
       {
         id: 'cloud',
+        topology: 'pipeline-split',
         tabLabel: 'Cloud, ECS & Colas',
         shortTabLabel: 'Cloud & ECS',
         windowContext: 'aws · us-east-1 · ecs-cluster',
@@ -266,6 +280,7 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'cicd',
+        topology: 'pipeline-split',
         tabLabel: 'CI/CD & GitHub Actions',
         shortTabLabel: 'CI/CD',
         windowContext: 'github-actions · main -> prod',
@@ -311,91 +326,96 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'observability',
+        topology: 'telemetry-bus',
         tabLabel: 'Datadog & Analítica',
         shortTabLabel: 'Datadog & Data',
-        windowContext: 'datadog-apm · 99.98% sla',
-        statusBadge: 'Monitores · Sanos',
+        windowContext: 'telemetry · events · sql-bi',
+        statusBadge: '3 Flujos · Activos',
         nodes: [
           {
-            id: 'telemetry-ingest',
-            title: 'Telemetría y Eventos',
-            subtitle: 'Logs · Spans · Eventos',
-            roleTag: 'Instrumentación',
+            id: 'prod-stack-source',
+            title: 'Backend, App y BDs',
+            subtitle: 'NestJS · Móvil · PostgreSQL',
+            roleTag: 'Origen de Señales y Datos',
             summary:
-              'Logs estructurados con trace IDs y emisión de eventos desde microservicios y colas.',
-            chips: ['Structured Logs', 'Trace IDs', 'Métricas'],
+              'Servicios en producción, apps móviles y bases relacionales emitiendo flujos independientes hacia observabilidad SRE, eventos de producto y BI.',
+            chips: ['NestJS APIs', 'SDKs Móviles', 'PostgreSQL'],
           },
           {
             id: 'datadog-apm',
             title: 'Datadog Observability',
-            subtitle: 'APM · Tracing · Alertas',
-            roleTag: 'Fiabilidad en Prod',
+            subtitle: 'APM · Logs · Alertas SLA',
+            streamLabel: 'APM · Logs',
+            roleTag: 'Fiabilidad de Ingeniería',
             summary:
-              'Trazabilidad distribuida entre servicios, alertas proactivas e investigación de incidentes.',
+              'Recibe trazas distribuidas APM, logs estructurados y métricas directo desde el backend y workers para alertas e investigación de incidentes.',
             chips: ['Datadog APM', 'Alertas y Monitores', 'Incident Debug'],
           },
           {
             id: 'clevertap',
-            title: 'Eventos en CleverTap',
-            subtitle: 'Embudos · Uso · Retención',
-            roleTag: 'Analítica de Producto',
+            title: 'CleverTap Analytics',
+            subtitle: 'Eventos · Embudos · Retención',
+            streamLabel: 'Eventos SDK',
+            roleTag: 'Comportamiento de Producto',
             summary:
-              'Medición de eventos de producto, embudos de conversión y adopción de nuevas funcionalidades.',
+              'Recibe acciones de usuario y eventos de dominio desde la app y el backend para medir embudos de conversión, cohortes y retención.',
             chips: ['CleverTap', 'Funnels', 'Retención'],
           },
           {
             id: 'metabase',
-            title: 'Decisiones en Metabase',
-            subtitle: 'SQL · Producto · Ops · BI',
-            roleTag: 'Impacto de Negocio',
+            title: 'Metabase & SQL BI',
+            subtitle: 'SQL · Producto · Ops · Finanzas',
+            streamLabel: 'Consultas SQL',
+            roleTag: 'Inteligencia de Negocio',
             summary:
-              'Consultas SQL y tableros para respaldar decisiones junto a Producto, Operaciones y Finanzas.',
+              'Consulta réplicas de lectura en PostgreSQL y modelos SQL directamente para que Producto, Operaciones y Finanzas decidan con datos reales.',
             chips: ['Metabase', 'SQL Analytics', 'KPIs'],
           },
         ],
       },
       {
         id: 'ai',
+        topology: 'pipeline-split',
         tabLabel: 'IA, MCP & Workers',
         shortTabLabel: 'IA & MCP',
         windowContext: 'cloudflare-workers · mcp',
         statusBadge: 'MCP · En Vivo',
         nodes: [
           {
-            id: 'team-workflows',
-            title: 'Flujos de Equipos',
-            subtitle: 'Ops · Soporte · Producto',
-            roleTag: 'Problema Real',
+            id: 'llm-clients-skills',
+            title: 'LLMs y Skills por Área',
+            subtitle: 'Claude · Codex · Plugins',
+            roleTag: 'Clientes IA y Skills',
             summary:
-              'Migración de procesos manuales repetitivos hacia flujos internos asistidos por IA.',
-            chips: ['Automatización', 'Internal Tools', 'Ops & Soporte'],
+              'Conexión de nuestros LLMs de preferencia con plugins enfocados, reglas de prompting y skills especializados para cada área del equipo.',
+            chips: ['Custom Skills', 'Team Plugins', 'Prompt Rules'],
           },
           {
             id: 'cf-workers',
-            title: 'Cloudflare Workers',
-            subtitle: 'Edge MCP · Serverless · HTTP',
-            roleTag: 'Runtime en el Edge',
+            title: 'MCP & Edge Workers',
+            subtitle: 'Cloudflare Workers · HTTP',
+            roleTag: 'Protocolo y Runtime Edge',
             summary:
-              'Ejecución serverless en el edge para servidores MCP, transporte Streamable HTTP, guardrails por IP y orquestación de flujos con IA.',
-            chips: ['Cloudflare Workers', 'Streamable HTTP', 'Edge Guardrails'],
+              'Servidores MCP sin estado en Cloudflare Workers y tooling interno gestionando Streamable HTTP, esquemas Zod y guardrails por IP.',
+            chips: ['Cloudflare Workers', 'MCP', 'Streamable HTTP'],
           },
           {
-            id: 'mcp-servers',
-            title: 'Tooling con MCP',
-            subtitle: 'Model Context Protocol',
-            roleTag: 'Conectividad LLM',
+            id: 'internal-apis-flows',
+            title: 'APIs y Flujos Internos',
+            subtitle: 'Ops · Soporte · Automatización',
+            roleTag: 'Ejecución Operativa',
             summary:
-              'Herramientas internas con MCP para conectar nuestros LLMs de preferencia con servicios y datos.',
-            chips: ['MCP', 'TypeScript', 'Tool Calling'],
+              'Migración de tareas manuales repetitivas en Operaciones, Soporte y Producto hacia acciones asistidas y seguras sobre el backend.',
+            chips: ['Automatización', 'Internal Tools', 'Ops & Soporte'],
           },
           {
-            id: 'team-skills',
-            title: 'Plugins y Skills por Área',
-            subtitle: 'Capacidades por Equipo',
-            roleTag: 'Productividad',
+            id: 'domain-context',
+            title: 'Contexto y Datos MCP',
+            subtitle: 'Docs · SQL · Evaluadores',
+            roleTag: 'Contexto Estructurado',
             summary:
-              'Plugins y skills enfocados en cada área interna del equipo para operar y entregar más rápido.',
-            chips: ['Custom Skills', 'Team Plugins', 'LLMs'],
+              'Exposición controlada de recursos, documentación técnica y evaluadores determinísticos para respaldar respuestas de IA con datos reales.',
+            chips: ['MCP Resources', 'Esquemas Zod', 'Guardrails'],
           },
         ],
       },

@@ -235,11 +235,20 @@ export const MacBookShowcase: React.FC = () => {
     rig.style.setProperty('--sheen-x', '50%');
   };
 
-  const highlightBeam1 = selectedNodeIndex === 0 || selectedNodeIndex === 1;
-  const highlightBeam2 = selectedNodeIndex === 1 || selectedNodeIndex === 2;
-  const highlightBeam3 = selectedNodeIndex === 1 || selectedNodeIndex === 3;
+  const isTelemetryBus = currentTab.topology === 'telemetry-bus';
 
-  const renderInteractiveNode = (nodeIdx: 0 | 1 | 2 | 3, isPrimaryCore = false): JSX.Element => {
+  const highlightBeam1 = selectedNodeIndex === 0 || selectedNodeIndex === 1;
+  const highlightBeam2 = isTelemetryBus
+    ? selectedNodeIndex === 0 || selectedNodeIndex === 2
+    : selectedNodeIndex === 1 || selectedNodeIndex === 2;
+  const highlightBeam3 = isTelemetryBus
+    ? selectedNodeIndex === 0 || selectedNodeIndex === 3
+    : selectedNodeIndex === 1 || selectedNodeIndex === 3;
+
+  const renderInteractiveNode = (
+    nodeIdx: 0 | 1 | 2 | 3,
+    variant: 'default' | 'core' | 'compact' = 'default'
+  ): JSX.Element => {
     const node = currentTab.nodes[nodeIdx];
     const isSelected = selectedNodeIndex === nodeIdx;
 
@@ -249,9 +258,13 @@ export const MacBookShowcase: React.FC = () => {
         type="button"
         onClick={() => setSelectedNodeIndex(nodeIdx)}
         onMouseEnter={() => setSelectedNodeIndex(nodeIdx)}
-        className={`${styles.archNode} ${isPrimaryCore ? styles.archNodeCore : ''} ${
-          isSelected ? styles.archNodeSelected : ''
-        }`}
+        className={`${styles.archNode} ${
+          variant === 'core'
+            ? styles.archNodeCore
+            : variant === 'compact'
+              ? styles.archNodeCompact
+              : ''
+        } ${isSelected ? styles.archNodeSelected : ''}`}
         aria-pressed={isSelected}
       >
         <div className={styles.nodeHeader}>
@@ -477,101 +490,232 @@ export const MacBookShowcase: React.FC = () => {
 
                   {/* Interactive Directed Graph Stage */}
                   <div key={currentTab.id} className={styles.graphStage}>
-                    <svg
-                      viewBox="0 0 600 180"
-                      preserveAspectRatio="none"
-                      className={styles.conduitSvg}
-                      aria-hidden="true"
-                    >
-                      <defs>
-                        <linearGradient id="beamWhite" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-                          <stop offset="50%" stopColor="#ffffff" stopOpacity="0.95" />
-                          <stop offset="100%" stopColor="#d2d2d7" stopOpacity="0" />
-                        </linearGradient>
-                        <radialGradient id="centerAura" cx="50%" cy="50%" r="50%">
-                          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.14" />
-                          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                        </radialGradient>
-                      </defs>
+                    {isTelemetryBus ? (
+                      <>
+                        <svg
+                          viewBox="0 0 600 180"
+                          preserveAspectRatio="none"
+                          className={styles.conduitSvg}
+                          aria-hidden="true"
+                        >
+                          <defs>
+                            <linearGradient id="beamBusWhite" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                              <stop offset="50%" stopColor="#ffffff" stopOpacity="0.95" />
+                              <stop offset="100%" stopColor="#d2d2d7" stopOpacity="0" />
+                            </linearGradient>
+                            <radialGradient id="sourceAura" cx="50%" cy="50%" r="50%">
+                              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.13" />
+                              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                            </radialGradient>
+                          </defs>
 
-                      <circle
-                        cx="295"
-                        cy="90"
-                        r="68"
-                        fill="url(#centerAura)"
-                        className={styles.ambientCorePulse}
-                      />
+                          <circle
+                            cx="102"
+                            cy="90"
+                            r="66"
+                            fill="url(#sourceAura)"
+                            className={styles.ambientSourcePulse}
+                          />
 
-                      <circle
-                        cx="295"
-                        cy="90"
-                        r="50"
-                        fill="none"
-                        stroke="rgba(255,255,255,0.14)"
-                        strokeWidth="1"
-                        strokeDasharray="5 7"
-                        className={styles.orbitRing}
-                      />
+                          {/* 3 Independent Stream Conduits (Origin -> APM / Events / SQL -> 3 Sinks) */}
+                          <g fill="none" strokeLinecap="round">
+                            <path
+                              d="M 186 90 C 208 90, 210 58, 234 58 L 378 58"
+                              stroke={
+                                highlightBeam1
+                                  ? 'rgba(255,255,255,0.42)'
+                                  : 'rgba(255,255,255,0.13)'
+                              }
+                              strokeWidth={highlightBeam1 ? '2' : '1.4'}
+                            />
+                            <path
+                              d="M 186 90 L 378 90"
+                              stroke={
+                                highlightBeam2
+                                  ? 'rgba(255,255,255,0.42)'
+                                  : 'rgba(255,255,255,0.13)'
+                              }
+                              strokeWidth={highlightBeam2 ? '2' : '1.4'}
+                            />
+                            <path
+                              d="M 186 90 C 208 90, 210 122, 234 122 L 378 122"
+                              stroke={
+                                highlightBeam3
+                                  ? 'rgba(255,255,255,0.42)'
+                                  : 'rgba(255,255,255,0.13)'
+                              }
+                              strokeWidth={highlightBeam3 ? '2' : '1.4'}
+                            />
+                          </g>
 
-                      {/* Base Conduit Splines (Highlighted along active node path!) */}
-                      <g fill="none" strokeLinecap="round">
-                        <path
-                          d="M 176 90 C 188 90, 192 90, 204 90"
-                          stroke={
-                            highlightBeam1 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
-                          }
-                          strokeWidth={highlightBeam1 ? '2' : '1.4'}
-                        />
-                        <path
-                          d="M 386 90 C 399 90, 400 64, 413 64"
-                          stroke={
-                            highlightBeam2 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
-                          }
-                          strokeWidth={highlightBeam2 ? '2' : '1.4'}
-                        />
-                        <path
-                          d="M 386 90 C 399 90, 400 116, 413 116"
-                          stroke={
-                            highlightBeam3 ? 'rgba(255,255,255,0.38)' : 'rgba(255,255,255,0.13)'
-                          }
-                          strokeWidth={highlightBeam3 ? '2' : '1.4'}
-                        />
-                      </g>
+                          {/* Animated Independent Light Pulses */}
+                          <g
+                            fill="none"
+                            stroke="url(#beamBusWhite)"
+                            strokeWidth="2.3"
+                            strokeLinecap="round"
+                          >
+                            <path
+                              d="M 186 90 C 208 90, 210 58, 234 58 L 378 58"
+                              className={styles.animatedBeam1}
+                            />
+                            <path
+                              d="M 186 90 L 378 90"
+                              className={styles.animatedBeam2}
+                            />
+                            <path
+                              d="M 186 90 C 208 90, 210 122, 234 122 L 378 122"
+                              className={styles.animatedBeam3}
+                            />
+                          </g>
+                        </svg>
 
-                      {/* Animated Vector Light Pulses */}
-                      <g
-                        fill="none"
-                        stroke="url(#beamWhite)"
-                        strokeWidth="2.4"
-                        strokeLinecap="round"
-                      >
-                        <path
-                          d="M 176 90 C 188 90, 192 90, 204 90"
-                          className={styles.animatedBeam1}
-                        />
-                        <path
-                          d="M 386 90 C 399 90, 400 64, 413 64"
-                          className={styles.animatedBeam2}
-                        />
-                        <path
-                          d="M 386 90 C 399 90, 400 116, 413 116"
-                          className={styles.animatedBeam3}
-                        />
-                      </g>
-                    </svg>
+                        <div className={styles.nodesGridBus}>
+                          <div className={styles.nodeColLeft}>
+                            {renderInteractiveNode(0, 'core')}
+                          </div>
 
-                    {/* 4 Interactive Clickable / Hoverable Nodes */}
-                    <div className={styles.nodesGrid}>
-                      <div className={styles.nodeColLeft}>{renderInteractiveNode(0)}</div>
+                          <div className={styles.busLanesStack}>
+                            {([1, 2, 3] as const).map((sinkIdx) => {
+                              const sinkNode = currentTab.nodes[sinkIdx];
+                              const isStreamActive =
+                                selectedNodeIndex === 0 || selectedNodeIndex === sinkIdx;
 
-                      <div className={styles.nodeColCenter}>{renderInteractiveNode(1, true)}</div>
+                              return (
+                                <div key={sinkNode.id} className={styles.busLaneRow}>
+                                  <div className={styles.busSignalCell}>
+                                    <button
+                                      type="button"
+                                      onClick={() => setSelectedNodeIndex(sinkIdx)}
+                                      onMouseEnter={() => setSelectedNodeIndex(sinkIdx)}
+                                      className={`${styles.busSignalPill} ${
+                                        isStreamActive ? styles.busSignalPillActive : ''
+                                      }`}
+                                      tabIndex={-1}
+                                      aria-hidden="true"
+                                    >
+                                      <span>{sinkNode.streamLabel}</span>
+                                      <span className={styles.busArrowGlyph}>→</span>
+                                    </button>
+                                  </div>
 
-                      <div className={styles.nodeColRight}>
-                        {renderInteractiveNode(2)}
-                        {renderInteractiveNode(3)}
-                      </div>
-                    </div>
+                                  <div className={styles.busSinkCell}>
+                                    {renderInteractiveNode(sinkIdx, 'compact')}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <svg
+                          viewBox="0 0 600 180"
+                          preserveAspectRatio="none"
+                          className={styles.conduitSvg}
+                          aria-hidden="true"
+                        >
+                          <defs>
+                            <linearGradient id="beamWhite" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                              <stop offset="50%" stopColor="#ffffff" stopOpacity="0.95" />
+                              <stop offset="100%" stopColor="#d2d2d7" stopOpacity="0" />
+                            </linearGradient>
+                            <radialGradient id="centerAura" cx="50%" cy="50%" r="50%">
+                              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.14" />
+                              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                            </radialGradient>
+                          </defs>
+
+                          <circle
+                            cx="295"
+                            cy="90"
+                            r="68"
+                            fill="url(#centerAura)"
+                            className={styles.ambientCorePulse}
+                          />
+
+                          <circle
+                            cx="295"
+                            cy="90"
+                            r="50"
+                            fill="none"
+                            stroke="rgba(255,255,255,0.14)"
+                            strokeWidth="1"
+                            strokeDasharray="5 7"
+                            className={styles.orbitRing}
+                          />
+
+                          {/* Base Conduit Splines (Highlighted along active node path!) */}
+                          <g fill="none" strokeLinecap="round">
+                            <path
+                              d="M 176 90 C 188 90, 192 90, 204 90"
+                              stroke={
+                                highlightBeam1
+                                  ? 'rgba(255,255,255,0.38)'
+                                  : 'rgba(255,255,255,0.13)'
+                              }
+                              strokeWidth={highlightBeam1 ? '2' : '1.4'}
+                            />
+                            <path
+                              d="M 386 90 C 399 90, 400 64, 413 64"
+                              stroke={
+                                highlightBeam2
+                                  ? 'rgba(255,255,255,0.38)'
+                                  : 'rgba(255,255,255,0.13)'
+                              }
+                              strokeWidth={highlightBeam2 ? '2' : '1.4'}
+                            />
+                            <path
+                              d="M 386 90 C 399 90, 400 116, 413 116"
+                              stroke={
+                                highlightBeam3
+                                  ? 'rgba(255,255,255,0.38)'
+                                  : 'rgba(255,255,255,0.13)'
+                              }
+                              strokeWidth={highlightBeam3 ? '2' : '1.4'}
+                            />
+                          </g>
+
+                          {/* Animated Vector Light Pulses */}
+                          <g
+                            fill="none"
+                            stroke="url(#beamWhite)"
+                            strokeWidth="2.4"
+                            strokeLinecap="round"
+                          >
+                            <path
+                              d="M 176 90 C 188 90, 192 90, 204 90"
+                              className={styles.animatedBeam1}
+                            />
+                            <path
+                              d="M 386 90 C 399 90, 400 64, 413 64"
+                              className={styles.animatedBeam2}
+                            />
+                            <path
+                              d="M 386 90 C 399 90, 400 116, 413 116"
+                              className={styles.animatedBeam3}
+                            />
+                          </g>
+                        </svg>
+
+                        {/* 4 Interactive Clickable / Hoverable Nodes */}
+                        <div className={styles.nodesGrid}>
+                          <div className={styles.nodeColLeft}>{renderInteractiveNode(0)}</div>
+
+                          <div className={styles.nodeColCenter}>
+                            {renderInteractiveNode(1, 'core')}
+                          </div>
+
+                          <div className={styles.nodeColRight}>
+                            {renderInteractiveNode(2)}
+                            {renderInteractiveNode(3)}
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {/* Live Technical Node Inspector Dock */}

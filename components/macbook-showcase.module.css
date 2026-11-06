@@ -477,6 +477,72 @@
   gap: 12px;
 }
 
+/* Telemetry & Analytics Multi-Sink Bus Layout (1 Origin -> 3 Independent Streams -> 3 Sinks) */
+.nodesGridBus {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.02fr 2.24fr;
+  align-items: center;
+  gap: 18px;
+}
+
+.busLanesStack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.busLaneRow {
+  display: grid;
+  grid-template-columns: 0.92fr 1.24fr;
+  align-items: center;
+  gap: 18px;
+}
+
+.busSignalCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.busSinkCell {
+  min-width: 0;
+}
+
+.busSignalPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 8.5px;
+  border-radius: 99px;
+  background: #141418;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: var(--font-family-mono);
+  font-size: 7.8px;
+  font-weight: 500;
+  color: #8e8e93;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.busSignalPillActive {
+  background: #1e1e24;
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #f5f5f7;
+}
+
+.busArrowGlyph {
+  font-size: 8px;
+  opacity: 0.72;
+}
+
 /* Interactive Clickable Nodes */
 .archNode {
   width: 100%;
@@ -513,6 +579,11 @@
 
 .archNodeCore {
   padding: 11px 12px;
+}
+
+.archNodeCompact {
+  padding: 6.5px 9.5px;
+  gap: 1.5px;
 }
 
 .archNodeSelected {
@@ -614,6 +685,11 @@
 
 .ambientCorePulse {
   transform-origin: 295px 90px;
+  animation: pulseGlow 3.6s ease-in-out infinite;
+}
+
+.ambientSourcePulse {
+  transform-origin: 102px 90px;
   animation: pulseGlow 3.6s ease-in-out infinite;
 }
 
@@ -966,6 +1042,7 @@
   .animatedBeam3,
   .orbitRing,
   .ambientCorePulse,
+  .ambientSourcePulse,
   .livePulseDot {
     animation: none;
   }
@@ -1092,6 +1169,25 @@
     gap: 8px;
   }
 
+  .nodesGridBus,
+  .busLaneRow {
+    gap: 6px;
+  }
+
+  .busLanesStack {
+    gap: 4.5px;
+  }
+
+  .busSignalPill {
+    padding: 2px 5px;
+    font-size: 6.4px;
+    gap: 2px;
+  }
+
+  .busArrowGlyph {
+    display: none;
+  }
+
   .archNode {
     padding: 5px 6px;
     border-radius: 6px;
@@ -1100,6 +1196,11 @@
 
   .archNodeCore {
     padding: 7px 7px;
+  }
+
+  .archNodeCompact {
+    padding: 4px 5.5px;
+    gap: 1px;
   }
 
   .nodeHeader {
@@ -1223,5 +1324,14 @@
 
   .archNodeCore {
     padding: 6px 5px;
+  }
+
+  .archNodeCompact {
+    padding: 3.5px 4.5px;
+  }
+
+  .busSignalPill {
+    padding: 1.5px 4px;
+    font-size: 5.8px;
   }
 }
