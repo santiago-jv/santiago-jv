@@ -2,7 +2,6 @@ import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
-import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './contact-section.module.css';
 
 type ContactFormData = {
@@ -159,7 +158,6 @@ const ContactSection: React.FC = () => {
             className={styles.channelsCard}
             data-apple-reveal
             style={{ '--reveal-delay': '0ms' } as CSSProperties}
-            onMouseMove={handleAppleCardSpotlight}
           >
             <h3 className={styles.cardHeading}>{contactContent.introTitle}</h3>
 
@@ -238,7 +236,6 @@ const ContactSection: React.FC = () => {
             className={styles.formCard}
             data-apple-reveal
             style={{ '--reveal-delay': '95ms' } as CSSProperties}
-            onMouseMove={handleAppleCardSpotlight}
           >
             <h3 className={styles.cardHeading}>{contactContent.formTitle}</h3>
 

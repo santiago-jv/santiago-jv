@@ -8,7 +8,6 @@ import {
   MCP_ENDPOINT_URL,
   MCP_GATEWAY_URL,
 } from '@/data/mcp-content';
-import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './mcp-showcase-section.module.css';
 
 const McpShowcaseSection: React.FC = () => {
@@ -56,11 +55,7 @@ const McpShowcaseSection: React.FC = () => {
 
         <div className={styles.showcaseGrid}>
           {/* Left: Signature Anodized Space Black Pro MCP Console */}
-          <div
-            className={styles.consoleCard}
-            data-apple-reveal
-            onMouseMove={handleAppleCardSpotlight}
-          >
+          <div className={styles.consoleCard} data-apple-reveal>
             <div className={styles.consoleInner}>
               <div className={styles.consoleHeader}>
                 <div className={styles.windowLights} aria-hidden="true">
@@ -170,7 +165,6 @@ const McpShowcaseSection: React.FC = () => {
                 className={styles.valueCard}
                 data-apple-reveal
                 style={{ '--reveal-delay': `${(index + 1) * 90}ms` } as CSSProperties}
-                onMouseMove={handleAppleCardSpotlight}
               >
                 <div className={styles.valueCardTop}>
                   <div className={styles.valueIconSquircle} aria-hidden="true">

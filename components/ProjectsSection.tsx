@@ -2,7 +2,6 @@ import React, { CSSProperties } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
-import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './projects-section.module.css';
 
 const BENTO_VARIANT_CLASSES = [
@@ -31,7 +30,6 @@ const ProjectsSection: React.FC = () => {
                 className={`${styles.bentoTile} ${variantClass}`}
                 data-apple-reveal
                 style={{ '--reveal-delay': `${index * 85}ms` } as CSSProperties}
-                onMouseMove={handleAppleCardSpotlight}
               >
                 <article className={styles.tileContent}>
                   <div className={styles.tileTopRow}>

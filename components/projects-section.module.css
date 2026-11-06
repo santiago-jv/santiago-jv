@@ -52,28 +52,6 @@
   background: linear-gradient(155deg, #f7f7fa 0%, #efeff4 100%);
 }
 
-.bentoTile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    460px circle at var(--spot-x, 50%) var(--spot-y, 0%),
-    rgba(255, 255, 255, 0.82),
-    transparent 65%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 340ms var(--ease-apple-snappy);
-}
-
-.bentoCompactAccent::before {
-  background: radial-gradient(
-    460px circle at var(--spot-x, 50%) var(--spot-y, 0%),
-    rgba(255, 255, 255, 0.1),
-    transparent 65%
-  );
-}
-
 .bentoTile:hover {
   transform: translate3d(0, -5px, 0) scale(1.008);
   box-shadow: var(--shadow-bento-hover);
@@ -83,10 +61,6 @@
 .bentoCompactAccent:hover {
   border-color: rgba(255, 255, 255, 0.24);
   box-shadow: 0 24px 52px rgba(0, 0, 0, 0.24);
-}
-
-.bentoTile:hover::before {
-  opacity: 1;
 }
 
 .tileContent {

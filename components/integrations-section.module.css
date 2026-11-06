@@ -33,20 +33,6 @@
   --brand-hovered: 0;
 }
 
-.matrixTile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    320px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-    var(--brand-tint, rgba(29, 29, 31, 0.04)),
-    transparent 68%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 320ms var(--ease-apple-snappy);
-}
-
 .matrixTile:hover {
   transform: translate3d(0, -3px, 0);
   border-color: var(--brand-border, var(--apple-border-strong));
@@ -63,10 +49,6 @@
   --fb-red: #dd2c00;
   --fb-rest-o1: 1;
   --fb-rest-o2: 1;
-}
-
-.matrixTile:hover::before {
-  opacity: 1;
 }
 
 .logoSquircle {

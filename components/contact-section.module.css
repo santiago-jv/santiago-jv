@@ -28,26 +28,6 @@
   overflow: hidden;
 }
 
-.channelsCard::before,
-.formCard::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    480px circle at var(--spot-x, 30%) var(--spot-y, 0%),
-    rgba(29, 29, 31, 0.035),
-    transparent 65%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 320ms var(--ease-apple-snappy);
-}
-
-.channelsCard:hover::before,
-.formCard:hover::before {
-  opacity: 1;
-}
-
 .cardHeading {
   position: relative;
   z-index: 1;

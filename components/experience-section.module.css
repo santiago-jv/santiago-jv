@@ -35,28 +35,10 @@
   outline: none;
 }
 
-.experienceCard::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    560px circle at var(--spot-x, 20%) var(--spot-y, 0%),
-    rgba(29, 29, 31, 0.04),
-    transparent 65%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 360ms var(--ease-apple-snappy);
-}
-
 .experienceCard:hover {
   transform: translate3d(0, -4px, 0) scale(1.004);
   box-shadow: var(--shadow-bento-hover);
   border-color: var(--apple-border-strong);
-}
-
-.experienceCard:hover::before {
-  opacity: 1;
 }
 
 .metaColumn {

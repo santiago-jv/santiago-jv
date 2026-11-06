@@ -33,24 +33,6 @@
   color: #ffffff;
 }
 
-.consoleCard::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    520px circle at var(--spot-x, 50%) var(--spot-y, 0%),
-    rgba(255, 255, 255, 0.085),
-    transparent 65%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 340ms var(--ease-apple-snappy);
-}
-
-.consoleCard:hover::before {
-  opacity: 1;
-}
-
 .consoleInner {
   position: relative;
   z-index: 1;
@@ -366,28 +348,10 @@
   gap: 10px;
 }
 
-.valueCard::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    380px circle at var(--spot-x, 50%) var(--spot-y, 0%),
-    rgba(255, 255, 255, 0.82),
-    transparent 65%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 340ms var(--ease-apple-snappy);
-}
-
 .valueCard:hover {
   transform: translate3d(0, -4px, 0);
   box-shadow: var(--shadow-bento-hover);
   border-color: var(--apple-border-strong);
-}
-
-.valueCard:hover::before {
-  opacity: 1;
 }
 
 .valueCardTop {

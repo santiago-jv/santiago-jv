@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 type IdleCallbackHandle = number;
 
@@ -112,13 +112,4 @@ export function useApplePageMotion(dependencyKey?: string): void {
       cleanupInner?.();
     };
   }, [dependencyKey]);
-}
-
-export function handleAppleCardSpotlight(event: React.MouseEvent<HTMLElement>): void {
-  const target = event.currentTarget;
-  const rect = target.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-  target.style.setProperty('--spot-x', `${x}px`);
-  target.style.setProperty('--spot-y', `${y}px`);
 }

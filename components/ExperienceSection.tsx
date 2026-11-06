@@ -2,7 +2,6 @@ import React, { CSSProperties } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
-import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './experience-section.module.css';
 
 const ExperienceSection: React.FC = () => {
@@ -23,7 +22,6 @@ const ExperienceSection: React.FC = () => {
                 className={styles.experienceCard}
                 data-apple-reveal
                 style={{ '--reveal-delay': `${index * 90}ms` } as CSSProperties}
-                onMouseMove={handleAppleCardSpotlight}
               >
                 <div className={styles.metaColumn}>
                   <div className={styles.periodPill}>

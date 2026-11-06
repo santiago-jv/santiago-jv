@@ -3,7 +3,6 @@ import SectionHeading from '@/components/SectionHeading';
 import IntegrationLogo from '@/components/IntegrationLogo';
 import { usePreferences } from '@/context/PreferencesContext';
 import { INTEGRATIONS_CONTENT } from '@/data/integrations-content';
-import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './integrations-section.module.css';
 
 const IntegrationsSection: React.FC = () => {
@@ -31,7 +30,6 @@ const IntegrationsSection: React.FC = () => {
                 className={styles.matrixTile}
                 data-apple-reveal
                 style={brandVars}
-                onMouseMove={handleAppleCardSpotlight}
               >
                 <div className={styles.logoSquircle} aria-hidden="true">
                   <IntegrationLogo brand={item.id} className={styles.logoGlyph} />
