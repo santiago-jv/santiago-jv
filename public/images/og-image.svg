@@ -30,7 +30,7 @@
     NestJS • Node.js • Spring Boot • Hexagonal &amp; DDD • AWS • Redis
   </text>
   <text x="110" y="450" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="22" font-weight="500">
-    MCP Internal Tooling • Cloudflare AI Gateway • Datadog • CleverTap • Metabase
+    MCP Internal Tooling • Cloudflare Workers • Datadog • CleverTap • Metabase
   </text>
 
   <text x="110" y="525" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="20">

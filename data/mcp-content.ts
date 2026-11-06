@@ -73,27 +73,27 @@ Open Role / Job Description:
         scoreBadge: '95 / 100 · STRONG FIT',
         verdict: 'Recommended to Interview · High Production Overlap',
         summary:
-          '4.5+ years shipping high-concurrency backend systems (NestJS, Node.js, TypeScript, Spring Boot), atomic Redis locks, Datadog observability, and production MCP + Cloudflare AI Gateway workflows.',
+          '4.5+ years shipping high-concurrency backend systems (NestJS, Node.js, TypeScript, Spring Boot), atomic Redis locks, Datadog observability, and production MCP + Cloudflare Workers workflows.',
         matchedPills: [
           'TypeScript · 4.5y',
           'NestJS · Hexagonal/DDD',
           'AWS ECS & Serverless',
           'Redis Locks',
-          'MCP & AI Gateway',
+          'MCP & CF Workers',
           'Datadog + Metabase',
         ],
         footnote: 'Auto-routed MCP tools · Deterministic edge scoring (<5ms) · Honest gap reporting',
       },
       engineeringPreview: {
         command:
-          '"Walk me through Santiago\'s production backend architecture, concurrency patterns, and how he ships MCP + Cloudflare AI Gateway workflows."',
+          '"Walk me through Santiago\'s production backend architecture, concurrency patterns, and how he ships MCP + Cloudflare Workers workflows."',
         copyCtaLabel: 'Copy Technical Prompt',
         copyPrompt: `Give me a concrete technical deep dive into Santiago Olayo's production engineering background.
 
 Cover:
 1. How he structures backend services (Hexagonal Architecture, DDD, TypeScript/NestJS, Java/Spring Boot).
 2. How he handles high concurrency, distributed Redis locks, async queues, and zero-downtime migrations.
-3. How he uses Datadog, CleverTap, Metabase, MCP servers, and Cloudflare AI Gateway in production.`,
+3. How he uses Datadog, CleverTap, Metabase, MCP servers, and Cloudflare Workers in production.`,
         scoreBadge: '6 Tools · 4 Resources · 3 Prompts',
         verdict: 'Stateless Cloudflare Worker · Streamable HTTP',
         summary:
@@ -165,27 +165,27 @@ Descripción de la vacante:
         scoreBadge: '95 / 100 · ALTO MATCH',
         verdict: 'Recomendado para Entrevista · Alta Coincidencia en Producción',
         summary:
-          '4.5+ años construyendo sistemas backend de alta concurrencia (NestJS, Node.js, TypeScript, Spring Boot), locks atómicos en Redis, observabilidad en Datadog y flujos productivos con MCP + Cloudflare AI Gateway.',
+          '4.5+ años construyendo sistemas backend de alta concurrencia (NestJS, Node.js, TypeScript, Spring Boot), locks atómicos en Redis, observabilidad en Datadog y flujos productivos con MCP + Cloudflare Workers.',
         matchedPills: [
           'TypeScript · 4.5a',
           'NestJS · Hexagonal/DDD',
           'AWS ECS & Serverless',
           'Redis Locks',
-          'MCP & AI Gateway',
+          'MCP & CF Workers',
           'Datadog + Metabase',
         ],
         footnote: 'Descubrimiento automático de tools · Scoring determinístico (<5ms) · Brechas honestas',
       },
       engineeringPreview: {
         command:
-          '"Explícame la arquitectura backend en producción de Santiago, cómo maneja concurrencia y cómo construye flujos con MCP y Cloudflare AI Gateway."',
+          '"Explícame la arquitectura backend en producción de Santiago, cómo maneja concurrencia y cómo construye flujos con MCP y Cloudflare Workers."',
         copyCtaLabel: 'Copiar Prompt Técnico',
         copyPrompt: `Dame un análisis técnico concreto de la experiencia en ingeniería de producción de Santiago Olayo.
 
 Incluye:
 1. Cómo estructura servicios backend (Arquitectura Hexagonal, DDD, TypeScript/NestJS, Java/Spring Boot).
 2. Cómo resuelve alta concurrencia, locks distribuidos en Redis, colas asíncronas y migraciones sin caída.
-3. Cómo aplica Datadog, CleverTap, Metabase, servidores MCP y Cloudflare AI Gateway en producción.`,
+3. Cómo aplica Datadog, CleverTap, Metabase, servidores MCP y Cloudflare Workers en producción.`,
         scoreBadge: '6 Tools · 4 Resources · 3 Prompts',
         verdict: 'Cloudflare Worker Stateless · Streamable HTTP',
         summary:

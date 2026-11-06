@@ -17,7 +17,7 @@ Software Engineer with 4+ years of experience building and improving products fo
 
 I work closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. I handle the process end to end, from discussions with stakeholders and technical design to implementation, deployment, and post-release monitoring. My work spans backend services, mobile features, internal tooling, and database migrations.
 
-I also work with CleverTap to track product events and business metrics, Datadog to monitor services, configure alerts, and investigate production issues, and Metabase to analyze data and support product decisions. Beyond feature development, I look for ways to improve internal workflows, reduce manual work, and make better use of AI to optimize the tools and processes the team relies on, including contributing to our internal MCP tooling, team-focused plugins and skills, and prompting rules with Cloudflare AI Gateway.
+I also work with CleverTap to track product events and business metrics, Datadog to monitor services, configure alerts, and investigate production issues, and Metabase to analyze data and support product decisions. Beyond feature development, I look for ways to improve internal workflows, reduce manual work, and make better use of AI to optimize the tools and processes the team relies on, including contributing to our internal MCP tooling, team-focused plugins and skills, prompting rules, and edge services on Cloudflare Workers.
 
 ---
 
@@ -33,7 +33,7 @@ I also work with CleverTap to track product events and business metrics, Datadog
 
 <p align="left">
   <img src="https://img.shields.io/badge/Datadog-Observability%20%26%20APM-632CA6?style=for-the-badge&logo=datadog&logoColor=white" alt="Datadog"/>
-  <img src="https://img.shields.io/badge/Cloudflare-AI%20Gateway-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare AI Gateway"/>
+  <img src="https://img.shields.io/badge/Cloudflare-Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare Workers"/>
   <img src="https://img.shields.io/badge/MCP-Internal%20AI%20Tooling-4F46E5?style=for-the-badge&logo=ankermake&logoColor=white" alt="MCP"/>
   <img src="https://img.shields.io/badge/Claude%20%26%20OpenAI-LLM%20Workflows-18181B?style=for-the-badge&logo=anthropic&logoColor=white" alt="LLMs"/>
   <img src="https://img.shields.io/badge/CleverTap-Product%20Events-EF4444?style=for-the-badge&logoColor=white" alt="CleverTap"/>

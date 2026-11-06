@@ -45,7 +45,7 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         'Hexagonal Architecture',
         'Domain-Driven Design (DDD)',
         'Model Context Protocol (MCP)',
-        'Cloudflare AI Gateway',
+        'Cloudflare Workers',
         'Large Language Models (LLMs)',
         'AWS',
         'Google Cloud Functions',
@@ -73,7 +73,7 @@ const Container: React.FC<ContainerProps> = ({ title, children }) => {
         <meta name="author" content="Santiago Olayo Villamil (santiago-jv)" />
         <meta
           name="keywords"
-          content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Senior Software Engineer, Senior Backend Engineer, Fullstack Engineer, Cloud Infrastructure, AI Internal Tooling, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare AI Gateway, Datadog, CleverTap, Metabase, AWS, Colombia"
+          content="Santiago Olayo, Santiago Olayo Villamil, santiago-jv, Senior Software Engineer, Senior Backend Engineer, Fullstack Engineer, Cloud Infrastructure, AI Internal Tooling, NestJS, Node.js, TypeScript, Spring Boot, Java, Hexagonal Architecture, DDD, MCP, Model Context Protocol, Cloudflare Workers, Datadog, CleverTap, Metabase, AWS, Colombia"
         />
         <meta
           name="robots"

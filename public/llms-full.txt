@@ -25,7 +25,7 @@ Software Engineer with 4+ years of experience building and improving products fo
 
 Works closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. Handles the process end to end, from discussions with stakeholders and technical design to implementation, database migrations, deployment, and post-release monitoring across backend services, mobile features, and internal tooling.
 
-Beyond feature development, has contributed to migrating manual processes toward AI-assisted workflows and improving/maintaining the internal tools the team relies on, including MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills for each internal team area, and prompting rules control with Cloudflare AI Gateway. Uses Datadog to monitor services, configure alerts, and investigate production issues, CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.
+Beyond feature development, has contributed to migrating manual processes toward AI-assisted workflows and improving/maintaining the internal tools the team relies on, including MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills for each internal team area, prompting rules, and serverless edge MCP servers on Cloudflare Workers. Uses Datadog to monitor services, configure alerts, and investigate production issues, CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.
 
 ---
 
@@ -37,7 +37,7 @@ Beyond feature development, has contributed to migrating manual processes toward
 - **Key Responsibilities & Achievements:**
   - End-to-end execution alongside product, operations, support, and finance: from stakeholder discussions and technical design to implementation, cloud deployment (AWS / Google Cloud Functions), and post-release monitoring.
   - Development and evolution of backend services (Node.js, NestJS, TypeScript) under Hexagonal Architecture and Domain-Driven Design (DDD), mobile features, internal tools, database migrations (PostgreSQL, MongoDB), and concurrency control using atomic locks in Redis.
-  - Contributed to building and migrating manual processes to AI-assisted workflows, improving and maintaining the team's internal tooling: MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills per internal team area, and prompting rules maintenance with Cloudflare AI Gateway.
+  - Contributed to building and migrating manual processes to AI-assisted workflows, improving and maintaining the team's internal tooling: MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills per internal team area, prompting rules, and edge services on Cloudflare Workers.
   - Production observability and reliability: continuous monitoring of distributed services, proactive alerting, distributed tracing, and production incident investigation using Datadog.
   - Product analytics and data-driven decisions: tracking product events and business metrics with CleverTap and analyzing data in Metabase to measure business impact and guide the product roadmap.
 

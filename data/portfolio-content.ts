@@ -41,7 +41,7 @@ const FOOTER_SKILLS = [
   'MongoDB',
   'Redis',
   'MCP',
-  'Cloudflare AI Gateway',
+  'Cloudflare Workers',
   'Datadog',
   'CleverTap',
   'Metabase',
@@ -123,7 +123,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         highlights: [
           'Handle feature development end to end, from discussions with stakeholders and technical design to implementation, deployment, and post-release monitoring.',
           'Build and maintain backend services (Node.js, NestJS, TypeScript) using Hexagonal Architecture and DDD, along with mobile features, internal tools, database migrations, and Redis locks.',
-          'Contributed to moving manual workflows toward AI-assisted processes and improving internal team tools, including MCP tooling to connect with our preferred LLMs, focused plugins and skills for each team area, and prompting rules with Cloudflare AI Gateway.',
+          'Contributed to moving manual workflows toward AI-assisted processes and improving internal team tools, including MCP tooling to connect with our preferred LLMs, focused plugins and skills for each team area, prompting rules, and serverless edge services on Cloudflare Workers.',
           'Use Datadog to monitor services, configure alerts, and investigate production issues, CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.',
         ],
         tech: [
@@ -134,7 +134,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
           'AWS',
           'Redis',
           'MCP',
-          'Cloudflare AI Gateway',
+          'Cloudflare Workers',
           'Datadog',
           'CleverTap',
           'Metabase',
@@ -183,8 +183,8 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       {
         title: 'Internal AI Tooling & Workflow Optimization',
         description:
-          'Helping the team replace manual tasks with AI-assisted workflows. Improving internal MCP tooling to connect with our preferred LLMs, building team-focused plugins and skills, and managing prompting rules through Cloudflare AI Gateway.',
-        tech: ['TypeScript', 'MCP', 'Cloudflare AI Gateway', 'LLMs', 'Internal Tooling'],
+          'Helping the team replace manual tasks with AI-assisted workflows. Improving internal MCP tooling to connect with our preferred LLMs, building team-focused plugins and skills, maintaining prompting rules, and shipping edge services on Cloudflare Workers.',
+        tech: ['TypeScript', 'MCP', 'Cloudflare Workers', 'LLMs', 'Internal Tooling'],
         status: 'Internal Tools',
         iconClassName: 'fa-solid fa-diagram-project',
       },
@@ -376,7 +376,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         highlights: [
           'Manejo el desarrollo de funcionalidades de punta a punta: desde conversaciones con stakeholders y diseño técnico hasta implementación, despliegue y monitoreo post-lanzamiento.',
           'Construyo y mantengo servicios backend (Node.js, NestJS, TypeScript) bajo Arquitectura Hexagonal y DDD, junto con funcionalidades móviles, herramientas internas, migraciones de bases de datos y locks en Redis.',
-          'Aporté en la migración de procesos manuales hacia flujos asistidos por IA y en la mejora continua de las herramientas internas del equipo, incluyendo tooling con MCP para conectar con nuestros LLMs de preferencia, plugins y skills enfocados por área de equipo, y reglas de prompting con Cloudflare AI Gateway.',
+          'Aporté en la migración de procesos manuales hacia flujos asistidos por IA y en la mejora continua de las herramientas internas del equipo, incluyendo tooling con MCP para conectar con nuestros LLMs de preferencia, plugins y skills enfocados por área de equipo, reglas de prompting y servicios serverless en Cloudflare Workers.',
           'Uso Datadog para monitorear servicios, configurar alertas e investigar incidentes en producción, CleverTap para medir eventos de producto y métricas de negocio, y Metabase para analizar datos y respaldar decisiones de producto.',
         ],
         tech: [
@@ -387,7 +387,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
           'AWS',
           'Redis',
           'MCP',
-          'Cloudflare AI Gateway',
+          'Cloudflare Workers',
           'Datadog',
           'CleverTap',
           'Metabase',
@@ -436,8 +436,8 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       {
         title: 'Tooling Interno con IA y Optimización de Flujos',
         description:
-          'Apoyo al equipo reemplazando tareas manuales por flujos asistidos con IA. Mejora continua del tooling interno con MCP para conectar con nuestros LLMs de preferencia, plugins y skills por área, y gestión de prompting rules con Cloudflare AI Gateway.',
-        tech: ['TypeScript', 'MCP', 'Cloudflare AI Gateway', 'LLMs', 'Internal Tooling'],
+          'Apoyo al equipo reemplazando tareas manuales por flujos asistidos con IA. Mejora continua del tooling interno con MCP para conectar con nuestros LLMs de preferencia, plugins y skills por área, reglas de prompting y servicios en el edge con Cloudflare Workers.',
+        tech: ['TypeScript', 'MCP', 'Cloudflare Workers', 'LLMs', 'Internal Tooling'],
         status: 'Herramientas Internas',
         iconClassName: 'fa-solid fa-diagram-project',
       },

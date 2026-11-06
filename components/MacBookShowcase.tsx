@@ -39,6 +39,20 @@ const SCROLL_OPEN_ANGLE = -2;
 const EXTRUSION_LAYERS = [-1.5, -3, -4.5, -6, -7.5, -9, -10.5, -12];
 const LID_THICKNESS_LAYERS = [-1.2, -2.4, -3.6];
 
+const easeMacBookOpen = (t: number): number => {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  const p = Math.pow(t, 2.05);
+  const q = Math.pow(1 - t, 2.45);
+  return p / (p + q);
+};
+
+const easeMacBookClose = (t: number): number => {
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+};
+
 export const MacBookShowcase: React.FC = () => {
   const { locale } = usePreferences();
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -80,11 +94,13 @@ export const MacBookShowcase: React.FC = () => {
 
     const clamped = Math.max(CLOSED_ANGLE, Math.min(0, angleDeg));
     const openRatio = (clamped - CLOSED_ANGLE) / (0 - CLOSED_ANGLE);
-    const screenWake = Math.max(0, Math.min(1, (clamped - -89) / 46));
+    const screenWake = Math.max(0, Math.min(1, (clamped - -86) / 44));
+    const deckWake = Math.max(0, Math.min(1, (clamped - -92) / 22));
 
     rig.style.setProperty('--lid-angle', `${clamped.toFixed(2)}deg`);
     rig.style.setProperty('--open-ratio', openRatio.toFixed(4));
     rig.style.setProperty('--screen-wake', screenWake.toFixed(4));
+    rig.style.setProperty('--deck-wake', deckWake.toFixed(4));
   }, []);
 
   useEffect(() => {
@@ -103,11 +119,10 @@ export const MacBookShowcase: React.FC = () => {
     let rafId = 0;
     let introFrameId = 0;
     let startTime = 0;
-    const introDuration = 1600;
+    const initialHoldMs = 420;
+    const introDuration = 2450;
 
     applyAngleToDom(CLOSED_ANGLE);
-
-    const easeAppleOut = (t: number): number => 1 - Math.pow(1 - t, 3.5);
 
     const computeScrollBoost = (): number => {
       const stage = stageRef.current;
@@ -127,9 +142,9 @@ export const MacBookShowcase: React.FC = () => {
 
     const stepIntro = (timestamp: number): void => {
       if (!startTime) startTime = timestamp;
-      const elapsed = Math.max(0, timestamp - startTime - 240);
+      const elapsed = Math.max(0, timestamp - startTime - initialHoldMs);
       const rawT = Math.min(1, elapsed / introDuration);
-      introProgress = easeAppleOut(rawT);
+      introProgress = easeMacBookOpen(rawT);
       scrollBoost = computeScrollBoost();
       renderCurrentAngle();
 
@@ -165,25 +180,22 @@ export const MacBookShowcase: React.FC = () => {
     setIsReplaying(true);
 
     const startClose = performance.now();
-    const closeDuration = 560;
-    const openDuration = 1420;
-
-    const easeInOut = (t: number): number =>
-      t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    const easeOut = (t: number): number => 1 - Math.pow(1 - t, 3.5);
+    const closeDuration = 920;
+    const closedHoldDuration = 480;
+    const openDuration = 2400;
 
     const animateReplay = (now: number): void => {
       const elapsed = now - startClose;
 
       if (elapsed <= closeDuration) {
-        const t = easeInOut(Math.min(1, elapsed / closeDuration));
+        const t = easeMacBookClose(Math.min(1, elapsed / closeDuration));
         const angle = SCROLL_OPEN_ANGLE + (CLOSED_ANGLE - SCROLL_OPEN_ANGLE) * t;
         applyAngleToDom(angle);
         window.requestAnimationFrame(animateReplay);
         return;
       }
 
-      const pauseElapsed = elapsed - closeDuration - 180;
+      const pauseElapsed = elapsed - closeDuration - closedHoldDuration;
       if (pauseElapsed < 0) {
         applyAngleToDom(CLOSED_ANGLE);
         window.requestAnimationFrame(animateReplay);
@@ -191,7 +203,7 @@ export const MacBookShowcase: React.FC = () => {
       }
 
       const openT = Math.min(1, pauseElapsed / openDuration);
-      const angle = CLOSED_ANGLE + (SCROLL_OPEN_ANGLE - CLOSED_ANGLE) * easeOut(openT);
+      const angle = CLOSED_ANGLE + (SCROLL_OPEN_ANGLE - CLOSED_ANGLE) * easeMacBookOpen(openT);
       applyAngleToDom(angle);
 
       if (openT < 1) {
@@ -262,25 +274,39 @@ export const MacBookShowcase: React.FC = () => {
       onMouseLeave={handleMouseLeave}
     >
       <div ref={rigRef} className={styles.macbookScene}>
-        <div className={styles.macbookRig}>
-          {/* =========================================================
-              1. UNIBODY DISPLAY LID (Exact same 680x434 footprint as Base)
-             ========================================================= */}
-          <div className={styles.lidAssembly}>
-            {LID_THICKNESS_LAYERS.map((z) => (
-              <div
-                key={z}
-                className={styles.lidAluminumSlice}
-                style={{ transform: `translateZ(${z}px)` }}
-                aria-hidden="true"
-              />
-            ))}
+        <div className={styles.macbookTiltStage}>
+          <div className={styles.macbookRig}>
+            {/* =========================================================
+                1. UNIBODY DISPLAY LID (Exact same 680x434 footprint as Base)
+               ========================================================= */}
+            <div className={styles.lidAssembly}>
+              {LID_THICKNESS_LAYERS.map((z) => (
+                <div
+                  key={z}
+                  className={styles.lidAluminumSlice}
+                  style={{ transform: `translateZ(${z}px)` }}
+                  aria-hidden="true"
+                />
+              ))}
 
-            {/* Outer Anodized Space Black Top Shell (Visible when closed) */}
-            <div className={styles.lidOuterCover} aria-hidden="true">
-              <div className={styles.lidOuterGlint} />
-              <div className={styles.lidOuterEmblem}>S</div>
-            </div>
+              {/* Outer Anodized Space Black Top Shell (Visible when closed) */}
+              <div className={styles.lidOuterCover} aria-hidden="true">
+                <div className={styles.lidOuterGlint} />
+                <div className={styles.lidOuterEmblem}>
+                  <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={styles.lidOuterEmblemSvg}
+                  >
+                    <circle cx="32" cy="32" r="30" fill="#FFFFFF" stroke="#D2D2D7" strokeWidth="2" />
+                    <path
+                      d="M32.00 44.39Q29.16 44.39 27.04 43.56Q24.92 42.72 23.71 41.15Q22.50 39.58 22.36 37.38L22.34 37.10L27.07 37.10L27.11 37.30Q27.27 38.22 27.95 38.89Q28.62 39.57 29.69 39.94Q30.77 40.32 32.13 40.32Q33.52 40.32 34.53 39.94Q35.54 39.56 36.09 38.87Q36.64 38.18 36.64 37.27L36.64 37.25Q36.64 36.04 35.69 35.35Q34.74 34.66 32.50 34.21L29.97 33.70Q27.61 33.23 26.03 32.32Q24.44 31.41 23.65 30.05Q22.85 28.70 22.85 26.90L22.85 26.88Q22.86 24.69 24.03 23.06Q25.21 21.42 27.27 20.52Q29.33 19.61 31.98 19.61Q34.75 19.61 36.77 20.47Q38.79 21.34 39.92 22.91Q41.05 24.49 41.17 26.59L41.18 26.90L36.45 26.90L36.43 26.70Q36.30 25.75 35.72 25.08Q35.13 24.41 34.18 24.05Q33.22 23.68 31.98 23.68Q30.70 23.68 29.78 24.05Q28.85 24.42 28.36 25.07Q27.86 25.72 27.86 26.58L27.86 26.60Q27.86 27.35 28.29 27.91Q28.71 28.47 29.59 28.87Q30.48 29.26 31.85 29.54L34.39 30.05Q36.90 30.55 38.51 31.43Q40.11 32.31 40.89 33.64Q41.66 34.98 41.66 36.86L41.66 36.88Q41.66 39.18 40.50 40.87Q39.35 42.56 37.19 43.48Q35.03 44.39 32.00 44.39Z"
+                      fill="#1D1D1F"
+                    />
+                  </svg>
+                </div>
+              </div>
 
             {/* Inner Liquid Retina XDR Display */}
             <div className={styles.lidInnerScreen}>
@@ -602,6 +628,7 @@ export const MacBookShowcase: React.FC = () => {
 
           <div className={styles.contactShadow} aria-hidden="true" />
           <div className={styles.ambientFloorShadow} aria-hidden="true" />
+          </div>
         </div>
       </div>
 

@@ -264,9 +264,10 @@ export const MacBookKeyboardSvg: React.FC = () => {
       <rect x="2" y="1" width="676" height="8" rx="1" fill="#0b0b0e" opacity="0.95" />
       <rect x="86" y="3.5" width="508" height="6.5" rx="3" fill="#050507" />
 
-      {/* Left & Right 6-Speaker Micro-Perforated Grilles */}
-      <rect x="20" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
-      <rect x="622" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
+      <g className={styles.deckInnerSurface}>
+        {/* Left & Right 6-Speaker Micro-Perforated Grilles */}
+        <rect x="20" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
+        <rect x="622" y="34" width="38" height="214" rx="4" fill="url(#speakerDots)" />
 
       {/* Recessed Matte Black Keyboard Well */}
       <rect
@@ -501,14 +502,15 @@ export const MacBookKeyboardSvg: React.FC = () => {
       {/* Force Touch Glass Trackpad */}
       <rect
         x="212"
-        y="266"
+        y="264"
         width="256"
-        height="152"
+        height="146"
         rx="11"
         fill="#202024"
         stroke="rgba(255,255,255,0.12)"
         strokeWidth="1.2"
       />
+      </g>
 
       {/* CNC Thumb-Scoop Cutout */}
       <path

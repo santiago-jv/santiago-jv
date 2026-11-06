@@ -169,9 +169,9 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'ai',
-        tabLabel: 'AI, MCP & Gateway',
+        tabLabel: 'AI, MCP & Workers',
         shortTabLabel: 'AI & MCP',
-        windowContext: 'cloudflare-ai-gateway · mcp',
+        windowContext: 'cloudflare-workers · mcp',
         statusBadge: 'MCP Agents · Live',
         nodes: [
           {
@@ -184,13 +184,13 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
             chips: ['Process Automation', 'Internal Tools', 'Ops & Support'],
           },
           {
-            id: 'ai-gateway',
-            title: 'Cloudflare AI Gateway',
-            subtitle: 'Prompts · Routing · Logs',
-            roleTag: 'AI Governance',
+            id: 'cf-workers',
+            title: 'Cloudflare Workers',
+            subtitle: 'Edge MCP · Serverless · HTTP',
+            roleTag: 'Edge Runtime',
             summary:
-              'Centralized prompting rules, multi-provider LLM routing, rate control, and request auditing.',
-            chips: ['Cloudflare AI Gateway', 'Prompt Rules', 'LLM Routing'],
+              'Stateless edge execution for MCP servers, Streamable HTTP transport, rate-limiting guardrails, and AI workflow orchestration.',
+            chips: ['Cloudflare Workers', 'Streamable HTTP', 'Edge Guardrails'],
           },
           {
             id: 'mcp-servers',
@@ -356,9 +356,9 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
       },
       {
         id: 'ai',
-        tabLabel: 'IA, MCP & Gateway',
+        tabLabel: 'IA, MCP & Workers',
         shortTabLabel: 'IA & MCP',
-        windowContext: 'cloudflare-ai-gateway · mcp',
+        windowContext: 'cloudflare-workers · mcp',
         statusBadge: 'MCP · En Vivo',
         nodes: [
           {
@@ -371,13 +371,13 @@ export const ARCHITECTURE_STUDIO_CONTENT: Record<Locale, ArchitectureStudioCopy>
             chips: ['Automatización', 'Internal Tools', 'Ops & Soporte'],
           },
           {
-            id: 'ai-gateway',
-            title: 'Cloudflare AI Gateway',
-            subtitle: 'Prompts · Routing · Logs',
-            roleTag: 'Gobernanza de IA',
+            id: 'cf-workers',
+            title: 'Cloudflare Workers',
+            subtitle: 'Edge MCP · Serverless · HTTP',
+            roleTag: 'Runtime en el Edge',
             summary:
-              'Gestión centralizada de prompting rules, enrutamiento hacia LLMs y trazabilidad de uso.',
-            chips: ['Cloudflare AI Gateway', 'Prompting Rules', 'LLM Routing'],
+              'Ejecución serverless en el edge para servidores MCP, transporte Streamable HTTP, guardrails por IP y orquestación de flujos con IA.',
+            chips: ['Cloudflare Workers', 'Streamable HTTP', 'Edge Guardrails'],
           },
           {
             id: 'mcp-servers',
