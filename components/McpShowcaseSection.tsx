@@ -1,16 +1,19 @@
 import React, { CSSProperties, useState } from 'react';
-import Link from 'next/link';
 import SectionHeading from '@/components/SectionHeading';
 import PortfolioIcon from '@/components/PortfolioIcon';
 import { usePreferences } from '@/context/PreferencesContext';
-import { MCP_CONTENT, MCP_ENDPOINT_URL } from '@/data/mcp-content';
+import {
+  MCP_CONTENT,
+  MCP_DOCS_URL,
+  MCP_ENDPOINT_URL,
+  MCP_GATEWAY_URL,
+} from '@/data/mcp-content';
 import { handleAppleCardSpotlight } from '@/hooks/useAppleMotion';
 import styles from './mcp-showcase-section.module.css';
 
 const McpShowcaseSection: React.FC = () => {
   const { locale } = usePreferences();
   const copy = MCP_CONTENT[locale].showcase;
-  const recruiterPrompt = MCP_CONTENT[locale].docs.recruiterSection.promptTemplate;
 
   const [activeTab, setActiveTab] = useState<'recruiter' | 'engineering'>('recruiter');
   const [copiedEndpoint, setCopiedEndpoint] = useState(false);
@@ -31,7 +34,7 @@ const McpShowcaseSection: React.FC = () => {
 
   const handleCopyPrompt = async (): Promise<void> => {
     try {
-      await navigator.clipboard.writeText(recruiterPrompt);
+      await navigator.clipboard.writeText(preview.copyPrompt);
       setCopiedPrompt(true);
       window.setTimeout(() => setCopiedPrompt(false), 2000);
     } catch {
@@ -66,7 +69,9 @@ const McpShowcaseSection: React.FC = () => {
                   <span className={styles.lightDot} />
                 </div>
 
-                <span className={styles.hostBadge}>mcp.santiago-jv.tech</span>
+                <a href={MCP_GATEWAY_URL} className={styles.hostBadge}>
+                  mcp.santiago-jv.tech
+                </a>
 
                 <span className={styles.livePill}>
                   <span className={styles.livePulse} aria-hidden="true" />
@@ -140,10 +145,10 @@ const McpShowcaseSection: React.FC = () => {
               </div>
 
               <div className={styles.consoleActions}>
-                <Link href="/mcp" className={styles.primaryDocsBtn}>
+                <a href={MCP_DOCS_URL} className={styles.primaryDocsBtn}>
                   <span>{copy.primaryCta}</span>
                   <span aria-hidden="true">›</span>
-                </Link>
+                </a>
 
                 <button
                   type="button"
@@ -151,7 +156,7 @@ const McpShowcaseSection: React.FC = () => {
                   className={styles.secondaryPromptBtn}
                 >
                   <PortfolioIcon name={copiedPrompt ? 'fa-check' : 'fa-copy'} />
-                  <span>{copiedPrompt ? copy.secondaryCopiedLabel : copy.secondaryCta}</span>
+                  <span>{copiedPrompt ? copy.secondaryCopiedLabel : preview.copyCtaLabel}</span>
                 </button>
               </div>
             </div>
