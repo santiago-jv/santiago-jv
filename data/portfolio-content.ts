@@ -66,6 +66,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         { label: 'About', href: '#about' },
         { label: 'Experience', href: '#experience' },
         { label: 'Work', href: '#projects' },
+        { label: 'Integrations', href: '#integrations' },
         { label: 'MCP', href: '#mcp' },
         { label: 'Contact', href: '#contact' },
       ],
@@ -207,7 +208,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     ],
     contact: {
       heading: {
-        number: '04.',
+        number: '05.',
         title: 'Contact',
         subtitle: 'Get In Touch',
         description:
@@ -286,6 +287,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         { label: 'About', href: '#about' },
         { label: 'Experience', href: '#experience' },
         { label: 'Work', href: '#projects' },
+        { label: 'Integrations', href: '#integrations' },
         { label: 'MCP Docs', href: 'https://mcp.santiago-jv.tech/docs' },
         { label: 'Contact', href: '#contact' },
       ],
@@ -298,7 +300,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       rightsReserved: 'All rights reserved.',
       builtWith: 'Built with Next.js & TypeScript',
       followAriaPrefix: 'Follow me on',
-      version: 'v4.4.0',
+      version: 'v4.5.0',
     },
   },
   es: {
@@ -319,6 +321,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         { label: 'Sobre mí', href: '#about' },
         { label: 'Experiencia', href: '#experience' },
         { label: 'Trabajo', href: '#projects' },
+        { label: 'Integraciones', href: '#integrations' },
         { label: 'MCP', href: '#mcp' },
         { label: 'Contacto', href: '#contact' },
       ],
@@ -460,7 +463,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
     ],
     contact: {
       heading: {
-        number: '04.',
+        number: '05.',
         title: 'Contacto',
         subtitle: 'Hablemos',
         description:
@@ -539,6 +542,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         { label: 'Sobre mí', href: '#about' },
         { label: 'Experiencia', href: '#experience' },
         { label: 'Trabajo', href: '#projects' },
+        { label: 'Integraciones', href: '#integrations' },
         { label: 'Docs MCP', href: 'https://mcp.santiago-jv.tech/docs' },
         { label: 'Contacto', href: '#contact' },
       ],
@@ -551,7 +555,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       rightsReserved: 'Todos los derechos reservados.',
       builtWith: 'Construido con Next.js y TypeScript',
       followAriaPrefix: 'Sígueme en',
-      version: 'v4.4.0',
+      version: 'v4.5.0',
     },
   },
 };

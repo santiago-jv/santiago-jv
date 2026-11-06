@@ -7,6 +7,9 @@ import { useApplePageMotion } from '@/hooks/useAppleMotion';
 
 const ExperienceSection = dynamic(() => import('@/components/ExperienceSection'), { ssr: true });
 const ProjectsSection = dynamic(() => import('@/components/ProjectsSection'), { ssr: true });
+const IntegrationsSection = dynamic(() => import('@/components/IntegrationsSection'), {
+  ssr: true,
+});
 const McpShowcaseSection = dynamic(() => import('@/components/McpShowcaseSection'), { ssr: true });
 const ContactSection = dynamic(() => import('@/components/ContactSection'), { ssr: true });
 const Footer = dynamic(() => import('@/components/Footer'), { ssr: true });
@@ -21,6 +24,7 @@ const Home: React.FC = () => {
       <MainContent />
       <ExperienceSection />
       <ProjectsSection />
+      <IntegrationsSection />
       <McpShowcaseSection />
       <ContactSection />
       <Footer />

@@ -47,7 +47,7 @@ const McpShowcaseSection: React.FC = () => {
       <div className={styles.container}>
         <SectionHeading
           content={{
-            number: '03.',
+            number: '04.',
             title: copy.eyebrow,
             subtitle: copy.subtitle,
             description: copy.description,

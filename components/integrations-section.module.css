@@ -1,0 +1,160 @@
+.integrationsSection {
+  padding: 108px 0 116px;
+  background-color: var(--apple-bg-stone);
+  position: relative;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.matrixGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.matrixTile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: var(--apple-bg-white);
+  border: 1px solid var(--apple-border);
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+  outline: none;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.matrixTile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    320px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    var(--brand-tint, rgba(29, 29, 31, 0.04)),
+    transparent 68%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms var(--ease-apple-snappy);
+}
+
+.matrixTile:hover {
+  transform: translate3d(0, -3px, 0);
+  border-color: var(--brand-border, var(--apple-border-strong));
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.065),
+    0 2px 8px rgba(0, 0, 0, 0.025);
+  --brand-accent-active: var(--brand-accent, var(--brand-color));
+}
+
+.matrixTile:hover::before {
+  opacity: 1;
+}
+
+.logoSquircle {
+  position: relative;
+  z-index: 1;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--apple-bg-stone);
+  border: 1px solid rgba(0, 0, 0, 0.055);
+  color: var(--apple-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  flex-shrink: 0;
+  transition:
+    color 260ms var(--ease-apple-spring),
+    background-color 260ms var(--ease-apple-spring),
+    border-color 260ms var(--ease-apple-spring),
+    transform 320ms var(--ease-apple-spring);
+}
+
+.matrixTile:hover .logoSquircle {
+  color: var(--brand-color, var(--apple-text-primary));
+  background: var(--brand-tint, var(--apple-bg-stone));
+  border-color: var(--brand-border, rgba(0, 0, 0, 0.1));
+  transform: scale(1.05);
+}
+
+.logoGlyph {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.metaStack {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.brandName {
+  font-family: var(--font-family-display);
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+  color: var(--apple-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.categoryLabel {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.008em;
+  color: var(--apple-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 820px) {
+  .integrationsSection {
+    padding: 84px 0 92px;
+  }
+
+  .matrixGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 0 18px;
+  }
+
+  .matrixGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .matrixTile {
+    padding: 15px 17px;
+    border-radius: 18px;
+  }
+
+  .logoSquircle {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 19.5px;
+  }
+}

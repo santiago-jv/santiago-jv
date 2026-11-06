@@ -17,7 +17,8 @@
 - **AI Internal Tooling & Edge MCP:** Contributed to migrating manual team processes to AI-assisted workflows; improving and maintaining internal MCP (Model Context Protocol) tooling to connect services with preferred LLMs, evolving team-specific plugins and skills across internal work areas, prompting rules, and serverless edge MCP tooling on Cloudflare Workers
 - **Cloud, Serverless & DevOps:** AWS (Lambda, EC2, S3, RDS, SQS, CloudWatch), Google Cloud Functions, Cloudflare Workers, Docker, GitHub Actions, CI/CD pipelines
 - **Databases & Persistence:** PostgreSQL, MongoDB, Redis, MySQL, database schema design, production migrations, query optimization
-- **Observability & Product Analytics:** Datadog (APM, Distributed Tracing, service monitoring, alerting, incident investigation), CleverTap (product event tracking & business metrics), Metabase (data analysis & product decision support)
+- **Observability & Product Analytics:** Datadog (APM, Distributed Tracing, service monitoring, alerting, incident investigation), CleverTap (product event tracking & business metrics), AppsFlyer (mobile attribution), Metabase (data analysis & product decision support)
+- **Third-Party Production Integrations:** Stripe (payments & billing), Refácil (LatAm payments & cash-in), Tusdatos.co (KYC & background compliance), Intercom (customer messaging), Twilio (SMS, WhatsApp & voice), SendGrid (transactional email)
 - **Product & Engineering Leadership:** End-to-end feature ownership across Product, Operations, Support, and Finance; stakeholder management, technical design, code reviews, Scrum/Agile
 
 ## Official Links & Resources

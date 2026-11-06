@@ -44,7 +44,7 @@ export interface McpLocaleCopy {
 export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
   en: {
     showcase: {
-      eyebrow: '03. Personal MCP Server',
+      eyebrow: 'Personal MCP Server',
       subtitle: "Don't just read my CV. Connect your AI to it",
       description:
         'I built and deployed a live Model Context Protocol server on Cloudflare Edge. Connect Claude, Codex, Antigravity, or Cursor in seconds and ask in plain language—your AI automatically discovers the right tools to audit my stack or evaluate your open role.',
@@ -136,7 +136,7 @@ Cover:
   },
   es: {
     showcase: {
-      eyebrow: '03. Servidor MCP Personal',
+      eyebrow: 'Servidor MCP Personal',
       subtitle: 'No solo leas mi CV. Conecta tu IA a él',
       description:
         'Construí y desplegué un servidor público de Model Context Protocol en Cloudflare Edge. Conecta Claude, Codex, Antigravity o Cursor en segundos y pregunta en lenguaje natural: tu IA detecta sola qué herramienta usar para auditar mi stack o evaluar tu vacante.',
