@@ -22,6 +22,8 @@
 
 ## Official Links & Resources
 - [Portfolio Website](https://www.santiago-jv.tech/): Official portfolio with experience timeline, architecture pillars, and contact channels.
+- [Public MCP Server Endpoint (Streamable HTTP)](https://mcp.santiago-jv.tech/mcp): Live Model Context Protocol server exposing career profile, tech stack, and `evaluate_vacancy_match` recruiter tool.
+- [MCP Documentation & Recruiter Guide](https://www.santiago-jv.tech/mcp): Interactive setup guide and live vacancy compatibility simulator.
 - [Full AI Context (llms-full.txt)](https://www.santiago-jv.tech/llms-full.txt): Detailed career history, architectural case studies, and full resume in plain text for LLMs.
 - [Master Resume / CV in English (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_EN.pdf): Complete downloadable English CV in ATS-friendly PDF format.
 - [Hoja de Vida / CV en Español (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_ES.pdf): Complete downloadable Spanish CV in ATS-friendly PDF format.

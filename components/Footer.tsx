@@ -1,12 +1,15 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { usePreferences } from '@/context/PreferencesContext';
 import PortfolioIcon from '@/components/PortfolioIcon';
 import styles from './footer.module.css';
 
 const Footer: React.FC = () => {
+  const router = useRouter();
   const { content } = usePreferences();
   const footer = content.footer;
   const currentYear = new Date().getFullYear();
+  const isHomePage = router.pathname === '/';
 
   return (
     <footer className={styles.footer}>
@@ -20,13 +23,17 @@ const Footer: React.FC = () => {
           <div className={styles.directoryColumn}>
             <h4 className={styles.columnTitle}>{footer.sectionTitles.navigation}</h4>
             <ul className={styles.linksList}>
-              {footer.quickLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className={styles.footerLink}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {footer.quickLinks.map((link) => {
+                const resolvedHref =
+                  !isHomePage && link.href.startsWith('#') ? `/${link.href}` : link.href;
+                return (
+                  <li key={link.href}>
+                    <a href={resolvedHref} className={styles.footerLink}>
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

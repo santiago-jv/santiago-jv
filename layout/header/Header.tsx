@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from './header.module.css';
 import { usePreferences } from '@/context/PreferencesContext';
 import PortfolioIcon from '@/components/PortfolioIcon';
 
 const Header: React.FC = () => {
+  const router = useRouter();
   const { content } = usePreferences();
   const headerContent = content.header;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isHomePage = router.pathname === '/';
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -33,9 +37,18 @@ const Header: React.FC = () => {
   }, []);
 
   const handleNavItemClick = (href: string): void => {
-    const section = document.querySelector(href);
-    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setIsMenuOpen(false);
+    if (href.startsWith('/')) {
+      void router.push(href);
+      return;
+    }
+
+    if (isHomePage) {
+      const section = document.querySelector(href);
+      section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      void router.push(`/${href}`);
+    }
   };
 
   return (
@@ -44,17 +57,31 @@ const Header: React.FC = () => {
         className={`${styles.header} ${isScrolled ? styles['header--scrolled'] : ''} ${styles['header--ready']}`}
       >
         <div className={styles.headerInner}>
-          <a href="#about" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
-            <img
-              src="/favicon.svg?v=white-bg-black-s"
-              alt=""
-              width={21}
-              height={21}
-              className={styles.brandMark}
-              aria-hidden="true"
-            />
-            <span className={styles.wordmark}>Santiago Olayo</span>
-          </a>
+          {isHomePage ? (
+            <a href="#about" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
+              <img
+                src="/favicon.svg?v=white-bg-black-s"
+                alt=""
+                width={21}
+                height={21}
+                className={styles.brandMark}
+                aria-hidden="true"
+              />
+              <span className={styles.wordmark}>Santiago Olayo</span>
+            </a>
+          ) : (
+            <Link href="/" aria-label={headerContent.brandAriaLabel} className={styles.brandLink}>
+              <img
+                src="/favicon.svg?v=white-bg-black-s"
+                alt=""
+                width={21}
+                height={21}
+                className={styles.brandMark}
+                aria-hidden="true"
+              />
+              <span className={styles.wordmark}>Santiago Olayo</span>
+            </Link>
+          )}
 
           <nav
             id="site-menu"

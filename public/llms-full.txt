@@ -8,6 +8,8 @@
 - **Name:** Santiago Olayo Villamil
 - **Title:** Senior Software Engineer | Backend, Fullstack, Cloud & AI Internal Tooling
 - **Website:** https://www.santiago-jv.tech/
+- **Public MCP Server (Streamable HTTP):** https://mcp.santiago-jv.tech/mcp
+- **MCP Documentation & Recruiter Fit Guide:** https://www.santiago-jv.tech/mcp
 - **Email:** contact@santiago-jv.tech
 - **LinkedIn:** https://www.linkedin.com/in/santiago-jv
 - **GitHub:** https://github.com/santiago-jv

@@ -230,6 +230,105 @@ export const PortfolioIcon: React.FC<PortfolioIconProps> = ({ name = '', classNa
     );
   }
 
+  if (token.includes('terminal')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <rect x="3" y="4" width="18" height="16" rx="3" />
+        <path d="m7.5 9.5 3 2.5-3 2.5M12.5 14.5h4" />
+      </svg>
+    );
+  }
+
+  if (token.includes('sparkles')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="m12 3 1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z" />
+        <path d="m18.5 15.5.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" />
+      </svg>
+    );
+  }
+
+  if (token.includes('shield')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="M12 3 4.5 6.2v5.3c0 5 3.2 8.6 7.5 9.8 4.3-1.2 7.5-4.8 7.5-9.8V6.2L12 3Z" />
+        <path d="m9 12.2 2.1 2.1 4-4.2" />
+      </svg>
+    );
+  }
+
+  if (token.includes('copy')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <rect x="9" y="9" width="11" height="11" rx="2.2" />
+        <path d="M5 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h8A2.5 2.5 0 0 1 15 4.5V5" />
+      </svg>
+    );
+  }
+
+  if (token.includes('check')) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d="m5 12.5 4.5 4.5L19 7.5" />
+      </svg>
+    );
+  }
+
   return null;
 };
 
