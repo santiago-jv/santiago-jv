@@ -1,0 +1,37 @@
+name: Verify & Build santiago-jv Portfolio
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Astro Check, Portfolio Suite & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Astro Check
+        run: npm run check
+
+      - name: Run Portfolio Security, i18n & SEO Tests
+        run: npm test
+
+      - name: Build Production Bundle
+        run: npm run build

@@ -7,32 +7,15 @@ function initMcpConsole(): void {
   const tabBtns = Array.from(consoleRoot.querySelectorAll<HTMLButtonElement>('[data-mcp-tab]'));
   const panels = Array.from(consoleRoot.querySelectorAll<HTMLElement>('[data-mcp-panel]'));
   const endpointBtn = consoleRoot.querySelector<HTMLButtonElement>('[data-mcp-copy-endpoint]');
-  const promptBtn = consoleRoot.querySelector<HTMLButtonElement>('[data-mcp-copy-prompt]');
 
   let activeTab: 'recruiter' | 'engineering' = 'recruiter';
   let endpointTimer = 0;
-  let promptTimer = 0;
 
   const setButtonIconState = (btn: HTMLElement, copied: boolean): void => {
     const copyIcon = btn.querySelector<HTMLElement>('[data-copy-icon]');
     const checkIcon = btn.querySelector<HTMLElement>('[data-check-icon]');
     if (copyIcon) copyIcon.hidden = copied;
     if (checkIcon) checkIcon.hidden = !copied;
-  };
-
-  const syncPromptLabel = (copied: boolean): void => {
-    if (!promptBtn) return;
-    const labelEl = promptBtn.querySelector<HTMLElement>('[data-copy-label]');
-    setButtonIconState(promptBtn, copied);
-    if (!labelEl) return;
-    if (copied) {
-      labelEl.textContent = promptBtn.dataset.copiedCta || '';
-    } else {
-      labelEl.textContent =
-        activeTab === 'recruiter'
-          ? promptBtn.dataset.recruiterCta || ''
-          : promptBtn.dataset.engineeringCta || '';
-    }
   };
 
   tabBtns.forEach((btn) => {
@@ -47,12 +30,6 @@ function initMcpConsole(): void {
       panels.forEach((panel) => {
         panel.hidden = panel.dataset.mcpPanel !== activeTab;
       });
-
-      if (promptTimer) {
-        window.clearTimeout(promptTimer);
-        promptTimer = 0;
-      }
-      syncPromptLabel(false);
     });
   });
 
@@ -72,24 +49,6 @@ function initMcpConsole(): void {
       if (labelEl) labelEl.textContent = endpointBtn.dataset.defaultLabel || '';
       endpointTimer = 0;
     }, 1800);
-  });
-
-  promptBtn?.addEventListener('click', async () => {
-    const promptText =
-      activeTab === 'recruiter'
-        ? promptBtn.dataset.recruiterPrompt || ''
-        : promptBtn.dataset.engineeringPrompt || '';
-    if (!promptText) return;
-
-    const ok = await copyToClipboard(promptText);
-    if (!ok) return;
-
-    syncPromptLabel(true);
-    if (promptTimer) window.clearTimeout(promptTimer);
-    promptTimer = window.setTimeout(() => {
-      syncPromptLabel(false);
-      promptTimer = 0;
-    }, 2000);
   });
 }
 
