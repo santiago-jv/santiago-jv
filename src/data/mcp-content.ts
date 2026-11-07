@@ -43,7 +43,7 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
   en: {
     showcase: {
       eyebrow: 'Personal MCP Server',
-      subtitle: "Don't just read my CV. Connect your AI to it",
+      subtitle: 'Connect Your AI to My Work',
       description:
         'Connect Claude, Codex, Antigravity, or Cursor to my live Cloudflare Edge MCP server, or chat directly in your browser.',
       liveStatusLabel: 'Live · Streamable HTTP',
@@ -88,21 +88,21 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
         {
           icon: 'fa-sparkles',
           eyebrow: 'Zero Setup Option',
-          title: 'Live Web AI Chat.',
+          title: 'Live Web AI Chat',
           description:
             'Open ai.santiago-jv.tech to ask about my work or paste a job description directly in your browser.',
         },
         {
           icon: 'fa-terminal',
           eyebrow: 'Model Context Protocol',
-          title: 'Connect in 10 Seconds.',
+          title: 'Connect in 10 Seconds',
           description:
             'Add mcp.santiago-jv.tech/mcp to Claude, Cursor, Codex, or Antigravity with zero API keys required.',
         },
         {
           icon: 'fa-shield',
           eyebrow: 'Edge Guardrails',
-          title: 'Public & Rate-Limited.',
+          title: 'Public & Rate-Limited',
           description:
             'Stateless Streamable HTTP on Cloudflare Workers with per-IP rate limiting and strict payload caps.',
         },
@@ -112,7 +112,7 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
   es: {
     showcase: {
       eyebrow: 'Servidor MCP Personal',
-      subtitle: 'No solo leas mi CV. Conecta tu IA a él',
+      subtitle: 'Conecta tu IA a mi Trabajo',
       description:
         'Conecta Claude, Codex, Antigravity o Cursor a mi servidor MCP en Cloudflare Edge, o chatea directo en el navegador.',
       liveStatusLabel: 'En Vivo · Streamable HTTP',
@@ -157,21 +157,21 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
         {
           icon: 'fa-sparkles',
           eyebrow: 'Sin Configuración',
-          title: 'Chat IA en el Navegador.',
+          title: 'Chat IA en el Navegador',
           description:
             'Entra a ai.santiago-jv.tech para preguntar sobre mi experiencia o pegar una vacante al instante.',
         },
         {
           icon: 'fa-terminal',
           eyebrow: 'Model Context Protocol',
-          title: 'Conéctalo en 10 Segundos.',
+          title: 'Conéctalo en 10 Segundos',
           description:
             'Agrega mcp.santiago-jv.tech/mcp en Claude, Cursor, Codex o Antigravity sin pedir API keys.',
         },
         {
           icon: 'fa-shield',
           eyebrow: 'Seguridad en el Edge',
-          title: 'Público y Protegido.',
+          title: 'Público y Protegido',
           description:
             'Streamable HTTP sin estado en Cloudflare Workers con rate-limiting por IP y validación estricta.',
         },
