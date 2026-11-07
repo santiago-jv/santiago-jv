@@ -267,7 +267,8 @@ function initMacBookStudio(): void {
     }
 
     if (lidEl) {
-      lidEl.style.transform = `translate3d(0, -4px, 1.5px) rotateX(${clamped.toFixed(2)}deg)`;
+      const lidY = -2.5 + openRatio * 4.5;
+      lidEl.style.transform = `translate3d(0, ${lidY.toFixed(2)}px, 1.5px) rotateX(${clamped.toFixed(2)}deg)`;
     }
 
     if (clamped < -80 && glintEl) {

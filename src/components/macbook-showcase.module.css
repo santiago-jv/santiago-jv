@@ -41,7 +41,7 @@
   aspect-ratio: 680 / 434;
   transform-style: preserve-3d;
   transform-origin: 50% 100%;
-  transform: translate3d(0, -4px, 1.5px) rotateX(-101deg);
+  transform: translate3d(0, -2.5px, 1.5px) rotateX(-101deg);
   will-change: transform;
   z-index: 4;
 }
@@ -49,7 +49,7 @@
 .lidAluminumSlice {
   position: absolute;
   inset: 0;
-  border-radius: 26px;
+  border-radius: 24px 24px 14px 14px;
   background: linear-gradient(90deg, #1b1b1f 0%, #2f2f35 12%, #18181b 50%, #2f2f35 88%, #1b1b1f 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   pointer-events: none;
@@ -58,7 +58,7 @@
 .lidOuterCover {
   position: absolute;
   inset: 0;
-  border-radius: 26px;
+  border-radius: 14px 14px 24px 24px;
   background:
     radial-gradient(ellipse 70% 55% at 50% 48%, rgba(255, 255, 255, 0.055) 0%, transparent 72%),
     linear-gradient(160deg, #2b2b30 0%, #1a1a1f 52%, #101014 100%);
@@ -112,7 +112,7 @@
 .lidInnerScreen {
   position: absolute;
   inset: 0;
-  border-radius: 24px 24px 5px 5px;
+  border-radius: 24px 24px 14px 14px;
   background: #070709;
   padding: 9px 9px 13px;
   border: 2px solid #2b2b30;
@@ -143,7 +143,7 @@
 .retinaDisplay {
   position: relative;
   flex: 1;
-  border-radius: 13px 13px 3px 3px;
+  border-radius: 13px 13px 8px 8px;
   background:
     radial-gradient(ellipse 75% 55% at 50% 0%, rgba(64, 64, 76, 0.34) 0%, transparent 65%),
     radial-gradient(ellipse 65% 60% at 85% 90%, rgba(45, 45, 54, 0.28) 0%, transparent 70%),
@@ -216,6 +216,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  max-width: calc(50% - 54px);
+  overflow: hidden;
 }
 
 .menuTrayIcons {
@@ -840,11 +842,11 @@
    2. CLAMSHELL HINGE CLUTCH (Light-tight full-seam barrel)
    ========================================================= */
 .hingeClutch {
-  width: 74%;
-  height: 12px;
+  width: 83%;
+  height: 14px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -6px;
+  margin-top: -8px;
   margin-bottom: -6px;
   transform: translateZ(-1.5px);
   background: linear-gradient(
@@ -855,7 +857,7 @@
     #0b0b0e 90%,
     #18181c 100%
   );
-  border-radius: 3px;
+  border-radius: 6px;
   pointer-events: none;
   z-index: 2;
 }
@@ -871,7 +873,7 @@
   transform-style: preserve-3d;
   transform-origin: 50% 0%;
   transform: rotateX(79deg);
-  border-radius: 22px 22px 24px 24px;
+  border-radius: 12px 12px 24px 24px;
   z-index: 3;
 }
 
@@ -879,7 +881,7 @@
   position: absolute;
   inset: 0;
   transform: translateZ(0px);
-  border-radius: 22px 22px 24px 24px;
+  border-radius: 12px 12px 24px 24px;
   overflow: hidden;
 }
 
@@ -905,7 +907,7 @@
 .chassisExtrusionSlice {
   position: absolute;
   inset: 0;
-  border-radius: 22px 22px 24px 24px;
+  border-radius: 12px 12px 24px 24px;
   background: linear-gradient(
     90deg,
     #141417 0%,
@@ -1115,7 +1117,7 @@
   }
 
   .lidAssembly {
-    transform: translate3d(0, -4px, 1.5px) rotateX(-2deg) !important;
+    transform: translate3d(0, 2px, 1.5px) rotateX(-2deg) !important;
   }
 
   .screenWakeVeil,
@@ -1167,12 +1169,15 @@
   }
 
   .hingeClutch {
-    width: 78%;
+    width: 90%;
   }
 
-  .lidOuterCover,
   .lidAluminumSlice {
-    border-radius: 20px;
+    border-radius: 18px 18px 11px 11px;
+  }
+
+  .lidOuterCover {
+    border-radius: 11px 11px 18px 18px;
   }
 
   .lidOuterEmblem {
@@ -1182,12 +1187,13 @@
 
   .lidInnerScreen {
     padding: 7px 7px 10px;
-    border-radius: 18px 18px 4px 4px;
+    border-radius: 18px 18px 11px 11px;
   }
 
+  .baseAssembly,
   .baseTopDeck,
   .chassisExtrusionSlice {
-    border-radius: 18px 18px 20px 20px;
+    border-radius: 10px 10px 20px 20px;
   }
 
   .cameraNotch {
@@ -1426,7 +1432,7 @@
   }
 
   .hingeClutch {
-    width: 80%;
+    width: 93%;
   }
 
   .liveBadgeText {
