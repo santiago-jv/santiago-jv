@@ -2,6 +2,7 @@
 import SectionHeading from '@/components/SectionHeading.astro';
 import PortfolioIcon from '@/components/PortfolioIcon.astro';
 import {
+  AI_CHAT_URL,
   MCP_CONTENT,
   MCP_DOCS_URL,
   MCP_ENDPOINT_URL,
@@ -132,7 +133,17 @@ const previews = [
           ))}
 
           <div class={styles.consoleActions}>
-            <a href={MCP_DOCS_URL} class={styles.primaryDocsBtn}>
+            <a
+              href={AI_CHAT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={styles.primaryDocsBtn}
+            >
+              <span>{copy.launchAiChatCta}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <a href={MCP_DOCS_URL} class={styles.secondaryPromptBtn} style="text-decoration:none">
               <span>{copy.primaryCta}</span>
               <span aria-hidden="true">›</span>
             </a>

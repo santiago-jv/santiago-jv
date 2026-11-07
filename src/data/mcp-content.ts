@@ -3,6 +3,7 @@ import type { Locale } from '@/types/portfolio';
 export const MCP_ENDPOINT_URL = 'https://mcp.santiago-jv.tech/mcp';
 export const MCP_DOCS_URL = 'https://mcp.santiago-jv.tech/docs';
 export const MCP_GATEWAY_URL = 'https://mcp.santiago-jv.tech';
+export const AI_CHAT_URL = 'https://ai.santiago-jv.tech';
 
 export interface McpShowcaseTabPreview {
   command: string;
@@ -30,6 +31,7 @@ export interface McpLocaleCopy {
     };
     recruiterPreview: McpShowcaseTabPreview;
     engineeringPreview: McpShowcaseTabPreview;
+    launchAiChatCta: string;
     primaryCta: string;
     secondaryCopiedLabel: string;
     valueCards: Array<{
@@ -107,15 +109,16 @@ Cover:
         ],
         footnote: 'Works natively with Claude, Codex, Antigravity, Cursor, ChatGPT, and VS Code',
       },
+      launchAiChatCta: 'Open Live Web AI Chat',
       primaryCta: 'Explore MCP Docs & Setup',
       secondaryCopiedLabel: 'Prompt Copied',
       valueCards: [
         {
           icon: 'fa-sparkles',
           eyebrow: 'For Recruiters & Hiring Managers',
-          title: 'Paste Your Vacancy. Get an Honest Fit Brief.',
+          title: 'Chat in Browser or Paste Your Vacancy.',
           description:
-            'Connect your preferred AI, drop your job description in natural language, and get a transparent breakdown of matched skills, production evidence, and any stack gaps in seconds.',
+            'Prefer zero setup? Open ai.santiago-jv.tech to chat with my @nestjs/ai agent directly in your browser, or connect Claude/Cursor via MCP to score your job description in seconds.',
         },
         {
           icon: 'fa-terminal',
@@ -199,15 +202,16 @@ Incluye:
         ],
         footnote: 'Compatible con Claude, Codex, Antigravity, Cursor, ChatGPT y VS Code',
       },
+      launchAiChatCta: 'Abrir Chat IA en Vivo',
       primaryCta: 'Ver Documentación y Guía MCP',
       secondaryCopiedLabel: 'Prompt Copiado',
       valueCards: [
         {
           icon: 'fa-sparkles',
           eyebrow: 'Para Reclutadores y Líderes de Selección',
-          title: 'Monta tu Vacante y Evalúa nuestro Match.',
+          title: 'Chatea en el Navegador o Evalúa tu Vacante.',
           description:
-            'Conecta tu IA favorita, pega la descripción de tu vacante en lenguaje natural y obtén en segundos un resumen claro y honesto de si mi experiencia, stack y seniority encajan con lo que buscas.',
+            '¿Prefieres cero configuración? Entra a ai.santiago-jv.tech para conversar con mi agente @nestjs/ai directo en el navegador, o conecta tu IA vía MCP para evaluar tu vacante en segundos.',
         },
         {
           icon: 'fa-terminal',
