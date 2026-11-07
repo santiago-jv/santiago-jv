@@ -1,22 +1,4 @@
-async function copyText(text: string): Promise<boolean> {
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(text);
-      return true;
-    }
-    const temp = document.createElement('textarea');
-    temp.value = text;
-    temp.style.position = 'fixed';
-    temp.style.opacity = '0';
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand('copy');
-    document.body.removeChild(temp);
-    return true;
-  } catch {
-    return false;
-  }
-}
+import { copyToClipboard } from '@/utils/clipboard';
 
 function initMcpConsole(): void {
   const consoleRoot = document.querySelector<HTMLElement>('[data-mcp-console]');
@@ -77,7 +59,7 @@ function initMcpConsole(): void {
   endpointBtn?.addEventListener('click', async () => {
     const url = endpointBtn.dataset.endpointUrl || '';
     if (!url) return;
-    const ok = await copyText(url);
+    const ok = await copyToClipboard(url);
     if (!ok) return;
 
     const labelEl = endpointBtn.querySelector<HTMLElement>('[data-copy-label]');
@@ -99,7 +81,7 @@ function initMcpConsole(): void {
         : promptBtn.dataset.engineeringPrompt || '';
     if (!promptText) return;
 
-    const ok = await copyText(promptText);
+    const ok = await copyToClipboard(promptText);
     if (!ok) return;
 
     syncPromptLabel(true);

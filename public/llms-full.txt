@@ -1,4 +1,4 @@
-# Santiago Olayo Villamil ,  Complete Professional Profile (llms-full.txt)
+# Santiago Olayo Villamil · Complete Professional Profile (llms-full.txt)
 
 > This document provides the full, structured professional context of Santiago Olayo Villamil (`santiago-jv`) following the `llms.txt` standard for AI assistants, search engines, and automated recruiting agents.
 
@@ -31,7 +31,7 @@ Beyond feature development, has contributed to migrating manual processes toward
 
 ## 3. Professional Experience
 
-### GoodRec ,  Fullstack Engineer
+### GoodRec · Fullstack Engineer
 - **Period:** January 2025 – Present
 - **Modality:** Remote
 - **Key Responsibilities & Achievements:**
@@ -41,16 +41,16 @@ Beyond feature development, has contributed to migrating manual processes toward
   - Production observability and reliability: continuous monitoring of distributed services, proactive alerting, distributed tracing, and production incident investigation using Datadog.
   - Product analytics and data-driven decisions: tracking product events and business metrics with CleverTap and analyzing data in Metabase to measure business impact and guide the product roadmap.
 
-### Bolsiyo ,  Backend Developer
+### Bolsiyo · Backend Developer
 - **Period:** August 2022 – January 2025 (2 years 6 months)
 - **Modality:** Remote (Colombia)
 - **Key Responsibilities & Achievements:**
   - Built high-transactional backend services with Node.js, TypeScript, and LoopBack 4 for the mobile platform used by independent merchants.
   - Designed schemas and migrations for relational and NoSQL databases (PostgreSQL, MongoDB), optimizing critical wallet and payment queries.
-  - Implemented secure REST APIs, Git version control, automated testing, and integrations with payment gateways (Stripe, Refácil), KYC compliance (Tusdatos.co), internal ops & alerting (Retool, Slack bots/alerts), messaging & push notifications (Twilio, SendGrid, Intercom, Firebase FCM), and mobile attribution (AppsFlyer).
+  - Implemented secure REST APIs, Git version control, automated testing, and integrations with payment gateways and digital wallets (Stripe, Nequi, Refácil), KYC compliance (Tusdatos.co), internal ops tooling (Retool), messaging & push notifications (Twilio, SendGrid, Intercom, Firebase FCM), and mobile attribution (AppsFlyer).
   - Continuous collaboration under Agile (Scrum) methodologies, technical user story refinement, and peer code reviews.
 
-### Cooltivalo · +COTAS · SLS GROUPS ,  Full Stack & Software Developer
+### Cooltivalo · +COTAS · SLS GROUPS · Full Stack & Software Developer
 - **Period:** January 2021 – May 2023
 - **Modality:** Santa Marta / Barranquilla / Remote
 - **Key Responsibilities & Achievements:**
@@ -61,5 +61,5 @@ Beyond feature development, has contributed to migrating manual processes toward
 ---
 
 ## 4. Education
-- **Ingeniero de Sistemas (Systems Engineering)** ,  Universidad del Magdalena, Santa Marta, Colombia (2019 – 2025)
-- **Curso Profesional de Scrum e Ingeniería de Software** ,  Platzi (2022)
+- **Ingeniero de Sistemas (Systems Engineering)** · Universidad del Magdalena, Santa Marta, Colombia (2019 – 2025)
+- **Curso Profesional de Scrum e Ingeniería de Software** · Platzi (2022)

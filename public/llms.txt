@@ -18,7 +18,7 @@
 - **Cloud, Serverless & DevOps:** AWS (Lambda, EC2, S3, RDS, SQS, CloudWatch), Google Cloud Functions, Cloudflare Workers, Docker, GitHub Actions, CI/CD pipelines
 - **Databases & Persistence:** PostgreSQL, MongoDB, Redis, MySQL, database schema design, production migrations, query optimization
 - **Observability & Product Analytics:** Datadog (APM, Distributed Tracing, service monitoring, alerting, incident investigation), CleverTap (product event tracking & business metrics), AppsFlyer (mobile attribution), Metabase (data analysis & product decision support)
-- **Third-Party Production Integrations:** Stripe (payments & billing), Refácil (LatAm payments & cash-in), Tusdatos.co (KYC & background compliance), Retool (internal tools & operations), Slack (automated alerts, webhooks & internal bots), Intercom (customer messaging), Twilio (SMS, WhatsApp & voice), SendGrid (transactional email), Firebase Cloud Messaging / FCM (mobile push notifications)
+- **Third-Party Production Integrations:** Stripe (payments & billing), Nequi (payments & digital wallets), Refácil (LatAm payments & cash-in), Tusdatos.co (KYC & background compliance), Retool (internal tools & operations), Intercom (customer messaging), Twilio (SMS, WhatsApp & voice), SendGrid (transactional email), Firebase Cloud Messaging / FCM (mobile push notifications)
 - **Product & Engineering Leadership:** End-to-end feature ownership across Product, Operations, Support, and Finance; stakeholder management, technical design, code reviews, Scrum/Agile
 
 ## Official Links & Resources

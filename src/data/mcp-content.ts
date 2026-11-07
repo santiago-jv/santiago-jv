@@ -47,7 +47,7 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
       eyebrow: 'Personal MCP Server',
       subtitle: "Don't just read my CV. Connect your AI to it",
       description:
-        'I built and deployed a live Model Context Protocol server on Cloudflare Edge. Connect Claude, Codex, Antigravity, or Cursor in seconds and ask in plain language—your AI automatically discovers the right tools to audit my stack or evaluate your open role.',
+        'I built and deployed a live Model Context Protocol server on Cloudflare Edge. Connect Claude, Codex, Antigravity, or Cursor in seconds and ask in plain language. Your AI automatically discovers the right tools to audit my stack or evaluate your open role.',
       liveStatusLabel: 'Live · Streamable HTTP · No Auth Required',
       endpointLabel: 'Public MCP Endpoint',
       copyUrlLabel: 'Copy URL',
@@ -129,7 +129,7 @@ Cover:
           eyebrow: 'Public by Design, Hardened at the Edge',
           title: 'Zero Login Friction. Strict Guardrails.',
           description:
-            'No API keys or Zero Trust walls slowing down recruiters—protected by per-IP rate limiting, strict 32 KB payload ceilings, and stateless Web Standard Streamable HTTP.',
+            'No API keys or Zero Trust walls slowing down recruiters, protected by per-IP rate limiting, strict 32 KB payload ceilings, and stateless Web Standard Streamable HTTP.',
         },
       ],
     },

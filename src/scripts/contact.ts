@@ -1,22 +1,4 @@
-async function copyToClipboard(text: string): Promise<boolean> {
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(text);
-      return true;
-    }
-    const temp = document.createElement('textarea');
-    temp.value = text;
-    temp.style.position = 'fixed';
-    temp.style.opacity = '0';
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand('copy');
-    document.body.removeChild(temp);
-    return true;
-  } catch {
-    return false;
-  }
-}
+import { copyToClipboard } from '@/utils/clipboard';
 
 function initContactSection(): void {
   const section = document.querySelector<HTMLElement>('[data-contact-section]');
