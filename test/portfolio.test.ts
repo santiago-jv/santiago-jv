@@ -38,10 +38,15 @@ describe('santiago-jv Portfolio Architecture, Security, i18n & SEO Suite', () =>
       );
     });
 
-    it('enforces strict origin validation in production and allows localhost in development', () => {
+    it('enforces strict origin validation in production and rejects arbitrary *.vercel.app hosts', () => {
       assert.equal(isOriginAllowed('https://www.santiago-jv.tech', true), true);
       assert.equal(isOriginAllowed('https://santiago-jv.tech', true), true);
-      assert.equal(isOriginAllowed('https://santiago-jv-preview.vercel.app', true), true);
+      assert.equal(isOriginAllowed('https://santiago-jv-preview.vercel.app', true), false);
+      assert.equal(isOriginAllowed('http://www.santiago-jv.tech', true), false);
+      assert.equal(
+        isOriginAllowed('https://santiago-jv-preview.vercel.app', true, 'santiago-jv-preview.vercel.app'),
+        true
+      );
       assert.equal(isOriginAllowed('https://evil.example.com', true), false);
       assert.equal(isOriginAllowed(null, true), false);
       assert.equal(isOriginAllowed('http://localhost:3000', true), false);
@@ -50,11 +55,15 @@ describe('santiago-jv Portfolio Architecture, Security, i18n & SEO Suite', () =>
       assert.equal(isOriginAllowed(null, false), true);
     });
 
-    it('extracts client IP from X-Forwarded-For or X-Real-IP headers', () => {
+    it('extracts trusted client IP safely (ignoring unverified CF-Connecting-IP)', () => {
       const req1 = new Request('https://www.santiago-jv.tech/api/contact', {
-        headers: { 'x-forwarded-for': '198.51.100.10, 10.0.0.1' },
+        headers: {
+          'cf-connecting-ip': '1.2.3.4',
+          'x-vercel-forwarded-for': '198.51.100.10, 10.0.0.1',
+        },
       });
-      assert.equal(extractClientIp(req1), '198.51.100.10');
+      assert.equal(extractClientIp(req1, undefined, false), '198.51.100.10');
+      assert.equal(extractClientIp(req1, undefined, true), '1.2.3.4');
 
       const req2 = new Request('https://www.santiago-jv.tech/api/contact', {
         headers: { 'x-real-ip': '198.51.100.22' },

@@ -41,20 +41,48 @@ export function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
-export function extractClientIp(request: Request, clientAddress?: string): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  if (forwarded) return forwarded.split(',')[0].trim();
+export function extractClientIp(
+  request: Request,
+  clientAddress?: string,
+  cfOriginVerified = false
+): string {
+  if (cfOriginVerified) {
+    const cfIp = request.headers.get('cf-connecting-ip')?.trim();
+    if (cfIp) return cfIp;
+  }
+  const vercelForwarded = request.headers.get('x-vercel-forwarded-for');
+  if (vercelForwarded) return vercelForwarded.split(',')[0].trim();
   const realIp = request.headers.get('x-real-ip');
   if (realIp) return realIp.trim();
-  return clientAddress || 'unknown';
+  if (clientAddress) return clientAddress;
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return 'unknown';
 }
 
-export function isOriginAllowed(origin: string | null, isProd: boolean): boolean {
+export function isOriginAllowed(
+  origin: string | null,
+  isProd: boolean,
+  extraAllowedHostsEnv?: string
+): boolean {
   if (!origin) return !isProd;
 
   try {
-    const hostname = new URL(origin).hostname.toLowerCase();
-    if (ALLOWED_PROD_HOSTS.has(hostname) || hostname.endsWith('.vercel.app')) return true;
+    const parsed = new URL(origin);
+    const hostname = parsed.hostname.toLowerCase();
+    if (isProd && parsed.protocol !== 'https:') return false;
+    if (ALLOWED_PROD_HOSTS.has(hostname)) return true;
+
+    if (extraAllowedHostsEnv) {
+      const extras = extraAllowedHostsEnv
+        .split(',')
+        .map((item) => item.trim().toLowerCase())
+        .filter(Boolean);
+      if (extras.includes(hostname) || extras.includes(origin.trim().toLowerCase())) {
+        return true;
+      }
+    }
+
     if (!isProd && (hostname === 'localhost' || hostname === '127.0.0.1')) return true;
     return false;
   } catch {

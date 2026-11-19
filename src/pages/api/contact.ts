@@ -1,3 +1,4 @@
+import { timingSafeEqual } from 'node:crypto';
 import type { APIRoute } from 'astro';
 import {
   buildContactEmailPayloads,
@@ -40,34 +41,32 @@ const json = (
     },
   });
 
-const getResendApiKey = (): string | undefined => {
-  const direct = readEnv('RESEND_API_KEY');
-  if (direct) return direct;
+const getResendApiKey = (): string | undefined => readEnv('RESEND_API_KEY');
 
-  if (typeof process !== 'undefined' && process.env) {
-    for (const [key, value] of Object.entries(process.env)) {
-      if (typeof value === 'string' && value.trim()) {
-        const normalized = key.trim().toUpperCase();
-        if (
-          normalized === 'RESEND_API_KEY' ||
-          normalized === 'RESEND_KEY' ||
-          normalized === 'RESEND_TOKEN' ||
-          normalized === 'RESEND_API' ||
-          normalized === 'RESEND'
-        ) {
-          return value.trim();
-        }
-      }
-    }
-  }
-  return undefined;
+const verifyCfToken = (headerVal: string | null, expected: string | undefined): boolean => {
+  if (!headerVal || !expected) return false;
+  const bufA = Buffer.from(headerVal.trim(), 'utf8');
+  const bufB = Buffer.from(expected.trim(), 'utf8');
+  if (bufA.length !== bufB.length) return false;
+  return timingSafeEqual(bufA, bufB);
 };
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   const prod = isProduction();
+  const cfSecret = readEnv('CF_ORIGIN_SECRET');
+  const cfVerified = verifyCfToken(request.headers.get('x-santiago-origin-token'), cfSecret);
 
-  if (!isOriginAllowed(request.headers.get('origin'), prod)) {
+  if (prod && cfSecret && !cfVerified) {
     return json({ ok: false, code: 'FORBIDDEN' }, 403);
+  }
+
+  if (!isOriginAllowed(request.headers.get('origin'), prod, readEnv('ALLOWED_CONTACT_ORIGINS'))) {
+    return json({ ok: false, code: 'FORBIDDEN' }, 403);
+  }
+
+  const contentType = request.headers.get('content-type') || '';
+  if (!contentType.toLowerCase().includes('application/json')) {
+    return json({ ok: false, code: 'VALIDATION_ERROR' }, 400);
   }
 
   const declaredLength = Number(request.headers.get('content-length') || '0');
@@ -106,7 +105,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     resolvedClientAddress = undefined;
   }
 
-  if (!checkContactRateLimit(extractClientIp(request, resolvedClientAddress))) {
+  if (!checkContactRateLimit(extractClientIp(request, resolvedClientAddress, cfVerified))) {
     return json({ ok: false, code: 'RATE_LIMITED' }, 429, { 'Retry-After': '600' });
   }
 
@@ -133,15 +132,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       return json({ ok: true, mode: 'dev-preview' });
     }
 
-    return json(
-      {
-        ok: false,
-        code: 'DELIVERY_FAILED',
-        message:
-          'RESEND_API_KEY is not defined in the Vercel Production environment. Please ensure it is saved for "Production" in Vercel Settings -> Environment Variables.',
-      },
-      503
-    );
+    console.error('[Contact API] RESEND_API_KEY is missing in Production environment.');
+    return json({ ok: false, code: 'DELIVERY_FAILED' }, 503);
   }
 
   const { htmlPayload, textPayload, subjectLine } = buildContactEmailPayloads(validation.data);
@@ -161,19 +153,13 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         html: htmlPayload,
         text: textPayload,
       }),
+      signal: AbortSignal.timeout(10_000),
     });
 
     if (!response.ok) {
       const errorBody = (await response.json().catch(() => null)) as { message?: string } | null;
       console.warn('[Contact API] Resend returned non-OK response:', response.status, errorBody);
-      return json(
-        {
-          ok: false,
-          code: 'DELIVERY_FAILED',
-          message: errorBody?.message || 'Email delivery failed',
-        },
-        502
-      );
+      return json({ ok: false, code: 'DELIVERY_FAILED' }, 502);
     }
 
     return json({ ok: true, mode: 'live' });
