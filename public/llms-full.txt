@@ -13,7 +13,7 @@
 - **Email:** contact@santiago-jv.tech
 - **LinkedIn:** https://www.linkedin.com/in/santiago-jv
 - **GitHub:** https://github.com/santiago-jv
-- **X (Twitter):** https://x.com/santiagojv_tech (`@santiagojv_tech`)
+- **X (Twitter):** https://x.com/santiagojvtech (`@santiagojvtech`)
 - **Medium:** https://medium.com/@santiago-jv/
 - **Resume PDF:** https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf
 - **Location:** Barranquilla / Santa Marta, Colombia (Remote)

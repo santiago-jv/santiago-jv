@@ -19,8 +19,8 @@ export const SHARED_SOCIAL_LINKS: SocialLink[] = [
   },
   {
     platform: 'x',
-    label: 'X (@santiagojv_tech)',
-    href: 'https://x.com/santiagojv_tech',
+    label: 'X (@santiagojvtech)',
+    href: 'https://x.com/santiagojvtech',
     iconClassName: 'fa-brands fa-x-twitter',
   },
   {
@@ -238,8 +238,8 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         {
           iconClassName: 'fa-brands fa-x-twitter',
           label: 'X',
-          value: '@santiagojv_tech',
-          href: 'https://x.com/santiagojv_tech',
+          value: '@santiagojvtech',
+          href: 'https://x.com/santiagojvtech',
         },
         {
           iconClassName: 'fa-brands fa-github',
@@ -493,8 +493,8 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
         {
           iconClassName: 'fa-brands fa-x-twitter',
           label: 'X',
-          value: '@santiagojv_tech',
-          href: 'https://x.com/santiagojv_tech',
+          value: '@santiagojvtech',
+          href: 'https://x.com/santiagojvtech',
         },
         {
           iconClassName: 'fa-brands fa-github',

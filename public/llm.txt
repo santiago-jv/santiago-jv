@@ -30,6 +30,6 @@
 - [Hoja de Vida / CV en Español (PDF)](https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_ES.pdf): Complete downloadable Spanish CV in ATS-friendly PDF format.
 - [LinkedIn Profile](https://www.linkedin.com/in/santiago-jv): Primary professional network.
 - [GitHub Profile](https://github.com/santiago-jv): Code repositories and open-source work.
-- [X (Twitter)](https://x.com/santiagojv_tech): `@santiagojv_tech`
+- [X (Twitter)](https://x.com/santiagojvtech): `@santiagojvtech`
 - [Medium Blog](https://medium.com/@santiago-jv/): Technical articles by Santiago Olayo.
 - [Direct Email](mailto:contact@santiago-jv.tech): `contact@santiago-jv.tech`
