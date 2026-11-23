@@ -10,6 +10,7 @@ import {
   MAX_BODY_BYTES,
   validateAndSanitizeContactInput,
 } from '@/services/contact-service';
+import { fetchRemoteSiteConfig } from '@/services/remote-config';
 
 export const prerender = false;
 
@@ -60,7 +61,17 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     return json({ ok: false, code: 'FORBIDDEN' }, 403);
   }
 
-  if (!isOriginAllowed(request.headers.get('origin'), prod, readEnv('ALLOWED_CONTACT_ORIGINS'))) {
+  const remoteConfig = prod
+    ? await fetchRemoteSiteConfig(readEnv('PUBLIC_CONFIG_API_URL'))
+    : null;
+  const mergedAllowedOrigins = [
+    readEnv('ALLOWED_CONTACT_ORIGINS'),
+    remoteConfig?.domains.allowedOrigins?.join(','),
+  ]
+    .filter(Boolean)
+    .join(',');
+
+  if (!isOriginAllowed(request.headers.get('origin'), prod, mergedAllowedOrigins || undefined)) {
     return json({ ok: false, code: 'FORBIDDEN' }, 403);
   }
 
@@ -116,7 +127,10 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
   const { name, email, subject, message } = validation.data;
   const resendApiKey = getResendApiKey();
-  const toEmail = readEnv('CONTACT_TO_EMAIL') || 'contact@santiago-jv.tech';
+  const toEmail =
+    readEnv('CONTACT_TO_EMAIL') ||
+    remoteConfig?.social.contactEmail ||
+    'contact@santiago-jv.tech';
   const fromEmail = readEnv('CONTACT_FROM_EMAIL') || 'Santiago Portfolio <noreply@santiago-jv.tech>';
 
   // Local development / preview fallback when RESEND_API_KEY is not configured yet
