@@ -110,7 +110,10 @@ async function hydrateRemoteConfig(): Promise<void> {
       signal: controller.signal,
     });
     if (!res.ok) return;
-    const cfg = (await res.json()) as RemotePublicSiteConfig;
+    const raw = (await res.json()) as RemotePublicSiteConfig & {
+      config?: RemotePublicSiteConfig;
+    };
+    const cfg = raw?.config ?? raw;
     if (cfg?.social?.contactEmail) {
       applyRemoteConfigToDom(cfg);
       try {
