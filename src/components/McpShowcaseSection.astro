@@ -23,7 +23,7 @@ const previews = [
 ];
 ---
 
-<section id="mcp" class={styles.mcpSection}>
+<section id="mcp" class={styles.mcpSection} data-cv-section>
   <div class={styles.container}>
     <SectionHeading
       content={{
@@ -36,7 +36,7 @@ const previews = [
 
     <div class={styles.showcaseGrid}>
       {/* Left: Signature Anodized Space Black Pro MCP Console */}
-      <div class={styles.consoleCard} data-apple-reveal data-mcp-console>
+      <div class={styles.consoleCard} data-apple-reveal data-mcp-console data-dark-surface>
         <div class={styles.consoleInner}>
           <div class={styles.consoleHeader}>
             <div class={styles.windowLights} aria-hidden="true">
@@ -76,11 +76,14 @@ const previews = [
             </button>
           </div>
 
-          <div class={styles.segmentedBar} role="tablist">
+          <div class={styles.segmentedBar} role="tablist" aria-label="MCP Console Mode">
             <button
               type="button"
+              id="mcp-tab-recruiter"
               role="tab"
               aria-selected="true"
+              aria-controls="mcp-panel-recruiter"
+              tabindex={0}
               class={styles.segmentBtn}
               data-mcp-tab="recruiter"
             >
@@ -88,8 +91,11 @@ const previews = [
             </button>
             <button
               type="button"
+              id="mcp-tab-engineering"
               role="tab"
               aria-selected="false"
+              aria-controls="mcp-panel-engineering"
+              tabindex={-1}
               class={styles.segmentBtn}
               data-mcp-tab="engineering"
             >
@@ -99,6 +105,9 @@ const previews = [
 
           {previews.map(({ key, data }) => (
             <div
+              id={`mcp-panel-${key}`}
+              role="tabpanel"
+              aria-labelledby={`mcp-tab-${key}`}
               class={styles.terminalViewport}
               data-mcp-panel={key}
               hidden={key !== 'recruiter' ? true : undefined}

@@ -34,6 +34,8 @@ const brandHref = isHomePage ? '#about' : homeBase;
         alt=""
         width={26}
         height={26}
+        fetchpriority="high"
+        decoding="sync"
         class={styles.brandMark}
         aria-hidden="true"
       />
@@ -54,13 +56,17 @@ const brandHref = isHomePage ? '#about' : homeBase;
       </header>
 
       <ul class={styles.navbar__items}>
-        {headerContent.navLinks.map((item) => (
-          <li class={styles.navbar__item}>
-            <button class={styles.navbar__link} type="button" data-nav-href={item.href}>
-              {item.label}
-            </button>
-          </li>
-        ))}
+        {headerContent.navLinks.map((item) => {
+          const resolvedHref =
+            !isHomePage && item.href.startsWith('#') ? `${homeBase}${item.href}` : item.href;
+          return (
+            <li class={styles.navbar__item}>
+              <a class={styles.navbar__link} href={resolvedHref} data-nav-href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
         <li class={styles.navbar__ctaItem}>
           <a
             href={headerContent.resumeHref}

@@ -124,6 +124,7 @@
   width: 100%;
   max-width: 320px;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
@@ -241,6 +242,7 @@
   z-index: 95;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -307,5 +309,59 @@
   .navbar__item:hover .navbar__link {
     background: transparent;
     color: var(--apple-text-primary);
+  }
+}
+
+/* Native CSS Scroll-Driven Animations (Off-main-thread GPU compositor, zero JS scroll listener) */
+@keyframes header-scrolled-surface {
+  to {
+    background: rgba(251, 251, 253, 0.86);
+    border-bottom-color: rgba(0, 0, 0, 0.095);
+  }
+}
+
+@keyframes scroll-progress-fill {
+  from {
+    transform: scale3d(0, 1, 1);
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+  .header {
+    animation-name: header-scrolled-surface;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(block root);
+    animation-range: 0px 24px;
+  }
+
+  .progressBar {
+    animation-name: scroll-progress-fill;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(block root);
+    animation-range: 0% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header__navbar,
+  .background,
+  .resumeButton,
+  .navbar__link,
+  .wordmark {
+    transition: none !important;
+  }
+
+  @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+    .header {
+      animation-timing-function: steps(1, end);
+    }
   }
 }

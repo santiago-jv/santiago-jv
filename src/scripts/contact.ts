@@ -1,5 +1,16 @@
 import { copyToClipboard } from '@/utils/clipboard';
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function isFieldValid(field: HTMLInputElement | HTMLTextAreaElement): boolean {
+  const val = field.value.trim();
+  if (field.required && val.length === 0) return false;
+  if (field.minLength > 0 && val.length < field.minLength) return false;
+  if (field.maxLength > 0 && val.length > field.maxLength) return false;
+  if (field.type === 'email' && !EMAIL_PATTERN.test(val)) return false;
+  return true;
+}
+
 function initContactSection(): void {
   const section = document.querySelector<HTMLElement>('[data-contact-section]');
   if (!section) return;
@@ -31,19 +42,43 @@ function initContactSection(): void {
     });
   });
 
-  // 2. Contact Form Submission
+  // 2. Contact Form Submission & Modern Web Guidance Blur/Input Validation
   const form = section.querySelector<HTMLFormElement>('[data-contact-form]');
   if (!form) return;
+
+  // Progressive enhancement: replace native browser submit popups with accessible inline blur validation
+  form.noValidate = true;
 
   const feedbackEl = form.querySelector<HTMLElement>('[data-contact-feedback]');
   const feedbackTextEl = feedbackEl?.querySelector<HTMLElement>('span');
   const submitBtn = form.querySelector<HTMLButtonElement>('[data-contact-submit]');
   const fields = Array.from(
     form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea')
-  );
+  ).filter((field) => field.name !== 'website');
 
   let startedAt = Date.now();
   let isSubmitting = false;
+
+  const setFieldErrorState = (
+    field: HTMLInputElement | HTMLTextAreaElement,
+    showError: boolean
+  ): void => {
+    const errId = field.getAttribute('aria-describedby');
+    const errEl = errId ? document.getElementById(errId) : null;
+    if (showError) {
+      field.setAttribute('aria-invalid', 'true');
+      if (errEl) {
+        errEl.textContent = field.dataset.errorMsg || '';
+        errEl.hidden = false;
+      }
+    } else {
+      field.removeAttribute('aria-invalid');
+      if (errEl) {
+        errEl.textContent = '';
+        errEl.hidden = true;
+      }
+    }
+  };
 
   const hideFeedback = (): void => {
     if (!feedbackEl) return;
@@ -60,9 +95,18 @@ function initContactSection(): void {
   };
 
   fields.forEach((field) => {
+    // Suppress validation errors immediately during active typing
     field.addEventListener('input', () => {
+      setFieldErrorState(field, false);
       if (feedbackEl && !feedbackEl.hidden) {
         hideFeedback();
+      }
+    });
+
+    // Display validation error on field blur if touched with invalid content
+    field.addEventListener('blur', () => {
+      if (field.value.length > 0 && !isFieldValid(field)) {
+        setFieldErrorState(field, true);
       }
     });
   });
@@ -70,9 +114,7 @@ function initContactSection(): void {
   const setSubmittingState = (submitting: boolean): void => {
     isSubmitting = submitting;
     fields.forEach((field) => {
-      if (field.name !== 'website') {
-        field.disabled = submitting;
-      }
+      field.disabled = submitting;
     });
     if (submitBtn) {
       submitBtn.disabled = submitting;
@@ -85,6 +127,20 @@ function initContactSection(): void {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (isSubmitting) return;
+
+    let firstInvalidField: HTMLInputElement | HTMLTextAreaElement | null = null;
+    fields.forEach((field) => {
+      const valid = isFieldValid(field);
+      setFieldErrorState(field, !valid);
+      if (!valid && !firstInvalidField) {
+        firstInvalidField = field;
+      }
+    });
+
+    if (firstInvalidField) {
+      (firstInvalidField as HTMLElement).focus();
+      return;
+    }
 
     const formData = new FormData(form);
     const payload = {
@@ -112,6 +168,7 @@ function initContactSection(): void {
 
       if (response.ok && data?.ok) {
         form.reset();
+        fields.forEach((f) => setFieldErrorState(f, false));
         startedAt = Date.now();
         const msg =
           data.mode === 'dev-preview'

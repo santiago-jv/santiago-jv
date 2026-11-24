@@ -100,7 +100,7 @@ const studioPayload = studio.tabs.map((tab) => ({
             </div>
           </div>
 
-          <div class={styles.lidInnerScreen}>
+          <div class={styles.lidInnerScreen} data-dark-surface>
             <div class={styles.glassReflection} data-studio-reflection aria-hidden="true" />
 
             <div class={styles.retinaDisplay}>
@@ -146,12 +146,15 @@ const studioPayload = studio.tabs.map((tab) => ({
                     <span class={`${styles.trafficDot} ${styles.dotZoom}`} />
                   </div>
 
-                  <div class={styles.windowTabs} role="tablist">
+                  <div class={styles.windowTabs} role="tablist" aria-label={studio.menuApp}>
                     {studio.tabs.map((tab, idx) => (
                       <button
                         type="button"
+                        id={`studio-tab-${tab.id}`}
                         role="tab"
                         aria-selected={idx === 0 ? 'true' : 'false'}
+                        aria-controls={`studio-panel-${tab.id}`}
+                        tabindex={idx === 0 ? 0 : -1}
                         class={styles.windowTabBtn}
                         data-studio-tab={idx}
                       >
@@ -175,6 +178,9 @@ const studioPayload = studio.tabs.map((tab) => ({
 
                   return (
                     <div
+                      id={`studio-panel-${tab.id}`}
+                      role="tabpanel"
+                      aria-labelledby={`studio-tab-${tab.id}`}
                       class={styles.graphStage}
                       data-studio-panel={tabIdx}
                       hidden={tabIdx !== 0 ? true : undefined}

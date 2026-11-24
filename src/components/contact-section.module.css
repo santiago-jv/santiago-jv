@@ -243,6 +243,27 @@
   cursor: not-allowed;
 }
 
+.formInput[aria-invalid='true'] {
+  background-color: var(--apple-bg-white);
+  border-color: var(--apple-red);
+}
+
+.formInput[aria-invalid='true']:focus {
+  border-color: var(--apple-red);
+  box-shadow: 0 0 0 4px var(--apple-red-tint);
+}
+
+.fieldError {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--apple-red);
+  line-height: 1.35;
+}
+
+.fieldError[hidden] {
+  display: none !important;
+}
+
 .formTextarea {
   resize: vertical;
   min-height: 128px;

@@ -77,6 +77,7 @@ html {
 body {
   font-family: var(--font-family-base);
   font-size: 17px;
+  font-size-adjust: 0.52;
   line-height: 1.55;
   letter-spacing: -0.012em;
   color: var(--apple-text-primary);
@@ -133,19 +134,37 @@ a:active {
   -webkit-tap-highlight-color: transparent !important;
 }
 
-/* Clean Apple keyboard focus ring (only shown when navigating via Tab key) */
+/* High-contrast (>= 3:1 WCAG 2.2) Apple keyboard focus ring (only shown on keyboard focus) */
 a:focus-visible,
 button:focus-visible,
 [role="button"]:focus-visible,
 [role="tab"]:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--apple-accent-focus) !important;
+  outline: 2px solid var(--apple-accent) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--apple-accent-focus) !important;
+}
+
+[data-dark-surface] a:focus-visible,
+[data-dark-surface] button:focus-visible,
+[data-dark-surface] [role="button"]:focus-visible,
+[data-dark-surface] [role="tab"]:focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25) !important;
 }
 
 input:focus-visible,
 textarea:focus-visible {
-  outline: none;
+  outline: 2px solid var(--apple-accent);
+  outline-offset: 0;
   box-shadow: 0 0 0 4px var(--apple-accent-focus);
+}
+
+/* Off-screen rendering isolation for below-the-fold sections (Modern Web Guidance CWV/INP) */
+[data-cv-section] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 680px;
+  scroll-margin-top: 64px;
 }
 
 a {

@@ -12,9 +12,23 @@ interface Props {
 const { locale } = Astro.props;
 const contactContent = PORTFOLIO_CONTENT[locale].contact;
 const labels = contactContent.formLabels;
+const fieldErrors =
+  locale === 'es'
+    ? {
+        name: 'Ingresa tu nombre (mínimo 2 caracteres).',
+        email: 'Ingresa un correo electrónico válido.',
+        subject: 'Ingresa un asunto breve (mínimo 2 caracteres).',
+        message: 'Escribe un mensaje de al menos 10 caracteres.',
+      }
+    : {
+        name: 'Please enter your name (at least 2 characters).',
+        email: 'Please enter a valid email address.',
+        subject: 'Please enter a brief subject (at least 2 characters).',
+        message: 'Please enter a message of at least 10 characters.',
+      };
 ---
 
-<section id="contact" class={styles.contactSection} data-contact-section>
+<section id="contact" class={styles.contactSection} data-contact-section data-cv-section>
   <div class={styles.container}>
     <SectionHeading content={contactContent.heading} />
 
@@ -126,7 +140,10 @@ const labels = contactContent.formLabels;
                 minlength={2}
                 maxlength={80}
                 autocomplete="name"
+                aria-describedby="contact-name-error"
+                data-error-msg={fieldErrors.name}
               />
+              <span id="contact-name-error" class={styles.fieldError} role="status" aria-live="polite" hidden />
             </div>
 
             <div class={styles.formGroup}>
@@ -141,7 +158,12 @@ const labels = contactContent.formLabels;
                 required
                 maxlength={120}
                 autocomplete="email"
+                inputmode="email"
+                spellcheck="false"
+                aria-describedby="contact-email-error"
+                data-error-msg={fieldErrors.email}
               />
+              <span id="contact-email-error" class={styles.fieldError} role="status" aria-live="polite" hidden />
             </div>
           </div>
 
@@ -157,7 +179,10 @@ const labels = contactContent.formLabels;
               required
               minlength={2}
               maxlength={140}
+              aria-describedby="contact-subject-error"
+              data-error-msg={fieldErrors.subject}
             />
+            <span id="contact-subject-error" class={styles.fieldError} role="status" aria-live="polite" hidden />
           </div>
 
           <div class={styles.formGroup}>
@@ -172,7 +197,10 @@ const labels = contactContent.formLabels;
               required
               minlength={10}
               maxlength={3000}
+              aria-describedby="contact-message-error"
+              data-error-msg={fieldErrors.message}
             ></textarea>
+            <span id="contact-message-error" class={styles.fieldError} role="status" aria-live="polite" hidden />
           </div>
 
           <div class={styles.submitStatus} aria-live="polite">

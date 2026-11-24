@@ -194,7 +194,7 @@ function initMacBookStudio(): void {
     syncPanelSelection();
   };
 
-  const selectTab = (nextIndex: number): void => {
+  const selectTab = (nextIndex: number, focusSelected = false): void => {
     if (nextIndex < 0 || nextIndex >= tabs.length) return;
     activeTabIndex = nextIndex;
     const tab = tabs[activeTabIndex];
@@ -205,7 +205,12 @@ function initMacBookStudio(): void {
 
     tabButtons.forEach((btn) => {
       const idx = Number(btn.dataset.studioTab);
-      btn.setAttribute('aria-selected', idx === activeTabIndex ? 'true' : 'false');
+      const isSelected = idx === activeTabIndex;
+      btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      btn.tabIndex = isSelected ? 0 : -1;
+      if (isSelected && focusSelected) {
+        btn.focus();
+      }
     });
 
     panels.forEach((panel, idx) => {
@@ -218,6 +223,24 @@ function initMacBookStudio(): void {
   tabButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       selectTab(Number(btn.dataset.studioTab));
+    });
+
+    btn.addEventListener('keydown', (event: KeyboardEvent) => {
+      const currentIdx = Number(btn.dataset.studioTab);
+      let targetIdx: number | null = null;
+      if (event.key === 'ArrowRight') {
+        targetIdx = (currentIdx + 1) % tabButtons.length;
+      } else if (event.key === 'ArrowLeft') {
+        targetIdx = (currentIdx - 1 + tabButtons.length) % tabButtons.length;
+      } else if (event.key === 'Home') {
+        targetIdx = 0;
+      } else if (event.key === 'End') {
+        targetIdx = tabButtons.length - 1;
+      }
+      if (targetIdx !== null) {
+        event.preventDefault();
+        selectTab(targetIdx, true);
+      }
     });
   });
 

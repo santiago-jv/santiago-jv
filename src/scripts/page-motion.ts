@@ -69,6 +69,16 @@ function initPageMotion(): void {
     const progressBarEl = document.querySelector<HTMLElement>('[data-scroll-progress-bar]');
     if (!progressBarEl) return;
 
+    // Native CSS Scroll-Driven Animations handle progress bar off-main-thread when supported
+    if (
+      typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      CSS.supports('animation-timeline: scroll()') &&
+      CSS.supports('animation-range: 0% 100%')
+    ) {
+      return;
+    }
+
     let rafId = 0;
     let cachedScrollableHeight = Math.max(
       1,

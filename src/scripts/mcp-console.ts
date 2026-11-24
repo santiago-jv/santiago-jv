@@ -18,18 +18,43 @@ function initMcpConsole(): void {
     if (checkIcon) checkIcon.hidden = !copied;
   };
 
-  tabBtns.forEach((btn) => {
+  const activateTab = (next: 'recruiter' | 'engineering', focusTab = false): void => {
+    activeTab = next;
+    tabBtns.forEach((b) => {
+      const isSelected = b.dataset.mcpTab === activeTab;
+      b.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      b.tabIndex = isSelected ? 0 : -1;
+      if (isSelected && focusTab) {
+        b.focus();
+      }
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.mcpPanel !== activeTab;
+    });
+  };
+
+  tabBtns.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
       const next = btn.dataset.mcpTab === 'engineering' ? 'engineering' : 'recruiter';
-      activeTab = next;
+      activateTab(next);
+    });
 
-      tabBtns.forEach((b) => {
-        b.setAttribute('aria-selected', b.dataset.mcpTab === activeTab ? 'true' : 'false');
-      });
-
-      panels.forEach((panel) => {
-        panel.hidden = panel.dataset.mcpPanel !== activeTab;
-      });
+    btn.addEventListener('keydown', (event: KeyboardEvent) => {
+      let targetIdx: number | null = null;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        targetIdx = (idx + 1) % tabBtns.length;
+      } else if (event.key === 'Home') {
+        targetIdx = 0;
+      } else if (event.key === 'End') {
+        targetIdx = tabBtns.length - 1;
+      }
+      if (targetIdx !== null) {
+        event.preventDefault();
+        const nextBtn = tabBtns[targetIdx];
+        const next = nextBtn?.dataset.mcpTab === 'engineering' ? 'engineering' : 'recruiter';
+        activateTab(next, true);
+      }
     });
   });
 
