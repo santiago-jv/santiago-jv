@@ -101,13 +101,11 @@ async function hydrateRemoteConfig(): Promise<void> {
     // ignore storage errors
   }
 
-  const controller = new AbortController();
-  const timer = window.setTimeout(() => controller.abort(), 2500);
   try {
     const res = await fetch(CONFIG_ENDPOINT, {
       method: 'GET',
       headers: { Accept: 'application/json' },
-      signal: controller.signal,
+      signal: AbortSignal.timeout(2500),
     });
     if (!res.ok) return;
     const raw = (await res.json()) as RemotePublicSiteConfig & {
@@ -127,8 +125,6 @@ async function hydrateRemoteConfig(): Promise<void> {
     }
   } catch {
     // graceful static fallback
-  } finally {
-    window.clearTimeout(timer);
   }
 }
 

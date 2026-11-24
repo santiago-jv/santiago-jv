@@ -45,14 +45,11 @@ export async function fetchRemoteSiteConfig(
     return cachedConfig;
   }
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 1800);
-
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
       headers: { Accept: 'application/json' },
-      signal: controller.signal,
+      signal: AbortSignal.timeout(1800),
     });
     if (!response.ok) return cachedConfig;
     const raw = (await response.json()) as RemotePublicSiteConfig & {
@@ -74,7 +71,5 @@ export async function fetchRemoteSiteConfig(
     return cachedConfig;
   } catch {
     return cachedConfig;
-  } finally {
-    clearTimeout(timeout);
   }
 }
