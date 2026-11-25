@@ -1,0 +1,215 @@
+name: Automated Release & Changelog
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'SemVer bump type (auto detects from Conventional Commits)'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Update Changelog, Tag & GitHub Release
+    runs-on: ubuntu-latest
+    if: github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore(release):')
+
+    steps:
+      - name: Checkout repository with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Publish GitHub Release for pushed tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists."
+            exit 0
+          fi
+
+          node -e '
+            const fs = require("fs");
+            const version = process.env.VERSION;
+            const changelog = fs.existsSync("CHANGELOG.md") ? fs.readFileSync("CHANGELOG.md", "utf8") : "";
+            const header = "## [" + version + "]";
+            const start = changelog.indexOf(header);
+            let notes = "";
+            if (start !== -1) {
+              const rest = changelog.slice(start);
+              const next = rest.indexOf("\n## [", header.length);
+              notes = (next === -1 ? rest : rest.slice(0, next)).trim();
+            }
+            if (!notes) {
+              notes = "Release v" + version;
+            }
+            fs.writeFileSync("RELEASE_NOTES.md", notes + "\n");
+          ' VERSION="$VERSION"
+
+          gh release create "$TAG" --title "$TAG" --notes-file RELEASE_NOTES.md
+
+      - name: Bump version, update English CHANGELOG.md, tag, and publish release
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMP_OVERRIDE: ${{ inputs.bump || 'auto' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          node <<'EOF'
+          const { execSync } = require('child_process');
+          const fs = require('fs');
+
+          function sh(cmd) {
+            return execSync(cmd, { encoding: 'utf8' }).trim();
+          }
+
+          let lastTag = '';
+          try {
+            lastTag = sh('git describe --tags --abbrev=0 --match "v[0-9]*.[0-9]*.[0-9]*"');
+          } catch {
+            lastTag = '';
+          }
+
+          const range = lastTag ? `${lastTag}..HEAD` : 'HEAD';
+          const rawLog = sh(`git log ${range} --pretty=format:"%H%x1f%s%x1f%b%x1e"`);
+          const commits = rawLog
+            .split('\x1e')
+            .map((entry) => entry.trim())
+            .filter(Boolean)
+            .map((entry) => {
+              const [hash = '', subject = '', body = ''] = entry.split('\x1f');
+              return { hash: hash.slice(0, 7), subject: subject.trim(), body: body.trim() };
+            })
+            .filter((c) => c.subject && !c.subject.startsWith('chore(release):'));
+
+          if (commits.length === 0) {
+            console.log('No new releasable commits since', lastTag || 'initial commit');
+            process.exit(0);
+          }
+
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const baseVersion = (lastTag ? lastTag.replace(/^v/, '') : pkg.version) || '1.0.0';
+          const [maj, min, pat] = baseVersion.split('.').map((n) => parseInt(n, 10) || 0);
+
+          let bump = process.env.BUMP_OVERRIDE || 'auto';
+          if (bump === 'auto') {
+            const hasMajor = commits.some(
+              (c) => /^[a-z]+(\([^)]+\))?!:/.test(c.subject) || /BREAKING CHANGE:/i.test(c.body)
+            );
+            const hasMinor = commits.some((c) => /^feat(\([^)]+\))?:/.test(c.subject));
+            bump = hasMajor ? 'major' : hasMinor ? 'minor' : 'patch';
+          }
+
+          const nextVersion =
+            bump === 'major'
+              ? `${maj + 1}.0.0`
+              : bump === 'minor'
+                ? `${maj}.${min + 1}.0`
+                : `${maj}.${min}.${pat + 1}`;
+          const nextTag = `v${nextVersion}`;
+
+          const groups = {
+            features: [],
+            fixes: [],
+            perfRefactor: [],
+            docsChore: [],
+          };
+
+          for (const c of commits) {
+            const line = `- ${c.subject} (\`${c.hash}\`)`;
+            if (/^feat(\([^)]+\))?!?:/i.test(c.subject)) {
+              groups.features.push(line);
+            } else if (/^fix(\([^)]+\))?!?:/i.test(c.subject)) {
+              groups.fixes.push(line);
+            } else if (/^(perf|refactor)(\([^)]+\))?!?:/i.test(c.subject)) {
+              groups.perfRefactor.push(line);
+            } else {
+              groups.docsChore.push(line);
+            }
+          }
+
+          const dateStr = new Date().toISOString().slice(0, 10);
+          const sections = [];
+          if (groups.features.length) sections.push(`### Features\n\n${groups.features.join('\n')}`);
+          if (groups.fixes.length) sections.push(`### Bug Fixes\n\n${groups.fixes.join('\n')}`);
+          if (groups.perfRefactor.length)
+            sections.push(`### Performance & Refactoring\n\n${groups.perfRefactor.join('\n')}`);
+          if (groups.docsChore.length)
+            sections.push(`### Documentation & Maintenance\n\n${groups.docsChore.join('\n')}`);
+
+          const releaseEntry = `## [${nextVersion}] - ${dateStr}\n\n${sections.join('\n\n')}`;
+
+          pkg.version = nextVersion;
+          fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+
+          if (fs.existsSync('package-lock.json')) {
+            try {
+              const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+              lock.version = nextVersion;
+              if (lock.packages && lock.packages['']) {
+                lock.packages[''].version = nextVersion;
+              }
+              fs.writeFileSync('package-lock.json', JSON.stringify(lock, null, 2) + '\n');
+            } catch {
+              // ignore lockfile formatting issues
+            }
+          }
+
+          const header =
+            '# Changelog\n\nAll notable changes to this project are documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n';
+          let updatedChangelog = '';
+          if (fs.existsSync('CHANGELOG.md')) {
+            const existing = fs.readFileSync('CHANGELOG.md', 'utf8');
+            const firstVersionIdx = existing.indexOf('\n## [');
+            if (firstVersionIdx !== -1) {
+              updatedChangelog =
+                existing.slice(0, firstVersionIdx + 1) +
+                releaseEntry +
+                '\n' +
+                existing.slice(firstVersionIdx + 1);
+            } else {
+              updatedChangelog = header + releaseEntry + '\n';
+            }
+          } else {
+            updatedChangelog = header + releaseEntry + '\n';
+          }
+          fs.writeFileSync('CHANGELOG.md', updatedChangelog);
+          fs.writeFileSync('RELEASE_NOTES.md', releaseEntry + '\n');
+
+          execSync('git add package.json CHANGELOG.md', { stdio: 'inherit' });
+          if (fs.existsSync('package-lock.json')) {
+            execSync('git add package-lock.json', { stdio: 'inherit' });
+          }
+          execSync(`git commit -m "chore(release): ${nextTag} [skip ci]"`, { stdio: 'inherit' });
+          execSync(`git tag -a "${nextTag}" -m "Release ${nextTag}"`, { stdio: 'inherit' });
+          execSync('git push origin HEAD:main', { stdio: 'inherit' });
+          execSync(`git push origin "${nextTag}"`, { stdio: 'inherit' });
+          execSync(`gh release create "${nextTag}" --title "${nextTag}" --notes-file RELEASE_NOTES.md`, {
+            stdio: 'inherit',
+          });
+          EOF
