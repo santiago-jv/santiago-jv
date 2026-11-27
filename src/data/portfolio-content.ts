@@ -53,7 +53,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       siteUrl: 'https://www.santiago-jv.tech/',
       title: 'Santiago Olayo | Senior Software Engineer',
       description:
-        'Senior Software Engineer with 4+ years of experience building and improving products across backend development, cloud infrastructure, product analytics, and internal tools.',
+        'Senior Software Engineer with 5+ years of experience building and improving products across backend development, cloud infrastructure, product analytics, and internal tools.',
       ogImage: '/images/og-image.svg',
       ogLocale: 'en_US',
     },
@@ -79,7 +79,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       name: 'Santiago Olayo',
       role: 'Senior Software Engineer',
       summary:
-        'Backend systems, cloud infrastructure, and AI workflows. 4+ years shipping products for global teams.',
+        'Backend systems, cloud infrastructure, and AI workflows. 5+ years shipping products for global teams.',
       coreStackAriaLabel: 'Core focus areas',
       socialLinksAriaLabel: 'Social links',
       highlights: [
@@ -308,7 +308,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       siteUrl: 'https://www.santiago-jv.tech/',
       title: 'Santiago Olayo | Senior Software Engineer',
       description:
-        'Senior Software Engineer con más de 4 años de experiencia construyendo y mejorando productos en desarrollo backend, infraestructura cloud, analítica de producto y herramientas internas.',
+        'Senior Software Engineer con más de 5 años de experiencia construyendo y mejorando productos en desarrollo backend, infraestructura cloud, analítica de producto y herramientas internas.',
       ogImage: '/images/og-image.svg',
       ogLocale: 'es_CO',
     },
@@ -334,7 +334,7 @@ export const PORTFOLIO_CONTENT: Record<Locale, PortfolioLocaleContent> = {
       name: 'Santiago Olayo',
       role: 'Senior Software Engineer',
       summary:
-        'Sistemas backend, infraestructura cloud y flujos con IA. 4+ años escalando productos en equipos globales.',
+        'Sistemas backend, infraestructura cloud y flujos con IA. 5+ años escalando productos en equipos globales.',
       coreStackAriaLabel: 'Áreas clave de enfoque',
       socialLinksAriaLabel: 'Enlaces sociales',
       highlights: [

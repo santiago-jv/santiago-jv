@@ -60,7 +60,7 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
         scoreBadge: '95 / 100 · STRONG FIT',
         verdict: 'Recommended to Interview',
         summary:
-          '4.5+ years shipping backend systems (NestJS, Node.js, TypeScript, Spring Boot), Redis locks, Datadog, and MCP workflows.',
+          '5+ years shipping backend systems (NestJS, Node.js, TypeScript, Spring Boot), Redis locks, Datadog, and MCP workflows.',
         matchedPills: [
           'TypeScript · 4.5y',
           'NestJS · Hexagonal',
@@ -129,7 +129,7 @@ export const MCP_CONTENT: Record<Locale, McpLocaleCopy> = {
         scoreBadge: '95 / 100 · ALTO MATCH',
         verdict: 'Recomendado para Entrevista',
         summary:
-          '4.5+ años construyendo sistemas backend (NestJS, Node.js, TypeScript, Spring Boot), locks en Redis, Datadog y MCP.',
+          '5+ años construyendo sistemas backend (NestJS, Node.js, TypeScript, Spring Boot), locks en Redis, Datadog y MCP.',
         matchedPills: [
           'TypeScript · 4.5a',
           'NestJS · Hexagonal',

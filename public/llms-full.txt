@@ -21,7 +21,7 @@
 ---
 
 ## 2. Executive Summary
-Software Engineer with 4+ years of experience building and improving products for startups and international companies. Works across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.
+Software Engineer with 5+ years of experience building and improving products for startups and international companies. Works across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.
 
 Works closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. Handles the process end to end, from discussions with stakeholders and technical design to implementation, database migrations, deployment, and post-release monitoring across backend services, mobile features, and internal tooling.
 
