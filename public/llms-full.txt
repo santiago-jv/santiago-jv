@@ -6,7 +6,7 @@
 
 ## 1. Identity & Contact
 - **Name:** Santiago Olayo Villamil
-- **Title:** Senior Software Engineer | Backend, Fullstack, Cloud & AI Internal Tooling
+- **Title:** Full Stack & Backend Software Engineer | NestJS, Node.js, TypeScript, Java, Spring Boot, Cloud & AI
 - **Website:** https://www.santiago-jv.tech/
 - **Public MCP Server (Streamable HTTP):** https://mcp.santiago-jv.tech/mcp
 - **MCP Documentation & Recruiter Fit Guide:** https://mcp.santiago-jv.tech/docs
@@ -15,51 +15,71 @@
 - **GitHub:** https://github.com/santiago-jv
 - **X (Twitter):** https://x.com/santiagojvtech (`@santiagojvtech`)
 - **Medium:** https://medium.com/@santiago-jv/
-- **Resume PDF:** https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV.pdf
+- **Resume PDF (ES):** https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_ES.pdf
+- **Resume PDF (EN):** https://www.santiago-jv.tech/Santiago_Olayo_Villamil_CV_EN.pdf
 - **Location:** Barranquilla / Santa Marta, Colombia (Remote)
 
 ---
 
 ## 2. Executive Summary
-Software Engineer with 5+ years of experience building and improving products for startups and international companies. Works across backend development, cloud infrastructure, product analytics, and internal tools, with a focus on solving real business problems and making systems and processes work better.
+Systems Engineer and Full Stack & Backend Software Engineer with 5+ years of real production experience building, modernizing, and scaling digital products for startups and technology companies. Works across backend engineering (Node.js, NestJS, TypeScript, LoopBack 4, Java, Spring Boot, Kotlin, Ktor), web/mobile frontend (React, Next.js, Angular, Astro), cloud infrastructure (AWS ECS/ECR/EC2/S3/Load Balancer/API Gateway/SQS/SNS, Google Cloud Functions, Cloudflare, Docker), product analytics, and internal AI tooling.
 
-Works closely with product, operations, support, and finance to understand their needs and turn ideas into production-ready features. Handles the process end to end, from discussions with stakeholders and technical design to implementation, database migrations, deployment, and post-release monitoring across backend services, mobile features, and internal tooling.
-
-Beyond feature development, has contributed to migrating manual processes toward AI-assisted workflows and improving/maintaining the internal tools the team relies on, including MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills for each internal team area, prompting rules, and serverless edge MCP servers on Cloudflare Workers. Uses Datadog to monitor services, configure alerts, and investigate production issues, CleverTap to track product events and business metrics, and Metabase to analyze data and support product decisions.
+Collaborates directly with stakeholders across product, operations, support, and finance to deliver end-to-end solutions: technical design (Hexagonal Architecture, DDD, Spec-Driven Development), unit testing and AI-powered E2E testing, database migrations (PostgreSQL, MongoDB), caching, distributed locks, throttling, and job queues with Redis/BullMQ, GitHub Actions CI/CD, and production observability with Datadog. Automates manual internal team workflows using Model Context Protocol (MCP), RAG, area-specific AI skills/plugins, and Cloudflare AI Gateway, and iterates with CleverTap and Metabase metrics.
 
 ---
 
 ## 3. Professional Experience
 
-### GoodRec · Fullstack Engineer
+### GoodRec · Semi Senior Full Stack Engineer / Backend Engineer
 - **Period:** January 2025 – Present
 - **Modality:** Remote
 - **Key Responsibilities & Achievements:**
-  - End-to-end execution alongside product, operations, support, and finance: from stakeholder discussions and technical design to implementation, cloud deployment (AWS / Google Cloud Functions), and post-release monitoring.
-  - Development and evolution of backend services (Node.js, NestJS, TypeScript) under Hexagonal Architecture and Domain-Driven Design (DDD), mobile features, internal tools, database migrations (PostgreSQL, MongoDB), and concurrency control using atomic locks in Redis.
-  - Contributed to building and migrating manual processes to AI-assisted workflows, improving and maintaining the team's internal tooling: MCP (Model Context Protocol) internal tooling to connect with preferred LLMs, focused plugins and skills per internal team area, prompting rules, and edge services on Cloudflare Workers.
-  - Production observability and reliability: continuous monitoring of distributed services, proactive alerting, distributed tracing, and production incident investigation using Datadog.
-  - Product analytics and data-driven decisions: tracking product events and business metrics with CleverTap and analyzing data in Metabase to measure business impact and guide the product roadmap.
+  - Led the migration of a legacy application and unstructured Firebase Realtime Database into a normalized PostgreSQL database and renewed NestJS/TypeScript stack, accelerated through AI-assisted workflows and Spec-Driven Development.
+  - Evolved from pure Backend to end-to-end Full Stack (web, mobile, backend, and cloud infrastructure), working directly with stakeholders on retention, growth, and UX solutions validated with CleverTap and Metabase.
+  - Designed and maintained a real-time chat microservice; implemented general-purpose fault-tolerant asynchronous messaging with AWS SQS & SNS, caching, distributed locks, throttling/rate limiting, and job queues with Redis & BullMQ, plus Stripe payments and Firebase Remote Config.
+  - Managed deployments and cloud infrastructure on AWS (ECS, ECR, EC2, S3, Load Balancer, API Gateway), GCP (Cloud Functions), Cloudflare, Docker, and GitHub Actions CI/CD, with unit testing, AI-powered E2E tests, and Datadog observability.
+  - Standardized and automated manual internal team workflows using Model Context Protocol (MCP), RAG, area-specific AI skills/plugins, and Cloudflare AI Gateway.
 
 ### Bolsiyo · Backend Developer
 - **Period:** August 2022 – January 2025 (2 years 6 months)
 - **Modality:** Remote (Colombia)
 - **Key Responsibilities & Achievements:**
-  - Built high-transactional backend services with Node.js, TypeScript, and LoopBack 4 for the mobile platform used by independent merchants.
-  - Designed schemas and migrations for relational and NoSQL databases (PostgreSQL, MongoDB), optimizing critical wallet and payment queries.
-  - Implemented secure REST APIs, Git version control, automated testing, and integrations with Colombian payment rails and digital wallets (Transfiya API and Nequi API for merchant QR and direct-to-Nequi number payments, plus Refácil), KYC compliance (Tusdatos.co), internal ops tooling (Retool), messaging & push notifications (Twilio, SendGrid, Intercom, Firebase FCM), and mobile attribution (AppsFlyer).
-  - Continuous collaboration under Agile (Scrum) methodologies, technical user story refinement, and peer code reviews.
+  - Built and maintained high-transactional backend services with Node.js, TypeScript, LoopBack 4, Spring Boot (Java & Kotlin), and Ktor for a mobile platform serving independent merchants.
+  - Integrated third-party financial, payment, and compliance platforms: Nequi QR payments, Transfiya interbank transfers, Refácil utility bill payments, and Tusdatos.co identity verification (KYC).
+  - Designed schemas and migrations in PostgreSQL and MongoDB under Docker and GitHub Actions CI/CD workflows, enabling merchants to expand payment methods, offer new services, and increase sales.
 
-### Cooltivalo · +COTAS · SLS GROUPS · Full Stack & Software Developer
-- **Period:** January 2021 – May 2023
-- **Modality:** Santa Marta / Barranquilla / Remote
+### Cooltivalo · Software Developer
+- **Period:** March 2023 – May 2023 (3 months)
+- **Modality:** Remote (Colombia)
 - **Key Responsibilities & Achievements:**
-  - Developed web platforms and backend services using JavaScript, TypeScript, Node.js, GraphQL, MySQL, and MongoDB.
-  - Built responsive interfaces and optimized REST and GraphQL API integrations.
-  - Modeled relational databases and managed cloud deployments.
+  - Built a full-stack e-learning and real-time video streaming platform for cultivation courses and tutorials (course uploads, descriptions, reviews, and live streaming on AWS).
+  - Stack: React.js, Node.js, Express.js, MongoDB, AWS Lambda, API Gateway, AWS streaming services, and Docker.
+
+### +COTAS Pet Shop Barranquilla · Full Stack Developer
+- **Period:** January 2022 – May 2022 (5 months)
+- **Modality:** Remote (Barranquilla, Colombia)
+- **Key Responsibilities & Achievements:**
+  - Partnered with a senior software architect to build a veterinary and pet grooming scheduling platform (dogs and cats) supporting pet type, breed, coat type, and tailored treatments, plus live Google Maps tracking for pickup/delivery couriers.
+  - Stack: React.js, Redux, Node.js, Express.js, GraphQL, AWS Lambda, AWS S3, MySQL, Google Maps API, and Docker.
+
+### Taxi Marino · Backend Developer
+- **Period:** August 2021 (1 month)
+- **Modality:** Santa Marta, Colombia
+- **Key Responsibilities & Achievements:**
+  - Executed a full database migration from Firebase to a relational MySQL database, structuring the target schema and ensuring data integrity.
+
+### SLS GROUPS · Full Stack Developer
+- **Period:** January 2021 – July 2021 (7 months)
+- **Modality:** Santa Marta, Colombia
+- **Key Responsibilities & Achievements:**
+  - Built an operational and administrative web application for a container management company covering container content tracking, inventory, accounting, employees, payments, file uploads, and role-based authentication.
+  - Stack: React.js, AWS Lambda, AWS S3, MySQL, and Docker.
 
 ---
 
-## 4. Education
-- **Ingeniero de Sistemas (Systems Engineering)** · Universidad del Magdalena, Santa Marta, Colombia (2019 – 2025)
-- **Curso Profesional de Scrum e Ingeniería de Software** · Platzi (2022)
+## 4. Education & Technical Certifications
+- **Ingeniero de Sistemas (B.S. in Systems Engineering)** · Universidad del Magdalena, Santa Marta, Colombia (2019 – 2025)
+- **Diplomatura en Formación en Programación** · Universidad Nacional de Colombia (May 2021 – Dec 2021)
+- **Curso Profesional de Scrum e Ingeniería de Software** · Platzi (Jul 2022)
+- **Desarrollo de Aplicaciones con Interfaz Gráfica, Manejo de Eventos, Clases y Objetos: Java** · Servicio Nacional de Aprendizaje (SENA) (Mar 2021 – Apr 2021)
+- **Programación Básica** · Platzi (Aug 2018 – Sep 2018)
