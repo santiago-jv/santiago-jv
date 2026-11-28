@@ -4,6 +4,11 @@ All notable changes to `santiago-jv` (`https://www.santiago-jv.tech`) are docume
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.5.4] - 2026-11-28
+
+### Documentation & Maintenance
+
+- chore(profile): sync all 6 experiences, 5+ years, tech diplomas, and regenerated ES/EN CVs (`d2f1757`)
 ## [4.5.3] - 2026-11-28
 
 ### Bug Fixes
